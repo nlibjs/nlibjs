@@ -1,0 +1,16 @@
+{
+    "name": "@nlib/lint",
+    "version": "0.0.0",
+    "description": "> TODO: description",
+    "main": "lib/index.js",
+    "repository": "https://github.com/nlibjs/nlibjs/tree/master/packages/lint",
+    "author": {
+        "name": "Kei Ito",
+        "email": "kei.itof@gmail.com",
+        "url": "https://github.com/kei-ito"
+    },
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    }
+}
