@@ -2,6 +2,7 @@
     "private": true,
     "devDependencies": {
         "@types/eslint": "^4.16.5",
+        "@types/node": "^10.12.17",
         "ava": "^1.0.1",
         "eslint": "^5.10.0",
         "lerna": "^3.6.0",
@@ -11,8 +12,11 @@
     "name": "nlibjs",
     "scripts": {
         "init": "lerna bootstrap",
-        "build:cleanup": "rm -rf packages/*/lib",
-        "build:tsc": "lerna exec tsc",
-        "build": "npm-run-all --serial build:cleanup build:tsc"
+        "lerna:cleanup": "lerna run cleanup",
+        "lerna:build": "lerna run build",
+        "lerna:test": "lerna run test",
+        "cleanup": "npm run lerna:cleanup",
+        "build": "npm-run-all --serial lerna:cleanup lerna:build",
+        "test": "npm-run-all --serial lerna:cleanup lerna:build lerna:test"
     }
 }
