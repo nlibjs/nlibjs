@@ -2,9 +2,13 @@
     "private": true,
     "devDependencies": {
         "@types/eslint": "^4.16.5",
-        "@types/node": "^10.12.15",
+        "ava": "^1.0.1",
         "eslint": "^5.10.0",
-        "lerna": "^3.6.0"
+        "lerna": "^3.6.0",
+        "typescript": "^3.2.2"
     },
-    "name": "nlibjs"
+    "name": "nlibjs",
+    "scripts": {
+        "init": "lerna bootstrap"
+    }
 }

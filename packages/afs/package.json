@@ -1,0 +1,12 @@
+{
+    "name": "@nlib/afs",
+    "main": "lib/index.js",
+    "dependencies": {
+        "@types/node": "^10.12.15"
+    },
+    "ava": {
+        "compileEnhancements": false,
+        "extensions": ["ts"],
+        "require": ["ts-node/register"]
+    }
+}

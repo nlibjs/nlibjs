@@ -1,12 +1,12 @@
 {
     "packages": ["packages/*"],
     "version": "0.0.0",
-    "commands": {
+    "command": {
         "publish": {
             "ignore": [
                 "*.md",
-                "test/**",
-                "package.json"
+                "*.ts",
+                "*.test.js"
             ]
         }
     }
