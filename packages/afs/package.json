@@ -7,12 +7,6 @@
     "scripts": {
         "cleanup": "rm -rf lib",
         "build": "tsc",
-        "test": "ava"
-    },
-    "ava": {
-        "files": ["lib/*.test.js"],
-        "compileEnhancements": false,
-        "extensions": ["ts"],
-        "require": ["ts-node/register"]
+        "test": "ava lib/*.test.js"
     }
 }
