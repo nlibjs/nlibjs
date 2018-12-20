@@ -16,8 +16,8 @@
             "parser": "typescript-eslint-parser",
             "plugins": ["typescript"],
             "rules": {
+                "no-unused-vars": "off",
                 "typescript/no-type-alias": "off",
-                "typescript/no-unused-vars": "error",
                 "typescript/no-use-before-define": "error",
                 "typescript/no-var-requires": "error",
                 "typescript/type-annotation-spacing": ["error", {
