@@ -6,6 +6,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - npm install -g nyc
   - npm install
+  - npm run init
 test_script:
   - nyc npm test
 after_test:

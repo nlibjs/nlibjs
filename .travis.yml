@@ -5,6 +5,7 @@ node_js:
 install:
 - npm install -g nyc
 - npm install
+- npm run init
 script:
 - nyc npm test
 - npm run lint
