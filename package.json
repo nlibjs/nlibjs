@@ -33,12 +33,15 @@
     },
     "ava": {
         "compileEnhancements": false,
-        "extensions": [
-            "ts"
-        ],
-        "require": [
-            "ts-node/register"
-        ]
+        "extensions": ["ts"],
+        "require": ["ts-node/register"]
+    },
+    "nyc": {
+        "include": ["packages/*/lib/**/*.js"],
+        "exclude": ["packages/*/lib/**/*.test.js"],
+        "all": true,
+        "sourceMap": true,
+        "reporter": ["lcov", "html", "text"]
     },
     "eslintConfig": {
         "extends": "./node_modules/@nlib/lint/.eslintrc.json",
@@ -60,8 +63,6 @@
         }
     },
     "lint-staged": {
-        "*.ts": [
-            "eslint"
-        ]
+        "*.ts": ["eslint"]
     }
 }

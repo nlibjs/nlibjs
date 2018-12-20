@@ -2,18 +2,12 @@ language: node_js
 node_js:
 - '10'
 - '8'
-before_install:
-- export GREENKEEPER=$([[ $(node -v) == v10.* ]]; echo $?)
-- if [[ ${GREENKEEPER} -eq 0 ]]; then npm install -g greenkeeper-lockfile; fi
 install:
+- npm install -g nyc
 - npm install
-before_script:
-- if [[ ${GREENKEEPER} -eq 0 ]]; then greenkeeper-lockfile-update; fi
 script:
-- npm run test
+- nyc npm test
 - npm run lint
 after_success:
-- if [[ ${GREENKEEPER} -eq 0 ]]; then greenkeeper-lockfile-upload; fi
 - npm install -g codecov
-- tap --coverage-report=text-lcov > coverage.lcov
 - codecov

@@ -4,7 +4,11 @@ environment:
     - nodejs_version: '8'
 install:
   - ps: Install-Product node $env:nodejs_version
+  - npm install -g nyc
   - npm install
 test_script:
-  - npm run test
+  - nyc npm test
+after_test:
+  - npm install -g codecov
+  - codecov
 build: off
