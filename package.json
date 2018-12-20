@@ -43,6 +43,7 @@
     "eslintConfig": {
         "extends": "./node_modules/@nlib/lint/.eslintrc.json",
         "env": {
+            "es6": true,
             "node": true
         }
     },
