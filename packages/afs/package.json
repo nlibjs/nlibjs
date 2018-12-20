@@ -1,5 +1,8 @@
 {
     "name": "@nlib/afs",
+    "publishConfig": {
+        "access": "public"
+    },
     "main": "lib/index.js",
     "dependencies": {
         "@types/node": "^10.12.15"

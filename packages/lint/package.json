@@ -1,6 +1,8 @@
 {
     "name": "@nlib/lint",
-    "version": "0.0.0",
+    "publishConfig": {
+        "access": "public"
+    },
     "description": "> TODO: description",
     "repository": "https://github.com/nlibjs/nlibjs/tree/master/packages/lint",
     "author": {
@@ -9,9 +11,6 @@
         "url": "https://github.com/kei-ito"
     },
     "license": "MIT",
-    "publishConfig": {
-        "access": "public"
-    },
     "peerDependencies": {
         "eslint-plugin-typescript": "^0.14.0",
         "typescript-eslint-parser": "^21.0.2"
