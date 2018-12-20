@@ -8,6 +8,7 @@
     "dependencies": {
         "@types/node": "^10.12.15"
     },
+    "files": ["lib"],
     "scripts": {
         "cleanup": "rm -rf lib",
         "build": "tsc",
