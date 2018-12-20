@@ -8,7 +8,7 @@ install:
   - npm install
   - npm run init
 test_script:
-  - nyc npm test
+  - nyc npm run test
 after_test:
   - npm install -g codecov
   - codecov
