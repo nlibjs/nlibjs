@@ -10,7 +10,7 @@ export type TreeNodeType =
 | 'socket'
 | 'characterdevice'
 | 'blockdevice'
-| 'fifo'
+| 'fifo';
 
 export interface TreeBranches {
     [key: string]: TreeNode
