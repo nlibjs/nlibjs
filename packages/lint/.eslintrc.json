@@ -3,6 +3,33 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
+    "overrides": [
+        {
+            "files": ["test/**/*.js"],
+            "rules": {
+                "global-require": "off",
+                "max-lines-per-function": "off"
+            }
+        },
+        {
+            "files": ["*.ts"],
+            "parser": "typescript-eslint-parser",
+            "plugins": ["typescript"],
+            "rules": {
+                "typescript/no-type-alias": "off",
+                "typescript/no-unused-vars": "error",
+                "typescript/no-use-before-define": "error",
+                "typescript/no-var-requires": "error",
+                "typescript/type-annotation-spacing": ["error", {
+                    "before": false,
+                    "after": true,
+                    "overrides": {
+                        "arrow": {"before": true, "after": true}
+                    }
+                }]
+            }
+        }
+    ],
     "rules": {
         "accessor-pairs": "off",
         "array-bracket-newline": ["warn", "consistent"],
@@ -293,14 +320,5 @@
         "wrap-regex": "warn",
         "yield-star-spacing": ["error", {"before": false, "after": true}],
         "yoda": "off"
-    },
-    "overrides": [
-        {
-            "files": ["test/**/*.js"],
-            "rules": {
-                "global-require": "off",
-                "max-lines-per-function": "off"
-            }
-        }
-    ]
+    }
 }
