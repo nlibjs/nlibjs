@@ -15,5 +15,9 @@
     "peerDependencies": {
         "eslint-plugin-typescript": "^0.14.0",
         "typescript-eslint-parser": "^21.0.2"
-    }
+    },
+    "files": [
+        ".editorconfig",
+        ".eslintrc.json"
+    ]
 }
