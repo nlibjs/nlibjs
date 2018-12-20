@@ -28,7 +28,19 @@
         "cleanup": "npm run lerna:cleanup",
         "build": "npm-run-all --serial lerna:cleanup lerna:build",
         "test": "npm-run-all --serial lerna:cleanup lerna:build lerna:test",
-        "release": "semantic-release"
+        "release": "lerna publish --conventional-commits"
+    },
+    "lerna": {
+        "packages": ["packages/*"],
+        "version": "0.0.0",
+        "command": {
+            "publish": {
+                "ignoreChanges": [
+                    "*.md",
+                    "*.test.ts"
+                ]
+            }
+        }
     },
     "ava": {
         "compileEnhancements": false,
