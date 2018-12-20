@@ -13,6 +13,6 @@
         "cleanup": "rm -rf lib",
         "build": "tsc",
         "test": "ava lib/*.test.js",
-        "lint": "eslint src"
+        "lint": "eslint --ext .ts src"
     }
 }
