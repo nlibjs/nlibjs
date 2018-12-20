@@ -14,6 +14,7 @@
         "lerna": "^3.7.1",
         "lint-staged": "^8.1.0",
         "npm-run-all": "^4.1.5",
+        "semantic-release": "^15.13.1",
         "ts-node": "^7.0.1",
         "typescript": "^3.2.2",
         "typescript-eslint-parser": "^21.0.2"
@@ -26,7 +27,8 @@
         "lerna:test": "lerna run test",
         "cleanup": "npm run lerna:cleanup",
         "build": "npm-run-all --serial lerna:cleanup lerna:build",
-        "test": "npm-run-all --serial lerna:cleanup lerna:build lerna:test"
+        "test": "npm-run-all --serial lerna:cleanup lerna:build lerna:test",
+        "release": "semantic-release"
     },
     "ava": {
         "compileEnhancements": false,
