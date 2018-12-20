@@ -1,14 +1,65 @@
 {
-    "packages": [
-        "packages/*"
-    ],
-    "version": "3.0.7",
-    "command": {
-        "publish": {
-            "ignoreChanges": [
-                "*.md",
-                "*.test.ts"
-            ]
+    "private": true,
+    "devDependencies": {
+        "@commitlint/cli": "^7.2.1",
+        "@commitlint/config-conventional": "^7.1.2",
+        "@commitlint/config-lerna-scopes": "^7.2.1",
+        "@nlib/lint": "file:packages/lint",
+        "@types/eslint": "^4.16.5",
+        "@types/node": "^10.12.18",
+        "ava": "^1.0.1",
+        "eslint": "^5.10.0",
+        "eslint-plugin-typescript": "^0.14.0",
+        "husky": "^1.3.0",
+        "lerna": "^3.7.1",
+        "lint-staged": "^8.1.0",
+        "npm-run-all": "^4.1.5",
+        "semantic-release": "^15.13.1",
+        "ts-node": "^7.0.1",
+        "typescript": "^3.2.2",
+        "typescript-eslint-parser": "^21.0.2"
+    },
+    "name": "nlibjs",
+    "scripts": {
+        "init": "lerna bootstrap",
+        "lerna:cleanup": "lerna run cleanup",
+        "lerna:build": "lerna run build",
+        "lerna:test": "lerna run test",
+        "cleanup": "npm run lerna:cleanup",
+        "build": "npm-run-all --serial lerna:cleanup lerna:build",
+        "test": "npm-run-all --serial lerna:cleanup lerna:build lerna:test",
+        "release": "lerna publish --conventional-commits"
+    },
+    "ava": {
+        "compileEnhancements": false,
+        "extensions": [
+            "ts"
+        ],
+        "require": [
+            "ts-node/register"
+        ]
+    },
+    "eslintConfig": {
+        "extends": "./node_modules/@nlib/lint/.eslintrc.json",
+        "env": {
+            "node": true
         }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional",
+            "@commitlint/config-lerna-scopes"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint"
+        ]
     }
 }
