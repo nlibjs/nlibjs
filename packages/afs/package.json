@@ -14,5 +14,15 @@
         "build": "tsc",
         "test": "ava lib/*.test.js",
         "lint": "eslint --ext .ts src"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": ["src/core.ts"],
+                "rules": {
+                    "prefer-destructuring": "off"
+                }
+            }
+        ]
     }
 }
