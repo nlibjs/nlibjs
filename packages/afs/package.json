@@ -12,6 +12,7 @@
     "scripts": {
         "cleanup": "rm -rf lib",
         "build": "tsc",
-        "test": "ava lib/*.test.js"
+        "test": "ava lib/*.test.js",
+        "lint": "eslint src"
     }
 }
