@@ -3,7 +3,7 @@
     "publishConfig": {
         "access": "public"
     },
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "> TODO: description",
     "repository": "https://github.com/nlibjs/nlibjs/tree/master/packages/lint",
     "author": {
