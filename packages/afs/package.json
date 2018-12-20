@@ -10,7 +10,7 @@
     },
     "files": ["lib"],
     "scripts": {
-        "cleanup": "rm -rf lib",
+        "cleanup": "rimraf lib",
         "build": "tsc",
         "test": "ava lib/*.test.js",
         "lint": "eslint --ext .ts src"
