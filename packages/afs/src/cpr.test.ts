@@ -127,12 +127,6 @@ test('copy an relative symbolic link out src', async (t) => {
     const stats = await lstat(destSymlink);
     t.true(stats.isSymbolicLink());
     const target = await readlink(destSymlink);
-    t.log({
-        symlinked,
-        relativeTarget,
-        destSymlink,
-        target,
-    });
     t.is(target, ['..', relativeTarget].join(sep));
     const copied = await readFile(destSymlink, 'utf8');
     t.is(copied, body);
