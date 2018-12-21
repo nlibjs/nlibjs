@@ -1,11 +1,16 @@
-import {join, dirname} from 'path';
+import {join, dirname, isAbsolute, relative} from 'path';
 import {PathLike} from 'fs';
 import {copyFile, symlink, readlink} from './core';
 import {tree, TreeNode} from './tree';
 import {mkdirp} from './mkdirp';
 import {absolutify} from './absolutify';
 
-const cprCore = async (tree: TreeNode, dest: string) => {
+interface CopyContext {
+    src: string
+    dest: string
+}
+
+const cprCore = async (tree: TreeNode, dest: string, context: CopyContext) => {
     switch (tree.type) {
     case 'file':
         await copyFile(tree.path, dest);
@@ -14,12 +19,21 @@ const cprCore = async (tree: TreeNode, dest: string) => {
         await mkdirp(dest);
         await Promise.all(Object.keys(tree.files).map(async (name) => {
             const file = tree.files[name];
-            await cprCore(file, join(dest, name));
+            await cprCore(file, join(dest, name), context);
         }));
         break;
-    case 'symboliclink':
-        await symlink(await readlink(tree.path), dest);
+    case 'symboliclink': {
+        const target = await readlink(tree.path);
+        const isRelative = !isAbsolute(target);
+        const absoluteTarget = isRelative ? join(dirname(tree.path), target) : target;
+        if (absoluteTarget.startsWith(context.src)) {
+            const copiedTarget = join(context.dest, relative(context.src, target));
+            await symlink(isRelative ? target : copiedTarget, dest);
+        } else {
+            await symlink(isRelative ? relative(dirname(dest), absoluteTarget) : target, dest);
+        }
         break;
+    }
     default:
         throw new Error(`${tree.type} is not supported: ${tree.path}`);
     }
@@ -29,5 +43,5 @@ export const cpr = async (src: PathLike, dest: string) => {
     src = absolutify(src);
     dest = absolutify(dest);
     await mkdirp(dirname(dest));
-    await cprCore(await tree(src), dest);
+    await cprCore(await tree(src), dest, {src, dest});
 };
