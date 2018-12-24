@@ -1,9 +1,17 @@
 import {tmpdir} from 'os';
-import {join, sep} from 'path';
+import {join, relative, dirname} from 'path';
 import anyTest, {TestInterface} from 'ava';
-import {mkdtemp, mkdir, writeFile, readFile, symlink, lstat, readlink} from './core';
+import {
+    mkdtemp,
+    mkdir,
+    symlink,
+    lstat,
+    readlink,
+} from './core';
 import {cpr} from './cpr';
 import {rmrf} from './rmrf';
+import {isSameFile} from './isSameFile';
+import {writeFilep} from './writeFilep';
 
 const test = anyTest as TestInterface<{
     directory: string
@@ -18,116 +26,90 @@ test.afterEach(async (t) => {
 });
 
 test('copy a file in a directory', async (t) => {
-    const source = join(t.context.directory, 'source');
-    const body = source;
-    await writeFile(source, body);
-    const dest = join(t.context.directory, 'dest');
-    await cpr(source, dest);
-    const copied = await readFile(dest, 'utf8');
-    t.is(copied, body);
+    const copieePath = join(t.context.directory, 'copiee');
+    await writeFilep(copieePath, copieePath);
+    const copiedPath = join(t.context.directory, 'copied1', 'copied2');
+    await cpr(copieePath, copiedPath);
+    t.true(await isSameFile(copiedPath, copieePath));
 });
 
 test('copy a directory', async (t) => {
-    const sourceDir = join(t.context.directory, 'source');
-    await mkdir(sourceDir);
-    const destDir = join(t.context.directory, 'dest');
-    const filenames = Array(100).fill(1).map((x, index) => {
-        const filename = `file-${index}`;
-        return {
-            source: join(sourceDir, filename),
-            dest: join(destDir, filename),
-        };
-    });
-    await Promise.all(filenames.map(({source}) => writeFile(source, source)));
-    await cpr(sourceDir, destDir);
-    await Promise.all(filenames.map(async ({source, dest}) => {
-        const [expected, actual] = await Promise.all([
-            await readFile(source, 'utf8'),
-            await readFile(dest, 'utf8'),
-        ]);
-        t.is(actual, expected);
+    const copieeDir = join(t.context.directory, 'copiee');
+    await mkdir(copieeDir);
+    const copiedDir = join(t.context.directory, 'copied');
+    const filenames = Array(100).fill(1).map((x, index) => ({
+        copiee: join(copieeDir, `dir-${index}`, `file-${index}`),
+        copied: join(copiedDir, `dir-${index}`, `file-${index}`),
+    }));
+    await Promise.all(filenames.map(({copiee}) => writeFilep(copiee, copiee)));
+    await cpr(copieeDir, copiedDir);
+    await Promise.all(filenames.map(async ({copiee, copied}) => {
+        t.true(await isSameFile(copied, copiee));
     }));
 });
 
-test('copy an absolute symbolic link in src', async (t) => {
-    const sourceDir = join(t.context.directory, 'source');
-    await mkdir(sourceDir);
-    const source = join(sourceDir, 'source');
-    const body = source;
-    await writeFile(source, body);
-    const symlinked = join(sourceDir, 'symlinked');
-    await symlink(source, symlinked);
-    const destDir = join(t.context.directory, 'dest1', 'dest2');
-    await cpr(sourceDir, destDir);
-    const destSymlink = join(destDir, 'symlinked');
-    const stats = await lstat(destSymlink);
-    t.true(stats.isSymbolicLink());
-    const target = await readlink(destSymlink);
-    const dest = join(destDir, 'source');
-    t.is(target, dest);
-    const copied = await readFile(destSymlink, 'utf8');
-    t.is(copied, body);
+test('copy an absolute symbolic link to a file in copiee', async (t) => {
+    const copieeDir = join(t.context.directory, 'copiee');
+    await mkdir(copieeDir);
+    const linkeePath = join(copieeDir, 'linkee1', 'linkee2');
+    await writeFilep(linkeePath, linkeePath);
+    const linkPath = join(copieeDir, 'linkPath');
+    await symlink(linkeePath, linkPath);
+    const copiedDir = join(t.context.directory, 'copied1', 'copied2');
+    await cpr(copieeDir, copiedDir);
+    const copiedSymlink = join(copiedDir, relative(copieeDir, linkPath));
+    t.true((await lstat(copiedSymlink)).isSymbolicLink());
+    const expectedSymlinkTarget = join(copiedDir, relative(copieeDir, linkeePath));
+    t.is(await readlink(copiedSymlink), expectedSymlinkTarget);
+    t.true(await isSameFile(copiedSymlink, linkPath));
 });
 
-test('copy an relative symbolic link in src', async (t) => {
-    const sourceDir = join(t.context.directory, 'source');
-    await mkdir(sourceDir);
-    const source = join(sourceDir, 'source');
-    const body = source;
-    await writeFile(source, body);
-    const symlinked = join(sourceDir, 'symlinked');
-    const relativeTarget = ['.', 'source'].join(sep);
-    await symlink(relativeTarget, symlinked);
-    const destDir = join(t.context.directory, 'dest1', 'dest2');
-    await cpr(sourceDir, destDir);
-    const destSymlink = join(destDir, 'symlinked');
-    const stats = await lstat(destSymlink);
-    t.true(stats.isSymbolicLink());
-    const target = await readlink(destSymlink);
-    t.is(target, relativeTarget);
-    const copied = await readFile(destSymlink, 'utf8');
-    t.is(copied, body);
+test('copy an relative symbolic link to a file in copiee', async (t) => {
+    const copieeDir = join(t.context.directory, 'copiee');
+    await mkdir(copieeDir);
+    const linkeeFile = join(copieeDir, 'linkee1', 'linkee2');
+    await writeFilep(linkeeFile, linkeeFile);
+    const linkPath = join(copieeDir, 'linkPath');
+    await symlink(relative(dirname(linkPath), linkeeFile), linkPath);
+    const copiedDir = join(t.context.directory, 'copied1', 'copied2');
+    await cpr(copieeDir, copiedDir);
+    const copiedSymlink = join(copiedDir, relative(copieeDir, linkPath));
+    t.true((await lstat(copiedSymlink)).isSymbolicLink());
+    const copiedLinkee = join(copiedDir, relative(copieeDir, linkeeFile));
+    t.is(await readlink(copiedSymlink), relative(dirname(copiedSymlink), copiedLinkee));
+    t.true(await isSameFile(copiedSymlink, linkPath));
 });
 
-test('copy an absolute symbolic link out src', async (t) => {
-    const contentDir = join(t.context.directory, 'content');
-    await mkdir(contentDir);
-    const sourceDir = join(t.context.directory, 'source');
-    await mkdir(sourceDir);
-    const source = join(contentDir, 'source');
-    const body = source;
-    await writeFile(source, body);
-    const symlinked = join(sourceDir, 'symlinked');
-    await symlink(source, symlinked);
-    const destDir = join(t.context.directory, 'dest1', 'dest2');
-    await cpr(sourceDir, destDir);
-    const destSymlink = join(destDir, 'symlinked');
-    const stats = await lstat(destSymlink);
-    t.true(stats.isSymbolicLink());
-    const target = await readlink(destSymlink);
-    t.is(target, source);
-    const copied = await readFile(destSymlink, 'utf8');
-    t.is(copied, body);
+test('copy an absolute symbolic link to a file outside copiee', async (t) => {
+    const linkeeDir = join(t.context.directory, 'linkee');
+    await mkdir(linkeeDir);
+    const linkeeFile = join(linkeeDir, 'linkee1', 'linkee2');
+    await writeFilep(linkeeFile, linkeeFile);
+    const copieeDir = join(t.context.directory, 'copiee');
+    await mkdir(copieeDir);
+    const linkPath = join(copieeDir, 'linkPath');
+    await symlink(linkeeFile, linkPath);
+    const copiedDir = join(t.context.directory, 'copied1', 'copied2');
+    await cpr(copieeDir, copiedDir);
+    const copiedSymlink = join(copiedDir, 'linkPath');
+    t.true((await lstat(copiedSymlink)).isSymbolicLink());
+    t.is(await readlink(copiedSymlink), linkeeFile);
+    t.true(await isSameFile(copiedSymlink, linkPath));
 });
 
-test('copy an relative symbolic link out src', async (t) => {
-    const contentDir = join(t.context.directory, 'content');
-    await mkdir(contentDir);
-    const sourceDir = join(t.context.directory, 'source');
-    await mkdir(sourceDir);
-    const source = join(contentDir, 'source');
-    const body = source;
-    await writeFile(source, body);
-    const symlinked = join(sourceDir, 'symlinked');
-    const relativeTarget = ['..', 'content', 'source'].join(sep);
-    await symlink(relativeTarget, symlinked);
-    const destDir = join(t.context.directory, 'dest1', 'dest2');
-    await cpr(sourceDir, destDir);
-    const destSymlink = join(destDir, 'symlinked');
-    const stats = await lstat(destSymlink);
-    t.true(stats.isSymbolicLink());
-    const target = await readlink(destSymlink);
-    t.is(target, ['..', relativeTarget].join(sep));
-    const copied = await readFile(destSymlink, 'utf8');
-    t.is(copied, body);
+test('copy an relative symbolic link to a file outside copiee', async (t) => {
+    const linkeeDir = join(t.context.directory, 'linkee');
+    await mkdir(linkeeDir);
+    const linkeeFile = join(linkeeDir, 'linkee1', 'linkee2');
+    await writeFilep(linkeeFile, linkeeFile);
+    const copieeDir = join(t.context.directory, 'copiee');
+    await mkdir(copieeDir);
+    const linkPath = join(copieeDir, 'linkPath');
+    await symlink(relative(dirname(linkPath), linkeeFile), linkPath);
+    const copiedDir = join(t.context.directory, 'copied1', 'copied2');
+    await cpr(copieeDir, copiedDir);
+    const copiedSymlink = join(copiedDir, relative(copieeDir, linkPath));
+    t.true((await lstat(copiedSymlink)).isSymbolicLink());
+    t.is(await readlink(copiedSymlink), relative(dirname(copiedSymlink), linkeeFile));
+    t.true(await isSameFile(copiedSymlink, linkPath));
 });
