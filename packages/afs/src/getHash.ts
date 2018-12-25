@@ -1,7 +1,15 @@
-import {Hash, createHash} from 'crypto';
+import {Hash, createHash, HexBase64Latin1Encoding} from 'crypto';
 
-export const getHash = (data: Parameters<Hash['update']>[0]): string => {
-    const hash = createHash('sha256');
+export interface HashOptions {
+    algorithm: string
+    encoding: HexBase64Latin1Encoding | typeof Buffer
+}
+
+export const getHash = (
+    data: Parameters<Hash['update']>[0],
+    {algorithm, encoding}: HashOptions = {algorithm: 'sha256', encoding: 'latin1'},
+): string | Buffer => {
+    const hash = createHash(algorithm || 'sha256');
     hash.update(data);
-    return hash.digest('base64');
+    return encoding === Buffer ? hash.digest() : hash.digest(encoding as HexBase64Latin1Encoding);
 };
