@@ -7,8 +7,8 @@ import {
     writeFile,
     symlink,
     mkdir,
-} from './core';
-import {rmrf} from './rmrf';
+    rmrf,
+} from '.';
 
 const test = anyTest as TestInterface<{
     directory: string

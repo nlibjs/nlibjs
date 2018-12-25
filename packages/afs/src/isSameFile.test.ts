@@ -1,10 +1,12 @@
 import {tmpdir} from 'os';
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
-import {mkdtemp} from './core';
-import {rmrf} from './rmrf';
-import {isSameFile} from './isSameFile';
-import {writeFilep} from './writeFilep';
+import {
+    mkdtemp,
+    rmrf,
+    isSameFile,
+    writeFilep,
+} from '.';
 
 const test = anyTest as TestInterface<{
     directory: string

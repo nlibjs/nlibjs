@@ -5,10 +5,10 @@ import {
     mkdtemp,
     readFile,
     stat,
-} from './core';
-import {rmrf} from './rmrf';
-import {mkdirp} from './mkdirp';
-import {updateFile} from './updateFile';
+    rmrf,
+    mkdirp,
+    updateFile,
+} from '.';
 const wait = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration));
 
 const test = anyTest as TestInterface<{

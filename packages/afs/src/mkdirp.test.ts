@@ -5,9 +5,9 @@ import {
     mkdtemp,
     stat,
     writeFile,
-} from './core';
-import {rmrf} from './rmrf';
-import {mkdirp} from './mkdirp';
+    rmrf,
+    mkdirp,
+} from '.';
 
 const test = anyTest as TestInterface<{
     directory: string

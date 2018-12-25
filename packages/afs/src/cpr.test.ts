@@ -7,11 +7,11 @@ import {
     symlink,
     lstat,
     readlink,
-} from './core';
-import {cpr} from './cpr';
-import {rmrf} from './rmrf';
-import {isSameFile} from './isSameFile';
-import {writeFilep} from './writeFilep';
+    cpr,
+    rmrf,
+    isSameFile,
+    writeFilep,
+} from '.';
 
 const test = anyTest as TestInterface<{
     directory: string

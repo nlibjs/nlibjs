@@ -1,6 +1,6 @@
 import {normalize, join} from 'path';
 import test from 'ava';
-import {absolutify} from './absolutify';
+import {absolutify} from '.';
 
 test('keep an absolute path unchanged', (t) => {
     t.is(absolutify('/foo/bar'), normalize('/foo/bar'));

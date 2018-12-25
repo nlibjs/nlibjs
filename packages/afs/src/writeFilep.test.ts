@@ -4,10 +4,10 @@ import anyTest, {TestInterface} from 'ava';
 import {
     mkdtemp,
     readFile,
-} from './core';
-import {rmrf} from './rmrf';
-import {writeFilep} from './writeFilep';
-import {mkdirp} from './mkdirp';
+    rmrf,
+    writeFilep,
+    mkdirp,
+} from '.';
 
 const test = anyTest as TestInterface<{
     directory: string
