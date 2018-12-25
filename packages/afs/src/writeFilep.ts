@@ -11,9 +11,9 @@ export const writeFilep = async (...args: Parameters<typeof writeFile>): ReturnT
             if (typeof pathLike !== 'number') {
                 await mkdirp(dirname(`${pathLike}`));
                 await writeFile(...args);
+                return;
             }
-        } else {
-            throw error;
         }
+        throw error;
     }
 };
