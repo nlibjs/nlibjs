@@ -14,7 +14,7 @@ const test = anyTest as TestInterface<{
 }>;
 
 test.beforeEach(async (t) => {
-    t.context.directory = await mkdtemp(join(tmpdir(), 'cpr'));
+    t.context.directory = await mkdtemp(tmpdir());
 });
 
 test.afterEach(async (t) => {
