@@ -19,5 +19,11 @@
     "files": [
         ".editorconfig",
         ".eslintrc.json"
-    ]
+    ],
+    "scripts": {
+        "cleanup": "rimraf lib",
+        "build": "tsc",
+        "test": "ava lib/*.test.js",
+        "lint": "eslint --ext .ts src"
+    }
 }
