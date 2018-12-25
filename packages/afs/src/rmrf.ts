@@ -5,7 +5,7 @@ import {PathLike} from 'fs';
 
 export type onFileHook = (target: string) => void;
 
-const rmrfCore = async (target: string, onFile?: onFileHook) => {
+const rmrfCore = async (target: string, onFile: onFileHook, retryCount: number = 0): Promise<boolean> => {
     try {
         const stats = await lstat(target);
         if (onFile) {
@@ -17,12 +17,20 @@ const rmrfCore = async (target: string, onFile?: onFileHook) => {
         } else {
             await unlink(target);
         }
+        return true;
     } catch (error) {
-        if (error.code !== 'ENOENT') {
-            throw error;
+        switch (error.code) {
+        case 'ENOENT':
+            return false;
+        case 'EBUSY':
+            if (retryCount < 10) {
+                return rmrfCore(target, onFile, retryCount + 1);
+            }
+            break;
+        default:
         }
+        throw error;
     }
-    return true;
 };
 
-export const rmrf = (target: PathLike, onFile?: onFileHook) => rmrfCore(absolutify(target), onFile);
+export const rmrf = (target: PathLike, onFile: onFileHook = () => {}) => rmrfCore(absolutify(target), onFile);
