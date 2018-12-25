@@ -22,7 +22,8 @@ test('remove a file', async (t) => {
     const data = filePath;
     await writeFile(filePath, data);
     await stat(filePath);
-    await rmrf(filePath);
+    const result = await rmrf(filePath);
+    t.true(result);
     await t.throwsAsync(() => stat(filePath));
 });
 
@@ -33,7 +34,8 @@ test('remove a symlink', async (t) => {
     const symlinkPath = join(t.context.directory, 'symlink');
     await symlink(filePath, symlinkPath);
     await stat(symlinkPath);
-    await rmrf(symlinkPath);
+    const result = await rmrf(symlinkPath);
+    t.true(result);
     await t.throwsAsync(() => stat(symlinkPath));
 });
 
@@ -44,7 +46,8 @@ test('remove a file in a directory', async (t) => {
     const data = filePath;
     await writeFile(filePath, data);
     await stat(filePath);
-    await rmrf(dirPath);
+    const result = await rmrf(dirPath);
+    t.true(result);
     await t.throwsAsync(() => stat(filePath));
     await t.throwsAsync(() => stat(dirPath));
 });
@@ -58,7 +61,8 @@ test('remove a symlink in a directory', async (t) => {
     const symlinkPath = join(dirPath, 'symlink');
     await symlink(filePath, symlinkPath);
     await stat(symlinkPath);
-    await rmrf(dirPath);
+    const result = await rmrf(dirPath);
+    t.true(result);
     await t.throwsAsync(() => stat(symlinkPath));
     await t.throwsAsync(() => stat(filePath));
     await t.throwsAsync(() => stat(dirPath));
@@ -74,10 +78,11 @@ test('call the onFile hook before delete a file', async (t) => {
     await symlink(filePath, symlinkPath);
     await stat(symlinkPath);
     const called: string[] = [];
-    await rmrf(dirPath, async (target) => {
+    const result = await rmrf(dirPath, async (target) => {
         called.push(target);
         await stat(target);
     });
+    t.true(result);
     await t.throwsAsync(() => stat(symlinkPath));
     await t.throwsAsync(() => stat(filePath));
     await t.throwsAsync(() => stat(dirPath));
@@ -86,4 +91,10 @@ test('call the onFile hook before delete a file', async (t) => {
         filePath,
         symlinkPath,
     ]);
+});
+
+test('return false if nothing is there', async (t) => {
+    const filePath = join(t.context.directory, 'file');
+    const result = await rmrf(filePath);
+    t.false(result);
 });
