@@ -7,6 +7,7 @@ import {
     rmrf,
     mkdir,
     findUp,
+    realpath,
 } from '.';
 
 const test = anyTest as TestInterface<{
@@ -27,7 +28,7 @@ const test = anyTest as TestInterface<{
 }>;
 
 test.beforeEach(async (t) => {
-    const directory = t.context.directory = await mkdtemp(join(tmpdir(), 'cpr'));
+    const directory = t.context.directory = await realpath(await mkdtemp(tmpdir()));
     const filename0 = t.context.filename0 = 'file0';
     const filename1 = t.context.filename1 = 'file1';
     const filename2 = t.context.filename2 = 'file2';
@@ -57,7 +58,13 @@ test.afterEach(async (t) => {
 });
 
 test('find a file in the same directory', async (t) => {
-    const found = await findUp([t.context.filename0], t.context.dir3);
+    const found = await findUp(t.context.filename0, t.context.dir3);
+    t.is(found, t.context.file30);
+});
+
+test('find a file in the current directory', async (t) => {
+    process.chdir(t.context.dir3);
+    const found = await findUp(t.context.filename0);
     t.is(found, t.context.file30);
 });
 
@@ -66,7 +73,18 @@ test('find a file in the parent directory', async (t) => {
     t.is(found, t.context.file11);
 });
 
+test('ignore directories', async (t) => {
+    mkdir(join(t.context.dir2, t.context.filename1));
+    const found = await findUp([t.context.filename1], t.context.dir3);
+    t.is(found, t.context.file11);
+});
+
 test('find a file in the nearest parent directory', async (t) => {
     const found = await findUp([t.context.filename1, t.context.filename2], t.context.dir3);
     t.is(found, t.context.file22);
+});
+
+test('return null if nothing is found', async (t) => {
+    const found = await findUp([]);
+    t.is(found, null);
 });
