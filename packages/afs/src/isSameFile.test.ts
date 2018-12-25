@@ -1,11 +1,9 @@
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
-import {
-    mktempdir,
-    rmrf,
-    isSameFile,
-    writeFilep,
-} from '.';
+import {mktempdir} from './mktempdir';
+import {rmrf} from './rmrf';
+import {writeFilep} from './writeFilep';
+import {isSameFile} from './isSameFile';
 
 const test = anyTest as TestInterface<{
     directory: string

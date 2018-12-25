@@ -2,11 +2,11 @@ import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
 import {
     readFile,
-    rmrf,
-    deploy,
     stat,
-    mktempdir,
-} from '.';
+} from './core';
+import {mktempdir} from './mktempdir';
+import {rmrf} from './rmrf';
+import {deploy} from './deploy';
 
 const test = anyTest as TestInterface<{
     directory: string

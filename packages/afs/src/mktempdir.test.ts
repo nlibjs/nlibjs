@@ -1,9 +1,7 @@
 import test from 'ava';
 import {basename} from 'path';
-import {
-    stat,
-    mktempdir,
-} from '.';
+import {stat} from './core';
+import {mktempdir} from './mktempdir';
 
 test('create a temporary directory', async (t) => {
     const directory = await mktempdir();

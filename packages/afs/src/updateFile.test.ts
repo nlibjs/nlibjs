@@ -1,13 +1,13 @@
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
 import {
-    mktempdir,
     readFile,
     stat,
-    rmrf,
-    mkdirp,
-    updateFile,
-} from '.';
+} from './core';
+import {mktempdir} from './mktempdir';
+import {rmrf} from './rmrf';
+import {updateFile} from './updateFile';
+import {mkdirp} from './mkdirp';
 const wait = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration));
 
 const test = anyTest as TestInterface<{

@@ -5,12 +5,12 @@ import {
     symlink,
     lstat,
     readlink,
-    cpr,
-    rmrf,
-    isSameFile,
-    writeFilep,
-    mktempdir,
-} from '.';
+} from './core';
+import {mktempdir} from './mktempdir';
+import {rmrf} from './rmrf';
+import {writeFilep} from './writeFilep';
+import {cpr} from './cpr';
+import {isSameFile} from './isSameFile';
 
 const test = anyTest as TestInterface<{
     directory: string

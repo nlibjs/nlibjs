@@ -1,13 +1,13 @@
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
 import {
-    mktempdir,
     stat,
     writeFile,
     symlink,
     mkdir,
-    rmrf,
-} from '.';
+} from './core';
+import {mktempdir} from './mktempdir';
+import {rmrf} from './rmrf';
 
 const test = anyTest as TestInterface<{
     directory: string

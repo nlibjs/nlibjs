@@ -1,5 +1,5 @@
 import test from 'ava';
-import {getHash} from '.';
+import {getHash} from './getHash';
 
 test('get a hash string', (t) => {
     const data = 'foo';
