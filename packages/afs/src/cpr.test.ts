@@ -1,8 +1,6 @@
-import {tmpdir} from 'os';
 import {join, relative, dirname} from 'path';
 import anyTest, {TestInterface} from 'ava';
 import {
-    mkdtemp,
     mkdir,
     symlink,
     lstat,
@@ -11,6 +9,7 @@ import {
     rmrf,
     isSameFile,
     writeFilep,
+    mktempdir,
 } from '.';
 
 const test = anyTest as TestInterface<{
@@ -18,7 +17,7 @@ const test = anyTest as TestInterface<{
 }>;
 
 test.beforeEach(async (t) => {
-    t.context.directory = await mkdtemp(tmpdir());
+    t.context.directory = await mktempdir();
 });
 
 test.afterEach(async (t) => {

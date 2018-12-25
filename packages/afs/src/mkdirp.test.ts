@@ -1,8 +1,7 @@
-import {tmpdir} from 'os';
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
 import {
-    mkdtemp,
+    mktempdir,
     stat,
     writeFile,
     rmrf,
@@ -14,7 +13,7 @@ const test = anyTest as TestInterface<{
 }>;
 
 test.beforeEach(async (t) => {
-    t.context.directory = await mkdtemp(tmpdir());
+    t.context.directory = await mktempdir();
 });
 
 test.afterEach(async (t) => {

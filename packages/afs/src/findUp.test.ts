@@ -1,13 +1,11 @@
-import {tmpdir} from 'os';
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
 import {
-    mkdtemp,
+    mktempdir,
     writeFile,
     rmrf,
     mkdir,
     findUp,
-    realpath,
 } from '.';
 
 const test = anyTest as TestInterface<{
@@ -28,7 +26,7 @@ const test = anyTest as TestInterface<{
 }>;
 
 test.beforeEach(async (t) => {
-    const directory = t.context.directory = await realpath(await mkdtemp(tmpdir()));
+    const directory = t.context.directory = await mktempdir();
     const filename0 = t.context.filename0 = 'file0';
     const filename1 = t.context.filename1 = 'file1';
     const filename2 = t.context.filename2 = 'file2';

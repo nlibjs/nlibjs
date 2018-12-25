@@ -10,3 +10,4 @@ export * from './tree';
 export * from './updateFile';
 export * from './writeFilep';
 export * from './isSameFile';
+export * from './mktempdir';
