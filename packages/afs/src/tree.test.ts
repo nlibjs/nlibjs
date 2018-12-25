@@ -6,7 +6,6 @@ import {
     symlink,
 } from './core';
 import {mktempdir} from './mktempdir';
-import {rmrf} from './rmrf';
 import {tree} from './tree';
 
 const test = anyTest as TestInterface<{
@@ -15,10 +14,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test.afterEach(async (t) => {
-    await rmrf(t.context.directory);
 });
 
 test('return a tree', async (t) => {

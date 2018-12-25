@@ -2,7 +2,6 @@ import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
 import {readFile} from './core';
 import {mktempdir} from './mktempdir';
-import {rmrf} from './rmrf';
 import {writeFilep} from './writeFilep';
 import {mkdirp} from './mkdirp';
 
@@ -12,10 +11,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test.afterEach(async (t) => {
-    await rmrf(t.context.directory);
 });
 
 test('write data to a file in a nested directory', async (t) => {

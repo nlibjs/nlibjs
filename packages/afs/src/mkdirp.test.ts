@@ -5,7 +5,6 @@ import {
     writeFile,
 } from './core';
 import {mktempdir} from './mktempdir';
-import {rmrf} from './rmrf';
 import {mkdirp} from './mkdirp';
 
 const test = anyTest as TestInterface<{
@@ -14,10 +13,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test.afterEach(async (t) => {
-    await rmrf(t.context.directory);
 });
 
 test('create a directory', async (t) => {

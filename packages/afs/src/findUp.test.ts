@@ -5,7 +5,6 @@ import {
     mkdir,
 } from './core';
 import {mktempdir} from './mktempdir';
-import {rmrf} from './rmrf';
 import {findUp} from './findUp';
 
 const test = anyTest as TestInterface<{
@@ -49,10 +48,6 @@ test.beforeEach(async (t) => {
     await writeFile(file30, file30);
     const file33 = t.context.file33 = join(dir3, filename3);
     await writeFile(file33, file33);
-});
-
-test.afterEach(async (t) => {
-    await rmrf(t.context.directory);
 });
 
 test('find a file in the same directory', async (t) => {

@@ -5,7 +5,6 @@ import {
     stat,
 } from './core';
 import {mktempdir} from './mktempdir';
-import {rmrf} from './rmrf';
 import {updateFile} from './updateFile';
 import {mkdirp} from './mkdirp';
 const wait = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration));
@@ -16,10 +15,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test.afterEach(async (t) => {
-    await rmrf(t.context.directory);
 });
 
 test('write data to a file in a nested directory', async (t) => {

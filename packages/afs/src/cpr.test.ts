@@ -7,7 +7,6 @@ import {
     readlink,
 } from './core';
 import {mktempdir} from './mktempdir';
-import {rmrf} from './rmrf';
 import {writeFilep} from './writeFilep';
 import {cpr} from './cpr';
 import {isSameFile} from './isSameFile';
@@ -18,10 +17,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test.afterEach(async (t) => {
-    await rmrf(t.context.directory);
 });
 
 test('copy a file in a directory', async (t) => {
