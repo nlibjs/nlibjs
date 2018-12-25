@@ -3,9 +3,9 @@ import {readdir, rmdir, unlink, lstat} from './core';
 import {absolutify} from './absolutify';
 import {PathLike} from 'fs';
 
-export type onFileHandler = (target: string) => any;
+export type onFileHook = (target: string) => void;
 
-const rmrfCore = async (target: string, onFile?: onFileHandler) => {
+const rmrfCore = async (target: string, onFile?: onFileHook) => {
     try {
         const stats = await lstat(target);
         if (onFile) {
@@ -25,4 +25,4 @@ const rmrfCore = async (target: string, onFile?: onFileHandler) => {
     return true;
 };
 
-export const rmrf = (target: PathLike, onFile?: onFileHandler) => rmrfCore(absolutify(target), onFile);
+export const rmrf = (target: PathLike, onFile?: onFileHook) => rmrfCore(absolutify(target), onFile);

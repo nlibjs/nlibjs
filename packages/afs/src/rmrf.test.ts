@@ -64,3 +64,27 @@ test('remove a symlink in a directory', async (t) => {
     await t.throwsAsync(() => stat(filePath));
     await t.throwsAsync(() => stat(dirPath));
 });
+
+test('call the onFile hook before delete a file', async (t) => {
+    const dirPath = join(t.context.directory, 'directory');
+    await mkdir(dirPath);
+    const filePath = join(dirPath, 'file');
+    const data = filePath;
+    await writeFile(filePath, data);
+    const symlinkPath = join(dirPath, 'symlink');
+    await symlink(filePath, symlinkPath);
+    await stat(symlinkPath);
+    const called: string[] = [];
+    await rmrf(dirPath, async (target) => {
+        called.push(target);
+        await stat(target);
+    });
+    await t.throwsAsync(() => stat(symlinkPath));
+    await t.throwsAsync(() => stat(filePath));
+    await t.throwsAsync(() => stat(dirPath));
+    t.deepEqual(called, [
+        dirPath,
+        filePath,
+        symlinkPath,
+    ]);
+});
