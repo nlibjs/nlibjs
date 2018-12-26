@@ -46,7 +46,7 @@ test('return false if two files have different data', async (t) => {
 test('throw an error if pathes points wrong location', async (t) => {
     const pathA = join(t.context.directory, 'fileA');
     const pathB = join(t.context.directory, 'fileB');
-    await t.throwsAsync(() => isSameFile(pathA, pathB));
+    await t.throwsAsync(() => isSameFile(pathA, pathB), {code: 'ENOENT'});
 });
 
 test('throw nothing if pathes points wrong location but buffers are given', async (t) => {

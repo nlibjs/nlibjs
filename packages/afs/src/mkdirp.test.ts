@@ -32,5 +32,5 @@ test('throw an error if there is a file', async (t) => {
     t.true((await stat(dirPath1)).isDirectory());
     const dirPath2 = join(dirPath1, 'dir4');
     await writeFile(dirPath2, dirPath2);
-    await t.throwsAsync(() => mkdirp(dirPath2));
+    await t.throwsAsync(() => mkdirp(dirPath2), {code: 'EEXIST'});
 });

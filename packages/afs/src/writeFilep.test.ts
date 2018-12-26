@@ -41,5 +41,5 @@ test('write files in parallel', async (t) => {
 test('throw an error if there is a directory', async (t) => {
     const dirPath = join(t.context.directory, 'dir1', 'dir2', 'dir3');
     await mkdirp(dirPath);
-    await t.throwsAsync(() => writeFilep(dirPath, dirPath));
+    await t.throwsAsync(() => writeFilep(dirPath, dirPath), {code: 'EISDIR'});
 });
