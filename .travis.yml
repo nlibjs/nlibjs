@@ -3,12 +3,13 @@ node_js:
 - '10'
 - '8'
 install:
-- npm install -g nyc
+- npm install -g nyc @commitlint/travis-cli
 - npm install
 - npm run init
 script:
 - npm test
 - npm run lint
+- commitlint-travis
 after_success:
 - npm install -g codecov
 - codecov
