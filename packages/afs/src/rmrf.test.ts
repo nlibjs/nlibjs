@@ -8,6 +8,7 @@ import {
 } from './core';
 import {mktempdir} from './mktempdir';
 import {rmrf} from './rmrf';
+import * as index from '.';
 
 const test = anyTest as TestInterface<{
     directory: string
@@ -15,6 +16,10 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
+});
+
+test('index.rmrf', (t) => {
+    t.is(index.rmrf, rmrf);
 });
 
 test('remove a file', async (t) => {

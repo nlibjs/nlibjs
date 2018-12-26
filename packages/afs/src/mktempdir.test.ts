@@ -2,6 +2,11 @@ import test from 'ava';
 import {basename} from 'path';
 import {stat} from './core';
 import {mktempdir} from './mktempdir';
+import * as index from '.';
+
+test('index.mktempdir', (t) => {
+    t.is(index.mktempdir, mktempdir);
+});
 
 test('create a temporary directory', async (t) => {
     const directory = await mktempdir();

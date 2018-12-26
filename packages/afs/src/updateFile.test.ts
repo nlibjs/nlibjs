@@ -7,6 +7,8 @@ import {
 import {mktempdir} from './mktempdir';
 import {updateFile} from './updateFile';
 import {mkdirp} from './mkdirp';
+import * as index from '.';
+
 const wait = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration));
 
 const test = anyTest as TestInterface<{
@@ -15,6 +17,10 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
+});
+
+test('index.updateFile', (t) => {
+    t.is(index.updateFile, updateFile);
 });
 
 test('write data to a file in a nested directory', async (t) => {

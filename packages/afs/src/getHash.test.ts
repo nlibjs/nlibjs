@@ -1,5 +1,10 @@
 import test from 'ava';
 import {getHash} from './getHash';
+import * as index from '.';
+
+test('index.getHash', (t) => {
+    t.is(index.getHash, getHash);
+});
 
 test('get a hash string', (t) => {
     const data = 'foo';

@@ -6,6 +6,7 @@ import {
 } from './core';
 import {mktempdir} from './mktempdir';
 import {deploy} from './deploy';
+import * as index from '.';
 
 const test = anyTest as TestInterface<{
     directory: string
@@ -13,6 +14,10 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
+});
+
+test('index.deploy', (t) => {
+    t.is(index.deploy, deploy);
 });
 
 test('deploy files', async (t) => {

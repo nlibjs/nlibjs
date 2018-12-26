@@ -7,6 +7,7 @@ import {
 } from './core';
 import {mktempdir} from './mktempdir';
 import {tree} from './tree';
+import * as index from '.';
 
 const test = anyTest as TestInterface<{
     directory: string
@@ -14,6 +15,10 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
+});
+
+test('index.tree', (t) => {
+    t.is(index.tree, tree);
 });
 
 test('return a tree', async (t) => {

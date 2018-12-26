@@ -10,6 +10,7 @@ import {mktempdir} from './mktempdir';
 import {writeFilep} from './writeFilep';
 import {cpr} from './cpr';
 import {isSameFile} from './isSameFile';
+import * as index from '.';
 
 const test = anyTest as TestInterface<{
     directory: string
@@ -17,6 +18,10 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
+});
+
+test('index.cpr', (t) => {
+    t.is(index.cpr, cpr);
 });
 
 test('copy a file in a directory', async (t) => {

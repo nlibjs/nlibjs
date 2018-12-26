@@ -6,6 +6,7 @@ import {
 } from './core';
 import {mktempdir} from './mktempdir';
 import {findUp} from './findUp';
+import * as index from '.';
 
 const test = anyTest as TestInterface<{
     directory: string
@@ -48,6 +49,10 @@ test.beforeEach(async (t) => {
     await writeFile(file30, file30);
     const file33 = t.context.file33 = join(dir3, filename3);
     await writeFile(file33, file33);
+});
+
+test('index.findUp', (t) => {
+    t.is(index.findUp, findUp);
 });
 
 test('find a file in the same directory', async (t) => {

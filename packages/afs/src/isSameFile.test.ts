@@ -3,6 +3,7 @@ import anyTest, {TestInterface} from 'ava';
 import {mktempdir} from './mktempdir';
 import {writeFilep} from './writeFilep';
 import {isSameFile} from './isSameFile';
+import * as index from '.';
 
 const test = anyTest as TestInterface<{
     directory: string
@@ -10,6 +11,10 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
+});
+
+test('index.isSameFile', (t) => {
+    t.is(index.isSameFile, isSameFile);
 });
 
 test('return true if two paths are same', async (t) => {
