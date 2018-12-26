@@ -86,3 +86,11 @@ test('return null if nothing is found', async (t) => {
     const found = await findUp([]);
     t.is(found, null);
 });
+
+if (process.platform !== 'win32') {
+    test('throw an EACCES error', async (t) => {
+        const directory = join(t.context.directory, 'throw');
+        await mkdir(directory, 1);
+        await t.throwsAsync(() => findUp(t.context.filename1, directory), {code: 'EACCES'});
+    });
+}

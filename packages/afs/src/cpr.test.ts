@@ -11,6 +11,7 @@ import {writeFilep} from './writeFilep';
 import {cpr} from './cpr';
 import {isSameFile} from './isSameFile';
 import * as index from '.';
+import {exec} from 'child_process';
 
 const test = anyTest as TestInterface<{
     directory: string
@@ -112,3 +113,22 @@ test('copy an relative symbolic link to a file outside copiee', async (t) => {
     t.is(await readlink(copiedSymlink), relative(dirname(copiedSymlink), linkeeFile));
     t.true(await isSameFile(copiedSymlink, linkPath));
 });
+
+if (process.platform !== 'win32') {
+    test('throw an error if copiee is fifo', async (t) => {
+        const copieeDir = join(t.context.directory, 'copiee');
+        await mkdir(copieeDir);
+        const fifoPath = join(copieeDir, 'fifo');
+        await new Promise((resolve, reject) => {
+            exec(`mkfifo ${fifoPath}`, (error, stdout, stdin) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve({stdin, stdout});
+                }
+            });
+        });
+        const copiedDir = join(t.context.directory, 'copied1', 'copied2');
+        await t.throwsAsync(() => cpr(copieeDir, copiedDir), {code: 'ENOTSUPPORTED'});
+    });
+}

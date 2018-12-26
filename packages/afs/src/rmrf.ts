@@ -8,9 +8,7 @@ export type onFileHook = (target: string) => void;
 const rmrfCore = async (target: string, onFile: onFileHook, retryCount: number = 0): Promise<boolean> => {
     try {
         const stats = await lstat(target);
-        if (onFile) {
-            await onFile(target);
-        }
+        await onFile(target);
         if (stats.isDirectory()) {
             await Promise.all((await readdir(target)).map((name) => rmrfCore(join(target, name), onFile)));
             await rmdir(target);

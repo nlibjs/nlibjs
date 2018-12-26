@@ -35,7 +35,10 @@ const cprCore = async (tree: TreeNode, dest: string, context: CopyContext) => {
         break;
     }
     default:
-        throw new Error(`${tree.type} is not supported: ${tree.path}`);
+        throw Object.assign(
+            new Error(`${tree.type} is not supported: ${tree.path}`),
+            {code: 'ENOTSUPPORTED'},
+        );
     }
 };
 
