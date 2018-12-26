@@ -6,9 +6,13 @@
     "version": "0.0.1",
     "main": "lib/index.js",
     "dependencies": {
-        "@types/node": "^10.12.15"
+        "@types/lockfile": "^1.0.0",
+        "@types/node": "^10.12.15",
+        "lockfile": "^1.0.4"
     },
-    "files": ["lib"],
+    "files": [
+        "lib"
+    ],
     "scripts": {
         "cleanup": "rimraf lib",
         "build": "tsc",
@@ -18,7 +22,9 @@
     "eslintConfig": {
         "overrides": [
             {
-                "files": ["src/core.ts"],
+                "files": [
+                    "src/core.ts"
+                ],
                 "rules": {
                     "prefer-destructuring": "off"
                 }
