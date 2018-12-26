@@ -22,12 +22,6 @@ const rmrfCore = async (target: string, onFile: onFileHook, retryCount: number =
         switch (error.code) {
         case 'ENOENT':
             return false;
-        case 'EBUSY':
-            if (retryCount < 10) {
-                await new Promise((resolve) => setTimeout(resolve, 50));
-                return rmrfCore(target, onFile, retryCount + 1);
-            }
-            break;
         default:
         }
         throw error;
