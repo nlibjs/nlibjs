@@ -4,18 +4,7 @@
         "access": "public"
     },
     "version": "0.0.1",
-    "description": "> TODO: description",
-    "repository": "https://github.com/nlibjs/nlibjs/tree/master/packages/lint",
-    "author": {
-        "name": "Kei Ito",
-        "email": "kei.itof@gmail.com",
-        "url": "https://github.com/kei-ito"
-    },
-    "license": "MIT",
-    "peerDependencies": {
-        "eslint-plugin-typescript": "^0.14.0",
-        "typescript-eslint-parser": "^21.0.2"
-    },
+    "main": "lib/index.js",
     "files": [
         ".editorconfig",
         ".eslintrc.json"
@@ -25,5 +14,9 @@
         "build": "tsc",
         "test": "ava lib/*.test.js",
         "lint": "eslint --ext .ts src"
+    },
+    "peerDependencies": {
+        "eslint-plugin-typescript": "^0.14.0",
+        "typescript-eslint-parser": "^21.0.2"
     }
 }
