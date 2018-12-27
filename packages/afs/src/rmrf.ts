@@ -1,6 +1,6 @@
 import {join} from 'path';
+import {absolutify} from '@nlib/util';
 import {readdir, rmdir, unlink, lstat} from './core';
-import {absolutify} from './absolutify';
 import {PathLike} from 'fs';
 
 export type onFileHook = (target: string) => void;

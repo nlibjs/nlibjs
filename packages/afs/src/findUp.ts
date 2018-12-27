@@ -1,6 +1,6 @@
 import {join, dirname} from 'path';
+import {absolutify} from '@nlib/util';
 import {stat} from './core';
-import {absolutify} from './absolutify';
 
 const findUpCore = async (targets: string[], directory: string): Promise<string | null> => {
     for (const target of targets) {

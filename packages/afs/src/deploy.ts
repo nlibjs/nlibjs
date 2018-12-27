@@ -1,6 +1,6 @@
 import {join} from 'path';
+import {absolutify} from '@nlib/util';
 import {writeFilep} from './writeFilep';
-import {absolutify} from './absolutify';
 import {PathLike} from 'fs';
 
 export type DeployData = string | Buffer | {

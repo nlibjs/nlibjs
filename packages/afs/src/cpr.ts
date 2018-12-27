@@ -1,9 +1,9 @@
 import {join, dirname, isAbsolute, relative} from 'path';
 import {PathLike} from 'fs';
+import {absolutify} from '@nlib/util';
 import {copyFile, symlink, readlink} from './core';
 import {tree, TreeNode} from './tree';
 import {mkdirp} from './mkdirp';
-import {absolutify} from './absolutify';
 
 interface CopyContext {
     src: string
