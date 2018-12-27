@@ -1,0 +1,17 @@
+{
+    "name": "@nlib/util",
+    "publishConfig": {
+        "access": "public"
+    },
+    "version": "0.0.1",
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "cleanup": "rimraf lib",
+        "build": "tsc",
+        "test": "ava lib/*.test.js",
+        "lint": "eslint --ext .ts src"
+    }
+}
