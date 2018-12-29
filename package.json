@@ -1,5 +1,6 @@
 {
     "private": true,
+    "name": "nlibjs",
     "devDependencies": {
         "@commitlint/cli": "^7.2.1",
         "@commitlint/config-conventional": "^7.1.2",
@@ -20,7 +21,6 @@
         "typescript": "^3.2.2",
         "typescript-eslint-parser": "^21.0.2"
     },
-    "name": "nlibjs",
     "scripts": {
         "init": "lerna bootstrap",
         "lerna:cleanup": "lerna run cleanup",
@@ -30,7 +30,7 @@
         "build": "npm-run-all --serial lerna:cleanup lerna:build",
         "test": "npm-run-all --serial lerna:cleanup lerna:build lerna:test",
         "lint": "lerna run lint",
-        "release": "lerna publish --conventional-commits"
+        "bump": "lerna version --conventional-commits"
     },
     "ava": {
         "compileEnhancements": false,
