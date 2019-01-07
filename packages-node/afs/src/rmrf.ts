@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {absolutify} from '@nlib/util';
+import {absolutify} from '@nlib/node-util';
 import {readdir, rmdir, unlink, lstat} from './core';
 import {PathLike} from 'fs';
 
