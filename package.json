@@ -58,10 +58,42 @@
     },
     "eslintConfig": {
         "extends": "./node_modules/@nlib/lint/.eslintrc.json",
-        "env": {
-            "es6": true,
-            "node": true
-        }
+        "overrides": [
+            {
+                "files": [
+                    "packages-hybrid/**/*.ts"
+                ],
+                "env": {
+                    "es6": true
+                }
+            },
+            {
+                "files": [
+                    "packages-client/**/*.ts"
+                ],
+                "env": {
+                    "es6": true,
+                    "browser": true
+                }
+            },
+            {
+                "files": [
+                    "packages-node/**/*.ts"
+                ],
+                "env": {
+                    "es6": true,
+                    "node": true
+                }
+            },
+            {
+                "files": [
+                    "*.test.ts"
+                ],
+                "env": {
+                    "node": true
+                }
+            }
+        ]
     },
     "commitlint": {
         "extends": [
