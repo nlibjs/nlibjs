@@ -92,11 +92,14 @@ test('call the onFile hook before delete a file', async (t) => {
     await t.throwsAsync(() => stat(symlinkPath), {code: 'ENOENT'});
     await t.throwsAsync(() => stat(filePath), {code: 'ENOENT'});
     await t.throwsAsync(() => stat(dirPath), {code: 'ENOENT'});
-    t.deepEqual(called, [
-        dirPath,
-        filePath,
-        symlinkPath,
-    ]);
+    t.deepEqual(
+        called.sort(),
+        [
+            dirPath,
+            filePath,
+            symlinkPath,
+        ].sort(),
+    );
 });
 
 test('return false if nothing is there', async (t) => {
