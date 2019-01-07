@@ -5,7 +5,7 @@
         "@commitlint/cli": "^7.2.1",
         "@commitlint/config-conventional": "^7.1.2",
         "@commitlint/config-lerna-scopes": "^7.2.1",
-        "@nlib/lint": "file:packages/lint",
+        "@nlib/lint": "file:packages-hybrid/lint",
         "@types/eslint": "^4.16.5",
         "@types/node": "^10.12.18",
         "ava": "^1.0.1",
@@ -43,10 +43,10 @@
     },
     "nyc": {
         "include": [
-            "packages/*/lib/**/*.js"
+            "packages-*/*/lib/**/*.js"
         ],
         "exclude": [
-            "packages/*/lib/**/*.test.js"
+            "packages-*/*/lib/**/*.test.js"
         ],
         "all": true,
         "reporter": [

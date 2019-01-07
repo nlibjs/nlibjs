@@ -1,4 +1,4 @@
-# `@nlib/util`
+# `@nlib/node-util`
 
 > TODO: description
 

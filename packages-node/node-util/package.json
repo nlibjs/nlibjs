@@ -1,5 +1,5 @@
 {
-    "name": "@nlib/util",
+    "name": "@nlib/node-util",
     "publishConfig": {
         "access": "public"
     },
