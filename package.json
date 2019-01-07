@@ -30,7 +30,7 @@
         "build": "npm-run-all --serial lerna:cleanup lerna:build",
         "test": "npm-run-all --serial lerna:cleanup lerna:build lerna:test",
         "lint": "lerna run lint",
-        "bump": "lerna version --conventional-commits"
+        "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag"
     },
     "ava": {
         "compileEnhancements": false,
