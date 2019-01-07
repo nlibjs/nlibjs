@@ -1,0 +1,49 @@
+{
+    "name": "@nlib/global",
+    "publishConfig": {
+        "access": "public"
+    },
+    "version": "3.1.0",
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "cleanup": "rimraf lib",
+        "build": "tsc",
+        "test": "ava lib/*.test.js",
+        "lint": "eslint --ext .ts src"
+    },
+    "dependencies": {
+        "@types/webassembly-js-api": "^0.0.2"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": [
+                    "src/index.ts"
+                ],
+                "globals": {
+                    "Atomics": true,
+                    "BigInt": true,
+                    "BigInt64Array": true,
+                    "BigUint64Array": true,
+                    "Intl": true,
+                    "SharedArrayBuffer": true,
+                    "URL": true,
+                    "URLSearchParams": true,
+                    "WebAssembly": true,
+                    "clearInterval": true,
+                    "clearTimeout": true,
+                    "console": true,
+                    "setInterval": true,
+                    "setTimeout": true
+                },
+                "rules": {
+                    "max-statements-per-line": "off",
+                    "no-eval": "off"
+                }
+            }
+        ]
+    }
+}
