@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-const lint = require('@nlib/util');
+const lint = require('@nlib/node-util');
 
 // TODO: DEMONSTRATE API
 ```
