@@ -10,7 +10,7 @@ const test = anyTest as TestInterface<{
 test.before(async (t) => {
     t.context.declaredKeys = new Set(Object.getOwnPropertyNames(global));
     const res = await httpGet('https://raw.githubusercontent.com/nodejs/node/master/doc/api/globals.md');
-    const readme = readStream(res);
+    const readme = await readStream(res);
     for (const line of `${readme}`.split(/\n/)) {
         const match = line.match(/^##(?:.*:)?\s*(.*)$/);
         if (match) {
