@@ -1,0 +1,40 @@
+{
+    "name": "@nlib/media-type",
+    "publishConfig": {
+        "access": "public"
+    },
+    "version": "3.1.0",
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "cleanup": "rimraf lib",
+        "build:constants": "ts-node build-constants.ts",
+        "build:tsc": "tsc",
+        "build": "npm-run-all --serial build:constants build:tsc",
+        "test": "ava lib/*.test.js",
+        "lint": "eslint --ext .ts src"
+    },
+    "dependencies": {
+        "@nlib/global": "^3.1.0"
+    },
+    "devDependencies": {
+        "@nlib/afs": "^3.1.0",
+        "@nlib/node-util": "^3.1.0",
+        "@nlib/xml-js": "^3.1.0"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": "build-constants.ts",
+                "env": {
+                    "node": true
+                }
+            }
+        ]
+    }
+}
