@@ -1,5 +1,4 @@
 import {join} from 'path';
-import console from 'console';
 import {httpGet, readStream} from '@nlib/node-util';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
 import {updateFile} from '@nlib/afs';
