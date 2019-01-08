@@ -26,6 +26,12 @@ test.before(async (t) => {
         'queueMicrotask',
         'TextDecoder',
         'TextEncoder',
+        'COUNTER_NET_SERVER_CONNECTION',
+        'COUNTER_NET_SERVER_CONNECTION_CLOSE',
+        'COUNTER_HTTP_SERVER_REQUEST',
+        'COUNTER_HTTP_SERVER_RESPONSE',
+        'COUNTER_HTTP_CLIENT_REQUEST',
+        'COUNTER_HTTP_CLIENT_RESPONSE',
     ]);
     for (const key of t.context.declaredKeys) {
         if (key.startsWith('DTRACE') || key.startsWith('__') || toBeIgnored.has(key)) {
