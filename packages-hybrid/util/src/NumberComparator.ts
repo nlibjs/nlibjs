@@ -100,11 +100,13 @@ export class NumberComparator {
             const {threshold: b} = anotherComparator;
             switch (this._operator) {
             case LT:
-            case LTE:
                 return b < a;
+            case LTE:
+                return b <= a;
             case GT:
-            case GTE:
                 return a < b;
+            case GTE:
+                return a <= b;
             default:
                 return a === b;
             }
