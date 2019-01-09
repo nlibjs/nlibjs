@@ -347,6 +347,7 @@ export const REGISTERED_TYPES: Map<string, Map<string, string>> = new Map([
         ['tamp-update-confirm', 'tamp-update-confirm'],
         ['taxii+json', 'taxii+json'],
         ['tei+xml', 'tei+xml'],
+        ['TETRA_ISI', 'TETRA_ISI'],
         ['thraud+xml', 'thraud+xml'],
         ['timestamp-query', 'timestamp-query'],
         ['timestamp-reply', 'timestamp-reply'],
