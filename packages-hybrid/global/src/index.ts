@@ -1,3 +1,7 @@
+declare global {
+    type Brand<K, T> = K & {__brand: T};
+    type Integer = Brand<number, 'Integer'>;
+}
 const _Array = Array; export {_Array as Array};
 const _ArrayBuffer = ArrayBuffer; export {_ArrayBuffer as ArrayBuffer};
 const _Atomics = Atomics; export {_Atomics as Atomics};
