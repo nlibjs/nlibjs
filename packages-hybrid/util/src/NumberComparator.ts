@@ -38,12 +38,12 @@ export class NumberComparator {
 
     public readonly threshold: number
 
-    public readonly compare: NumberComparator.compare
+    public readonly compare: (x: number) => boolean
 
     private constructor(operator: Operator, threshold: number) {
         this._operator = operator;
         this.threshold = threshold;
-        let compare: NumberComparator.compare;
+        let compare: typeof NumberComparator.prototype.compare;
         switch (operator) {
         case LT:
             compare = (x) => x < threshold;
@@ -134,8 +134,4 @@ export class NumberComparator {
         return this.compare.toString();
     }
 
-}
-
-export namespace NumberComparator {
-    export type compare = (x: number) => boolean;
 }
