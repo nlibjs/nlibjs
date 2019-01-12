@@ -2,16 +2,16 @@ import {Infinity} from '@nlib/global';
 import {RInterval, NullableRIntervalList} from './RInterval';
 import {normalizeRIntervalList} from './normalizeRIntervalList';
 import {RCut, gt, lt} from './RCut';
-import {RClass, RTypes, RSetLike} from './types';
+import {NumberSetBase, SetTypes, SetLike} from './types';
 
-export class RSet implements RClass, RSetLike {
+export class RSet implements NumberSetBase, SetLike<RInterval> {
 
-    public readonly type: RTypes.RSet
+    public readonly type: SetTypes.RSet
 
     public readonly intervals: ReadonlyArray<RInterval>
 
     private constructor(intervals: NullableRIntervalList) {
-        this.type = RTypes.RSet;
+        this.type = SetTypes.RSet;
         this.intervals = normalizeRIntervalList(intervals);
     }
 

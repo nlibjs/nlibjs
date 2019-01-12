@@ -25,8 +25,8 @@ test('gt(0)', (t) => {
     t.is(cut.number, 0);
     t.true(cut.onRight);
     t.false(cut.onLeft);
-    t.true(cut.opened);
-    t.false(cut.closed);
+    t.true(cut.exclusive);
+    t.false(cut.inclusive);
     t.false(cut.has(-1));
     t.false(cut.has(-0));
     t.false(cut.has(0));
@@ -44,8 +44,8 @@ test('gt(-Infinity)', (t) => {
     t.false(Number.isFinite(cut.number));
     t.true(cut.onRight);
     t.false(cut.onLeft);
-    t.true(cut.opened);
-    t.false(cut.closed);
+    t.true(cut.exclusive);
+    t.false(cut.inclusive);
     t.false(cut.has(-Infinity));
     t.true(cut.has(0));
     t.true(cut.has(Infinity));
@@ -57,8 +57,8 @@ test('gt(Infinity)', (t) => {
     t.false(Number.isFinite(cut.number));
     t.true(cut.onRight);
     t.false(cut.onLeft);
-    t.true(cut.opened);
-    t.false(cut.closed);
+    t.true(cut.exclusive);
+    t.false(cut.inclusive);
     t.false(cut.has(-Infinity));
     t.false(cut.has(0));
     t.false(cut.has(Infinity));
@@ -73,7 +73,7 @@ test('gte(0)', (t) => {
     t.is(cut.number, 0);
     t.true(cut.onRight);
     t.false(cut.onLeft);
-    t.false(cut.opened);
+    t.false(cut.exclusive);
     t.false(cut.has(-1));
     t.true(cut.has(-0));
     t.true(cut.has(0));
@@ -102,8 +102,8 @@ test('lt(0)', (t) => {
     t.is(cut.number, 0);
     t.false(cut.onRight);
     t.true(cut.onLeft);
-    t.true(cut.opened);
-    t.false(cut.closed);
+    t.true(cut.exclusive);
+    t.false(cut.inclusive);
     t.true(cut.has(-1));
     t.false(cut.has(-0));
     t.false(cut.has(0));
@@ -121,8 +121,8 @@ test('lt(-Infinity)', (t) => {
     t.false(Number.isFinite(cut.number));
     t.false(cut.onRight);
     t.true(cut.onLeft);
-    t.true(cut.opened);
-    t.false(cut.closed);
+    t.true(cut.exclusive);
+    t.false(cut.inclusive);
     t.false(cut.has(-Infinity));
     t.false(cut.has(0));
     t.false(cut.has(Infinity));
@@ -134,8 +134,8 @@ test('lt(Infinity)', (t) => {
     t.false(Number.isFinite(cut.number));
     t.false(cut.onRight);
     t.true(cut.onLeft);
-    t.true(cut.opened);
-    t.false(cut.closed);
+    t.true(cut.exclusive);
+    t.false(cut.inclusive);
     t.true(cut.has(-Infinity));
     t.true(cut.has(0));
     t.false(cut.has(Infinity));
@@ -150,7 +150,7 @@ test('lte(0)', (t) => {
     t.is(cut.number, 0);
     t.false(cut.onRight);
     t.true(cut.onLeft);
-    t.false(cut.opened);
+    t.false(cut.exclusive);
     t.true(cut.has(-1));
     t.true(cut.has(-0));
     t.true(cut.has(0));

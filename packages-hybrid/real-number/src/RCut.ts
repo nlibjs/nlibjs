@@ -1,5 +1,5 @@
 import {Number, Error} from '@nlib/global';
-import {RClass, RTypes} from './types';
+import {NumberSetBase, SetTypes} from './types';
 const GTE = 0;
 const GT = 1;
 const LT = 2;
@@ -8,15 +8,15 @@ type Operator = typeof GT | typeof GTE | typeof LT | typeof LTE;
 type Comparator = (x: number) => boolean;
 
 /** A set of real numbers gt, gte, lt or lte than the given number. */
-export class RCut implements RClass {
+export class RCut implements NumberSetBase {
 
-    public readonly type: RTypes.RCut
+    public readonly type: SetTypes.RCut
 
     public readonly number: number
 
     public readonly operator: Operator
 
-    public readonly opened: boolean
+    public readonly exclusive: boolean
 
     public readonly onRight: boolean
 
@@ -27,12 +27,12 @@ export class RCut implements RClass {
             throw new Error('The given number is NaN');
         }
         let onRight = false;
-        let opened = false;
+        let exclusive = false;
         let has: Comparator;
         switch (operator) {
         case GT:
             onRight = true;
-            opened = true;
+            exclusive = true;
             has = (x) => number < x;
             break;
         case GTE:
@@ -43,7 +43,7 @@ export class RCut implements RClass {
             has = (x) => number <= x;
             break;
         case LT:
-            opened = true;
+            exclusive = true;
             has = (x) => x < number;
             break;
         case LTE:
@@ -55,10 +55,10 @@ export class RCut implements RClass {
         default:
             throw new Error(`Invalid operator: ${operator}`);
         }
-        this.type = RTypes.RCut;
+        this.type = SetTypes.RCut;
         this.number = number;
         this.operator = operator;
-        this.opened = opened;
+        this.exclusive = exclusive;
         this.onRight = onRight;
         this.has = has;
     }
@@ -113,13 +113,13 @@ export class RCut implements RClass {
 
     public toString(): string {
         if (this.onRight) {
-            return `${this.opened ? '(' : '['}${this.number}, Infinity)`;
+            return `${this.exclusive ? '(' : '['}${this.number}, Infinity)`;
         }
-        return `(-Infinity, ${this.number}${this.opened ? ')' : ']'}`;
+        return `(-Infinity, ${this.number}${this.exclusive ? ')' : ']'}`;
     }
 
-    public get closed(): boolean {
-        return !this.opened;
+    public get inclusive(): boolean {
+        return !this.exclusive;
     }
 
     public get onLeft(): boolean {

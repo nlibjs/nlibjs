@@ -6,12 +6,12 @@ import {
     lte,
     RCut,
 } from './RCut';
-import {RClass, RTypes, RSetLike} from './types';
+import {NumberSetBase, SetTypes, SetLike} from './types';
 
 /** A set of real numbers between the left and right endpoints. */
-export class RInterval implements RClass, RSetLike {
+export class RInterval implements NumberSetBase, SetLike<RInterval> {
 
-    public readonly type: RTypes.RInterval
+    public readonly type: SetTypes.RInterval
 
     public readonly leftEnd: RCut
 
@@ -19,7 +19,7 @@ export class RInterval implements RClass, RSetLike {
 
     public constructor(leftEnd: RCut, rightEnd: RCut) {
         if (leftEnd.number <= rightEnd.number) {
-            this.type = RTypes.RInterval;
+            this.type = SetTypes.RInterval;
             this.leftEnd = leftEnd;
             this.rightEnd = rightEnd;
         } else {
@@ -27,23 +27,23 @@ export class RInterval implements RClass, RSetLike {
         }
     }
 
-    /** left-opened, right-opened */
-    public static openopen(leftEnd: number, rightEnd: number): RInterval {
+    /** left-exclusive, right-exclusive */
+    public static exex(leftEnd: number, rightEnd: number): RInterval {
         return new RInterval(gt(leftEnd), lt(rightEnd));
     }
 
-    /** left-opened, right-closed */
-    public static openclose(leftEnd: number, rightEnd: number): RInterval {
+    /** left-exclusive, right-inclusive */
+    public static exin(leftEnd: number, rightEnd: number): RInterval {
         return new RInterval(gt(leftEnd), lte(rightEnd));
     }
 
-    /** left-closed, right-opened */
-    public static closeopen(leftEnd: number, rightEnd: number): RInterval {
+    /** left-inclusive, right-exclusive */
+    public static inex(leftEnd: number, rightEnd: number): RInterval {
         return new RInterval(gte(leftEnd), lt(rightEnd));
     }
 
-    /** left-closed, right-closed */
-    public static closeclose(leftEnd: number, rightEnd: number): RInterval {
+    /** left-inclusive, right-inclusive */
+    public static inin(leftEnd: number, rightEnd: number): RInterval {
         return new RInterval(gte(leftEnd), lte(rightEnd));
     }
 
@@ -71,7 +71,7 @@ export class RInterval implements RClass, RSetLike {
         ] = [i1, i2].sort(RInterval.compareFunction);
         const {number: r1} = rightEnd1;
         const {number: l2} = leftEnd2;
-        if (r1 < l2 || (r1 === l2 && (rightEnd1.opened || leftEnd2.opened))) {
+        if (r1 < l2 || (r1 === l2 && (rightEnd1.exclusive || leftEnd2.exclusive))) {
             return null;
         }
         return new RInterval(leftEnd2, [rightEnd1, rightEnd2].sort(RCut.compareFunction)[0]);
@@ -86,7 +86,7 @@ export class RInterval implements RClass, RSetLike {
         ] = [i1, i2].sort(RInterval.compareFunction);
         const {number: r1} = rightEnd1;
         const {number: l2} = leftEnd2;
-        if (r1 < l2 || (r1 === l2 && rightEnd1.opened && leftEnd2.opened)) {
+        if (r1 < l2 || (r1 === l2 && rightEnd1.exclusive && leftEnd2.exclusive)) {
             return null;
         }
         return new RInterval(leftEnd1, [rightEnd1, rightEnd2].sort(RCut.compareFunction)[1]);
@@ -107,19 +107,19 @@ export class RInterval implements RClass, RSetLike {
 
     public toString(): string {
         const {
-            leftEnd: {number: l, opened: lo},
-            rightEnd: {number: r, opened: ro},
+            leftEnd: {number: l, exclusive: lExclusive},
+            rightEnd: {number: r, exclusive: rExclusive},
         } = this;
-        return `${lo ? '(' : '['}${l}, ${r}${ro ? ')' : ']'}`;
+        return `${lExclusive ? '(' : '['}${l}, ${r}${rExclusive ? ')' : ']'}`;
     }
 
 }
 
 export const {
-    openopen,
-    openclose,
-    closeopen,
-    closeclose,
+    exex,
+    exin,
+    inex,
+    inin,
 } = RInterval;
 
 export type NullableRIntervalList = Iterable<Nullable<RInterval>>;

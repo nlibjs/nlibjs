@@ -1,25 +1,27 @@
 import {Error} from '@nlib/global';
-import {RInterval} from './RInterval';
 
-export enum RTypes {
+export enum SetTypes {
     RCut,
     RInterval,
     RSet,
+    NCut,
+    NInterval,
+    NSet,
 }
 
-export interface RClass {
-    readonly type: RTypes,
+export interface NumberSetBase {
+    readonly type: SetTypes,
 }
 
-export interface RSetLike {
-    readonly intervals: ReadonlyArray<RInterval>,
+export interface SetLike<TInterval> {
+    readonly intervals: ReadonlyArray<TInterval>,
     isEmpty: boolean,
     has(x: number): boolean,
     toString(): string,
 }
 
 // https://github.com/Microsoft/TypeScript/issues/14600
-export const testRSetLikeConstructor = (Constructor: {}): void => {
+export const testSetLikeConstructor = (Constructor: {}): void => {
     if (!('union' in Constructor)) {
         throw new Error('.union() is not implemented');
     }

@@ -1,7 +1,7 @@
 import test from 'ava';
 import * as index from './index';
 import {normalizeRIntervalList} from './normalizeRIntervalList';
-import {closeclose, closeopen, RInterval, openclose, openopen} from './RInterval';
+import {inin, inex, exin, exex, RInterval} from './RInterval';
 
 test('index.normalizeRIntervalList', (t) => {
     t.is(index.normalizeRIntervalList, normalizeRIntervalList);
@@ -9,28 +9,28 @@ test('index.normalizeRIntervalList', (t) => {
 
 test('[0, 1] (1, 2] [2, 3) (3, 3) (3, 4) [4, 5] → [0, 3) (3, 5]', (t) => {
     const result = normalizeRIntervalList([
-        closeclose(4, 5),
-        openopen(3, 4),
-        closeopen(2, 3),
-        openclose(1, 2),
-        closeclose(0, 1),
-        openopen(3, 3),
+        inin(4, 5),
+        exex(3, 4),
+        inex(2, 3),
+        exin(1, 2),
+        inin(0, 1),
+        exex(3, 3),
     ]);
     t.is(result.length, 2);
-    t.true(RInterval.equal(result[0], closeopen(0, 3)));
-    t.true(RInterval.equal(result[1], openclose(3, 5)));
+    t.true(RInterval.equal(result[0], inex(0, 3)));
+    t.true(RInterval.equal(result[1], exin(3, 5)));
 });
 
 test('[0, 1] (1, 2] [2, 3) (3, 3) (3, 4) [4, 5] [3, 3] → [0, 5]', (t) => {
     const result = normalizeRIntervalList([
-        closeclose(4, 5),
-        openopen(3, 4),
-        closeopen(2, 3),
-        openclose(1, 2),
-        closeclose(0, 1),
-        closeclose(3, 3),
-        openopen(3, 3),
+        inin(4, 5),
+        exex(3, 4),
+        inex(2, 3),
+        exin(1, 2),
+        inin(0, 1),
+        inin(3, 3),
+        exex(3, 3),
     ]);
     t.is(result.length, 1);
-    t.true(RInterval.equal(result[0], closeclose(0, 5)));
+    t.true(RInterval.equal(result[0], inin(0, 5)));
 });
