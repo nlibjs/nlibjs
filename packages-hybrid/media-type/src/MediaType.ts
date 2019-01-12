@@ -8,7 +8,7 @@ export class MediaType {
 
     public readonly parameters: mediatype.Parameters
 
-    private constructor(source: mediatype.Source) {
+    protected constructor(source: mediatype.Source) {
         this.type = source.type;
         this.subtype = source.subtype;
         this.parameters = source.parameters;
