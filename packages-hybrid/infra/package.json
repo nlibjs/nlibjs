@@ -1,0 +1,21 @@
+{
+    "name": "@nlib/infra",
+    "publishConfig": {
+        "access": "public"
+    },
+    "version": "3.1.0",
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "cleanup": "rimraf lib",
+        "build": "tsc",
+        "test": "ava lib/*.test.js",
+        "lint": "eslint --ext .ts src"
+    },
+    "dependencies": {
+        "@nlib/global": "^3.1.0",
+        "@nlib/real-number": "^3.1.0"
+    }
+}
