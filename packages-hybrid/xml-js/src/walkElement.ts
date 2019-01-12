@@ -1,12 +1,12 @@
 import {Boolean} from '@nlib/global';
 import {Element} from 'xml-js';
 
-type WalkCallback = (...ancestors: Element[]) => void | boolean;
+type WalkCallback = (...ancestors: Array<Element>) => void | boolean;
 
 const walkElementCore = (
     element: Element,
     callback: WalkCallback,
-    previousAncestors: Element[],
+    previousAncestors: Array<Element>,
 ): boolean => {
     const ancestors = [element, ...previousAncestors];
     const skip = Boolean(callback(...ancestors));

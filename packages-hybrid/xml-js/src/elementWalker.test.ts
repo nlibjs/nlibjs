@@ -12,7 +12,7 @@ test('elementWalker', (t) => {
         <?xml version='1.1' encoding='utf-8'?>
         <b><a></a></b>
     `, {compact: false}) as Element;
-    const actual: any[][] = [];
+    const actual: Array<Array<Element>> = [];
     for (const ancestors of elementWalker(xml)) {
         actual.push(ancestors);
     }

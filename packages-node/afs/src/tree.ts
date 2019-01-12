@@ -13,14 +13,14 @@ export type TreeNodeType =
 | 'fifo';
 
 export interface TreeBranches {
-    [key: string]: TreeNode
+    [key: string]: TreeNode,
 }
 
 export interface TreeNode {
-    path: string
-    type: TreeNodeType
-    size: number
-    files: TreeBranches
+    path: string,
+    type: TreeNodeType,
+    size: number,
+    files: TreeBranches,
 }
 
 export const tree = async (file: PathLike): Promise<TreeNode> => {

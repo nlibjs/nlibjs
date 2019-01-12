@@ -3,7 +3,7 @@ import {mediatype} from './types';
 
 export const parse = (input: string): mediatype.Source => {
     return {
-        type: '',
+        type: input,
         subtype: '',
         parameters: new Map(),
     };

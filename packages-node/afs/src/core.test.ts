@@ -27,13 +27,13 @@ test('core should have all members in fs', (t) => {
         if (core.has(`${key}Sync`)) {
             t.is(typeof value, typeof core.get(key));
         } else {
-            t.is(value, core.get(key) as any);
+            t.true(value === core.get(key));
         }
     }
 });
 
 test('index should have all members in core', (t) => {
     for (const [key, value] of core) {
-        t.is(value, index.get(key) as any);
+        t.true(value === index.get(key));
     }
 });

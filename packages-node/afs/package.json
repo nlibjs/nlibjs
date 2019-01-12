@@ -18,8 +18,7 @@
         "overrides": [
             {
                 "files": [
-                    "src/core.ts",
-                    "src/lockfile.ts"
+                    "src/core.ts"
                 ],
                 "rules": {
                     "prefer-destructuring": "off"
@@ -28,8 +27,8 @@
         ]
     },
     "dependencies": {
+        "@nlib/node-global": "^3.1.0",
         "@nlib/node-util": "^3.1.0",
-        "@types/lockfile": "^1.0.0",
         "@types/node": "^10.12.15",
         "@types/semver": "^5.5.0",
         "lockfile": "^1.0.4",

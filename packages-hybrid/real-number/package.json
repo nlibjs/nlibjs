@@ -1,13 +1,12 @@
 {
-    "name": "@nlib/lint",
+    "name": "@nlib/real-number",
     "publishConfig": {
         "access": "public"
     },
     "version": "3.1.0",
     "main": "lib/index.js",
     "files": [
-        ".editorconfig",
-        ".eslintrc.json"
+        "lib"
     ],
     "scripts": {
         "cleanup": "rimraf lib",
@@ -15,7 +14,8 @@
         "test": "ava lib/*.test.js",
         "lint": "eslint --ext .ts src"
     },
-    "peerDependencies": {
-        "eslint-plugin-typescript": "^0.14.0"
+    "dependencies": {
+        "@nlib/global": "^3.1.0",
+        "@nlib/util": "^3.1.0"
     }
 }

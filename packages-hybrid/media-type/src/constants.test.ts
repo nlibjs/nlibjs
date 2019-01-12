@@ -6,14 +6,14 @@ import {elementToRecord} from './elementToRecord';
 import {REGISTERED_TYPES} from './constants';
 
 const test = anyTest as TestInterface<{
-    records: mediatype.Record[]
+    records: Array<mediatype.Record>,
 }>;
 
 test.before(async (t) => {
     const res = await httpGet('https://www.iana.org/assignments/media-types/media-types.xml');
     const xmlString = await readStream(res);
     const xml = xml2js(`${xmlString}`, {compact: false}) as Element;
-    const records: mediatype.Record[] = t.context.records = [];
+    const records: Array<mediatype.Record> = t.context.records = [];
     for (const [element] of elementWalker(xml)) {
         const record = elementToRecord(element);
         if (record) {

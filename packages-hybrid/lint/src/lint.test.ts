@@ -4,7 +4,7 @@ import {readFile} from 'fs';
 import {Linter} from 'eslint';
 
 const test = anyTest as TestInterface<{
-    config: Linter.Config
+    config: Linter.Config,
 }>;
 
 test.beforeEach(async (t) => {

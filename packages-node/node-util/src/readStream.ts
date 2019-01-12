@@ -1,7 +1,7 @@
 import {Writable, Stream} from 'stream';
 
 export const readStream = (readableStream: Stream): Promise<Buffer> => new Promise((resolve, reject) => {
-    const chunks: Buffer[] = [];
+    const chunks: Array<Buffer> = [];
     let length = 0;
     readableStream
     .once('error', reject)

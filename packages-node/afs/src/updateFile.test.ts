@@ -9,10 +9,10 @@ import {updateFile} from './updateFile';
 import {mkdirp} from './mkdirp';
 import * as index from '.';
 
-const wait = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration));
+const wait = (duration: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, duration));
 
 const test = anyTest as TestInterface<{
-    directory: string
+    directory: string,
 }>;
 
 test.beforeEach(async (t) => {

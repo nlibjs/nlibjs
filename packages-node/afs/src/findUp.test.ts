@@ -9,20 +9,20 @@ import {findUp} from './findUp';
 import * as index from '.';
 
 const test = anyTest as TestInterface<{
-    directory: string
-    filename0: string
-    filename1: string
-    filename2: string
-    filename3: string
-    dir1: string
-    file10: string
-    file11: string
-    dir2: string
-    file20: string
-    file22: string
-    dir3: string
-    file30: string
-    file33: string
+    directory: string,
+    filename0: string,
+    filename1: string,
+    filename2: string,
+    filename3: string,
+    dir1: string,
+    file10: string,
+    file11: string,
+    dir2: string,
+    file20: string,
+    file22: string,
+    dir3: string,
+    file30: string,
+    file33: string,
 }>;
 
 test.beforeEach(async (t) => {

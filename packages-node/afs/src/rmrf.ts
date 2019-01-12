@@ -5,12 +5,16 @@ import {PathLike} from 'fs';
 
 export type onFileHook = (target: string) => void;
 
-const rmrfCore = async (target: string, onFile: onFileHook, retryCount: number = 0): Promise<boolean> => {
+const rmrfCore = async (
+    target: string,
+    onFile: onFileHook,
+): Promise<boolean> => {
     try {
         const stats = await lstat(target);
         await onFile(target);
         if (stats.isDirectory()) {
-            await Promise.all((await readdir(target)).map((name) => rmrfCore(join(target, name), onFile)));
+            const files = await readdir(target);
+            await Promise.all(files.map((name) => rmrfCore(join(target, name), onFile)));
             await rmdir(target);
         } else {
             await unlink(target);
@@ -26,4 +30,7 @@ const rmrfCore = async (target: string, onFile: onFileHook, retryCount: number =
     }
 };
 
-export const rmrf = (target: PathLike, onFile: onFileHook = () => {}) => rmrfCore(absolutify(target), onFile);
+export const rmrf = (
+    target: PathLike,
+    onFile: onFileHook = () => {},
+): Promise<boolean> => rmrfCore(absolutify(target), onFile);

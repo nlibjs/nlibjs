@@ -9,6 +9,8 @@ before_install:
 install:
 - npm install -g nyc @commitlint/travis-cli
 - npm install
+# Remove this↓ line when eslint-plugin-typescript@1.0.0-rc.2 or 1.X is installed
+- curl https://raw.githubusercontent.com/bradzacher/eslint-plugin-typescript/c9d2227db2bea041bcd3dc21c639b05b0732d61e/lib/rules/no-this-alias.js > ./node_modules/eslint-plugin-typescript/lib/rules/no-this-alias.js
 - npm run init
 script:
 - npm test

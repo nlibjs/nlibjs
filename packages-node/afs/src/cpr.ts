@@ -6,11 +6,11 @@ import {tree, TreeNode} from './tree';
 import {mkdirp} from './mkdirp';
 
 interface CopyContext {
-    src: string
-    dest: string
+    src: string,
+    dest: string,
 }
 
-const cprCore = async (tree: TreeNode, dest: string, context: CopyContext) => {
+const cprCore = async (tree: TreeNode, dest: string, context: CopyContext): Promise<void> => {
     switch (tree.type) {
     case 'file':
         await copyFile(tree.path, dest);
@@ -42,7 +42,7 @@ const cprCore = async (tree: TreeNode, dest: string, context: CopyContext) => {
     }
 };
 
-export const cpr = async (src: PathLike, dest: string) => {
+export const cpr = async (src: PathLike, dest: string): ReturnType<typeof cprCore> => {
     src = absolutify(src);
     dest = absolutify(dest);
     await mkdirp(dirname(dest));

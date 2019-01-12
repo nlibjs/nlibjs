@@ -11,7 +11,7 @@ import * as index from '.';
 import {exec} from 'child_process';
 
 const test = anyTest as TestInterface<{
-    directory: string
+    directory: string,
 }>;
 
 test.beforeEach(async (t) => {

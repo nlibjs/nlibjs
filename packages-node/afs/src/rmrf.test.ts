@@ -12,7 +12,7 @@ import {rmrf} from './rmrf';
 import * as index from '.';
 
 const test = anyTest as TestInterface<{
-    directory: string
+    directory: string,
 }>;
 
 test.beforeEach(async (t) => {
@@ -83,7 +83,7 @@ test('call the onFile hook before delete a file', async (t) => {
     const symlinkPath = join(dirPath, 'symlink');
     await symlink(filePath, symlinkPath);
     await stat(symlinkPath);
-    const called: string[] = [];
+    const called: Array<string> = [];
     const result = await rmrf(dirPath, async (target) => {
         called.push(target);
         await stat(target);

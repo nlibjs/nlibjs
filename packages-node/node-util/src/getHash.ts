@@ -1,8 +1,8 @@
 import {Hash, createHash, HexBase64Latin1Encoding} from 'crypto';
 
 export interface HashOptions {
-    algorithm: string
-    encoding: HexBase64Latin1Encoding | typeof Buffer
+    algorithm: string,
+    encoding: HexBase64Latin1Encoding | typeof Buffer,
 }
 
 export const getHash = (

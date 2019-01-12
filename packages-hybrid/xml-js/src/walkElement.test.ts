@@ -12,7 +12,7 @@ test('walkElement', (t) => {
         <?xml version='1.1' encoding='utf-8'?>
         <b><a></a></b>
     `, {compact: false}) as Element;
-    const actual: any[][] = [];
+    const actual: Array<Array<Element>> = [];
     walkElement(xml, (...ancestors) => {
         actual.push(ancestors);
     });
@@ -34,7 +34,7 @@ test('stop walking', (t) => {
         <?xml version='1.1' encoding='utf-8'?>
         <b><a></a></b>
     `, {compact: false}) as Element;
-    const actual: any[][] = [];
+    const actual: Array<Array<Element>> = [];
     walkElement(xml, (element, ...ancestors) => {
         actual.push([element, ...ancestors]);
         return element.name === 'b';

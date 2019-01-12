@@ -7,7 +7,7 @@ import {mkdirp} from './mkdirp';
 import * as index from '.';
 
 const test = anyTest as TestInterface<{
-    directory: string
+    directory: string,
 }>;
 
 test.beforeEach(async (t) => {

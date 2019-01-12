@@ -4,7 +4,7 @@ import {httpGet, readStream} from '@nlib/node-util';
 import * as imported from './index';
 
 const test = anyTest as TestInterface<{
-    declaredKeys: Set<string>
+    declaredKeys: Set<string>,
 }>;
 
 test.before(async (t) => {

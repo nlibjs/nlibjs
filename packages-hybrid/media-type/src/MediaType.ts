@@ -2,19 +2,19 @@ import {mediatype} from './types';
 
 export class MediaType {
 
-    readonly type: string
+    public readonly type: string
 
-    readonly subtype: string
+    public readonly subtype: string
 
-    readonly parameters: mediatype.Parameters
+    public readonly parameters: mediatype.Parameters
 
-    constructor(source: mediatype.Source) {
+    private constructor(source: mediatype.Source) {
         this.type = source.type;
         this.subtype = source.subtype;
         this.parameters = source.parameters;
     }
 
-    get essence() {
+    public get essence(): string {
         return `${this.type}/${this.subtype}`;
     }
 

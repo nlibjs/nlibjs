@@ -4,10 +4,10 @@ import {writeFilep} from './writeFilep';
 import {PathLike} from 'fs';
 
 export type DeployData = string | Buffer | {
-    [key: string]: DeployData
+    [key: string]: DeployData,
 };
 
-const deployCore = async (dest: string, data: DeployData) => {
+const deployCore = async (dest: string, data: DeployData): Promise<void> => {
     if (typeof data === 'string' || Buffer.isBuffer(data)) {
         await writeFilep(dest, data);
     } else {
@@ -15,4 +15,7 @@ const deployCore = async (dest: string, data: DeployData) => {
     }
 };
 
-export const deploy = (directory: PathLike, data: DeployData) => deployCore(absolutify(directory), data);
+export const deploy = (
+    directory: PathLike,
+    data: DeployData,
+): ReturnType<typeof deployCore> => deployCore(absolutify(directory), data);

@@ -1,13 +1,16 @@
 import {Element, getTextContent} from '@nlib/xml-js';
 import {mediatype} from './types';
 
-export const elementToRecord = ({name: elementName, elements: fields}: Element): mediatype.Record | null => {
+export const elementToRecord = ({
+    name: elementName,
+    elements: fields,
+}: Element): mediatype.Record | null => {
     if (elementName !== 'record' || !fields) {
         return null;
     }
-    let name: string = '';
-    let type: string = '';
-    let subtype: string = '';
+    let name = '';
+    let type = '';
+    let subtype = '';
     let xref: mediatype.Xref | null = null;
     for (const field of fields) {
         switch (field.name) {

@@ -10,12 +10,8 @@ export const mkdirp = async (
     useNativeRecursiveOptionIfAvailable = true
 ): Promise<boolean> => {
     try {
-        await mkdir(
-            directory,
-            recursiveIsSupported && useNativeRecursiveOptionIfAvailable
-            ? {recursive: true, mode}
-            : mode,
-        );
+        const useRecursive = recursiveIsSupported && useNativeRecursiveOptionIfAvailable;
+        await mkdir(directory, useRecursive ? {recursive: true, mode} : mode);
         return true;
     } catch (error) {
         if (error.code === 'ENOENT') {
