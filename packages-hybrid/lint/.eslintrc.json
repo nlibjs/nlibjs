@@ -16,6 +16,7 @@
             "parser": "eslint-plugin-typescript/parser",
             "plugins": ["typescript"],
             "rules": {
+                "consistent-this": "off",
                 "indent": "off",
                 "no-dupe-args": "off",
                 "no-dupe-class-members": "off",
@@ -45,7 +46,7 @@
                     "MemberExpression": 0,
                     "ignoredNodes": ["ConditionalExpression"]
                 }],
-                "typescript/interface-name-prefix": "error",
+                "typescript/interface-name-prefix": ["error", "always"],
                 "typescript/member-delimiter-style": ["error", {
                     "multiline": {
                         "delimiter": "comma",
@@ -69,7 +70,10 @@
                 "typescript/no-non-null-assertion": "error",
                 "typescript/no-object-literal-type-assertion": "error",
                 "typescript/no-parameter-properties": "error",
-                "typescript/no-this-alias": ["error", {"allowDestructuring": true}],
+                "typescript/no-this-alias": ["error", {
+                    "allowDestructuring": true,
+                    "allowedNames": ["self"]
+                }],
                 "typescript/no-triple-slash-reference": "error",
                 "typescript/no-type-alias": "off",
                 "typescript/no-unused-vars": "error",
