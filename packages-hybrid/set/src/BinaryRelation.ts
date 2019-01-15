@@ -3,42 +3,42 @@ import {Set} from './Set';
 import {RelationIndicatorFunction} from './types';
 
 export interface IBinaryRelationTypes {
-    /** for all x and z in X and y in Y it holds that if xRy and zRy then x = z. */
+    /** For all x and z in X and y in Y it holds that if xRy and zRy then x = z. */
     readonly leftUnique: boolean,
-    /** for all x in X, and y and z in Y it holds that if xRy and xRz then y = z */
+    /** For all x in X, and y and z in Y it holds that if xRy and xRz then y = z */
     readonly rightUnique: boolean,
-    /** for all x in X there exists a y in Y such that xRy. */
+    /** For all x in X there exists a y in Y such that xRy. */
     readonly leftTotal: boolean,
-    /** for all y in Y there exists an x in X such that xRy. */
+    /** For all y in Y there exists an x in X such that xRy. */
     readonly rightTotal: boolean,
 
-    /** for all x in X it holds that xRx. */
+    /** For all x in X it holds that xRx. */
     readonly reflexive: boolean,
-    /** for all x in X it holds that not xRx. */
+    /** For all x in X it holds that not xRx. */
     readonly irreflexive: boolean,
-    /** for all x and y in X it holds that if xRy then x = y. */
+    /** For all x and y in X it holds that if xRy then x = y. */
     readonly coreflexive: boolean,
-    /** for all x and y in X it holds that if xRy then yRx. */
+    /** For all x and y in X it holds that if xRy then yRx. */
     readonly symmetric: boolean,
-    /** for all x and y in X, if xRy and yRx then x = y. */
+    /** For all x and y in X, if xRy and yRx then x = y. */
     readonly antisymmetric: boolean,
-    /** for all x and y in X, if xRy then not yRx. */
+    /** For all x and y in X, if xRy then not yRx. */
     readonly asymmetric: boolean,
-    /** for all x, y and z in X it holds that if xRy and yRz then xRz. */
+    /** For all x, y and z in X it holds that if xRy and yRz then xRz. */
     readonly transitive: boolean,
-    /** for all x and y in X it holds that xRy or yRx (or both). */
+    /** For all x and y in X it holds that xRy or yRx (or both). */
     readonly connex: boolean,
-    /** for all x and y in X exactly one of xRy, yRx or x = y holds. */
+    /** For all x and y in X exactly one of xRy, yRx or x = y holds. */
     readonly trichotomous: boolean,
-    /** for all x, y and z in X, if xRy and xRz, then yRz. */
+    /** For all x, y and z in X, if xRy and xRz, then yRz. */
     readonly rightEuclidean: boolean,
-    /** for all x, y and z in X, if yRx and zRx, then yRz. */
+    /** For all x, y and z in X, if yRx and zRx, then yRz. */
     readonly leftEuclidean: boolean,
-    /** for all x in X, there exists y in X such that xRy. */
+    /** For all x in X, there exists y in X such that xRy. */
     readonly serial: boolean,
-    /** for every x in X, the class of all y such that yRx is a set. */
+    /** For every x in X, the class of all y such that yRx is a set. */
     readonly setLike: boolean,
-    /** every nonempty subset S of X contains a minimal element with respect to R. */
+    /** Every nonempty subset S of X contains a minimal element with respect to R. */
     readonly wellFounded: boolean,
 }
 
