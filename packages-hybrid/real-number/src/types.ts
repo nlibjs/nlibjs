@@ -9,11 +9,11 @@ export enum SetTypes {
     NSet,
 }
 
-export interface NumberSetBase {
+export interface INumberSetBase {
     readonly type: SetTypes,
 }
 
-export interface SetLike<TInterval> {
+export interface ISetLike<TInterval> {
     readonly intervals: ReadonlyArray<TInterval>,
     isEmpty: boolean,
     has(x: number): boolean,

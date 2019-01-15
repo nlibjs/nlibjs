@@ -4,14 +4,14 @@ import {mediatype} from './types';
 export const elementToRecord = ({
     name: elementName,
     elements: fields,
-}: Element): mediatype.Record | null => {
+}: Element): mediatype.IRecord | null => {
     if (elementName !== 'record' || !fields) {
         return null;
     }
     let name = '';
     let type = '';
     let subtype = '';
-    let xref: mediatype.Xref | null = null;
+    let xref: mediatype.IXref | null = null;
     for (const field of fields) {
         switch (field.name) {
         case 'name':

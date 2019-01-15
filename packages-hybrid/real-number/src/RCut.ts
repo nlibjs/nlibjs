@@ -1,5 +1,5 @@
 import {Number, Error} from '@nlib/global';
-import {NumberSetBase, SetTypes} from './types';
+import {INumberSetBase, SetTypes} from './types';
 const GTE = 0;
 const GT = 1;
 const LT = 2;
@@ -8,7 +8,7 @@ type Operator = typeof GT | typeof GTE | typeof LT | typeof LTE;
 type Comparator = (x: number) => boolean;
 
 /** A set of real numbers gt, gte, lt or lte than the given number. */
-export class RCut implements NumberSetBase {
+export class RCut implements INumberSetBase {
 
     public readonly type: SetTypes.RCut
 

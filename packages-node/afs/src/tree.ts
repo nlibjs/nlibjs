@@ -12,20 +12,20 @@ export type TreeNodeType =
 | 'blockdevice'
 | 'fifo';
 
-export interface TreeBranches {
-    [key: string]: TreeNode,
-}
-
-export interface TreeNode {
+export interface ITreeNode {
     path: string,
     type: TreeNodeType,
     size: number,
-    files: TreeBranches,
+    files: ITreeBranches,
 }
 
-export const tree = async (file: PathLike): Promise<TreeNode> => {
+export interface ITreeBranches {
+    [key: string]: ITreeNode,
+}
+
+export const tree = async (file: PathLike): Promise<ITreeNode> => {
     let type: TreeNodeType = 'file';
-    const files: TreeBranches = {};
+    const files: ITreeBranches = {};
     const stats = await lstat(file);
     if (stats.isDirectory()) {
         type = 'directory';

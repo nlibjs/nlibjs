@@ -2,9 +2,9 @@ import {Infinity} from '@nlib/global';
 import {RInterval, NullableRIntervalList} from './RInterval';
 import {normalizeRIntervalList} from './normalizeRIntervalList';
 import {RCut, gt, lt} from './RCut';
-import {NumberSetBase, SetTypes, SetLike} from './types';
+import {INumberSetBase, SetTypes, ISetLike} from './types';
 
-export class RSet implements NumberSetBase, SetLike<RInterval> {
+export class RSet implements INumberSetBase, ISetLike<RInterval> {
 
     public readonly type: SetTypes.RSet
 

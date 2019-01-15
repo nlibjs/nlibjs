@@ -1,18 +1,18 @@
 export namespace mediatype {
-    interface Xref {
+    interface IXref {
         type: string,
         data: string,
     }
-    interface Record {
+    interface IRecord {
         name: string,
         type: string,
         subtype: string,
-        xref: Xref,
+        xref: IXref,
     }
-    interface Parameters extends Map<string, string> {}
-    interface Source {
+    interface IParameters extends Map<string, string> {}
+    interface ISource {
         readonly type: string,
         readonly subtype: string,
-        readonly parameters: Parameters,
+        readonly parameters: IParameters,
     }
 }

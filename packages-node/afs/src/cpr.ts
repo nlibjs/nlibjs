@@ -2,15 +2,15 @@ import {join, dirname, isAbsolute, relative} from 'path';
 import {PathLike} from 'fs';
 import {absolutify} from '@nlib/node-util';
 import {copyFile, symlink, readlink} from './core';
-import {tree, TreeNode} from './tree';
+import {tree, ITreeNode} from './tree';
 import {mkdirp} from './mkdirp';
 
-interface CopyContext {
+interface ICopyContext {
     src: string,
     dest: string,
 }
 
-const cprCore = async (tree: TreeNode, dest: string, context: CopyContext): Promise<void> => {
+const cprCore = async (tree: ITreeNode, dest: string, context: ICopyContext): Promise<void> => {
     switch (tree.type) {
     case 'file':
         await copyFile(tree.path, dest);

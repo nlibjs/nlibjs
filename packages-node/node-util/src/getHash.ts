@@ -1,13 +1,13 @@
 import {Hash, createHash, HexBase64Latin1Encoding} from 'crypto';
 
-export interface HashOptions {
+export interface IHashOptions {
     algorithm: string,
     encoding: HexBase64Latin1Encoding | typeof Buffer,
 }
 
 export const getHash = (
     data: Parameters<Hash['update']>[0],
-    {algorithm, encoding}: HashOptions = {algorithm: 'sha256', encoding: 'latin1'},
+    {algorithm, encoding}: IHashOptions = {algorithm: 'sha256', encoding: 'latin1'},
 ): string | Buffer => {
     const hash = createHash(algorithm);
     hash.update(data);

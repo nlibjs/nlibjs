@@ -6,10 +6,10 @@ import {
     lte,
     RCut,
 } from './RCut';
-import {NumberSetBase, SetTypes, SetLike} from './types';
+import {INumberSetBase, SetTypes, ISetLike} from './types';
 
 /** A set of real numbers between the left and right endpoints. */
-export class RInterval implements NumberSetBase, SetLike<RInterval> {
+export class RInterval implements INumberSetBase, ISetLike<RInterval> {
 
     public readonly type: SetTypes.RInterval
 

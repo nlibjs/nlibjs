@@ -2,9 +2,6 @@ declare global {
     type Brand<TType, TName> = TType & {__brand: TName};
     type Nullable<TAny> = null | TAny;
     type Integer = Brand<number, 'Integer'>;
-    interface KeyValueObject {
-        [key: string]: void | null | string | number | Function | {},
-    }
 }
 const _Array = Array; export {_Array as Array};
 const _ArrayBuffer = ArrayBuffer; export {_ArrayBuffer as ArrayBuffer};
