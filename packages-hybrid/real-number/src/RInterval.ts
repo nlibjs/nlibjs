@@ -1,11 +1,5 @@
-import {Error} from '@nlib/global';
-import {
-    gt,
-    gte,
-    lt,
-    lte,
-    RCut,
-} from './RCut';
+import {Error, Nullable} from '@nlib/global';
+import {gt, gte, lt, lte, RCut} from './RCut';
 import {INumberSetBase, SetTypes, ISetLike} from './types';
 
 /** A set of real numbers between the left and right endpoints. */

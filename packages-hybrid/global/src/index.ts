@@ -1,8 +1,6 @@
-declare global {
-    type Brand<TType, TName> = TType & {__brand: TName};
-    type Nullable<TAny> = null | TAny;
-    type Integer = Brand<number, 'Integer'>;
-}
+export type Brand<TType, TName> = TType & {__brand: TName};
+export type Nullable<TAny> = null | TAny;
+export type Integer = Brand<number, 'Integer'>;
 const _Array = Array; export {_Array as Array};
 const _ArrayBuffer = ArrayBuffer; export {_ArrayBuffer as ArrayBuffer};
 const _Atomics = Atomics; export {_Atomics as Atomics};

@@ -1,4 +1,4 @@
-import {Infinity} from '@nlib/global';
+import {Infinity, Nullable} from '@nlib/global';
 import {RInterval, NullableRIntervalList} from './RInterval';
 import {normalizeRIntervalList} from './normalizeRIntervalList';
 import {RCut, gt, lt} from './RCut';
