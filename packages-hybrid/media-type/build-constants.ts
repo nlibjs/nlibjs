@@ -5,11 +5,11 @@ import {updateFile} from '@nlib/afs';
 import {mediatype} from './src/types';
 import {elementToRecord} from './src/elementToRecord';
 
-export const build = async () => {
+export const build = async (): Promise<void> => {
     const res = await httpGet('https://www.iana.org/assignments/media-types/media-types.xml');
     const xmlString = await readStream(res);
     const xml = xml2js(`${xmlString}`, {compact: false}) as Element;
-    const records: mediatype.Record[] = [];
+    const records: Array<mediatype.IRecord> = [];
     const typeSet: Set<string> = new Set();
     for (const [element] of elementWalker(xml)) {
         const record = elementToRecord(element);

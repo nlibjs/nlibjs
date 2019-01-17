@@ -14,7 +14,7 @@
         "build:tsc": "tsc",
         "build": "npm-run-all --serial build:constants build:tsc",
         "test": "ava lib/*.test.js",
-        "lint": "eslint --ext .ts src"
+        "lint": "eslint --ext .ts src build-constants.ts"
     },
     "dependencies": {
         "@nlib/global": "^3.1.0"
