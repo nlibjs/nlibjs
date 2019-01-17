@@ -1,15 +1,28 @@
 import test from 'ava';
 import * as index from './index';
-import {Bytes} from './4.3.Bytes';
+import {isByte, Byte, ASCIIByte, isASCIIByte} from './4.3.Bytes';
 
 test('index', (t) => {
-    t.is(index.Bytes, Bytes);
+    t.is(index.Byte, Byte);
+    t.is(index.ASCIIByte, ASCIIByte);
 });
 
-test('Bytes', (t) => {
-    t.false(Bytes.has(-1));
-    t.true(Bytes.has(0));
-    t.false(Bytes.has(0.1));
-    t.true(Bytes.has(255));
-    t.false(Bytes.has(256));
+test(`Byte: ${Byte}`, (t) => {
+    t.false(isByte(-1));
+    t.true(isByte(0));
+    t.false(isByte(0.1));
+    t.true(isByte(0x7F));
+    t.true(isByte(0x7F + 1));
+    t.true(isByte(255));
+    t.false(isByte(256));
+});
+
+test(`ASCIIByte: ${ASCIIByte}`, (t) => {
+    t.false(isASCIIByte(-1));
+    t.true(isASCIIByte(0));
+    t.false(isASCIIByte(0.1));
+    t.true(isASCIIByte(0x7F));
+    t.false(isASCIIByte(0x7F + 1));
+    t.false(isASCIIByte(255));
+    t.false(isASCIIByte(256));
 });

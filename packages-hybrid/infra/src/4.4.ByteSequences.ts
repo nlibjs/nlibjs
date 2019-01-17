@@ -1,8 +1,8 @@
 // https://infra.spec.whatwg.org/#byte-sequences
-import {String} from '@nlib/global';
 import {isASCIIUpperAlpha, isASCIILowerAlpha} from './4.5.CodePoints';
+import {ScalarValueString, CodePoint} from './types';
 
-export const toLowerCase = (byteSequence: Uint8Array): Uint8Array => {
+export const toLowerCaseBytes = (byteSequence: Uint8Array): Uint8Array => {
     const result = byteSequence.slice();
     const {length} = result;
     for (let i = 0; i < length; i++) {
@@ -14,7 +14,7 @@ export const toLowerCase = (byteSequence: Uint8Array): Uint8Array => {
     return result;
 };
 
-export const toUpperCase = (byteSequence: Uint8Array): Uint8Array => {
+export const toUpperCaseBytes = (byteSequence: Uint8Array): Uint8Array => {
     const result = byteSequence.slice();
     const {length} = result;
     for (let i = 0; i < length; i++) {
@@ -26,13 +26,13 @@ export const toUpperCase = (byteSequence: Uint8Array): Uint8Array => {
     return result;
 };
 
-export const caseInsensitiveMatch = (byteSequence1: Uint8Array, byteSequence2: Uint8Array): boolean => {
+export const caseInsensitiveMatchBytes = (byteSequence1: Uint8Array, byteSequence2: Uint8Array): boolean => {
     const {length} = byteSequence1;
     if (length !== byteSequence2.length) {
         return false;
     }
-    const caseInsensitiveByteSequence1 = toLowerCase(byteSequence1);
-    const caseInsensitiveByteSequence2 = toLowerCase(byteSequence2);
+    const caseInsensitiveByteSequence1 = toLowerCaseBytes(byteSequence1);
+    const caseInsensitiveByteSequence2 = toLowerCaseBytes(byteSequence2);
     for (let i = 0; i < length; i++) {
         if (caseInsensitiveByteSequence1[i] !== caseInsensitiveByteSequence2[i]) {
             return false;
@@ -41,4 +41,4 @@ export const caseInsensitiveMatch = (byteSequence1: Uint8Array, byteSequence2: U
     return true;
 };
 
-export const isomorphicDecode = (byteSequence: Uint8Array): string => String.fromCodePoint(...byteSequence);
+export const isomorphicDecode = (byteSequence: Uint8Array): ScalarValueString => [...byteSequence] as Array<CodePoint>;

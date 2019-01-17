@@ -1,6 +1,8 @@
 // https://infra.spec.whatwg.org/#bytes
-import {Brand} from '@nlib/global';
-import {inin, intersectionZ} from '@nlib/real-number';
-export const Bytes = intersectionZ(inin(0, 255));
-export type Byte = Brand<number, 'Byts'>;
-export const isByte = (x: number): boolean => Bytes.has(x);
+import {inin, fromIntervalZ} from '@nlib/real-number';
+
+export const Byte = fromIntervalZ(inin(0x00, 0xFF));
+export const isByte = (x: number): boolean => Byte.has(x);
+
+export const ASCIIByte = fromIntervalZ(inin(0x00, 0x7F));
+export const isASCIIByte = (x: number): boolean => ASCIIByte.has(x);
