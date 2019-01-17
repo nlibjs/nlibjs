@@ -105,9 +105,7 @@
         "brace-style": ["error", "1tbs"],
         "callback-return": "off",
         "camelcase": "error",
-        "capitalized-comments": ["error", "always", {
-            "ignorePattern": "(\\s*[\\w-]+,\\s*)+,?|\\s*(export\\s+)?(?:const|let) [[{\\w]|\\s*import [[{\\w]"
-        }],
+        "capitalized-comments": "off",
         "class-methods-use-this": "error",
         "comma-dangle": ["error", "always-multiline"],
         "comma-spacing": ["error", {"before": false, "after": true}],
