@@ -1,5 +1,5 @@
 import {Error, Nullable} from '@nlib/global';
-import {gt, gte, lt, lte, RCut} from './RCut';
+import {gt, gte, lt, lte, RCut, equalC, compareFunctionC} from './RCut';
 import {INumberSetBase, SetTypes, ISetLike} from './types';
 
 /** A set of real numbers between the left and right endpoints. */
@@ -23,68 +23,76 @@ export class RInterval implements INumberSetBase, ISetLike<RInterval> {
 
     /** left-exclusive, right-exclusive */
     public static exex(leftEnd: number, rightEnd: number): RInterval {
-        return new RInterval(gt(leftEnd), lt(rightEnd));
+        return new this(gt(leftEnd), lt(rightEnd));
     }
 
     /** left-exclusive, right-inclusive */
     public static exin(leftEnd: number, rightEnd: number): RInterval {
-        return new RInterval(gt(leftEnd), lte(rightEnd));
+        return new this(gt(leftEnd), lte(rightEnd));
     }
 
     /** left-inclusive, right-exclusive */
     public static inex(leftEnd: number, rightEnd: number): RInterval {
-        return new RInterval(gte(leftEnd), lt(rightEnd));
+        return new this(gte(leftEnd), lt(rightEnd));
     }
 
     /** left-inclusive, right-inclusive */
     public static inin(leftEnd: number, rightEnd: number): RInterval {
-        return new RInterval(gte(leftEnd), lte(rightEnd));
+        return new this(gte(leftEnd), lte(rightEnd));
     }
 
-    public static equal(i1: RInterval, i2: RInterval): boolean {
-        return i1 && i2 && RCut.equal(i1.leftEnd, i2.leftEnd) && RCut.equal(i1.rightEnd, i2.rightEnd);
+    /** point */
+    public static eq(value: number): RInterval {
+        return RInterval.inin(value, value);
+    }
+
+    public static equal(interval1: RInterval, interval2: RInterval): boolean {
+        return interval1
+        && interval2
+        && equalC(interval1.leftEnd, interval2.leftEnd)
+        && equalC(interval1.rightEnd, interval2.rightEnd);
     }
 
     public static compareFunction(
         {leftEnd: leftEnd1, rightEnd: rightEnd1}: RInterval,
         {leftEnd: leftEnd2, rightEnd: rightEnd2}: RInterval,
     ): 1 | 0 | -1 {
-        const result = RCut.compareFunction(leftEnd1, leftEnd2);
+        const result = compareFunctionC(leftEnd1, leftEnd2);
         if (result === 0) {
-            return RCut.compareFunction(rightEnd1, rightEnd2);
+            return compareFunctionC(rightEnd1, rightEnd2);
         } else {
             return result;
         }
     }
 
     /** Returns the intersection of two Rintervals. */
-    public static intersection(i1: RInterval, i2: RInterval): RInterval | null {
+    public static intersection(interval1: RInterval, interval2: RInterval): RInterval | null {
         const [
             {rightEnd: rightEnd1},
             {leftEnd: leftEnd2, rightEnd: rightEnd2},
-        ] = [i1, i2].sort(RInterval.compareFunction);
+        ] = [interval1, interval2].sort(RInterval.compareFunction);
         const {number: r1} = rightEnd1;
         const {number: l2} = leftEnd2;
         if (r1 < l2 || (r1 === l2 && (rightEnd1.exclusive || leftEnd2.exclusive))) {
             return null;
         }
-        return new RInterval(leftEnd2, [rightEnd1, rightEnd2].sort(RCut.compareFunction)[0]);
+        return new this(leftEnd2, [rightEnd1, rightEnd2].sort(compareFunctionC)[0]);
     }
 
     /** Returns the (connected) union of two Rintervals.
      * If the union is not connected, it returns null. */
-    public static union = (i1: RInterval, i2: RInterval): RInterval | null => {
+    public static union(interval1: RInterval, interval2: RInterval): RInterval | null {
         const [
             {leftEnd: leftEnd1, rightEnd: rightEnd1},
             {leftEnd: leftEnd2, rightEnd: rightEnd2},
-        ] = [i1, i2].sort(RInterval.compareFunction);
+        ] = [interval1, interval2].sort(RInterval.compareFunction);
         const {number: r1} = rightEnd1;
         const {number: l2} = leftEnd2;
         if (r1 < l2 || (r1 === l2 && rightEnd1.exclusive && leftEnd2.exclusive)) {
             return null;
         }
-        return new RInterval(leftEnd1, [rightEnd1, rightEnd2].sort(RCut.compareFunction)[1]);
-    };
+        return new this(leftEnd1, [rightEnd1, rightEnd2].sort(compareFunctionC)[1]);
+    }
 
     public has(x: number): boolean {
         return this.leftEnd.has(x) && this.rightEnd.has(x);
@@ -109,11 +117,13 @@ export class RInterval implements INumberSetBase, ISetLike<RInterval> {
 
 }
 
-export const {
-    exex,
-    exin,
-    inex,
-    inin,
-} = RInterval;
-
 export type NullableRIntervalList = Iterable<Nullable<RInterval>>;
+export const exex = RInterval.exex.bind(RInterval);
+export const exin = RInterval.exin.bind(RInterval);
+export const inex = RInterval.inex.bind(RInterval);
+export const inin = RInterval.inin.bind(RInterval);
+export const eq = RInterval.eq.bind(RInterval);
+export const equalI = RInterval.equal.bind(RInterval);
+export const compareFunctionI = RInterval.compareFunction.bind(RInterval);
+export const intersectionI = RInterval.intersection.bind(RInterval);
+export const unionI = RInterval.union.bind(RInterval);

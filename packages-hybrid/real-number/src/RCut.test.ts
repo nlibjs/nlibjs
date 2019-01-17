@@ -1,6 +1,6 @@
 import {Number, Infinity} from '@nlib/global';
 import test from 'ava';
-import {gt, gte, lte, lt, RCut} from './RCut';
+import {gt, gte, lte, lt, equalC, complementC, compareFunctionC, RCut} from './RCut';
 import * as index from './index';
 
 test('index', (t) => {
@@ -12,8 +12,8 @@ test('index', (t) => {
 });
 
 test('compare cuts', (t) => {
-    t.true(RCut.equal(gt(0), gt(0)));
-    t.false(RCut.equal(gt(0), gt(1)));
+    t.true(equalC(gt(0), gt(0)));
+    t.false(equalC(gt(0), gt(1)));
 });
 
 test('gt(NaN) is invalid', (t) => {
@@ -35,7 +35,7 @@ test('gt(0)', (t) => {
 });
 
 test('complement(gt(0))', (t) => {
-    t.true(RCut.equal(RCut.complement(gt(0)), lte(0)));
+    t.true(equalC(complementC(gt(0)), lte(0)));
 });
 
 test('gt(-Infinity)', (t) => {
@@ -82,7 +82,7 @@ test('gte(0)', (t) => {
 });
 
 test('complement(gte(0))', (t) => {
-    t.true(RCut.equal(RCut.complement(gte(0)), lt(0)));
+    t.true(equalC(complementC(gte(0)), lt(0)));
 });
 
 test('gte(-Infinity) is invalid', (t) => {
@@ -112,7 +112,7 @@ test('lt(0)', (t) => {
 });
 
 test('complement(lt(0))', (t) => {
-    t.true(RCut.equal(RCut.complement(lt(0)), gte(0)));
+    t.true(equalC(complementC(lt(0)), gte(0)));
 });
 
 test('lt(-Infinity)', (t) => {
@@ -159,7 +159,7 @@ test('lte(0)', (t) => {
 });
 
 test('complement(lte(0))', (t) => {
-    t.true(RCut.equal(RCut.complement(lte(0)), gt(0)));
+    t.true(equalC(complementC(lte(0)), gt(0)));
 });
 
 test('lte(-Infinity) is invalid', (t) => {
@@ -175,7 +175,7 @@ test('sort cuts (different numbers)', (t) => {
     const c2 = lte(2);
     const c3 = lte(1);
     const c4 = lte(0);
-    t.deepEqual([c1, c2, c3, c4].sort(RCut.compareFunction), [c4, c3, c2, c1]);
+    t.deepEqual([c1, c2, c3, c4].sort(compareFunctionC), [c4, c3, c2, c1]);
 });
 
 test('sort cuts (same numbers)', (t) => {
@@ -183,7 +183,7 @@ test('sort cuts (same numbers)', (t) => {
     const c2 = lt(0);
     const c3 = gt(0);
     const c4 = gte(0);
-    t.deepEqual([c1, c2, c3, c4].sort(RCut.compareFunction), [c4, c3, c2, c1]);
+    t.deepEqual([c1, c2, c3, c4].sort(compareFunctionC), [c4, c3, c2, c1]);
 });
 
 test('gt(0).toString() = (0, Infinity)', (t) => {

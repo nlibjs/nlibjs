@@ -8,3 +8,10 @@ export class ZSet extends RSet {
     }
 
 }
+
+export const equalZ = ZSet.equal.bind(ZSet);
+export const emptyZ = ZSet.empty.bind(ZSet);
+export const fromIntervalZ = ZSet.fromInterval.bind(ZSet);
+export const complementZ = ZSet.complement.bind(ZSet);
+export const unionZ = ZSet.union.bind(ZSet);
+export const intersectionZ = ZSet.intersection.bind(ZSet);

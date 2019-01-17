@@ -1,7 +1,7 @@
 import test from 'ava';
 import * as index from './index';
 import {normalizeRIntervalList} from './normalizeRIntervalList';
-import {inin, inex, exin, exex, RInterval} from './RInterval';
+import {inin, inex, exin, exex, equalI} from './RInterval';
 
 test('index.normalizeRIntervalList', (t) => {
     t.is(index.normalizeRIntervalList, normalizeRIntervalList);
@@ -17,8 +17,8 @@ test('[0, 1] (1, 2] [2, 3) (3, 3) (3, 4) [4, 5] → [0, 3) (3, 5]', (t) => {
         exex(3, 3),
     ]);
     t.is(result.length, 2);
-    t.true(RInterval.equal(result[0], inex(0, 3)));
-    t.true(RInterval.equal(result[1], exin(3, 5)));
+    t.true(equalI(result[0], inex(0, 3)));
+    t.true(equalI(result[1], exin(3, 5)));
 });
 
 test('[0, 1] (1, 2] [2, 3) (3, 3) (3, 4) [4, 5] [3, 3] → [0, 5]', (t) => {
@@ -32,5 +32,5 @@ test('[0, 1] (1, 2] [2, 3) (3, 3) (3, 4) [4, 5] [3, 3] → [0, 5]', (t) => {
         exex(3, 3),
     ]);
     t.is(result.length, 1);
-    t.true(RInterval.equal(result[0], inin(0, 5)));
+    t.true(equalI(result[0], inin(0, 5)));
 });

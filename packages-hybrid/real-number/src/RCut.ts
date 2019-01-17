@@ -64,19 +64,19 @@ export class RCut implements INumberSetBase {
     }
 
     public static gt(number: number): RCut {
-        return new RCut(number, GT);
+        return new this(number, GT);
     }
 
     public static gte(number: number): RCut {
-        return new RCut(number, GTE);
+        return new this(number, GTE);
     }
 
     public static lt(number: number): RCut {
-        return new RCut(number, LT);
+        return new this(number, LT);
     }
 
     public static lte(number: number): RCut {
-        return new RCut(number, LTE);
+        return new this(number, LTE);
     }
 
     public static equal(c1: RCut, c2: RCut): boolean {
@@ -99,13 +99,13 @@ export class RCut implements INumberSetBase {
     public static complement({operator, number}: RCut): RCut {
         switch (operator) {
         case GT:
-            return (Number.isFinite(number) ? RCut.lte : RCut.lt)(number);
+            return Number.isFinite(number) ? this.lte(number) : this.lt(number);
         case GTE:
-            return RCut.lt(number);
+            return this.lt(number);
         case LT:
-            return (Number.isFinite(number) ? RCut.gte : RCut.gt)(number);
+            return Number.isFinite(number) ? this.gte(number) : this.gt(number);
         case LTE:
-            return RCut.gt(number);
+            return this.gt(number);
         default:
             throw new Error(`Invalid operator: ${operator}`);
         }
@@ -128,4 +128,10 @@ export class RCut implements INumberSetBase {
 
 }
 
-export const {gt, gte, lt, lte} = RCut;
+export const gt = RCut.gt.bind(RCut);
+export const gte = RCut.gte.bind(RCut);
+export const lt = RCut.lt.bind(RCut);
+export const lte = RCut.lte.bind(RCut);
+export const equalC = RCut.equal.bind(RCut);
+export const compareFunctionC = RCut.compareFunction.bind(RCut);
+export const complementC = RCut.complement.bind(RCut);

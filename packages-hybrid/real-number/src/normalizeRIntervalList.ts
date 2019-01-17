@@ -1,4 +1,4 @@
-import {RInterval, NullableRIntervalList} from './RInterval';
+import {NullableRIntervalList, compareFunctionI, unionI, RInterval} from './RInterval';
 
 const filterNullAndSort = (nullableIntervalList: NullableRIntervalList): Array<RInterval> => {
     const intervals: Array<RInterval> = [];
@@ -7,7 +7,7 @@ const filterNullAndSort = (nullableIntervalList: NullableRIntervalList): Array<R
             intervals.push(item);
         }
     }
-    return intervals.sort(RInterval.compareFunction);
+    return intervals.sort(compareFunctionI);
 };
 
 export const normalizeRIntervalList = (nullableIntervalList: NullableRIntervalList): Array<RInterval> => {
@@ -16,7 +16,7 @@ export const normalizeRIntervalList = (nullableIntervalList: NullableRIntervalLi
     for (const interval of filterNullAndSort(nullableIntervalList)) {
         if (interval && !interval.isEmpty) {
             if (currentInterval) {
-                const union = RInterval.union(currentInterval, interval);
+                const union = unionI(currentInterval, interval);
                 if (union) {
                     currentInterval = union;
                 } else {

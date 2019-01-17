@@ -1,7 +1,7 @@
 import {Infinity, Nullable} from '@nlib/global';
-import {RInterval, NullableRIntervalList} from './RInterval';
+import {RInterval, NullableRIntervalList, equalI, intersectionI} from './RInterval';
 import {normalizeRIntervalList} from './normalizeRIntervalList';
-import {RCut, gt, lt} from './RCut';
+import {RCut, gt, lt, complementC} from './RCut';
 import {INumberSetBase, SetTypes, ISetLike} from './types';
 
 export class RSet implements INumberSetBase, ISetLike<RInterval> {
@@ -17,7 +17,7 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
 
     public static equal({intervals: intervals1}: RSet, {intervals: intervals2}: RSet): boolean {
         return intervals1.length === intervals2.length
-        && intervals1.every((interval, index) => RInterval.equal(interval, intervals2[index]));
+        && intervals1.every((interval, index) => equalI(interval, intervals2[index]));
     }
 
     public static empty(): RSet {
@@ -32,8 +32,8 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
         const inverse: Array<RInterval> = [];
         let pos: RCut = gt(-Infinity);
         for (const {leftEnd, rightEnd} of set.intervals) {
-            inverse.push(new RInterval(pos, RCut.complement(leftEnd)));
-            pos = RCut.complement(rightEnd);
+            inverse.push(new RInterval(pos, complementC(leftEnd)));
+            pos = complementC(rightEnd);
         }
         inverse.push(new RInterval(pos, lt(Infinity)));
         return new this(inverse);
@@ -51,7 +51,7 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
         const {intervals} = items.reduce(({intervals: intervals1}, {intervals: intervals2}) => {
             const intervals: Array<Nullable<RInterval>> = [];
             for (const interval1 of intervals1) {
-                intervals.push(...intervals2.map((interval2) => RInterval.intersection(interval1, interval2)));
+                intervals.push(...intervals2.map((interval2) => intersectionI(interval1, interval2)));
             }
             return new this(intervals);
         });
@@ -71,3 +71,10 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
     }
 
 }
+
+export const equalR = RSet.equal.bind(RSet);
+export const emptyR = RSet.empty.bind(RSet);
+export const fromIntervalR = RSet.fromInterval.bind(RSet);
+export const complementR = RSet.complement.bind(RSet);
+export const unionR = RSet.union.bind(RSet);
+export const intersectionR = RSet.intersection.bind(RSet);

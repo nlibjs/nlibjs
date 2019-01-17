@@ -5,6 +5,11 @@ import {
     exin,
     inex,
     inin,
+    eq,
+    equalI,
+    compareFunctionI,
+    intersectionI,
+    unionI,
     RInterval,
 } from './RInterval';
 import * as index from './index';
@@ -18,11 +23,11 @@ test('index', (t) => {
 });
 
 test('compare intervals', (t) => {
-    t.true(RInterval.equal(exex(0, 1), exex(0, 1)));
-    t.false(RInterval.equal(exex(0, 1), exex(0, 2)));
-    t.false(RInterval.equal(exex(0, 1), exin(0, 1)));
-    t.false(RInterval.equal(exex(0, 1), inex(0, 1)));
-    t.false(RInterval.equal(exex(0, 1), inin(0, 1)));
+    t.true(equalI(exex(0, 1), exex(0, 1)));
+    t.false(equalI(exex(0, 1), exex(0, 2)));
+    t.false(equalI(exex(0, 1), exin(0, 1)));
+    t.false(equalI(exex(0, 1), inex(0, 1)));
+    t.false(equalI(exex(0, 1), inin(0, 1)));
 });
 
 test('rejects inverse ends', (t) => {
@@ -113,59 +118,66 @@ test('inin(0, 2)', (t) => {
     t.false(interval.has(3));
 });
 
+test('eq(0)', (t) => {
+    const interval = eq(0);
+    t.false(interval.has(-1));
+    t.true(interval.has(0));
+    t.false(interval.has(1));
+});
+
 test('sort intervals', (t) => {
     const i1 = exex(1, 1);
     const i2 = inin(1, 1);
     const i3 = exex(0, 1);
     const i4 = inin(1, 2);
     const i5 = inin(0, 1);
-    const result = [i1, i2, i3, i4, i5].sort(RInterval.compareFunction);
+    const result = [i1, i2, i3, i4, i5].sort(compareFunctionI);
     t.deepEqual(result, [i5, i3, i2, i4, i1]);
 });
 
 test('intersection((0, 3), [1, 4]) → [1, 3)', (t) => {
-    const result = RInterval.intersection(exex(0, 3), inin(1, 4));
-    t.true(result && RInterval.equal(result, inex(1, 3)));
+    const result = intersectionI(exex(0, 3), inin(1, 4));
+    t.true(result && equalI(result, inex(1, 3)));
 });
 
 test('union((0, 3), [1, 4]) → (0, 4]', (t) => {
-    const result = RInterval.union(exex(0, 3), inin(1, 4));
-    t.true(result && RInterval.equal(result, exin(0, 4)));
+    const result = unionI(exex(0, 3), inin(1, 4));
+    t.true(result && equalI(result, exin(0, 4)));
 });
 
 test('intersection((0, 3), [1, 2]) → [1, 2]', (t) => {
-    const result = RInterval.intersection(exex(0, 3), inin(1, 2));
-    t.true(result && RInterval.equal(result, inin(1, 2)));
+    const result = intersectionI(exex(0, 3), inin(1, 2));
+    t.true(result && equalI(result, inin(1, 2)));
 });
 
 test('union((0, 3), [1, 2]) → (0, 3)', (t) => {
-    const result = RInterval.union(exex(0, 3), inin(1, 2));
-    t.true(result && RInterval.equal(result, exex(0, 3)));
+    const result = unionI(exex(0, 3), inin(1, 2));
+    t.true(result && equalI(result, exex(0, 3)));
 });
 
 test('intersection((0, 1), [1, 2]) → null', (t) => {
-    const result = RInterval.intersection(exex(0, 1), inin(1, 2));
+    const result = intersectionI(exex(0, 1), inin(1, 2));
     t.is(result, null);
 });
 
 test('union((0, 1), [1, 2]) → (0, 2]', (t) => {
-    const result = RInterval.union(exex(0, 1), inin(1, 2));
-    t.true(result && RInterval.equal(result, exin(0, 2)));
+    const result = unionI(exex(0, 1), inin(1, 2));
+    t.true(result && equalI(result, exin(0, 2)));
 });
 
 test('intersection((0, 1], [1, 2]) → [1, 1]', (t) => {
-    const result = RInterval.intersection(exin(0, 1), inin(1, 2));
-    t.true(result && RInterval.equal(result, inin(1, 1)));
+    const result = intersectionI(exin(0, 1), inin(1, 2));
+    t.true(result && equalI(result, inin(1, 1)));
 });
 
 test('union((0, 1), [2, 3]) → null', (t) => {
-    const result = RInterval.union(exex(0, 1), inin(2, 3));
+    const result = unionI(exex(0, 1), inin(2, 3));
     t.is(result, null);
 });
 
 test('union((-Infinity, 1), [0, Infinity)) → (-Infinity, Infinity)', (t) => {
-    const result = RInterval.union(exex(-Infinity, 1), inex(0, Infinity));
-    t.true(result && RInterval.equal(result, exex(-Infinity, Infinity)));
+    const result = unionI(exex(-Infinity, 1), inex(0, Infinity));
+    t.true(result && equalI(result, exex(-Infinity, Infinity)));
 });
 
 test('exex(0, 1).toString() = (0, 1)', (t) => {
