@@ -11,8 +11,8 @@
     "scripts": {
         "cleanup": "rimraf lib",
         "build:constants": "ts-node build-constants.ts",
-        "build:tsc": "tsc",
-        "build": "npm-run-all --serial build:constants build:tsc",
+        "tsc": "tsc",
+        "build": "npm-run-all --serial build:constants tsc",
         "test": "ava lib/*.test.js",
         "lint": "eslint --ext .ts src build-constants.ts"
     },

@@ -21,12 +21,11 @@
     },
     "scripts": {
         "init": "lerna bootstrap",
-        "lerna:cleanup": "lerna run cleanup",
+        "cleanup": "lerna run cleanup",
         "lerna:build": "lerna run build",
         "lerna:test": "nyc lerna run test",
-        "cleanup": "npm run lerna:cleanup",
-        "build": "npm-run-all --serial lerna:cleanup lerna:build",
-        "test": "npm-run-all --serial lerna:cleanup lerna:build lerna:test",
+        "build": "npm-run-all --serial lerna:build",
+        "test": "npm-run-all --serial lerna:build lerna:test",
         "lint": "lerna run lint",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag"
     },
