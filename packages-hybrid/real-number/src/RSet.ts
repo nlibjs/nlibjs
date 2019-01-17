@@ -10,7 +10,7 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
 
     public readonly intervals: ReadonlyArray<RInterval>
 
-    private constructor(intervals: NullableRIntervalList) {
+    protected constructor(intervals: NullableRIntervalList) {
         this.type = SetTypes.RSet;
         this.intervals = normalizeRIntervalList(intervals);
     }
@@ -21,11 +21,11 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
     }
 
     public static empty(): RSet {
-        return new RSet([]);
+        return new this([]);
     }
 
     public static fromInterval(interval: RInterval): RSet {
-        return new RSet([interval]);
+        return new this([interval]);
     }
 
     public static complement(set: RSet): RSet {
@@ -36,7 +36,7 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
             pos = RCut.complement(rightEnd);
         }
         inverse.push(new RInterval(pos, lt(Infinity)));
-        return new RSet(inverse);
+        return new this(inverse);
     }
 
     public static union(...items: Array<RSet | RInterval>): RSet {
@@ -44,7 +44,7 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
         for (const item of items) {
             intervals.push(...item.intervals);
         }
-        return new RSet(intervals);
+        return new this(intervals);
     }
 
     public static intersection(...items: Array<RSet | RInterval>): RSet {
@@ -53,9 +53,9 @@ export class RSet implements INumberSetBase, ISetLike<RInterval> {
             for (const interval1 of intervals1) {
                 intervals.push(...intervals2.map((interval2) => RInterval.intersection(interval1, interval2)));
             }
-            return new RSet(intervals);
+            return new this(intervals);
         });
-        return new RSet(intervals);
+        return new this(intervals);
     }
 
     public get isEmpty(): boolean {
