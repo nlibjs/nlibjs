@@ -8,7 +8,7 @@ before_install:
 - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
 install:
 - npm install -g nyc @commitlint/travis-cli
-- npm install
+- npm ci
 - npm run init
 script:
 - npm test
