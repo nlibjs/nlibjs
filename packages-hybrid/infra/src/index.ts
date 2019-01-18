@@ -1,4 +1,5 @@
 export * from './getCodePoints';
+export * from './toScalarValueString';
 export * from './4.3.Bytes';
 export * from './4.4.ByteSequences';
 export * from './4.5.CodePoints';
