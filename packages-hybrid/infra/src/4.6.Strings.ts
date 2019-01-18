@@ -159,3 +159,5 @@ export const collectCodePointSequence = (input: ScalarValueString, position: num
     }
     return [result, position];
 };
+
+export const skipASCIIWhitespace = (input: ScalarValueString, position: number): number => collectCodePointSequence(input, position, isASCIIWhitespace)[1];

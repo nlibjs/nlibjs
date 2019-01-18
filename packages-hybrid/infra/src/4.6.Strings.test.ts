@@ -14,6 +14,7 @@ import {
     stripLeadingAndTrailingASCIIWhitespace,
     stripAndCollapseASCIIWhiteSpace,
     collectCodePointSequence,
+    skipASCIIWhitespace,
 } from './4.6.Strings';
 import {ScalarValueString} from './types';
 
@@ -125,5 +126,26 @@ test('collectCodePointSequence("AAAbbbCCC") (3)', (t) => {
     t.deepEqual(
         collectCodePointSequence(svs('AAAbbbCCC'), 3, (codePoint) => codePoint === 0x62),
         [svs('bbb'), 6],
+    );
+});
+
+test('skipASCIIWhitespace("AAA   CCC", 0)', (t) => {
+    t.is(
+        skipASCIIWhitespace(svs('AAA   CCC'), 0),
+        0,
+    );
+});
+
+test('skipASCIIWhitespace("AAA   CCC", 3)', (t) => {
+    t.is(
+        skipASCIIWhitespace(svs('AAA   CCC'), 3),
+        6,
+    );
+});
+
+test('skipASCIIWhitespace("AAA   CCC", 4)', (t) => {
+    t.is(
+        skipASCIIWhitespace(svs('AAA   CCC'), 4),
+        6,
     );
 });
