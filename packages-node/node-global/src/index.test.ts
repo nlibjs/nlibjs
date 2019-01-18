@@ -24,6 +24,7 @@ test.before(async (t) => {
         'GLOBAL',
         'root',
         'queueMicrotask',
+        'Symbol',
         'TextDecoder',
         'TextEncoder',
         'COUNTER_NET_SERVER_CONNECTION',
