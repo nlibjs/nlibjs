@@ -1,65 +1,114 @@
-import {Error, Uint8Array} from '@nlib/global';
-import {isASCIICodePoint, isASCIIUpperAlpha, isASCIILowerAlpha, isASCIINewline, CR, LF, isASCIIWhitespace, SPACE} from './4.5.CodePoints';
-import {ScalarValueString, CodePoint} from './types';
+import {CodePoint} from './types';
+import {getCodePoints} from './getCodePoints';
+import {Uint32Array, Uint8Array} from '@nlib/global';
+import {ASCIICodePoint, isASCIINewline, CR, LF, isASCIIWhitespace, SPACE} from './4.5.CodePoints';
+import {
+    toASCIILowerCase as toASCIILowerCaseCodePoint,
+    toASCIIUpperCase as toASCIIUpperCaseCodePoint,
+} from './CodePoint';
 import {isASCIIByte} from './4.3.Bytes';
 import {isomorphicDecode} from './4.4.ByteSequences';
 
+export class ScalarValueString implements Iterable<CodePoint> {
+
+    private readonly codePoints: Uint32Array
+
+    public constructor(codePoints: Uint32Array) {
+        this.codePoints = codePoints;
+    }
+
+    public* iterator(): IterableIterator<CodePoint> {
+        for (const codePoint of this.codePoints) {
+            yield codePoint as CodePoint;
+        }
+    }
+
+    public [Symbol.iterator](): IterableIterator<CodePoint> {
+        return this.iterator();
+    }
+
+    public get length(): number {
+        return this.codePoints.length;
+    }
+
+    public get(index: number): CodePoint {
+        return this.codePoints[index] as CodePoint;
+    }
+
+    public get array(): Uint32Array {
+        return this.codePoints.slice();
+    }
+
+}
+
+export const fromString = (input: string): ScalarValueString => {
+    return new ScalarValueString(Uint32Array.from(getCodePoints(input)));
+};
+
+export const fromIterable = (input: Iterable<number> | Iterable<CodePoint>): ScalarValueString => {
+    return new ScalarValueString(Uint32Array.from(input));
+};
+
+export const equal = (s1: ScalarValueString, s2: ScalarValueString): boolean => {
+    const {length} = s1;
+    if (length !== s2.length) {
+        return false;
+    }
+    for (let i = 0; i < length; i++) {
+        if (s1.get(i) !== s2.get(i)) {
+            return false;
+        }
+    }
+    return true;
+};
+
+export const caseInsensitiveMatch = (s1: ScalarValueString, s2: ScalarValueString): boolean => {
+    const {length} = s1;
+    if (length !== s2.length) {
+        return false;
+    }
+    for (let i = 0; i < length; i++) {
+        if (toASCIILowerCaseCodePoint(s1.get(i)) !== toASCIILowerCaseCodePoint(s2.get(i))) {
+            return false;
+        }
+    }
+    return true;
+};
+
+export const slice = (input: ScalarValueString, from: number = 0, to: number = input.length): ScalarValueString => {
+    return new ScalarValueString(input.array.slice(from, to));
+};
+
+export const map = (input: ScalarValueString, callback: (codePoint: CodePoint, index: number, self: typeof input) => CodePoint): ScalarValueString => {
+    return new ScalarValueString(input.array.map((codePoint, index) => callback(codePoint as CodePoint, index, input)));
+};
+
+export const every = (input: ScalarValueString, callback: (codePoint: CodePoint, index: number, self: typeof input) => boolean): boolean => {
+    return input.array.every((codePoint, index) => callback(codePoint as CodePoint, index, input));
+};
+
+export const some = (input: ScalarValueString, callback: (codePoint: CodePoint, index: number, self: typeof input) => boolean): boolean => {
+    return input.array.some((codePoint, index) => callback(codePoint as CodePoint, index, input));
+};
+
 export const isomorphicEncode = (input: ScalarValueString): Uint8Array => {
-    const codePoints: Array<number> = [];
-    for (const codePoint of input) {
+    const {length} = input;
+    const encoded = new Uint8Array(length);
+    for (let i = 0; i < length; i++) {
+        const codePoint = input.get(i);
         if (0x00FF < codePoint) {
             throw new Error(`The codepoint is greater then 0x00FF: ${codePoint}`);
         }
-        codePoints.push(codePoint);
+        encoded[i] = codePoint;
     }
-    return Uint8Array.from(codePoints);
+    return encoded;
 };
 
-export const isASCIIString = (input: ScalarValueString): boolean => {
-    for (const codePoint of input) {
-        if (!isASCIICodePoint(codePoint)) {
-            return false;
-        }
-    }
-    return true;
-};
+export const isASCIIString = (input: ScalarValueString): boolean => every(input, (codePoint) => ASCIICodePoint.has(codePoint));
 
-export const toASCIILowerCase = (input: ScalarValueString): ScalarValueString => {
-    const result = input.slice();
-    for (let i = 0; i < input.length; i++) {
-        const codePoint = input[i];
-        if (isASCIIUpperAlpha(codePoint)) {
-            result[i] = (codePoint + 0x20) as CodePoint;
-        }
-    }
-    return result;
-};
+export const toASCIILowerCase = (input: ScalarValueString): ScalarValueString => map(input, toASCIILowerCaseCodePoint);
 
-export const toASCIIUpperCase = (input: ScalarValueString): ScalarValueString => {
-    const result = input.slice();
-    for (let i = 0; i < input.length; i++) {
-        const codePoint = input[i];
-        if (isASCIILowerAlpha(codePoint)) {
-            result[i] = (codePoint - 0x20) as CodePoint;
-        }
-    }
-    return result;
-};
-
-export const caseInsensitiveMatch = (input1: ScalarValueString, input2: ScalarValueString): boolean => {
-    const {length} = input1;
-    if (length !== input2.length) {
-        return false;
-    }
-    const caseInsensitiveByteSequence1 = toASCIILowerCase(input1);
-    const caseInsensitiveByteSequence2 = toASCIILowerCase(input2);
-    for (let i = 0; i < length; i++) {
-        if (caseInsensitiveByteSequence1[i] !== caseInsensitiveByteSequence2[i]) {
-            return false;
-        }
-    }
-    return true;
-};
+export const toASCIIUpperCase = (input: ScalarValueString): ScalarValueString => map(input, toASCIIUpperCaseCodePoint);
 
 export const encodeASCII = (input: ScalarValueString): Uint8Array => {
     if (!isASCIIString(input)) {
@@ -77,87 +126,85 @@ export const decodeASCII = (input: Uint8Array): ScalarValueString => {
     return isomorphicDecode(input);
 };
 
-/** Mutates its input */
-export const _stripNewlines = (input: ScalarValueString): ScalarValueString => {
-    let i = input.length;
-    while (0 < --i) {
-        if (isASCIINewline(input[i])) {
-            input.splice(i, 1);
-        }
-    }
-    return input;
-};
+export const stripNewlines = (input: ScalarValueString): ScalarValueString => new ScalarValueString(input.array.filter((codePoint) => !isASCIINewline(codePoint)));
 
-export const stripNewlines = (input: ScalarValueString): ScalarValueString => _stripNewlines(input.slice());
-
-/** Mutates its input */
-export const _normalizeNewlines = (input: ScalarValueString): ScalarValueString => {
-    let i = input.length;
-    while (0 < --i) {
-        const codePoint = input[i];
+export const normalizeNewlines = (input: ScalarValueString): ScalarValueString => {
+    const normalized = input.array;
+    const {length} = normalized;
+    let normalizedLength = 0;
+    for (let position = 0; position < length; position++) {
+        let codePoint = input.get(position);
         if (codePoint === CR) {
-            input[i] = LF;
-        } else if (codePoint === LF && input[i - 1] === CR) {
-            input.splice(i - 1, 2, LF);
-            i -= 1;
-        }
-    }
-    return input;
-};
-
-export const normalizeNewlines = (input: ScalarValueString): ScalarValueString => _normalizeNewlines(input.slice());
-
-/** Mutates its input */
-export const _stripLeadingASCIIWhitespace = (input: ScalarValueString): ScalarValueString => {
-    while (isASCIIWhitespace(input[0])) {
-        input.shift();
-    }
-    return input;
-};
-
-/** Mutates its input */
-export const _stripTrailingASCIIWhitespace = (input: ScalarValueString): ScalarValueString => {
-    while (isASCIIWhitespace(input[input.length - 1])) {
-        input.pop();
-    }
-    return input;
-};
-
-export const stripLeadingAndTrailingASCIIWhitespace = (input: ScalarValueString): ScalarValueString => _stripLeadingASCIIWhitespace(_stripTrailingASCIIWhitespace(input.slice()));
-
-/** Mutates its input */
-export const _collapseASCIIWhiteSpace = (input: ScalarValueString): ScalarValueString => {
-    let i = input.length;
-    while (0 < --i) {
-        if (isASCIIWhitespace(input[i])) {
-            let length = 1;
-            while (isASCIIWhitespace(input[i - length])) {
-                length += 1;
+            if (input.get(position + 1) === LF) {
+                position += 1;
             }
-            i = i - length + 1;
-            input.splice(i, length, SPACE);
+            codePoint = LF;
         }
+        normalized[normalizedLength++] = codePoint;
     }
-    return input;
+    return new ScalarValueString(normalized.slice(0, normalizedLength));
 };
 
-export const stripAndCollapseASCIIWhiteSpace = (input: ScalarValueString): ScalarValueString => _collapseASCIIWhiteSpace(_stripLeadingASCIIWhitespace(_stripTrailingASCIIWhitespace(input.slice())));
+export const getNonASCIIWhitespaceRange = (input: ScalarValueString): [number, number] => {
+    let start = 0;
+    while (isASCIIWhitespace(input.get(start))) {
+        start += 1;
+    }
+    let end = input.length - 1;
+    while (start < end && isASCIIWhitespace(input.get(end))) {
+        end -= 1;
+    }
+    return [start, end + 1];
+};
+
+export const stripLeadingAndTrailingASCIIWhitespace = (input: ScalarValueString): ScalarValueString => {
+    const [start, end] = getNonASCIIWhitespaceRange(input);
+    return slice(input, start, end);
+};
 
 export type CodePointCondition = (codePoint: CodePoint) => boolean;
 
 export const collectCodePointSequence = (input: ScalarValueString, position: number, condition: CodePointCondition): [ScalarValueString, number] => {
-    const result: ScalarValueString = [];
+    const collected = input.array;
+    let collectedLength = 0;
+    let newPosition = position;
     const {length} = input;
-    while (position < length) {
-        const codePoint = input[position];
+    while (newPosition < length) {
+        const codePoint = input.get(newPosition);
         if (condition(codePoint)) {
-            result.push(codePoint);
-            position += 1;
+            collected[collectedLength++] = codePoint;
+            newPosition += 1;
         } else {
             break;
         }
     }
-    return [result, position];
+    return [new ScalarValueString(collected.slice(0, collectedLength)), newPosition];
 };
 
-export const skipASCIIWhitespace = (input: ScalarValueString, position: number): number => collectCodePointSequence(input, position, isASCIIWhitespace)[1];
+export const skipASCIIWhitespace = (input: ScalarValueString, position: number): number => {
+    const {length} = input;
+    let newPosition = position;
+    while (newPosition < length) {
+        if (isASCIIWhitespace(input.get(newPosition))) {
+            newPosition += 1;
+        } else {
+            break;
+        }
+    }
+    return newPosition;
+};
+
+export const stripAndCollapseASCIIWhiteSpace = (input: ScalarValueString): ScalarValueString => {
+    const collapsed = input.array;
+    const [start, end] = getNonASCIIWhitespaceRange(input);
+    let collapsedLength = 0;
+    for (let position = start; position < end; position++) {
+        let codePoint = input.get(position);
+        if (isASCIIWhitespace(codePoint)) {
+            position = skipASCIIWhitespace(input, position) - 1;
+            codePoint = SPACE;
+        }
+        collapsed[collapsedLength++] = codePoint;
+    }
+    return new ScalarValueString(collapsed.slice(0, collapsedLength));
+};

@@ -6,7 +6,7 @@ import {
     caseInsensitiveMatchBytes,
     isomorphicDecode,
 } from './4.4.ByteSequences';
-import {getCodePoints} from './getCodePoints';
+import {fromString} from './4.6.Strings';
 
 test('toLowerCase', (t) => {
     t.deepEqual(
@@ -34,5 +34,5 @@ test('caseInsensitiveMatchBytes', (t) => {
 });
 
 test('isomorphicDecode', (t) => {
-    t.deepEqual(isomorphicDecode(new Uint8Array([0x41, 0x42, 0x63, 0x64])), [...getCodePoints('ABcd')]);
+    t.deepEqual(isomorphicDecode(new Uint8Array([0x41, 0x42, 0x63, 0x64])), fromString('ABcd'));
 });

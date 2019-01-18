@@ -1,6 +1,6 @@
 // https://infra.spec.whatwg.org/#byte-sequences
 import {isASCIIUpperAlpha, isASCIILowerAlpha} from './4.5.CodePoints';
-import {ScalarValueString, CodePoint} from './types';
+import {ScalarValueString, fromIterable} from './4.6.Strings';
 
 export const toLowerCaseBytes = (byteSequence: Uint8Array): Uint8Array => {
     const result = byteSequence.slice();
@@ -41,4 +41,4 @@ export const caseInsensitiveMatchBytes = (byteSequence1: Uint8Array, byteSequenc
     return true;
 };
 
-export const isomorphicDecode = (byteSequence: Uint8Array): ScalarValueString => [...byteSequence] as Array<CodePoint>;
+export const isomorphicDecode = (byteSequence: Uint8Array): ScalarValueString => fromIterable(byteSequence);
