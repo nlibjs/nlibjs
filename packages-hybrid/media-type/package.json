@@ -10,9 +10,9 @@
     ],
     "scripts": {
         "cleanup": "rimraf lib",
-        "build:constants": "ts-node build-constants.ts",
+        "build_constants": "ts-node build-constants.ts",
         "tsc": "tsc",
-        "build": "npm-run-all --serial build:constants tsc",
+        "build": "npm-run-all --serial build_constants cleanup tsc",
         "test": "ava lib/*.test.js",
         "lint": "eslint --ext .ts src build-constants.ts"
     },
@@ -27,7 +27,7 @@
     "eslintConfig": {
         "overrides": [
             {
-                "files": "build-constants.ts",
+                "files": "build_constants.ts",
                 "env": {
                     "node": true
                 },
