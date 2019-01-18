@@ -10,11 +10,11 @@
     ],
     "scripts": {
         "cleanup": "rimraf lib",
-        "build_constants": "ts-node build-constants.ts",
+        "build_constants": "ts-node build_constants.ts",
         "tsc": "tsc",
         "build": "npm-run-all --serial build_constants cleanup tsc",
         "test": "ava lib/*.test.js",
-        "lint": "eslint --ext .ts src build-constants.ts"
+        "lint": "eslint --ext .ts src build_constants.ts"
     },
     "dependencies": {
         "@nlib/global": "^3.1.0",
