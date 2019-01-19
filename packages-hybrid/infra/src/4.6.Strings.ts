@@ -1,6 +1,6 @@
+import {Uint32Array, Uint8Array, String} from '@nlib/global';
 import {CodePoint} from './types';
 import {getCodePoints} from './getCodePoints';
-import {Uint32Array, Uint8Array} from '@nlib/global';
 import {ASCIICodePoint, isASCIINewline, CR, LF, isASCIIWhitespace, SPACE} from './4.5.CodePoints';
 import {
     toASCIILowerCase as toASCIILowerCaseCodePoint,
@@ -37,6 +37,10 @@ export class ScalarValueString implements Iterable<CodePoint> {
 
     public get array(): Uint32Array {
         return this.codePoints.slice();
+    }
+
+    public toString(): string {
+        return String.fromCodePoint(...this);
     }
 
 }

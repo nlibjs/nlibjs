@@ -150,3 +150,7 @@ test('skipASCIIWhitespace("AAA   CCC", 4)', (t) => {
         6,
     );
 });
+
+test('toString', (t) => {
+    t.is(fromString('AbC').toString(), 'AbC');
+});
