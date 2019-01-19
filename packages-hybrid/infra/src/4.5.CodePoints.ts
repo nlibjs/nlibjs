@@ -1,6 +1,16 @@
 import {inin, eq, fromIntervalZ, complementZ, unionZ} from '@nlib/real-number';
 import {CodePoint} from './types';
 
+const NULL = 0x0000 as CodePoint;
+const DELETE = 0x007F as CodePoint;
+const LF = 0x000A as CodePoint;
+const CR = 0x000D as CodePoint;
+const TAB = 0x0009 as CodePoint;
+const FF = 0x000C as CodePoint;
+const SPACE = 0x0020 as CodePoint;
+const INFORMATION_SEPARATOR_ONE = 0x001F as CodePoint;
+const APPLICATION_PROGRAM_COMMAND = 0x009F as CodePoint;
+
 /** A leading surrogate is a code point that is in the range U+D800 to U+DBFF, inclusive. */
 export const LeadingSurrogate = fromIntervalZ(inin(0xD800, 0xDBFF));
 export const isLeadingSurrogate = (x: number): boolean => LeadingSurrogate.has(x);
@@ -37,37 +47,22 @@ export const Noncharacter = unionZ(
 export const isNoncharacter = (x: number): boolean => Noncharacter.has(x);
 
 /** An ASCII code point is a code point in the range U+0000 NULL to U+007F DELETE, inclusive. */
-export const NULL = 0x0000 as CodePoint;
-export const DELETE = 0x007F as CodePoint;
 export const ASCIICodePoint = fromIntervalZ(inin(NULL, DELETE));
 export const isASCIICodePoint = (x: number): boolean => ASCIICodePoint.has(x);
 
 /** An ASCII newline is U+000A LF, or U+000D CR. */
-export const LF = 0x000A as CodePoint;
-export const CR = 0x000D as CodePoint;
 export const ASCIINewline = unionZ(eq(LF), eq(CR));
 export const isASCIINewline = (x: number): boolean => ASCIINewline.has(x);
 
 /** An ASCII tab or newline is U+0009 TAB, U+000A LF, or U+000D CR. */
-export const TAB = 0x0009 as CodePoint;
-export const ASCIITabOrNewline = unionZ(
-    eq(TAB),
-    ASCIINewline,
-);
+export const ASCIITabOrNewline = unionZ(eq(TAB), ASCIINewline);
 export const isASCIITabOrNewline = (x: number): boolean => ASCIITabOrNewline.has(x);
 
-export const FF = 0x000C as CodePoint;
-export const SPACE = 0x0020 as CodePoint;
 /** ASCII whitespace is U+0009 TAB, U+000A LF, U+000C FF, U+000D CR, or U+0020 SPACE. */
-export const ASCIIWhitespace = unionZ(
-    ASCIITabOrNewline,
-    eq(FF),
-    eq(SPACE),
-);
+export const ASCIIWhitespace = unionZ(ASCIITabOrNewline, eq(FF), eq(SPACE));
 export const isASCIIWhitespace = (x: number): boolean => ASCIIWhitespace.has(x);
 
 /** A C0 control is a code point in the range U+0000 NULL to U+001F INFORMATION SEPARATOR ONE, inclusive. */
-export const INFORMATION_SEPARATOR_ONE = 0x001F as CodePoint;
 export const C0Control = fromIntervalZ(inin(NULL, INFORMATION_SEPARATOR_ONE));
 export const isC0Control = (x: number): boolean => C0Control.has(x);
 
@@ -76,7 +71,6 @@ export const C0ControlOrSpace = unionZ(C0Control, eq(SPACE));
 export const isC0ControlOrSpace = (x: number): boolean => C0ControlOrSpace.has(x);
 
 /** A control is a C0 control or a code point in the range U+007F DELETE to U+009F APPLICATION PROGRAM COMMAND, inclusive. */
-export const APPLICATION_PROGRAM_COMMAND = 0x009F as CodePoint;
 export const Control = unionZ(C0Control, inin(DELETE, APPLICATION_PROGRAM_COMMAND));
 export const isControl = (x: number): boolean => Control.has(x);
 

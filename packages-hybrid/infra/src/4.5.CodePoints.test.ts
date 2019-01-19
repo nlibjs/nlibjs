@@ -7,8 +7,11 @@ import {
     Noncharacter,
     isNoncharacter,
 } from './4.5.CodePoints';
+import * as index from './index';
 
 test(`Surrogate: ${Surrogate}`, (t) => {
+    t.is(index.Surrogate, Surrogate);
+    t.is(index.isSurrogate, isSurrogate);
     t.false(isSurrogate(0xD800 - 1));
     t.true(isSurrogate(0xD800));
     t.true(isSurrogate(0xDFFF));
@@ -16,6 +19,8 @@ test(`Surrogate: ${Surrogate}`, (t) => {
 });
 
 test(`ScalarValue: ${ScalarValue}`, (t) => {
+    t.is(index.ScalarValue, ScalarValue);
+    t.is(index.isScalarValue, isScalarValue);
     t.true(isScalarValue(0xD800 - 1));
     t.false(isScalarValue(0xD800));
     t.false(isScalarValue(0xDFFF));
@@ -23,6 +28,8 @@ test(`ScalarValue: ${ScalarValue}`, (t) => {
 });
 
 test(`Noncharacter: ${Noncharacter}`, (t) => {
+    t.is(index.Noncharacter, Noncharacter);
+    t.is(index.isNoncharacter, isNoncharacter);
     t.true(isNoncharacter(0xFDEF));
     t.true(isNoncharacter(0xFFFE));
     t.true(isNoncharacter(0xFFFF));

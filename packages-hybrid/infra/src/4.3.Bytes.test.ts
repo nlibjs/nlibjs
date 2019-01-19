@@ -1,10 +1,12 @@
 import test from 'ava';
-import * as index from './index';
 import {isByte, Byte, ASCIIByte, isASCIIByte} from './4.3.Bytes';
+import * as index from './index';
 
 test('index', (t) => {
     t.is(index.Byte, Byte);
     t.is(index.ASCIIByte, ASCIIByte);
+    t.is(index.isByte, isByte);
+    t.is(index.isASCIIByte, isASCIIByte);
 });
 
 test(`Byte: ${Byte}`, (t) => {

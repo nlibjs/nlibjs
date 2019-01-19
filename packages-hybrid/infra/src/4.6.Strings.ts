@@ -1,13 +1,17 @@
 import {Uint32Array, Uint8Array, String} from '@nlib/global';
 import {CodePoint} from './types';
 import {getCodePoints} from './getCodePoints';
-import {ASCIICodePoint, isASCIINewline, CR, LF, isASCIIWhitespace, SPACE} from './4.5.CodePoints';
+import {ASCIICodePoint, isASCIINewline, isASCIIWhitespace} from './4.5.CodePoints';
 import {
     toASCIILowerCase as toASCIILowerCaseCodePoint,
     toASCIIUpperCase as toASCIIUpperCaseCodePoint,
 } from './CodePoint';
 import {isASCIIByte} from './4.3.Bytes';
 import {isomorphicDecode} from './4.4.ByteSequences';
+const LF = 0x000A as CodePoint;
+const CR = 0x000D as CodePoint;
+const SPACE = 0x0020 as CodePoint;
+
 
 export class ScalarValueString implements Iterable<CodePoint> {
 
