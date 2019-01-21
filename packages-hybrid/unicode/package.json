@@ -1,5 +1,5 @@
 {
-    "name": "@nlib/media-type",
+    "name": "@nlib/unicode",
     "publishConfig": {
         "access": "public"
     },
@@ -9,21 +9,22 @@
         "lib"
     ],
     "scripts": {
+        "clear-cache": "rimraf build/__cache",
         "cleanup": "rimraf lib",
-        "build:constants": "ts-node build/constants.ts",
+        "build:named": "ts-node build/named.ts",
         "tsc": "tsc",
-        "build": "npm-run-all --serial build:constants cleanup tsc",
+        "build": "npm-run-all --serial build:named cleanup tsc",
         "test": "ava --verbose lib/*.test.js",
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {
-        "@nlib/global": "^3.1.0",
-        "@nlib/infra": "^3.1.0"
+        "@nlib/global": "^3.1.0"
     },
     "devDependencies": {
         "@nlib/afs": "^3.1.0",
-        "@nlib/node-util": "^3.1.0",
-        "@nlib/xml-js": "^3.1.0"
+        "@nlib/infra": "^3.1.0",
+        "@nlib/node-stream": "^3.1.0",
+        "@nlib/node-util": "^3.1.0"
     },
     "eslintConfig": {
         "overrides": [

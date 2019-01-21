@@ -3,3 +3,4 @@ node_modules
 coverage
 packages-*/*/lib
 lerna-debug.log
+__cache

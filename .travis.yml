@@ -9,9 +9,10 @@ before_install:
 install:
 - npm install -g nyc @commitlint/travis-cli
 - npm ci
-- npm run init
+- npm run bootstrap
 script:
 - npm test
+- git diff --exit-code
 - npm run lint
 - commitlint-travis
 after_success:

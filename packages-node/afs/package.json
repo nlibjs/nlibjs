@@ -12,7 +12,7 @@
         "cleanup": "rimraf lib",
         "tsc": "tsc",
         "build": "npm-run-all --serial cleanup tsc",
-        "test": "ava lib/*.test.js",
+        "test": "ava --verbose lib/*.test.js",
         "lint": "eslint --ext .ts src"
     },
     "eslintConfig": {
@@ -28,8 +28,6 @@
         ]
     },
     "dependencies": {
-        "@nlib/node-global": "^3.1.0",
-        "@nlib/node-util": "^3.1.0",
         "@types/node": "^10.12.15",
         "@types/semver": "^5.5.0",
         "lockfile": "^1.0.4",

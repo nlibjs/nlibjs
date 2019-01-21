@@ -1,4 +1,4 @@
-import {inin, eq, fromIntervalZ, complementZ, unionZ} from '@nlib/real-number';
+import {inin, eq, fromIntervalZ, complementZ, unionZ, intersectionZ} from '@nlib/real-number';
 import {CodePoint} from './types';
 
 const NULL = 0x0000 as CodePoint;
@@ -61,6 +61,10 @@ export const isASCIITabOrNewline = (x: number): boolean => ASCIITabOrNewline.has
 /** ASCII whitespace is U+0009 TAB, U+000A LF, U+000C FF, U+000D CR, or U+0020 SPACE. */
 export const ASCIIWhitespace = unionZ(ASCIITabOrNewline, eq(FF), eq(SPACE));
 export const isASCIIWhitespace = (x: number): boolean => ASCIIWhitespace.has(x);
+
+/** ASCII nonnewline whitespace is U+0009 TAB, U+000C FF or U+0020 SPACE. */
+export const ASCIINonNewlineWhitespace = intersectionZ(ASCIIWhitespace, complementZ(ASCIINewline));
+export const isASCIINonNewlineWhitespace = (x: number): boolean => ASCIINonNewlineWhitespace.has(x);
 
 /** A C0 control is a code point in the range U+0000 NULL to U+001F INFORMATION SEPARATOR ONE, inclusive. */
 export const C0Control = fromIntervalZ(inin(NULL, INFORMATION_SEPARATOR_ONE));

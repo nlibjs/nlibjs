@@ -1,5 +1,5 @@
 import test from 'ava';
-import {readStream} from './readStream';
+import {readStream, readObjectStream} from './readStream';
 import {PassThrough} from 'stream';
 import * as index from '.';
 
@@ -17,4 +17,15 @@ test('read a stream', async (t) => {
     });
     const read = await readStream(readableStream);
     t.is(`${read}`, `${data}${data}${data}`);
+});
+
+test('read an object stream', async (t) => {
+    const readableStream = new PassThrough({objectMode: true});
+    readableStream.write(100);
+    setTimeout(() => {
+        readableStream.write(200);
+        readableStream.end(300);
+    });
+    const read = await readObjectStream<number>(readableStream);
+    t.deepEqual(read, [100, 200, 300]);
 });

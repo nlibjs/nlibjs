@@ -1,4 +1,5 @@
 export * from './core';
+export * from './absolutify';
 export * from './cpr';
 export * from './deploy';
 export * from './findUp';

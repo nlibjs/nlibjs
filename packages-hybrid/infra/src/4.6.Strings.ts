@@ -1,7 +1,12 @@
 import {Uint32Array, Uint8Array, String} from '@nlib/global';
 import {CodePoint} from './types';
 import {getCodePoints} from './getCodePoints';
-import {ASCIICodePoint, isASCIINewline, isASCIIWhitespace} from './4.5.CodePoints';
+import {
+    ASCIICodePoint,
+    isASCIINewline,
+    isASCIIWhitespace,
+    isASCIINonNewlineWhitespace,
+} from './4.5.CodePoints';
 import {
     toASCIILowerCase as toASCIILowerCaseCodePoint,
     toASCIIUpperCase as toASCIIUpperCaseCodePoint,
@@ -11,6 +16,7 @@ import {isomorphicDecode} from './4.4.ByteSequences';
 const LF = 0x000A as CodePoint;
 const CR = 0x000D as CodePoint;
 const SPACE = 0x0020 as CodePoint;
+const COMMA = 0x002C as CodePoint;
 
 
 export class ScalarValueString implements Iterable<CodePoint> {
@@ -83,21 +89,26 @@ export const caseInsensitiveMatch = (s1: ScalarValueString, s2: ScalarValueStrin
     return true;
 };
 
-export const slice = (input: ScalarValueString, from: number = 0, to: number = input.length): ScalarValueString => {
-    return new ScalarValueString(input.array.slice(from, to));
-};
+export const slice = (
+    input: ScalarValueString,
+    from: number = 0,
+    to: number = input.length,
+): ScalarValueString => new ScalarValueString(input.array.slice(from, to));
 
-export const map = (input: ScalarValueString, callback: (codePoint: CodePoint, index: number, self: typeof input) => CodePoint): ScalarValueString => {
-    return new ScalarValueString(input.array.map((codePoint, index) => callback(codePoint as CodePoint, index, input)));
-};
+export const map = (
+    input: ScalarValueString,
+    callback: (codePoint: CodePoint, index: number, self: typeof input) => CodePoint,
+): ScalarValueString => new ScalarValueString(input.array.map((codePoint, index) => callback(codePoint as CodePoint, index, input)));
 
-export const every = (input: ScalarValueString, callback: (codePoint: CodePoint, index: number, self: typeof input) => boolean): boolean => {
-    return input.array.every((codePoint, index) => callback(codePoint as CodePoint, index, input));
-};
+export const every = (
+    input: ScalarValueString,
+    callback: (codePoint: CodePoint, index: number, self: typeof input) => boolean,
+): boolean => input.array.every((codePoint, index) => callback(codePoint as CodePoint, index, input));
 
-export const some = (input: ScalarValueString, callback: (codePoint: CodePoint, index: number, self: typeof input) => boolean): boolean => {
-    return input.array.some((codePoint, index) => callback(codePoint as CodePoint, index, input));
-};
+export const some = (
+    input: ScalarValueString,
+    callback: (codePoint: CodePoint, index: number, self: typeof input) => boolean,
+): boolean => input.array.some((codePoint, index) => callback(codePoint as CodePoint, index, input));
 
 export const isomorphicEncode = (input: ScalarValueString): Uint8Array => {
     const {length} = input;
@@ -144,7 +155,7 @@ export const normalizeNewlines = (input: ScalarValueString): ScalarValueString =
         let codePoint = input.get(position);
         if (codePoint === CR) {
             if (input.get(position + 1) === LF) {
-                position += 1;
+                position++;
             }
             codePoint = LF;
         }
@@ -153,66 +164,167 @@ export const normalizeNewlines = (input: ScalarValueString): ScalarValueString =
     return new ScalarValueString(normalized.slice(0, normalizedLength));
 };
 
-export const getNonASCIIWhitespaceRange = (input: ScalarValueString): [number, number] => {
-    let start = 0;
-    while (isASCIIWhitespace(input.get(start))) {
-        start += 1;
-    }
-    let end = input.length - 1;
-    while (start < end && isASCIIWhitespace(input.get(end))) {
-        end -= 1;
-    }
-    return [start, end + 1];
-};
-
-export const stripLeadingAndTrailingASCIIWhitespace = (input: ScalarValueString): ScalarValueString => {
-    const [start, end] = getNonASCIIWhitespaceRange(input);
-    return slice(input, start, end);
-};
-
 export type CodePointCondition = (codePoint: CodePoint) => boolean;
 
-export const collectCodePointSequence = (input: ScalarValueString, position: number, condition: CodePointCondition): [ScalarValueString, number] => {
-    const collected = input.array;
-    let collectedLength = 0;
-    let newPosition = position;
+export const collectCodePoint = function* (
+    input: ScalarValueString,
+    from: number,
+    condition: CodePointCondition,
+): IterableIterator<CodePoint> {
+    let position = from;
     const {length} = input;
-    while (newPosition < length) {
-        const codePoint = input.get(newPosition);
+    while (position < length) {
+        const codePoint = input.get(position);
         if (condition(codePoint)) {
-            collected[collectedLength++] = codePoint;
-            newPosition += 1;
+            yield codePoint;
+            position++;
         } else {
             break;
         }
     }
-    return [new ScalarValueString(collected.slice(0, collectedLength)), newPosition];
+};
+
+export const collectCodePointRight = function* (
+    input: ScalarValueString,
+    from: number,
+    condition: CodePointCondition,
+): IterableIterator<CodePoint> {
+    let position = from;
+    while (0 < position) {
+        const codePoint = input.get(position - 1);
+        if (condition(codePoint)) {
+            yield codePoint;
+            position--;
+        } else {
+            break;
+        }
+    }
+};
+
+export const collectCodePointSequence = (
+    input: ScalarValueString,
+    position: number,
+    condition: CodePointCondition,
+    positionCallback: (position: number) => void = () => {},
+): ScalarValueString => {
+    const {array: collected} = input;
+    let length = 0;
+    for (const codePoint of collectCodePoint(input, position, condition)) {
+        collected[length++] = codePoint;
+    }
+    positionCallback(position + length);
+    return new ScalarValueString(collected.slice(0, length));
+};
+
+export const skipASCIINonNewlineWhitespace = (input: ScalarValueString, position: number): number => {
+    const iterator = collectCodePoint(input, position, isASCIINonNewlineWhitespace);
+    let length = 0;
+    while (!iterator.next().done) {
+        length++;
+    }
+    return position + length;
 };
 
 export const skipASCIIWhitespace = (input: ScalarValueString, position: number): number => {
-    const {length} = input;
-    let newPosition = position;
-    while (newPosition < length) {
-        if (isASCIIWhitespace(input.get(newPosition))) {
-            newPosition += 1;
-        } else {
-            break;
-        }
+    const iterator = collectCodePoint(input, position, isASCIIWhitespace);
+    let length = 0;
+    while (!iterator.next().done) {
+        length++;
     }
-    return newPosition;
+    return position + length;
 };
 
+export const skipASCIIWhitespaceRight = (input: ScalarValueString, position: number): number => {
+    const iterator = collectCodePointRight(input, position, isASCIIWhitespace);
+    let length = 0;
+    while (!iterator.next().done) {
+        length++;
+    }
+    return position - length;
+};
+
+export const stripLeadingAndTrailingASCIIWhitespace = (input: ScalarValueString): ScalarValueString => slice(
+    input,
+    skipASCIIWhitespace(input, 0),
+    skipASCIIWhitespaceRight(input, input.length),
+);
+
 export const stripAndCollapseASCIIWhiteSpace = (input: ScalarValueString): ScalarValueString => {
-    const collapsed = input.array;
-    const [start, end] = getNonASCIIWhitespaceRange(input);
+    const {array: collapsed, length} = input;
     let collapsedLength = 0;
-    for (let position = start; position < end; position++) {
-        let codePoint = input.get(position);
+    let position = skipASCIIWhitespace(input, 0);
+    let spaceFlag = false;
+    while (position < length) {
+        const codePoint = input.get(position);
         if (isASCIIWhitespace(codePoint)) {
-            position = skipASCIIWhitespace(input, position) - 1;
-            codePoint = SPACE;
+            spaceFlag = true;
+            position = skipASCIIWhitespace(input, position);
+        } else {
+            if (spaceFlag) {
+                collapsed[collapsedLength++] = SPACE;
+            }
+            collapsed[collapsedLength++] = codePoint;
+            position++;
         }
-        collapsed[collapsedLength++] = codePoint;
     }
     return new ScalarValueString(collapsed.slice(0, collapsedLength));
+};
+
+export const split = function* (input: ScalarValueString, condition: CodePointCondition): IterableIterator<ScalarValueString> {
+    const {array: token} = input;
+    let tokenLength = 0;
+    for (const codePoint of input) {
+        if (condition(codePoint)) {
+            yield new ScalarValueString(token.slice(0, tokenLength));
+            tokenLength = 0;
+        } else {
+            token[tokenLength++] = codePoint;
+        }
+    }
+    yield new ScalarValueString(token.slice(0, tokenLength));
+};
+
+export const strictlySplit = (input: ScalarValueString, delimiter: CodePoint): IterableIterator<ScalarValueString> => split(input, (codePoint) => codePoint === delimiter);
+
+export const splitOn = function* (input: ScalarValueString, condition: CodePointCondition): IterableIterator<ScalarValueString> {
+    const {length} = input;
+    let position = 0;
+    while (position < length) {
+        position = skipASCIIWhitespace(input, position);
+        const {array: collected} = input;
+        let collectedLength = 0;
+        let whiteSpaceLength = 0;
+        for (const codePoint of collectCodePoint(input, position, (codePoint) => !condition(codePoint))) {
+            collected[collectedLength++] = codePoint;
+            if (isASCIIWhitespace(codePoint)) {
+                whiteSpaceLength++;
+            } else {
+                whiteSpaceLength = 0;
+            }
+            position++;
+        }
+        yield new ScalarValueString(collected.slice(0, collectedLength - whiteSpaceLength));
+        position++;
+    }
+};
+
+export const splitOnASCIIWhitespace = function* (input: ScalarValueString): IterableIterator<ScalarValueString> {
+    for (const collected of splitOn(input, isASCIIWhitespace)) {
+        if (0 < collected.length) {
+            yield collected;
+        }
+    }
+};
+
+export const splitOnComma = (input: ScalarValueString): IterableIterator<ScalarValueString> => splitOn(input, (codePoint) => codePoint === COMMA);
+
+export const concatenate = (...args: Array<ScalarValueString>): ScalarValueString => {
+    const concatenated = new Uint32Array(args.reduce((sum, string) => sum + string.length, 0));
+    let position = 0;
+    for (const string of args) {
+        for (const codePoint of string) {
+            concatenated[position++] = codePoint;
+        }
+    }
+    return new ScalarValueString(concatenated);
 };

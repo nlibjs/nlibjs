@@ -7,7 +7,7 @@ export interface IHashOptions {
 
 export const getHash = (
     data: Parameters<Hash['update']>[0],
-    {algorithm, encoding}: IHashOptions = {algorithm: 'sha256', encoding: 'latin1'},
+    {algorithm, encoding}: IHashOptions = {algorithm: 'sha256', encoding: 'base64'},
 ): string | Buffer => {
     const hash = createHash(algorithm);
     hash.update(data);

@@ -2,8 +2,8 @@ import {join} from 'path';
 import {httpGet, readStream} from '@nlib/node-util';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
 import {updateFile} from '@nlib/afs';
-import {mediatype} from './src/types';
-import {elementToRecord} from './src/elementToRecord';
+import {mediatype} from '../src/types';
+import {elementToRecord} from '../src/elementToRecord';
 
 export const build = async (): Promise<void> => {
     const res = await httpGet('https://www.iana.org/assignments/media-types/media-types.xml');
@@ -33,7 +33,7 @@ export const build = async (): Promise<void> => {
         ']);',
         '',
     ].join('\n');
-    const dest = join(__dirname, 'src/constants.ts');
+    const dest = join(__dirname, '../src/constants.ts');
     await updateFile(dest, code);
 };
 

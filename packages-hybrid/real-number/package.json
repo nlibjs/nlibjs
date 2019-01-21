@@ -12,7 +12,7 @@
         "cleanup": "rimraf lib",
         "tsc": "tsc",
         "build": "npm-run-all --serial cleanup tsc",
-        "test": "ava lib/*.test.js",
+        "test": "ava --verbose lib/*.test.js",
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {

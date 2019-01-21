@@ -16,7 +16,13 @@ import {
     stripAndCollapseASCIIWhiteSpace,
     collectCodePointSequence,
     skipASCIIWhitespace,
+    strictlySplit,
+    splitOnASCIIWhitespace,
+    skipASCIIWhitespaceRight,
+    splitOnComma,
+    concatenate,
 } from './4.6.Strings';
+import {CodePoint} from './types';
 
 test('"AbC".isomorphicEncode()', (t) => {
     t.deepEqual(
@@ -110,24 +116,45 @@ test('stripAndCollapseASCIIWhiteSpace("\\t Ab\\n\\r\\r\\nC\\t ")', (t) => {
 });
 
 test('collectCodePointSequence("AAAbbbCCC") (1)', (t) => {
-    t.deepEqual(
-        collectCodePointSequence(fromString('AAAbbbCCC'), 0, (codePoint) => codePoint === 0x41),
-        [fromString('AAA'), 3],
+    let position = 0;
+    const collected = collectCodePointSequence(
+        fromString('AAAbbbCCC'),
+        position,
+        (codePoint) => codePoint === 0x41,
+        (newPosition) => {
+            position = newPosition;
+        },
     );
+    t.deepEqual(collected, fromString('AAA'));
+    t.is(position, 3);
 });
 
 test('collectCodePointSequence("AAAbbbCCC") (2)', (t) => {
-    t.deepEqual(
-        collectCodePointSequence(fromString('AAAbbbCCC'), 0, (codePoint) => codePoint === 0x62),
-        [fromString(''), 0],
+    let position = 0;
+    const collected = collectCodePointSequence(
+        fromString('AAAbbbCCC'),
+        position,
+        (codePoint) => codePoint === 0x62,
+        (newPosition) => {
+            position = newPosition;
+        },
     );
+    t.deepEqual(collected, fromString(''));
+    t.is(position, 0);
 });
 
 test('collectCodePointSequence("AAAbbbCCC") (3)', (t) => {
-    t.deepEqual(
-        collectCodePointSequence(fromString('AAAbbbCCC'), 3, (codePoint) => codePoint === 0x62),
-        [fromString('bbb'), 6],
+    let position = 3;
+    const collected = collectCodePointSequence(
+        fromString('AAAbbbCCC'),
+        position,
+        (codePoint) => codePoint === 0x62,
+        (newPosition) => {
+            position = newPosition;
+        },
     );
+    t.deepEqual(collected, fromString('bbb'));
+    t.is(position, 6);
 });
 
 test('skipASCIIWhitespace("AAA   CCC", 0)', (t) => {
@@ -148,6 +175,75 @@ test('skipASCIIWhitespace("AAA   CCC", 4)', (t) => {
     t.is(
         skipASCIIWhitespace(fromString('AAA   CCC'), 4),
         6,
+    );
+});
+
+test('skipASCIIWhitespaceRight("AAA   CCC", 9)', (t) => {
+    t.is(
+        skipASCIIWhitespaceRight(fromString('AAA   CCC'), 9),
+        9,
+    );
+});
+
+test('skipASCIIWhitespaceRight("AAA   CCC", 6)', (t) => {
+    t.is(
+        skipASCIIWhitespaceRight(fromString('AAA   CCC'), 6),
+        3,
+    );
+});
+
+test('skipASCIIWhitespaceRight("AAA   CCC", 5)', (t) => {
+    t.is(
+        skipASCIIWhitespaceRight(fromString('AAA   CCC'), 5),
+        3,
+    );
+});
+
+test('strictlySplit("XAAXbbXCCXX", "X")', (t) => {
+    t.deepEqual(
+        [...strictlySplit(fromString('XAAXbbXCCXX'), ('X').codePointAt(0) as CodePoint)],
+        [
+            fromString(''),
+            fromString('AA'),
+            fromString('bb'),
+            fromString('CC'),
+            fromString(''),
+            fromString(''),
+        ],
+    );
+});
+
+test('splitOnASCIIWhitespace(" \\t\\n\\r AA \\t\\n\\r bb \\t\\n\\r CC \\t\\n\\r ")', (t) => {
+    const source = ' \t\n\r AA \t\n\r bb \t\n\r CC \t\n\r ';
+    t.log([...splitOnASCIIWhitespace(fromString(source))].map((x) => `${x}`));
+    t.deepEqual(
+        [...splitOnASCIIWhitespace(fromString(source))],
+        [
+            fromString('AA'),
+            fromString('bb'),
+            fromString('CC'),
+        ],
+    );
+});
+
+test('splitOnComma("  AA bb  ,  CC  ,DD,  ")', (t) => {
+    const source = '  AA bb  ,  CC  ,DD,  ';
+    t.log([...splitOnComma(fromString(source))].map((x) => `${x}`));
+    t.deepEqual(
+        [...splitOnComma(fromString(source))],
+        [
+            fromString('AA bb'),
+            fromString('CC'),
+            fromString('DD'),
+            fromString(''),
+        ],
+    );
+});
+
+test('concatenate(" AA ", " bb ", " CC ")', (t) => {
+    t.deepEqual(
+        concatenate(fromString(' AA '), fromString(' bb '), fromString(' CC ')),
+        fromString(' AA  bb  CC '),
     );
 });
 

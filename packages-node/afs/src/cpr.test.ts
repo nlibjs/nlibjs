@@ -37,7 +37,7 @@ test('copy a directory', async (t) => {
     const copieeDir = join(t.context.directory, 'copiee');
     await mkdir(copieeDir);
     const copiedDir = join(t.context.directory, 'copied');
-    const filenames = Array(100).fill(1).map((x, index) => ({
+    const filenames = Array(100).fill(1).map((_, index) => ({
         copiee: join(copieeDir, `dir-${index}`, `file-${index}`),
         copied: join(copiedDir, `dir-${index}`, `file-${index}`),
     }));

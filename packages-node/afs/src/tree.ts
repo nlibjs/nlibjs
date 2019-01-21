@@ -1,7 +1,7 @@
 import {PathLike} from 'fs';
 import {join, basename} from 'path';
-import {absolutify} from '@nlib/node-util';
 import {lstat, readdir} from './core';
+import {absolutify} from './absolutify';
 
 export type TreeNodeType =
 | 'file'

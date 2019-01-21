@@ -32,8 +32,8 @@ test('write data to a file in a nested directory', async (t) => {
 });
 
 test('write files in parallel', async (t) => {
-    const filePaths = Array(100).fill(1).map((x, index) => {
-        const directories = Array(index % 8).fill(1).map((x, index) => `dir${index}`);
+    const filePaths = Array(100).fill(1).map((_, index) => {
+        const directories = Array(index % 8).fill(1).map((_, index) => `dir${index}`);
         return join(t.context.directory, ...directories, `file${index}`);
     });
     await Promise.all(filePaths.map((filePath) => updateFile(filePath, filePath)));

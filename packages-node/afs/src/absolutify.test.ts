@@ -1,7 +1,7 @@
 import {normalize, join} from 'path';
 import test from 'ava';
 import {absolutify} from './absolutify';
-import * as index from '.';
+import * as index from './index';
 
 test('index.absolutify', (t) => {
     t.is(index.absolutify, absolutify);

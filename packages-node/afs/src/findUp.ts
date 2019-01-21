@@ -1,7 +1,6 @@
-import {Array} from '@nlib/node-global';
 import {join, dirname} from 'path';
-import {absolutify} from '@nlib/node-util';
 import {stat} from './core';
+import {absolutify} from './absolutify';
 
 const findUpCore = async (
     targets: Array<string>,
