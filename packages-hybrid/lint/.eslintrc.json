@@ -13,8 +13,8 @@
         },
         {
             "files": ["*.ts"],
-            "parser": "eslint-plugin-typescript/parser",
-            "plugins": ["typescript"],
+            "parser": "@typescript-eslint/parser",
+            "plugins": ["@typescript-eslint"],
             "rules": {
                 "consistent-this": "off",
                 "indent": "off",
@@ -22,9 +22,9 @@
                 "no-dupe-class-members": "off",
                 "no-redeclare": "off",
                 "no-unused-vars": "off",
-                "typescript/adjacent-overload-signatures": "error",
-                "typescript/array-type": ["error", "generic"],
-                "typescript/ban-types": [
+                "@typescript-eslint/adjacent-overload-signatures": "error",
+                "@typescript-eslint/array-type": ["error", "generic"],
+                "@typescript-eslint/ban-types": [
                     "error",
                     {
                         "types": {
@@ -36,18 +36,18 @@
                         }
                     }
                 ],
-                "typescript/camelcase": "off",
-                "typescript/class-name-casing": "error",
-                "typescript/explicit-function-return-type": "error",
-                "typescript/explicit-member-accessibility": "error",
-                "typescript/generic-type-naming": "error",
-                "typescript/indent": ["error", 4, {
+                "@typescript-eslint/camelcase": "off",
+                "@typescript-eslint/class-name-casing": "error",
+                "@typescript-eslint/explicit-function-return-type": "error",
+                "@typescript-eslint/explicit-member-accessibility": "error",
+                "@typescript-eslint/generic-type-naming": "error",
+                "@typescript-eslint/indent": ["error", 4, {
                     "SwitchCase": 0,
                     "MemberExpression": 0,
                     "ignoredNodes": ["ConditionalExpression"]
                 }],
-                "typescript/interface-name-prefix": ["error", "always"],
-                "typescript/member-delimiter-style": ["error", {
+                "@typescript-eslint/interface-name-prefix": ["error", "always"],
+                "@typescript-eslint/member-delimiter-style": ["error", {
                     "multiline": {
                         "delimiter": "comma",
                         "requireLast": true
@@ -57,31 +57,31 @@
                         "requireLast": false
                     }
                 }],
-                "typescript/member-naming": "error",
-                "typescript/member-ordering": "error",
-                "typescript/no-angle-bracket-type-assertion": "off",
-                "typescript/no-array-constructor": "error",
-                "typescript/no-empty-interface": "off",
-                "typescript/no-explicit-any": "error",
-                "typescript/no-extraneous-class": "error",
-                "typescript/no-inferrable-types": "error",
-                "typescript/no-misused-new": "error",
-                "typescript/no-namespace": ["error", {"allowDefinitionFiles": true}],
-                "typescript/no-non-null-assertion": "error",
-                "typescript/no-object-literal-type-assertion": "error",
-                "typescript/no-parameter-properties": "error",
-                "typescript/no-this-alias": ["error", {
+                "@typescript-eslint/member-naming": "error",
+                "@typescript-eslint/member-ordering": "error",
+                "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+                "@typescript-eslint/no-array-constructor": "error",
+                "@typescript-eslint/no-empty-interface": "off",
+                "@typescript-eslint/no-explicit-any": "error",
+                "@typescript-eslint/no-extraneous-class": "error",
+                "@typescript-eslint/no-inferrable-types": "error",
+                "@typescript-eslint/no-misused-new": "error",
+                "@typescript-eslint/no-namespace": ["error", {"allowDefinitionFiles": true}],
+                "@typescript-eslint/no-non-null-assertion": "error",
+                "@typescript-eslint/no-object-literal-type-assertion": "error",
+                "@typescript-eslint/no-parameter-properties": "error",
+                "@typescript-eslint/no-this-alias": ["error", {
                     "allowDestructuring": true,
                     "allowedNames": ["self"]
                 }],
-                "typescript/no-triple-slash-reference": "error",
-                "typescript/no-type-alias": "off",
-                "typescript/no-unused-vars": "error",
-                "typescript/no-use-before-define": "error",
-                "typescript/no-var-requires": "error",
-                "typescript/prefer-interface": "error",
-                "typescript/prefer-namespace-keyword": "off",
-                "typescript/type-annotation-spacing": ["error", {
+                "@typescript-eslint/no-triple-slash-reference": "error",
+                "@typescript-eslint/no-type-alias": "off",
+                "@typescript-eslint/no-unused-vars": "error",
+                "@typescript-eslint/no-use-before-define": "error",
+                "@typescript-eslint/no-var-requires": "error",
+                "@typescript-eslint/prefer-interface": "error",
+                "@typescript-eslint/prefer-namespace-keyword": "off",
+                "@typescript-eslint/type-annotation-spacing": ["error", {
                     "before": false,
                     "after": true,
                     "overrides": {
