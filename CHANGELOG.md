@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://github.com/nlibjs/nlibjs/compare/v3.2.0...v3.2.1) (2019-01-22)
+
+
+### Bug Fixes
+
+* fix .travis.yml ([c5dbc32](https://github.com/nlibjs/nlibjs/commit/c5dbc32))
+
+
+
+
+
 # [3.2.0](https://github.com/nlibjs/nlibjs/compare/v3.1.0...v3.2.0) (2019-01-22)
 
 
