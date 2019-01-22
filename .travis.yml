@@ -1,11 +1,19 @@
 language: node_js
+os:
+  - linux
+  - osx
+  - windows
+matrix:
+  allow_failures:
+    - os: osx
+    - os: windows
 node_js:
 - '10'
 env:
   global:
     secure: q/s+haJffbpIlDQCBQGt9x+bJd1OdqNJIoOnolS41r2KcwUKEYiPLHEqXFmQ21TWX0slvUvFyy4As0NR/ydr6aCWMoxKSUR1E7X0ycLuKFOVevzCmQH2XtHDKnapkoa0ddeMSdv4xEoObnuissu+zRtdAZfKuyJkz8Ysz9tPwTY6hjdH9CLfmcyGx7RkCtvaqbPPfNQrPwI/Wrl+mB9VqXwnbXt+OWwRxr78/rI2xquTazPMUj2Ao4WNU4hZlA2VPcMSLIm31WCnvcO87uNMW6/36BBW16cy02AhcVlU17HEZSwJAJQ58FlPpHbHyHmf+7PB/lfZ1cw08RvR3owSb0KVhOpvBxPa+yBS7HOGNPGdx4Zouw3/VLksVXKy80YUGA5b87hhDDl4EnfDCuLvNhCZBazgzrY8YOT0w2Ggrj/yWdd9R1HsnJQM6EludfJNHs6a0XXUyPou/loBbHD6bFHVJf7BonZfSJvHS3MZov4ULU37FZDDcGWWGariyUwaQEcIg7qBw3nxDrd396qHJgn2XfQM9b2XV3apda7SrcBQXkDWAG6zI9bDtuhjmInO8T/1zkrKh+BgMT7KG1mBHcaGsYKpPDVAJmE9dbpP0hrV2UaWsRb6capYHjIcHaL6mEOdJADpcG4jNKV3aYVbTwFr8urcnoFHCNy9tzz9aKw=
 before_install:
-- echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+- if [ $TRAVIS_OS_NAME = linux ]; then echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc; fi
 install:
 - npm install -g nyc @commitlint/travis-cli
 - npm ci
@@ -24,11 +32,13 @@ deploy:
   provider: script
   script: npx lerna publish --conventional-commits --no-git-reset --no-push --yes
   on:
+    condition: $TRAVIS_OS_NAME = linux
     node: 10
     repo: nlibjs/nlibjs
     branch: master
     tags: true
 -
+  condition: $TRAVIS_OS_NAME = linux
   skip_cleanup: true
   provider: script
   script: npx lerna publish --canary --conventional-commits --no-git-reset --no-push --yes
