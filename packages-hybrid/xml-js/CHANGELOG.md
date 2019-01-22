@@ -6,24 +6,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 # [3.2.0](https://github.com/nlibjs/nlibjs/compare/v3.1.0...v3.2.0) (2019-01-22)
 
 
-### Bug Fixes
-
-* **node-util:** update README ([cffdaf1](https://github.com/nlibjs/nlibjs/commit/cffdaf1))
-
-
 ### Features
 
-* **node-util:** add httpGet and readStream ([1c73f0c](https://github.com/nlibjs/nlibjs/commit/1c73f0c))
 * **real-number:** add "real-number" package ([#8](https://github.com/nlibjs/nlibjs/issues/8)) ([f7d8ee5](https://github.com/nlibjs/nlibjs/commit/f7d8ee5))
 * **unicode:** add unicode package ([#9](https://github.com/nlibjs/nlibjs/issues/9)) ([998933a](https://github.com/nlibjs/nlibjs/commit/998933a)), closes [#10](https://github.com/nlibjs/nlibjs/issues/10)
-
-
-
-
-
-# 3.1.0 (2018-12-29)
-
-
-### Features
-
-* **util:** add [@nlib](https://github.com/nlib)/util ([a0c70ff](https://github.com/nlibjs/nlibjs/commit/a0c70ff))
+* **xml-js:** add utilities for xml-js ([cc46e63](https://github.com/nlibjs/nlibjs/commit/cc46e63))

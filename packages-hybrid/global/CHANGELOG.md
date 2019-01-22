@@ -8,22 +8,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **node-util:** update README ([cffdaf1](https://github.com/nlibjs/nlibjs/commit/cffdaf1))
+* **global:** export Types instaed of defining ([4e911d3](https://github.com/nlibjs/nlibjs/commit/4e911d3))
+* **global:** stop exporting Symbol ([3fdcb07](https://github.com/nlibjs/nlibjs/commit/3fdcb07))
 
 
 ### Features
 
-* **node-util:** add httpGet and readStream ([1c73f0c](https://github.com/nlibjs/nlibjs/commit/1c73f0c))
+* **global:** add [@nlib](https://github.com/nlib)/global ([41f9926](https://github.com/nlibjs/nlibjs/commit/41f9926))
+* **global:** declare Brand and Integer ([2d3cb01](https://github.com/nlibjs/nlibjs/commit/2d3cb01))
 * **real-number:** add "real-number" package ([#8](https://github.com/nlibjs/nlibjs/issues/8)) ([f7d8ee5](https://github.com/nlibjs/nlibjs/commit/f7d8ee5))
 * **unicode:** add unicode package ([#9](https://github.com/nlibjs/nlibjs/issues/9)) ([998933a](https://github.com/nlibjs/nlibjs/commit/998933a)), closes [#10](https://github.com/nlibjs/nlibjs/issues/10)
-
-
-
-
-
-# 3.1.0 (2018-12-29)
-
-
-### Features
-
-* **util:** add [@nlib](https://github.com/nlib)/util ([a0c70ff](https://github.com/nlibjs/nlibjs/commit/a0c70ff))
