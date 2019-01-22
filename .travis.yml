@@ -38,11 +38,11 @@ deploy:
     branch: master
     tags: true
 -
-  condition: $TRAVIS_OS_NAME = linux
   skip_cleanup: true
   provider: script
   script: npx lerna publish --canary --conventional-commits --no-git-reset --no-push --yes
   on:
+    condition: $TRAVIS_OS_NAME = linux
     node: 10
     repo: nlibjs/nlibjs
     branch: master
