@@ -1,3 +1,5 @@
+import {ScalarValueString} from '@nlib/infra';
+
 export namespace mediatype {
     interface IXref {
         type: string,
@@ -9,10 +11,10 @@ export namespace mediatype {
         subtype: string,
         xref: IXref,
     }
-    interface IParameters extends Map<string, string> {}
+    interface IParameters extends Map<string, ScalarValueString> {}
     interface ISource {
-        readonly type: string,
-        readonly subtype: string,
+        readonly type: ScalarValueString,
+        readonly subtype: ScalarValueString,
         readonly parameters: IParameters,
     }
 }

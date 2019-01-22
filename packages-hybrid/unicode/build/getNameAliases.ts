@@ -19,7 +19,10 @@ export const getNameAliases = async (): Promise<AliaseMap> => {
             objectMode: true,
             transform([codePointWithoutPrefix, Name, type]: Array<ScalarValueString>, _, callback) {
                 if (`${type}` !== 'abbreviation') {
-                    aliases.set(`${codePointWithoutPrefix}`, Name);
+                    const key = `${codePointWithoutPrefix}`;
+                    if (!aliases.has(key)) {
+                        aliases.set(key, Name);
+                    }
                 }
                 callback();
             },

@@ -1,13 +1,10 @@
 import {
     ScalarValueString,
-    skipASCIINonNewlineWhitespace,
+    skip,
 } from './4.6.Strings';
 import {
-    isASCIINonNewlineWhitespace,
+    isASCIINonNewlineWhitespace, LINE_FEED, CARRIAGE_RETURN,
 } from './4.5.CodePoints';
-import {CodePoint} from './types';
-const LF = 0x000A as CodePoint;
-const CR = 0x000D as CodePoint;
 
 export const getLines = function* (input: ScalarValueString): IterableIterator<ScalarValueString> {
     const {length} = input;
@@ -16,9 +13,9 @@ export const getLines = function* (input: ScalarValueString): IterableIterator<S
     let collectedLength = 0;
     while (position < length) {
         const codePoint = input.get(position);
-        let flush = codePoint === LF;
-        if (codePoint === CR) {
-            if (input.get(position + 1) === LF) {
+        let flush = codePoint === LINE_FEED;
+        if (codePoint === CARRIAGE_RETURN) {
+            if (input.get(position + 1) === LINE_FEED) {
                 position++;
             }
             flush = true;
@@ -36,15 +33,15 @@ export const getLines = function* (input: ScalarValueString): IterableIterator<S
 
 export const getTrimmedLines = function* (input: ScalarValueString): IterableIterator<ScalarValueString> {
     const {length} = input;
-    let position = skipASCIINonNewlineWhitespace(input, 0);
+    let position = skip(input, 0, isASCIINonNewlineWhitespace);
     const collected = input.array;
     let collectedLength = 0;
     let whitespaceLength = 0;
     while (position < length) {
         const codePoint = input.get(position);
-        let flush = codePoint === LF;
-        if (codePoint === CR) {
-            if (input.get(position + 1) === LF) {
+        let flush = codePoint === LINE_FEED;
+        if (codePoint === CARRIAGE_RETURN) {
+            if (input.get(position + 1) === LINE_FEED) {
                 position++;
             }
             flush = true;
@@ -53,7 +50,7 @@ export const getTrimmedLines = function* (input: ScalarValueString): IterableIte
             yield new ScalarValueString(collected.slice(0, collectedLength - whitespaceLength));
             collectedLength = 0;
             whitespaceLength = 0;
-            position = skipASCIINonNewlineWhitespace(input, position + 1);
+            position = skip(input, position + 1, isASCIINonNewlineWhitespace);
         } else {
             if (isASCIINonNewlineWhitespace(codePoint)) {
                 whitespaceLength++;

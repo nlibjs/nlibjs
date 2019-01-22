@@ -1,5 +1,5 @@
 {
-    "name": "@nlib/media-type",
+    "name": "@nlib/fetch",
     "publishConfig": {
         "access": "public"
     },
@@ -10,41 +10,24 @@
     ],
     "scripts": {
         "cleanup": "rimraf lib",
-        "build:constants": "ts-node build/constants.ts",
         "tsc": "tsc",
-        "build": "npm-run-all --serial build:constants cleanup tsc",
+        "build": "npm-run-all --serial cleanup tsc",
         "test": "ava --verbose lib/*.test.js",
-        "lint": "eslint --ext .ts src build"
+        "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/fetch": "^3.1.0",
         "@nlib/global": "^3.1.0",
         "@nlib/infra": "^3.1.0",
         "@nlib/real-number": "^3.1.0"
     },
-    "devDependencies": {
-        "@nlib/afs": "^3.1.0",
-        "@nlib/node-util": "^3.1.0",
-        "@nlib/xml-js": "^3.1.0"
-    },
     "eslintConfig": {
         "overrides": [
-            {
-                "files": "build/*.ts",
-                "env": {
-                    "node": true
-                },
-                "rules": {
-                    "no-console": "off"
-                }
-            },
             {
                 "files": "src/*.ts",
                 "env": {
                     "node": true
                 },
                 "rules": {
-                    "max-lines-per-function": "off",
                     "no-loop-func": "off"
                 }
             }

@@ -12,17 +12,38 @@ import {
     caseInsensitiveMatch,
     stripNewlines,
     normalizeNewlines,
-    stripLeadingAndTrailingASCIIWhitespace,
     stripAndCollapseASCIIWhiteSpace,
     collectCodePointSequence,
-    skipASCIIWhitespace,
     strictlySplit,
     splitOnASCIIWhitespace,
-    skipASCIIWhitespaceRight,
-    splitOnComma,
     concatenate,
+    stripLeading,
+    stripTrailing,
+    stripLeadingAndTrailing,
+    skip,
+    skipRight,
+    splitOn,
+    matches,
+    doesNotMatch,
+    fromIterable,
+    fromCodePoint,
 } from './4.6.Strings';
 import {CodePoint} from './types';
+import {isASCIIWhitespace} from './4.5.CodePoints';
+
+test('fromIterable', (t) => {
+    t.deepEqual(
+        fromString('AbC'),
+        fromIterable([0x41, 0x62, 0x43]),
+    );
+});
+
+test('fromCodePoint', (t) => {
+    t.deepEqual(
+        fromString('AbC'),
+        fromCodePoint(0x41 as CodePoint, 0x62 as CodePoint, 0x43 as CodePoint),
+    );
+});
 
 test('"AbC".isomorphicEncode()', (t) => {
     t.deepEqual(
@@ -101,9 +122,23 @@ test('normalizeNewlines("Ab\\n\\r\\r\\nC")', (t) => {
     );
 });
 
-test('stripLeadingAndTrailingASCIIWhitespace("\\t Ab\\n\\r\\r\\nC\\t ")', (t) => {
+test('stripLeading("\\t Ab\\n\\r\\r\\nC\\t ", isASCIIWhitespace)', (t) => {
     t.deepEqual(
-        stripLeadingAndTrailingASCIIWhitespace(fromString('\t Ab\n\r\r\nC\t ')),
+        stripLeading(fromString('\t Ab\n\r\r\nC\t '), isASCIIWhitespace),
+        fromString('Ab\n\r\r\nC\t '),
+    );
+});
+
+test('stripTrailing("\\t Ab\\n\\r\\r\\nC\\t ", isASCIIWhitespace)', (t) => {
+    t.deepEqual(
+        stripTrailing(fromString('\t Ab\n\r\r\nC\t '), isASCIIWhitespace),
+        fromString('\t Ab\n\r\r\nC'),
+    );
+});
+
+test('stripLeadingAndTrailing("\\t Ab\\n\\r\\r\\nC\\t ", isASCIIWhitespace)', (t) => {
+    t.deepEqual(
+        stripLeadingAndTrailing(fromString('\t Ab\n\r\r\nC\t '), isASCIIWhitespace),
         fromString('Ab\n\r\r\nC'),
     );
 });
@@ -157,44 +192,44 @@ test('collectCodePointSequence("AAAbbbCCC") (3)', (t) => {
     t.is(position, 6);
 });
 
-test('skipASCIIWhitespace("AAA   CCC", 0)', (t) => {
+test('skip("AAA   CCC", 0, isASCIIWhitespace)', (t) => {
     t.is(
-        skipASCIIWhitespace(fromString('AAA   CCC'), 0),
+        skip(fromString('AAA   CCC'), 0, isASCIIWhitespace),
         0,
     );
 });
 
-test('skipASCIIWhitespace("AAA   CCC", 3)', (t) => {
+test('skip("AAA   CCC", 3, isASCIIWhitespace)', (t) => {
     t.is(
-        skipASCIIWhitespace(fromString('AAA   CCC'), 3),
+        skip(fromString('AAA   CCC'), 3, isASCIIWhitespace),
         6,
     );
 });
 
-test('skipASCIIWhitespace("AAA   CCC", 4)', (t) => {
+test('skip("AAA   CCC", 4, isASCIIWhitespace)', (t) => {
     t.is(
-        skipASCIIWhitespace(fromString('AAA   CCC'), 4),
+        skip(fromString('AAA   CCC'), 4, isASCIIWhitespace),
         6,
     );
 });
 
-test('skipASCIIWhitespaceRight("AAA   CCC", 9)', (t) => {
+test('skipRight("AAA   CCC", 9, isASCIIWhitespace)', (t) => {
     t.is(
-        skipASCIIWhitespaceRight(fromString('AAA   CCC'), 9),
+        skipRight(fromString('AAA   CCC'), 9, isASCIIWhitespace),
         9,
     );
 });
 
-test('skipASCIIWhitespaceRight("AAA   CCC", 6)', (t) => {
+test('skipRight("AAA   CCC", 6, isASCIIWhitespace)', (t) => {
     t.is(
-        skipASCIIWhitespaceRight(fromString('AAA   CCC'), 6),
+        skipRight(fromString('AAA   CCC'), 6, isASCIIWhitespace),
         3,
     );
 });
 
-test('skipASCIIWhitespaceRight("AAA   CCC", 5)', (t) => {
+test('skipRight("AAA   CCC", 5, isASCIIWhitespace)', (t) => {
     t.is(
-        skipASCIIWhitespaceRight(fromString('AAA   CCC'), 5),
+        skipRight(fromString('AAA   CCC'), 5, isASCIIWhitespace),
         3,
     );
 });
@@ -226,11 +261,12 @@ test('splitOnASCIIWhitespace(" \\t\\n\\r AA \\t\\n\\r bb \\t\\n\\r CC \\t\\n\\r 
     );
 });
 
-test('splitOnComma("  AA bb  ,  CC  ,DD,  ")', (t) => {
+test('splitOn("  AA bb  ,  CC  ,DD,  ", COMMA)', (t) => {
+    const COMMA = 0x002C as CodePoint;
     const source = '  AA bb  ,  CC  ,DD,  ';
-    t.log([...splitOnComma(fromString(source))].map((x) => `${x}`));
+    t.log([...splitOn(fromString(source), matches(COMMA))].map((x) => `${x}`));
     t.deepEqual(
-        [...splitOnComma(fromString(source))],
+        [...splitOn(fromString(source), matches(COMMA))],
         [
             fromString('AA bb'),
             fromString('CC'),
@@ -245,6 +281,13 @@ test('concatenate(" AA ", " bb ", " CC ")', (t) => {
         concatenate(fromString(' AA '), fromString(' bb '), fromString(' CC ')),
         fromString(' AA  bb  CC '),
     );
+});
+
+test('doesNotMatch(0, 1, 2)', (t) => {
+    const condition = doesNotMatch(0 as CodePoint, 1 as CodePoint);
+    t.false(condition(0 as CodePoint));
+    t.false(condition(1 as CodePoint));
+    t.true(condition(2 as CodePoint));
 });
 
 test('toString', (t) => {
