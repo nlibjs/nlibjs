@@ -10,9 +10,9 @@
     ],
     "scripts": {
         "cleanup": "rimraf lib",
-        "build:constants": "ts-node build/constants.ts",
+        "build:REGISTERED_TYPES": "ts-node build/REGISTERED_TYPES.ts",
         "tsc": "tsc",
-        "build": "npm-run-all --serial build:constants cleanup tsc",
+        "build": "npm-run-all --serial build:REGISTERED_TYPES cleanup tsc",
         "test": "ava --verbose lib/*.test.js",
         "lint": "eslint --ext .ts src build"
     },

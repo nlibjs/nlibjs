@@ -3,7 +3,7 @@ import {httpGet, readStream} from '@nlib/node-util';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
 import {mediatype} from './types';
 import {elementToRecord} from './elementToRecord';
-import {REGISTERED_TYPES} from './constants';
+import {REGISTERED_TYPES} from './REGISTERED_TYPES';
 
 const test = anyTest as TestInterface<{
     records: Array<mediatype.IRecord>,

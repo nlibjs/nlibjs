@@ -19,21 +19,22 @@ export const build = async (): Promise<void> => {
         }
     }
     const types = [...typeSet];
-    const code: string = [
+    const lines = [
         'import {Map} from \'@nlib/global\';',
-        'export const REGISTERED_TYPES: Map<string, Map<string, string>> = new Map([',
-        ...types.map((type) => {
-            const matchedRecords = records.filter((record) => record.type === type);
-            return [
-                `    ['${type}', new Map([`,
-                ...matchedRecords.map(({name, subtype}) => `        ['${subtype}', '${name}'],`),
-                '    ])],',
-            ].join('\n');
-        }),
-        ']);',
-        '',
-    ].join('\n');
-    const dest = join(__dirname, '../src/constants.ts');
+        'export const REGISTERED_TYPES: Map<string, Map<string, string>> = new Map();',
+    ];
+    for (const type of types) {
+        lines.push(`const ${type} = new Map();`);
+        lines.push(`REGISTERED_TYPES.set('${type}', ${type});`);
+        for (const record of records) {
+            if (record.type === type) {
+                lines.push(`${type}.set('${record.subtype}', '${record.name}');`);
+            }
+        }
+    }
+    lines.push('');
+    const code: string = lines.join('\n');
+    const dest = join(__dirname, '../src/REGISTERED_TYPES.ts');
     await updateFile(dest, code);
 };
 

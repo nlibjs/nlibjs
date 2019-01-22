@@ -1,4 +1,4 @@
+export * from './REGISTERED_TYPES';
 export * from './codePoints';
-export * from './constants';
 export * from './MediaType';
 export * from './parse';
