@@ -40,7 +40,7 @@ deploy:
 -
   skip_cleanup: true
   provider: script
-  script: npx lerna publish --canary --conventional-commits --no-git-reset --no-push --yes
+  script: npx lerna publish --canary --conventional-commits --no-git-reset --no-push --yes --force-publish
   on:
     condition: $TRAVIS_OS_NAME = linux
     node: 10
