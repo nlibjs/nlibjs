@@ -4,7 +4,7 @@ import {Readable} from 'stream';
 import {Stats} from 'fs';
 import {stat, createReadStream, createWriteStream, mkdirp} from '@nlib/afs';
 import {request} from './request';
-const sanitizeEtag = (etag: string): string => etag.replace(/\W/g, (c) => `_${(c.codePointAt(0) || 0).toString(16)}_`);
+export const sanitizeEtag = (etag: string): string => etag.replace(/\W/g, (c) => `_${(c.codePointAt(0) || 0).toString(16)}_`);
 
 export interface IResponseStream extends Readable {
     fromCache: boolean,
@@ -34,7 +34,7 @@ export const httpGet = async (
     if (cacheDirectory) {
         const {headers: {etag}} = await request(url, {method: 'HEAD'});
         if (typeof etag === 'string') {
-            const cachePath = join(cacheDirectory, `${sanitizeEtag(etag)}`);
+            const cachePath = join(cacheDirectory, sanitizeEtag(etag));
             try {
                 return (await readFromCache(cachePath));
             } catch (error) {
@@ -52,7 +52,7 @@ export const httpGet = async (
     if (cacheDirectory) {
         const {headers: {etag}} = response;
         if (typeof etag === 'string') {
-            const cacheDest = join(cacheDirectory, `${sanitizeEtag(etag)}`);
+            const cacheDest = join(cacheDirectory, sanitizeEtag(etag));
             cachePromise = writeToCache(response, cacheDest)
             .then(() => stat(cacheDest))
             .catch((error) => {

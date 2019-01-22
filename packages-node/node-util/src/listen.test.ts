@@ -36,6 +36,22 @@ test('listenPort', async (t) => {
     t.is(listeningPort1, listeningPort2);
 });
 
+test('pass listenOptions', async (t) => {
+    const server = t.context.createServer();
+    await listen(server, {port: 3000});
+    t.true(server.listening);
+});
+
+test('skip listen() if server.running', async (t) => {
+    const server = t.context.createServer();
+    await listenPort(server);
+    t.true(server.listening);
+    const address1 = server.address();
+    await listen(server, {port: 4001});
+    const address2 = server.address();
+    t.deepEqual(address1, address2);
+});
+
 test('try the next port', async (t) => {
     const server1 = t.context.createServer();
     const server2 = t.context.createServer();
