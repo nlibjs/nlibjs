@@ -1,10 +1,16 @@
 {
     "name": "@nlib/lint",
+    "version": "3.3.2",
     "license": "MIT",
+    "author": "Kei Ito <kei.itof@gmail.com>",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/lint",
+    "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
     },
-    "version": "3.3.2",
+    "engines": {
+        "node": ">=10.0.0"
+    },
     "main": "lib/index.js",
     "files": [
         ".editorconfig",
@@ -16,8 +22,5 @@
         "build": "npm-run-all --serial cleanup tsc",
         "test": "ava --verbose lib/*.test.js",
         "lint": "eslint --ext .ts src"
-    },
-    "peerDependencies": {
-        "@typescript-eslint/eslint-plugin": "^1.1.0"
     }
 }

@@ -1,10 +1,16 @@
 {
     "name": "@nlib/unicode",
+    "version": "3.3.2",
     "license": "MIT",
+    "author": "Kei Ito <kei.itof@gmail.com>",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/unicode",
+    "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
     },
-    "version": "3.3.2",
+    "engines": {
+        "node": ">=10.0.0"
+    },
     "main": "lib/index.js",
     "files": [
         "lib"
