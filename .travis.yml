@@ -30,7 +30,9 @@ deploy:
 -
   skip_cleanup: true
   provider: script
-  script: npx lerna publish --conventional-commits --no-git-reset --no-git-tag-version --no-push --yes
+  script:
+  - git checkout master
+  - npx lerna publish --conventional-commits --no-git-reset --no-git-tag-version --no-push --yes
   on:
     condition: $TRAVIS_OS_NAME = linux
     node: 10
