@@ -54,11 +54,11 @@ test('do nothing if the data will be unchanged', async (t) => {
     const data1 = `${filePath}1`;
     await updateFile(filePath, data1);
     const {mtime: mtime1} = await stat(filePath);
-    await wait(200);
+    await wait(1000);
     const data2 = `${filePath}2`;
     await updateFile(filePath, data2);
     const {mtime: mtime2} = await stat(filePath);
-    await wait(50);
+    await wait(1000);
     const data3 = data2;
     await updateFile(filePath, data3);
     const {mtime: mtime3} = await stat(filePath);
