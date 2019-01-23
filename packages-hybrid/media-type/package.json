@@ -4,7 +4,7 @@
     "publishConfig": {
         "access": "public"
     },
-    "version": "3.3.1",
+    "version": "3.3.2",
     "main": "lib/index.js",
     "files": [
         "lib"
@@ -18,15 +18,15 @@
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {
-        "@nlib/fetch": "^3.3.0",
-        "@nlib/global": "^3.2.0",
-        "@nlib/infra": "^3.3.0",
-        "@nlib/real-number": "^3.2.0"
+        "@nlib/fetch": "^3.3.2",
+        "@nlib/global": "^3.3.2",
+        "@nlib/infra": "^3.3.2",
+        "@nlib/real-number": "^3.3.2"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.2.0",
-        "@nlib/node-util": "^3.3.1",
-        "@nlib/xml-js": "^3.2.0"
+        "@nlib/afs": "^3.3.2",
+        "@nlib/node-util": "^3.3.2",
+        "@nlib/xml-js": "^3.3.2"
     },
     "eslintConfig": {
         "overrides": [
