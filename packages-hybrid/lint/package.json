@@ -18,6 +18,6 @@
         "lint": "eslint --ext .ts src"
     },
     "peerDependencies": {
-        "eslint-plugin-typescript": "^0.14.0"
+        "@typescript-eslint/eslint-plugin": "^1.1.0"
     }
 }
