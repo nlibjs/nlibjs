@@ -1,6 +1,6 @@
 {
     "name": "@nlib/xml-js",
-    "version": "3.3.2",
+    "version": "3.3.3",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/xml-js",
@@ -23,7 +23,7 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.3.2",
+        "@nlib/global": "^3.3.3",
         "xml-js": "^1.6.8"
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "@nlib/fetch",
-    "version": "3.3.2",
+    "version": "3.3.3",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/fetch",
@@ -23,9 +23,9 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.3.2",
-        "@nlib/infra": "^3.3.2",
-        "@nlib/real-number": "^3.3.2"
+        "@nlib/global": "^3.3.3",
+        "@nlib/infra": "^3.3.3",
+        "@nlib/real-number": "^3.3.3"
     },
     "eslintConfig": {
         "overrides": [
