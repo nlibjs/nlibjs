@@ -1,5 +1,5 @@
 import anyTest, {TestInterface} from 'ava';
-import {URL} from '@nlib/global';
+import {URL, Date, Object} from '@nlib/global';
 import {mktempdir, readFile, mkdirp} from '@nlib/afs';
 import {join} from 'path';
 import {Server, createServer} from 'http';
@@ -10,44 +10,69 @@ import * as index from './index';
 import {readStream} from './readStream';
 
 const test = anyTest as TestInterface<{
-    NORMAL_GET: '/normal-get',
-    CACHE_GET: '/cache-get',
-    NOT_FOUND: '/404',
+    NORMAL_GET: string,
+    CACHE_GET: string,
+    CACHE_DATE_GET: string,
+    NOT_FOUND: string,
     directory: string,
     server: Server,
     baseURL: URL,
     etag: string,
-    cacheDest: string,
+    lastModified: Date,
     data: string,
+    cachePath1: string,
+    cachePath2: string,
 }>;
 
 
 test.beforeEach(async (t) => {
-    t.context.NORMAL_GET = '/normal-get';
-    t.context.CACHE_GET = '/cache-get';
-    t.context.NOT_FOUND = '/404';
-    t.context.directory = await mktempdir();
-    t.context.etag = 'foobar1234567890';
-    t.context.cacheDest = join(t.context.directory, sanitizeEtag(t.context.etag));
-    t.context.data = t.context.etag.repeat(100);
     const server = t.context.server = createServer((req, res) => {
         switch (req.url) {
+        case t.context.NORMAL_GET:
+            res.writeHead(200);
+            break;
         case t.context.CACHE_GET:
-            res.writeHead(200, {etag: t.context.etag});
-            if (req.method === 'GET') {
-                res.write(t.context.data);
-            }
+            res.setHeader('etag', t.context.etag);
+            res.writeHead(200);
+            break;
+        case t.context.CACHE_DATE_GET:
+            res.setHeader('Last-Modified', t.context.lastModified.toUTCString());
+            res.writeHead(200);
             break;
         case t.context.NOT_FOUND:
-            res.writeHead(404);
-            break;
         default:
-            res.writeHead(200);
+            res.writeHead(404);
+        }
+        if (req.method === 'GET') {
+            res.write(t.context.data);
         }
         res.end();
     });
-    t.context.baseURL = new URL('http://localhost');
-    t.context.baseURL.port = `${await listenPort(server)}`;
+    const NORMAL_GET = '/normal-get';
+    const CACHE_GET = '/cache-get';
+    const CACHE_DATE_GET = '/cache-date-get';
+    const NOT_FOUND = '/404';
+    const directory = await mktempdir();
+    const etag = 'foobar1234567890';
+    const data = etag.repeat(100);
+    const lastModified = new Date();
+    const cachePath1 = join(directory, sanitizeEtag(etag));
+    const cachePath2 = join(directory, sanitizeEtag(lastModified.toUTCString()));
+    const baseURL = new URL('http://localhost');
+    baseURL.port = `${await listenPort(server)}`;
+    Object.assign(t.context, {
+        NORMAL_GET,
+        CACHE_GET,
+        CACHE_DATE_GET,
+        NOT_FOUND,
+        directory,
+        etag,
+        data,
+        lastModified,
+        cachePath1,
+        cachePath2,
+        baseURL,
+    });
 });
 
 test.afterEach(async (t) => {
@@ -78,7 +103,19 @@ test('request cached', async (t) => {
     t.true(res2.fromCache);
     const stats = await res1.cachePromise;
     t.true(stats && 0 < stats.size);
-    t.is(`${await readStream(res2)}`, await readFile(t.context.cacheDest, 'utf8'));
+    t.is(`${await readStream(res2)}`, await readFile(t.context.cachePath1, 'utf8'));
+});
+
+test('request cached by last modified', async (t) => {
+    const url = new URL(t.context.CACHE_DATE_GET, t.context.baseURL);
+    const res1 = await httpGet(url, t.context.directory);
+    t.false(res1.fromCache);
+    await res1.cachePromise;
+    const res2 = await httpGet(url, t.context.directory);
+    t.true(res2.fromCache);
+    const stats = await res1.cachePromise;
+    t.true(stats && 0 < stats.size);
+    t.is(`${await readStream(res2)}`, await readFile(t.context.cachePath2, 'utf8'));
 });
 
 test('request 404', async (t) => {
@@ -89,7 +126,7 @@ test('request 404', async (t) => {
 });
 
 test('fail to read cache', async (t) => {
-    await mkdirp(t.context.cacheDest);
+    await mkdirp(t.context.cachePath1);
     const url = new URL(t.context.CACHE_GET, t.context.baseURL);
     await t.throwsAsync(async () => {
         await httpGet(url, t.context.directory);

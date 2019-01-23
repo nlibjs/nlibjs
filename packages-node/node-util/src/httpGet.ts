@@ -4,7 +4,9 @@ import {Readable} from 'stream';
 import {Stats} from 'fs';
 import {stat, createReadStream, createWriteStream, mkdirp} from '@nlib/afs';
 import {request} from './request';
-export const sanitizeEtag = (etag: string): string => etag.replace(/\W/g, (c) => `_${(c.codePointAt(0) || 0).toString(16)}_`);
+export const sanitizeEtag = (etag: string): string => etag
+.replace(/\s/g, '_')
+.replace(/\W/g, (c) => `_${(c.codePointAt(0) || 0).toString(16)}_`);
 
 export interface IResponseStream extends Readable {
     fromCache: boolean,
@@ -20,21 +22,29 @@ const readFromCache = async (cachePath: string): Promise<IResponseStream> => {
     }
 };
 
-const writeToCache = (stream: Readable, cachePath: string): Promise<void> => mkdirp(dirname(cachePath))
-.then(() => new Promise<void>((resolve, reject) => {
-    stream.pipe(createWriteStream(cachePath))
-    .once('finish', resolve)
-    .once('error', reject);
-}));
+const writeToCache = async (stream: Readable, cachePath: string): Promise<void> => {
+    try {
+        await mkdirp(dirname(cachePath));
+        await new Promise<void>((resolve, reject) => {
+            stream.pipe(createWriteStream(cachePath))
+            .once('finish', resolve)
+            .once('error', reject);
+        });
+    } catch (error) {
+        console.log(`Failed to write: ${cachePath}`);
+        throw error;
+    }
+};
 
 export const httpGet = async (
     url: string | URL,
     cacheDirectory?: string,
 ): Promise<IResponseStream> => {
     if (cacheDirectory) {
-        const {headers: {etag}} = await request(url, {method: 'HEAD'});
-        if (typeof etag === 'string') {
-            const cachePath = join(cacheDirectory, sanitizeEtag(etag));
+        const {headers} = await request(url, {method: 'HEAD'});
+        const id = headers.etag || headers['last-modified'];
+        if (typeof id === 'string') {
+            const cachePath = join(cacheDirectory, sanitizeEtag(id));
             try {
                 return (await readFromCache(cachePath));
             } catch (error) {
@@ -50,11 +60,17 @@ export const httpGet = async (
     }
     let cachePromise = null;
     if (cacheDirectory) {
-        const {headers: {etag}} = response;
-        if (typeof etag === 'string') {
-            const cacheDest = join(cacheDirectory, sanitizeEtag(etag));
-            cachePromise = writeToCache(response, cacheDest)
-            .then(() => stat(cacheDest))
+        const {headers} = response;
+        const id = headers.etag || headers['last-modified'];
+        if (typeof id === 'string') {
+            const cachePath = join(cacheDirectory, sanitizeEtag(id));
+            cachePromise = writeToCache(response, cachePath)
+            .then(() => {
+                return stat(cachePath)
+                .catch((error) => {
+                    throw error;
+                });
+            })
             .catch((error) => {
                 console.error(error);
                 throw error;
