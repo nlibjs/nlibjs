@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.1](https://github.com/nlibjs/nlibjs/compare/v3.3.0...v3.3.1) (2019-01-23)
+
+
+### Bug Fixes
+
+* **lint:** test typescript-eslint rules ([f52a678](https://github.com/nlibjs/nlibjs/commit/f52a678))
+
+
+
+
+
 # [3.2.0](https://github.com/nlibjs/nlibjs/compare/v3.1.0...v3.2.0) (2019-01-22)
 
 
