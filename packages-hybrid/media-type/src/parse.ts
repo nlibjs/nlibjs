@@ -18,9 +18,8 @@ import {
 } from './codePoints';
 import {mediatype} from './types';
 import {Map} from '@nlib/global';
-import {MediaType} from './MediaType';
 
-export const parse = (input: ScalarValueString): MediaType | null => {
+export const parse = (input: ScalarValueString): mediatype.ISource | null => {
     const {length: inputLength} = input;
     let position = skip(input, 0, isHTTPWhitespace);
     const type = collectCodePointSequence(
@@ -103,5 +102,5 @@ export const parse = (input: ScalarValueString): MediaType | null => {
             }
         }
     }
-    return new MediaType(mediaTypeSource);
+    return mediaTypeSource;
 };

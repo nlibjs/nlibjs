@@ -10,8 +10,10 @@ import {
     EQUALS_SIGN,
     QUOTATION_MARK,
     REVERSE_SOLIDUS,
+    toScalarValueString,
 } from '@nlib/infra';
 import {isHTTPToken} from './codePoints';
+import {parse} from './parse';
 
 export class MediaType {
 
@@ -25,6 +27,11 @@ export class MediaType {
         this.type = source.type;
         this.subtype = source.subtype;
         this.parameters = source.parameters;
+    }
+
+    public static fromString(input: string | ScalarValueString): MediaType | null {
+        const source = parse(toScalarValueString(input));
+        return source ? new MediaType(source) : source;
     }
 
     public get essence(): ScalarValueString {
