@@ -1,12 +1,13 @@
 import {join} from 'path';
-import {httpGet, readStream} from '@nlib/node-util';
+import {readStream} from '@nlib/node-util';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
 import {updateFile} from '@nlib/afs';
 import {mediatype} from '../src/types';
 import {elementToRecord} from '../src/elementToRecord';
+import {getFileStream} from './getFileStream';
 
 export const build = async (): Promise<void> => {
-    const res = await httpGet('https://www.iana.org/assignments/media-types/media-types.xml');
+    const res = await getFileStream('https://www.iana.org/assignments/media-types/media-types.xml');
     const xmlString = await readStream(res);
     const xml = xml2js(`${xmlString}`, {compact: false}) as Element;
     const records: Array<mediatype.IRecord> = [];
