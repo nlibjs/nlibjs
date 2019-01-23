@@ -19,5 +19,15 @@
         "@nlib/afs": "^3.2.0",
         "@nlib/global": "^3.2.0",
         "@nlib/real-number": "^3.2.0"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": ["src/listen.ts"],
+                "rules": {
+                    "func-style": "off"
+                }
+            }
+        ]
     }
 }

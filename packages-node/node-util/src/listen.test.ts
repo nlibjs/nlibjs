@@ -26,6 +26,20 @@ test('index.listen', (t) => {
     t.is(index.listen, listen);
 });
 
+test('listen 5000', async (t) => {
+    const server = t.context.createServer();
+    const port = 5000;
+    await listen(server, port);
+    t.true(server.listening);
+});
+
+test('listen 6000 and backlog', async (t) => {
+    const server = t.context.createServer();
+    const port = 6000;
+    await listen(server, port, 5);
+    t.true(server.listening);
+});
+
 test('listenPort', async (t) => {
     const server = t.context.createServer();
     const listeningPort1 = await listenPort(server);

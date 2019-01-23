@@ -2,53 +2,58 @@ import {Promise, Error} from '@nlib/global';
 import {fromIntervalZ, inin, ZSet} from '@nlib/real-number';
 import {Server, ListenOptions} from 'net';
 
-type ListenParams =
-| [number]
-| [number, number]
-| [number, string]
-| [number, string, number]
-| [string]
-| [string, number]
-| [ListenOptions];
-
-export const listen = (server: Server, ...args: ListenParams): Promise<Server> => new Promise((resolve, reject) => {
-    if (server.listening) {
-        resolve(server);
-    } else {
-        const [arg1, arg2, arg3] = args;
-        server
-        .once('error', reject)
-        .once('listening', () => {
-            server.removeListener('error', reject);
+export function listen(server: Server, port?: number, hostname?: string, backlog?: number): Promise<Server>;
+export function listen(server: Server, port?: number, hostname?: string): Promise<Server>;
+export function listen(server: Server, port?: number, backlog?: number): Promise<Server>;
+export function listen(server: Server, port?: number): Promise<Server>;
+export function listen(server: Server, path: string, backlog?: number): Promise<Server>;
+export function listen(server: Server, path: string): Promise<Server>;
+export function listen(server: Server, options: ListenOptions): Promise<Server>;
+export function listen(server: Server, handle: {}, backlog?: number): Promise<Server>;
+export function listen(server: Server, handle: {}): Promise<Server>;
+export function listen(
+    server: Server,
+    arg1?: number | string | ListenOptions | {},
+    arg2?: string | number,
+    arg3?: number,
+): Promise<Server> {
+    return new Promise((resolve, reject) => {
+        if (server.listening) {
             resolve(server);
-        });
-        switch (typeof arg1) {
-        case 'number':
-            switch (typeof arg2) {
+        } else {
+            server
+            .once('error', reject)
+            .once('listening', () => {
+                server.removeListener('error', reject);
+                resolve(server);
+            });
+            switch (typeof arg1) {
             case 'number':
-                server.listen(arg1, arg2);
+                switch (typeof arg2) {
+                case 'number':
+                    server.listen(arg1, arg2);
+                    break;
+                default:
+                    server.listen(arg1, arg2, arg3);
+                }
+                break;
+            case 'string':
+            case 'object':
+                switch (typeof arg2) {
+                case 'number':
+                case 'undefined':
+                    server.listen(arg1, arg2);
+                    break;
+                default:
+                    throw new Error(`Invalid second parameter: ${arg2}`);
+                }
                 break;
             default:
-                server.listen(arg1, arg2, arg3);
+                throw new Error(`Invalid first parameter: ${arg1}`);
             }
-            break;
-        case 'string':
-            switch (typeof arg2) {
-            case 'number':
-                server.listen(arg1, arg2);
-                break;
-            default:
-                throw new Error(`Invalid second parameter: ${arg2}`);
-            }
-            break;
-        case 'object':
-            server.listen(arg1);
-            break;
-        default:
-            throw new Error(`Invalid first parameter: ${arg1}`);
         }
-    }
-});
+    });
+}
 
 export const listenPort = async (
     server: Server,
