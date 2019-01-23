@@ -1,5 +1,5 @@
 import anyTest, {TestInterface} from 'ava';
-import {URL, Date, Object} from '@nlib/global';
+import {URL, Date} from '@nlib/global';
 import {mktempdir, readFile, mkdirp} from '@nlib/afs';
 import {join} from 'path';
 import {Server, createServer} from 'http';
@@ -11,6 +11,7 @@ import {readStream} from './readStream';
 
 const test = anyTest as TestInterface<{
     NORMAL_GET: string,
+    CACHE_SLOW: string,
     CACHE_GET: string,
     CACHE_DATE_GET: string,
     NOT_FOUND: string,
@@ -28,6 +29,18 @@ const test = anyTest as TestInterface<{
 test.beforeEach(async (t) => {
     const server = t.context.server = createServer((req, res) => {
         switch (req.url) {
+        case t.context.CACHE_SLOW:
+            res.setHeader('etag', t.context.etag);
+            res.writeHead(200);
+            res.write(t.context.data);
+            setTimeout(() => {
+                res.write(t.context.data);
+                setTimeout(() => {
+                    res.write(t.context.data);
+                    setTimeout(() => res.end(t.context.data), 50);
+                }, 50);
+            }, 50);
+            return;
         case t.context.NORMAL_GET:
             res.writeHead(200);
             break;
@@ -48,31 +61,19 @@ test.beforeEach(async (t) => {
         }
         res.end();
     });
-    const NORMAL_GET = '/normal-get';
-    const CACHE_GET = '/cache-get';
-    const CACHE_DATE_GET = '/cache-date-get';
-    const NOT_FOUND = '/404';
-    const directory = await mktempdir();
-    const etag = 'foobar1234567890';
-    const data = etag.repeat(100);
-    const lastModified = new Date();
-    const cachePath1 = join(directory, sanitizeEtag(etag));
-    const cachePath2 = join(directory, sanitizeEtag(lastModified.toUTCString()));
-    const baseURL = new URL('http://localhost');
-    baseURL.port = `${await listenPort(server)}`;
-    Object.assign(t.context, {
-        NORMAL_GET,
-        CACHE_GET,
-        CACHE_DATE_GET,
-        NOT_FOUND,
-        directory,
-        etag,
-        data,
-        lastModified,
-        cachePath1,
-        cachePath2,
-        baseURL,
-    });
+    t.context.NORMAL_GET = '/normal-get';
+    t.context.CACHE_GET = '/cache-get';
+    t.context.CACHE_SLOW = '/cache-slow-get';
+    t.context.CACHE_DATE_GET = '/cache-date-get';
+    t.context.NOT_FOUND = '/404';
+    t.context.etag = 'foobar1234567890';
+    t.context.data = '<data>';
+    t.context.lastModified = new Date();
+    t.context.directory = await mktempdir();
+    t.context.cachePath1 = join(t.context.directory, sanitizeEtag(t.context.etag));
+    t.context.cachePath2 = join(t.context.directory, sanitizeEtag(t.context.lastModified.toUTCString()));
+    t.context.baseURL = new URL('http://localhost');
+    t.context.baseURL.port = `${await listenPort(server)}`;
 });
 
 test.afterEach(async (t) => {
@@ -98,12 +99,14 @@ test('request cached', async (t) => {
     const url = new URL(t.context.CACHE_GET, t.context.baseURL);
     const res1 = await httpGet(url, t.context.directory);
     t.false(res1.fromCache);
-    await res1.cachePromise;
     const res2 = await httpGet(url, t.context.directory);
     t.true(res2.fromCache);
+    const body1 = await readStream(res1);
+    const body2 = await readStream(res2);
+    t.is(`${body1}`, `${body2}`);
+    t.is(`${body2}`, await readFile(t.context.cachePath1, 'utf8'));
     const stats = await res1.cachePromise;
     t.true(stats && 0 < stats.size);
-    t.is(`${await readStream(res2)}`, await readFile(t.context.cachePath1, 'utf8'));
 });
 
 test('request cached by last modified', async (t) => {
@@ -115,7 +118,22 @@ test('request cached by last modified', async (t) => {
     t.true(res2.fromCache);
     const stats = await res1.cachePromise;
     t.true(stats && 0 < stats.size);
-    t.is(`${await readStream(res2)}`, await readFile(t.context.cachePath2, 'utf8'));
+    const body1 = await readStream(res1);
+    const body2 = await readStream(res2);
+    t.is(`${body1}`, `${body2}`);
+    t.is(`${body2}`, await readFile(t.context.cachePath2, 'utf8'));
+});
+
+test('cache slow stream', async (t) => {
+    const url = new URL(t.context.CACHE_SLOW, t.context.baseURL);
+    const res1 = await httpGet(url, t.context.directory);
+    t.false(res1.fromCache);
+    const res2 = await httpGet(url, t.context.directory);
+    t.true(res2.fromCache);
+    const body1 = await readStream(res1);
+    const body2 = await readStream(res2);
+    t.is(`${body1}`, `${body2}`);
+    t.is(`${body2}`, await readFile(t.context.cachePath1, 'utf8'));
 });
 
 test('request 404', async (t) => {
