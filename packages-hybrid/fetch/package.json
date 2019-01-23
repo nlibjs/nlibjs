@@ -1,5 +1,6 @@
 {
     "name": "@nlib/fetch",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     },

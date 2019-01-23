@@ -1,5 +1,6 @@
 {
     "name": "@nlib/util",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     },

@@ -1,5 +1,6 @@
 {
     "name": "@nlib/unicode",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     },

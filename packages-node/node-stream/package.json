@@ -1,5 +1,6 @@
 {
     "name": "@nlib/node-stream",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     },

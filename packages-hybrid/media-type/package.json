@@ -1,5 +1,6 @@
 {
     "name": "@nlib/media-type",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     },
