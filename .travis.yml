@@ -30,9 +30,7 @@ deploy:
 -
   skip_cleanup: true
   provider: script
-  script:
-  - git checkout master
-  - npx lerna publish from-package --no-git-reset --yes
+  script: npx lerna publish from-package --no-git-reset --yes
   on:
     condition: $TRAVIS_OS_NAME = linux
     node: 10
@@ -42,7 +40,7 @@ deploy:
 -
   skip_cleanup: true
   provider: script
-  script: npx lerna publish from-package --canary --no-git-reset --yes --force-publish
+  script: npx lerna publish --canary --no-git-reset --yes --force-publish
   on:
     condition: $TRAVIS_OS_NAME = linux
     node: 10
