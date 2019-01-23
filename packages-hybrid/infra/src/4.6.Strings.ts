@@ -64,6 +64,8 @@ export const fromString = (input: string): ScalarValueString => {
     return new ScalarValueString(Uint32Array.from(getCodePoints(input)));
 };
 
+export const toScalarValueString = (input: string | ScalarValueString): ScalarValueString => typeof input === 'string' ? fromString(input) : input;
+
 export const fromIterable = (input: Iterable<number> | Iterable<CodePoint>): ScalarValueString => {
     return new ScalarValueString(Uint32Array.from(input));
 };

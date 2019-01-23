@@ -27,9 +27,21 @@ import {
     doesNotMatch,
     fromIterable,
     fromCodePoint,
+    toScalarValueString,
 } from './4.6.Strings';
 import {CodePoint} from './types';
 import {isASCIIWhitespace} from './4.5.CodePoints';
+
+test('toScalarValueString', (t) => {
+    t.deepEqual(
+        toScalarValueString('AbC'),
+        fromIterable([0x41, 0x62, 0x43]),
+    );
+    t.deepEqual(
+        toScalarValueString(fromString('AbC')),
+        fromIterable([0x41, 0x62, 0x43]),
+    );
+});
 
 test('fromIterable', (t) => {
     t.deepEqual(
