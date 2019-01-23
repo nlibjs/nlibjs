@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/nlibjs/nlibjs/compare/v3.2.1...v3.3.0) (2019-01-23)
+
+
+### Features
+
+* **infra:** add toScalarValueString ([a0badfb](https://github.com/nlibjs/nlibjs/commit/a0badfb))
+
+
+
+
+
 # [3.2.0](https://github.com/nlibjs/nlibjs/compare/v3.1.0...v3.2.0) (2019-01-22)
 
 

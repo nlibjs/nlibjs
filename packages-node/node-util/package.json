@@ -3,7 +3,7 @@
     "publishConfig": {
         "access": "public"
     },
-    "version": "3.2.1",
+    "version": "3.3.0",
     "main": "lib/index.js",
     "files": [
         "lib"
@@ -23,7 +23,9 @@
     "eslintConfig": {
         "overrides": [
             {
-                "files": ["src/listen.ts"],
+                "files": [
+                    "src/listen.ts"
+                ],
                 "rules": {
                     "func-style": "off"
                 }

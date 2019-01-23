@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/nlibjs/nlibjs/compare/v3.2.1...v3.3.0) (2019-01-23)
+
+
+### Features
+
+* **media-type:** add MediaType.fromString ([e02813c](https://github.com/nlibjs/nlibjs/commit/e02813c))
+
+
+
+
+
 ## [3.2.1](https://github.com/nlibjs/nlibjs/compare/v3.2.0...v3.2.1) (2019-01-22)
 
 **Note:** Version bump only for package @nlib/media-type
