@@ -12,6 +12,45 @@ test('return null if type is empty', (t) => {
     t.is(mediaTypeSource, null);
 });
 
+test('return null if subtype is empty', (t) => {
+    const mediaTypeSource = parse(fromString('teXt/'));
+    t.is(mediaTypeSource, null);
+});
+
+test('teXt/hTmL', (t) => {
+    const mediaTypeSource = parse(fromString('teXt/hTmL'));
+    if (mediaTypeSource) {
+        t.is(`${mediaTypeSource.type}`, 'text');
+        t.is(`${mediaTypeSource.subtype}`, 'html');
+        t.is(mediaTypeSource.parameters.size, 0);
+    } else {
+        t.truthy(mediaTypeSource);
+    }
+});
+
+test('teXt/hTmL;', (t) => {
+    const mediaTypeSource = parse(fromString('teXt/hTmL;'));
+    if (mediaTypeSource) {
+        t.is(`${mediaTypeSource.type}`, 'text');
+        t.is(`${mediaTypeSource.subtype}`, 'html');
+        t.is(mediaTypeSource.parameters.size, 0);
+    } else {
+        t.truthy(mediaTypeSource);
+    }
+});
+
+test('teXt/hTmL;  cHarSEt=utf-8  ', (t) => {
+    const mediaTypeSource = parse(fromString('teXt/hTmL;  cHarSEt=utf-8  '));
+    if (mediaTypeSource) {
+        t.is(`${mediaTypeSource.type}`, 'text');
+        t.is(`${mediaTypeSource.subtype}`, 'html');
+        t.is(mediaTypeSource.parameters.size, 1);
+        t.is(`${mediaTypeSource.parameters.get('charset')}`, 'utf-8');
+    } else {
+        t.truthy(mediaTypeSource);
+    }
+});
+
 test('teXt/hTmL;cHarSEt="shift_jis"iso-2022-jp', (t) => {
     const mediaTypeSource = parse(fromString('teXt/hTmL;cHarSEt="shift_jis"iso-2022-jp'));
     if (mediaTypeSource) {
