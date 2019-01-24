@@ -23,10 +23,11 @@
     "scripts": {
         "bootstrap": "lerna bootstrap",
         "cleanup": "lerna run cleanup",
+        "fill-json": "ts-node ./scripts/fix-package.json.ts",
         "lerna:clear-cache": "lerna run clear-cache",
         "lerna:build": "lerna run build",
         "lerna:test": "nyc lerna run test",
-        "build": "npm-run-all --serial lerna:clear-cache lerna:build",
+        "build": "npm-run-all --serial fill-json lerna:clear-cache lerna:build",
         "test": "npm-run-all --serial lerna:build lerna:test",
         "lint": "lerna run lint",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag --no-push"
