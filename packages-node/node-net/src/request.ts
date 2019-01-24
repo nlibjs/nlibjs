@@ -1,4 +1,3 @@
-import {Error, URL} from '@nlib/global';
 import {
     request as requestHTTP,
     RequestOptions as RequestOptionsHTTP,

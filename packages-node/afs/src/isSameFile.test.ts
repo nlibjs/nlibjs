@@ -3,7 +3,7 @@ import anyTest, {TestInterface} from 'ava';
 import {mktempdir} from './mktempdir';
 import {writeFilep} from './writeFilep';
 import {isSameFile} from './isSameFile';
-import * as index from '.';
+import * as index from './index';
 
 const test = anyTest as TestInterface<{
     directory: string,

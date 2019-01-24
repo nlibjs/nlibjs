@@ -7,7 +7,7 @@ import {
 } from './core';
 import {mktempdir} from './mktempdir';
 import {tree} from './tree';
-import * as index from '.';
+import * as index from './index';
 import {exec} from 'child_process';
 
 const test = anyTest as TestInterface<{

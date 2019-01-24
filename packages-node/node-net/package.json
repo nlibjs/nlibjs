@@ -1,9 +1,9 @@
 {
-    "name": "@nlib/unicode",
+    "name": "@nlib/node-net",
     "version": "3.3.3",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/unicode",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-node/node-util",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -16,32 +16,27 @@
         "lib"
     ],
     "scripts": {
-        "clear-cache": "rimraf build/__cache",
         "cleanup": "rimraf lib",
-        "build:named": "ts-node build/named.ts",
         "tsc": "tsc",
-        "build": "npm-run-all --serial build:named cleanup tsc",
+        "build": "npm-run-all --serial cleanup tsc",
         "test": "ava --verbose lib/*.test.js",
-        "lint": "eslint --ext .ts src build"
+        "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.3.3"
+        "@nlib/afs": "^3.3.3",
+        "@nlib/real-number": "^3.3.3"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.3.3",
-        "@nlib/infra": "^3.3.3",
-        "@nlib/node-net": "^3.3.3",
         "@nlib/node-stream": "^3.3.3"
     },
     "eslintConfig": {
         "overrides": [
             {
-                "files": "build/*.ts",
-                "env": {
-                    "node": true
-                },
+                "files": [
+                    "src/listen.ts"
+                ],
                 "rules": {
-                    "no-console": "off"
+                    "func-style": "off"
                 }
             }
         ]

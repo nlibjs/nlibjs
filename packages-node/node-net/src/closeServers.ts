@@ -1,4 +1,3 @@
-import {Promise, setTimeout, clearTimeout, Error} from '@nlib/global';
 import {Server} from 'net';
 
 export const closeServers = async (...servers: Array<Server>): Promise<void> => {

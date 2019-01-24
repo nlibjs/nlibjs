@@ -7,7 +7,7 @@ import {
 import {mktempdir} from './mktempdir';
 import {updateFile} from './updateFile';
 import {mkdirp} from './mkdirp';
-import * as index from '.';
+import * as index from './index';
 
 const wait = (duration: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, duration));
 

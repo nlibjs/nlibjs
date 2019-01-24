@@ -21,22 +21,5 @@
         "build": "npm-run-all --serial cleanup tsc",
         "test": "ava --verbose lib/*.test.js",
         "lint": "eslint --ext .ts src"
-    },
-    "dependencies": {
-        "@nlib/afs": "^3.3.3",
-        "@nlib/global": "^3.3.3",
-        "@nlib/real-number": "^3.3.3"
-    },
-    "eslintConfig": {
-        "overrides": [
-            {
-                "files": [
-                    "src/listen.ts"
-                ],
-                "rules": {
-                    "func-style": "off"
-                }
-            }
-        ]
     }
 }

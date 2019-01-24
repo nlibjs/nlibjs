@@ -1,6 +1,6 @@
 import test from 'ava';
 import {getHash} from './getHash';
-import * as index from '.';
+import * as index from './index';
 
 test('index.getHash', (t) => {
     t.is(index.getHash, getHash);

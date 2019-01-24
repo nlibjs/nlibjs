@@ -1,7 +1,7 @@
 import anyTest, {TestInterface} from 'ava';
 import {createServer, Server} from 'net';
 import {listenPort, listen} from './listen';
-import * as index from '.';
+import * as index from './index';
 import {closeServers} from './closeServers';
 
 const test = anyTest as TestInterface<{

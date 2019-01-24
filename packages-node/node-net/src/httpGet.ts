@@ -1,4 +1,3 @@
-import {console, Object, Error} from '@nlib/global';
 import {join, dirname} from 'path';
 import {Readable, PassThrough} from 'stream';
 import {Stats} from 'fs';
@@ -28,16 +27,11 @@ const writeToCache = async (stream: Readable, cacheDirectory: string, cacheId: s
     const cachePath = join(cacheDirectory, sanitizeEtag(cacheId));
     await mkdirp(dirname(cachePath));
     const writer = createWriteStream(cachePath);
-    try {
-        await new Promise<void>((resolve, reject) => {
-            stream.pipe(writer)
-            .once('finish', resolve)
-            .once('error', reject);
-        });
-    } catch (error) {
-        console.log(`Failed to write: ${cachePath}`);
-        throw error;
-    }
+    await new Promise<void>((resolve, reject) => {
+        stream.pipe(writer)
+        .once('finish', resolve)
+        .once('error', reject);
+    });
     return stat(cachePath);
 };
 

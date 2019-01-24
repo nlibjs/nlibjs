@@ -1,4 +1,3 @@
-import {Promise, Error} from '@nlib/global';
 import {fromIntervalZ, inin, ZSet} from '@nlib/real-number';
 import {Server, ListenOptions} from 'net';
 

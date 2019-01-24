@@ -1,6 +1,6 @@
 import {join} from 'path';
 import {Readable} from 'stream';
-import {httpGet} from '@nlib/node-util';
+import {httpGet} from '@nlib/node-net';
 import {LineStream} from '@nlib/node-stream';
 import {FieldExtractor} from './FieldExtractor';
 

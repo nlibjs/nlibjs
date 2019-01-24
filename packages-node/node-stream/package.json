@@ -24,8 +24,5 @@
     },
     "dependencies": {
         "@nlib/infra": "^3.3.3"
-    },
-    "devDependencies": {
-        "@nlib/node-util": "^3.3.3"
     }
 }

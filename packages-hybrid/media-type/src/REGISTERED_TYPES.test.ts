@@ -1,5 +1,6 @@
 import anyTest, {TestInterface} from 'ava';
-import {httpGet, readStream} from '@nlib/node-util';
+import {httpGet} from '@nlib/node-net';
+import {readStream} from '@nlib/node-stream';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
 import {mediatype} from './types';
 import {elementToRecord} from './elementToRecord';

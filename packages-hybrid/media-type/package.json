@@ -31,7 +31,8 @@
     },
     "devDependencies": {
         "@nlib/afs": "^3.3.3",
-        "@nlib/node-util": "^3.3.3",
+        "@nlib/node-net": "^3.3.3",
+        "@nlib/node-stream": "^3.3.3",
         "@nlib/xml-js": "^3.3.3"
     },
     "eslintConfig": {

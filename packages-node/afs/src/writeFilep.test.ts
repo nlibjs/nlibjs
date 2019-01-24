@@ -4,7 +4,7 @@ import {readFile} from './core';
 import {mktempdir} from './mktempdir';
 import {writeFilep} from './writeFilep';
 import {mkdirp} from './mkdirp';
-import * as index from '.';
+import * as index from './index';
 
 const test = anyTest as TestInterface<{
     directory: string,

@@ -10,7 +10,7 @@ import {mktempdir} from './mktempdir';
 import {writeFilep} from './writeFilep';
 import {cpr} from './cpr';
 import {isSameFile} from './isSameFile';
-import * as index from '.';
+import * as index from './index';
 import {exec} from 'child_process';
 
 const test = anyTest as TestInterface<{

@@ -6,7 +6,7 @@ import {
 } from './core';
 import {mktempdir} from './mktempdir';
 import {deploy} from './deploy';
-import * as index from '.';
+import * as index from './index';
 
 const test = anyTest as TestInterface<{
     directory: string,

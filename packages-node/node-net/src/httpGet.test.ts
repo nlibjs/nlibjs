@@ -1,13 +1,12 @@
 import anyTest, {TestInterface} from 'ava';
-import {URL, Date} from '@nlib/global';
 import {mktempdir, readFile, mkdirp} from '@nlib/afs';
 import {join} from 'path';
 import {Server, createServer} from 'http';
 import {listenPort} from './listen';
 import {closeServers} from './closeServers';
 import {httpGet, sanitizeEtag} from './httpGet';
+import {readStream} from '@nlib/node-stream';
 import * as index from './index';
-import {readStream} from './readStream';
 
 const test = anyTest as TestInterface<{
     NORMAL_GET: string,

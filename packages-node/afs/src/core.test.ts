@@ -1,7 +1,7 @@
 import test from 'ava';
 import * as _fs from 'fs';
 import * as _core from './core';
-import * as _index from '.';
+import * as _index from './index';
 
 const fs = new Map(Object.entries(_fs));
 const core = new Map(Object.entries(_core));

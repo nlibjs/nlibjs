@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {readStream} from '@nlib/node-util';
+import {readStream} from '@nlib/node-stream';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
 import {updateFile} from '@nlib/afs';
 import {mediatype} from '../src/types';

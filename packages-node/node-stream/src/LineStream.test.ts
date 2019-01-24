@@ -1,7 +1,7 @@
 import test from 'ava';
 import {PassThrough} from 'stream';
-import {readObjectStream} from '@nlib/node-util';
 import {fromString} from '@nlib/infra';
+import {readObjectStream} from './readStream';
 import {LineStream} from './LineStream';
 import * as index from './index';
 

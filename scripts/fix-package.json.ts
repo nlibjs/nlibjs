@@ -23,11 +23,12 @@ export const fix = async (file: string): Promise<void> => {
         'devDependencies',
         'eslintConfig',
     ];
+    const [category, directory] = file.split(sep).slice(-3, -1);
     const defaults: DataMap = new Map([
         ['license', 'MIT'],
         ['author', 'Kei Ito <kei.itof@gmail.com>'],
         ['repository', 'https://github.com/nlibjs/nlibjs'],
-        ['homepage', `https://github.com/nlibjs/nlibjs/tree/master/${file.split(sep).slice(-3, -1).join('/')}`],
+        ['homepage', `https://github.com/nlibjs/nlibjs/tree/master/${category}/${directory}`],
         ['engines', {node: '>=10.0.0'}],
     ] as DataArray);
     const result: {[key: string]: string | {}} = {};

@@ -1,12 +1,11 @@
 import anyTest, {TestInterface} from 'ava';
-import {URL} from '@nlib/global';
+import {Server, createServer} from 'http';
+import {readStream} from '@nlib/node-stream';
 import {mktempdir} from '@nlib/afs';
 import {request} from './request';
-import * as index from '.';
-import {Server, createServer} from 'http';
+import * as index from './index';
 import {listenPort} from './listen';
 import {closeServers} from './closeServers';
-import {readStream} from './readStream';
 import {PassThrough} from 'stream';
 
 const test = anyTest as TestInterface<{
