@@ -326,7 +326,7 @@ export const splitOnASCIIWhitespace = function* (input: ScalarValueString): Iter
     }
 };
 
-export const concatenate = (...args: Array<ScalarValueString>): ScalarValueString => {
+export const concatenate = (...args: Array<ScalarValueString | Uint32Array>): ScalarValueString => {
     const concatenated = new Uint32Array(args.reduce((sum, string) => sum + string.length, 0));
     let position = 0;
     for (const string of args) {
