@@ -5,7 +5,6 @@ os:
   - windows
 matrix:
   allow_failures:
-    - os: osx
     - os: windows
 node_js:
 - '10'
