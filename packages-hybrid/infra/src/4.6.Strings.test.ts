@@ -28,9 +28,33 @@ import {
     fromIterable,
     fromCodePoint,
     toScalarValueString,
+    leftEqual,
+    rightEqual,
 } from './4.6.Strings';
 import {CodePoint} from './types';
 import {isASCIIWhitespace} from './4.5.CodePoints';
+
+test('leftEqual', (t) => {
+    t.true(leftEqual(
+        fromString('AbC'),
+        fromString('AbCd'),
+    ));
+    t.false(leftEqual(
+        fromString('AbC'),
+        fromString('abCd'),
+    ));
+});
+
+test('rightEqual', (t) => {
+    t.true(rightEqual(
+        fromString('AbC'),
+        fromString('zAbC'),
+    ));
+    t.false(rightEqual(
+        fromString('AbC'),
+        fromString('AbCz'),
+    ));
+});
 
 test('toScalarValueString', (t) => {
     t.deepEqual(

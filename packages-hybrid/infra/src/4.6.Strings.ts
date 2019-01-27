@@ -1,4 +1,4 @@
-import {Uint32Array, Uint8Array, String, Set} from '@nlib/global';
+import {Uint32Array, Uint8Array, String, Set, Math} from '@nlib/global';
 import {CodePoint} from './types';
 import {getCodePoints} from './getCodePoints';
 import {
@@ -74,11 +74,8 @@ export const fromCodePoint = (...input: Array<CodePoint>): ScalarValueString => 
     return new ScalarValueString(Uint32Array.from(input));
 };
 
-export const equal = (s1: ScalarValueString, s2: ScalarValueString): boolean => {
-    const {length} = s1;
-    if (length !== s2.length) {
-        return false;
-    }
+export const leftEqual = (s1: ScalarValueString, s2: ScalarValueString): boolean => {
+    const length = Math.min(s1.length, s2.length);
     for (let i = 0; i < length; i++) {
         if (s1.get(i) !== s2.get(i)) {
             return false;
@@ -86,6 +83,20 @@ export const equal = (s1: ScalarValueString, s2: ScalarValueString): boolean => 
     }
     return true;
 };
+
+export const rightEqual = (s1: ScalarValueString, s2: ScalarValueString): boolean => {
+    const {length: length1} = s1;
+    const {length: length2} = s2;
+    const length = Math.min(length1, length2);
+    for (let i = 0; i < length; i++) {
+        if (s1.get(length1 - i - 1) !== s2.get(length2 - i - 1)) {
+            return false;
+        }
+    }
+    return true;
+};
+
+export const equal = (s1: ScalarValueString, s2: ScalarValueString): boolean => s1.length === s2.length && leftEqual(s1, s2);
 
 export const caseInsensitiveMatch = (s1: ScalarValueString, s2: ScalarValueString): boolean => {
     const {length} = s1;
