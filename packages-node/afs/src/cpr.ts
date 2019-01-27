@@ -10,33 +10,30 @@ interface ICopyContext {
     dest: string,
 }
 
-const cprCore = async (tree: ITreeNode, dest: string, context: ICopyContext): Promise<void> => {
-    switch (tree.type) {
-    case 'file':
-        await copyFile(tree.path, dest);
-        break;
-    case 'directory':
+const cprCore = async (node: ITreeNode, dest: string, context: ICopyContext): Promise<void> => {
+    const {stats} = node;
+    if (stats.isFile()) {
+        await copyFile(node.path, dest);
+    } else if (stats.isDirectory()) {
         await mkdirp(dest);
-        await Promise.all(Object.keys(tree.files).map(async (name) => {
-            const file = tree.files[name];
-            await cprCore(file, join(dest, name), context);
-        }));
-        break;
-    case 'symboliclink': {
-        const target = await readlink(tree.path);
+        await Promise.all(
+            Object.entries(node.files)
+            .map(([name, childNode]) => cprCore(childNode, join(dest, name), context))
+        );
+    } else if (stats.isSymbolicLink()) {
+        const source = node.path;
+        const target = await readlink(source);
         const isRelative = !isAbsolute(target);
-        const absoluteTarget = isRelative ? join(dirname(tree.path), target) : target;
+        const absoluteTarget = isRelative ? join(dirname(source), target) : target;
         if (absoluteTarget.startsWith(context.src)) {
             const copiedTarget = join(context.dest, relative(context.src, target));
             await symlink(isRelative ? target : copiedTarget, dest);
         } else {
             await symlink(isRelative ? relative(dirname(dest), absoluteTarget) : target, dest);
         }
-        break;
-    }
-    default:
+    } else {
         throw Object.assign(
-            new Error(`${tree.type} is not supported: ${tree.path}`),
+            new Error(`Unsupported file: ${node.path}`),
             {code: 'ENOTSUPPORTED'},
         );
     }

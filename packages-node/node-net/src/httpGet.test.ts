@@ -97,14 +97,14 @@ test('request http', async (t) => {
 test('request cached', async (t) => {
     const url = new URL(t.context.CACHE_GET, t.context.baseURL);
     const res1 = await httpGet(url, t.context.directory);
+    const body1 = await readStream(res1);
+    const stats = await res1.cachePromise;
     t.false(res1.fromCache);
     const res2 = await httpGet(url, t.context.directory);
     t.true(res2.fromCache);
-    const body1 = await readStream(res1);
     const body2 = await readStream(res2);
     t.is(`${body1}`, `${body2}`);
     t.is(`${body2}`, await readFile(t.context.cachePath1, 'utf8'));
-    const stats = await res1.cachePromise;
     t.true(stats && 0 < stats.size);
 });
 

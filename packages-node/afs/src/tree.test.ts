@@ -28,13 +28,13 @@ test('return a tree', async (t) => {
     const file1 = join(dir1, 'bar');
     await writeFile(file1, file1);
     const result = await tree(t.context.directory);
-    t.is(result.type, 'directory');
+    t.true(result.stats.isDirectory());
     t.is(result.path, t.context.directory);
     t.truthy(result.files.foo);
-    t.is(result.files.foo.type, 'directory');
+    t.true(result.files.foo.stats.isDirectory());
     t.is(result.files.foo.path, dir1);
     t.truthy(result.files.foo.files.bar);
-    t.is(result.files.foo.files.bar.type, 'file');
+    t.true(result.files.foo.files.bar.stats.isFile());
     t.is(result.files.foo.files.bar.path, file1);
 });
 
@@ -46,16 +46,16 @@ test('return a tree with symbolic link', async (t) => {
     const symlink1 = join(dir1, 'baz');
     await symlink(file1, symlink1);
     const result = await tree(t.context.directory);
-    t.is(result.type, 'directory');
+    t.true(result.stats.isDirectory());
     t.is(result.path, t.context.directory);
     t.truthy(result.files.foo);
-    t.is(result.files.foo.type, 'directory');
+    t.true(result.files.foo.stats.isDirectory());
     t.is(result.files.foo.path, dir1);
     t.truthy(result.files.foo.files.bar);
-    t.is(result.files.foo.files.bar.type, 'file');
+    t.true(result.files.foo.files.bar.stats.isFile());
     t.is(result.files.foo.files.bar.path, file1);
     t.truthy(result.files.foo.files.baz);
-    t.is(result.files.foo.files.baz.type, 'symboliclink');
+    t.true(result.files.foo.files.baz.stats.isSymbolicLink());
     t.is(result.files.foo.files.baz.path, symlink1);
 });
 
@@ -73,13 +73,13 @@ test('return a tree with fifo', async (t) => {
         });
     });
     const result = await tree(t.context.directory);
-    t.is(result.type, 'directory');
+    t.true(result.stats.isDirectory());
     t.is(result.path, t.context.directory);
     t.truthy(result.files.foo);
-    t.is(result.files.foo.type, 'directory');
+    t.true(result.files.foo.stats.isDirectory());
     t.is(result.files.foo.path, dir);
     if (result.files.foo.files.fifo) {
-        t.is(result.files.foo.files.fifo.type, 'fifo');
+        t.true(result.files.foo.files.fifo.stats.isFIFO());
         t.is(result.files.foo.files.fifo.path, fifoPath);
     }
 });

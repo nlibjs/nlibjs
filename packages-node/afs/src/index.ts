@@ -10,3 +10,4 @@ export * from './rmrf';
 export * from './tree';
 export * from './updateFile';
 export * from './writeFilep';
+export * from './walkDirectory';
