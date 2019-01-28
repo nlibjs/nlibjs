@@ -1,6 +1,6 @@
 {
     "name": "@nlib/media-type",
-    "version": "3.3.3",
+    "version": "3.4.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/media-type",
@@ -24,15 +24,15 @@
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {
-        "@nlib/fetch": "^3.3.3",
+        "@nlib/fetch": "^3.4.0",
         "@nlib/global": "^3.3.3",
-        "@nlib/infra": "^3.3.3",
+        "@nlib/infra": "^3.4.0",
         "@nlib/real-number": "^3.3.3"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.3.3",
-        "@nlib/node-net": "^3.3.3",
-        "@nlib/node-stream": "^3.3.3",
+        "@nlib/afs": "^3.4.0",
+        "@nlib/node-net": "^3.4.0",
+        "@nlib/node-stream": "^3.4.0",
         "@nlib/xml-js": "^3.3.3"
     },
     "eslintConfig": {

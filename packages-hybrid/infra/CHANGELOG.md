@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/nlibjs/nlibjs/compare/v3.3.3...v3.4.0) (2019-01-28)
+
+
+### Features
+
+* **infra:** add leftEqual and rightEqual ([#24](https://github.com/nlibjs/nlibjs/issues/24)) ([253b758](https://github.com/nlibjs/nlibjs/commit/253b758))
+* **match:** add match ([#22](https://github.com/nlibjs/nlibjs/issues/22)) ([f022fd7](https://github.com/nlibjs/nlibjs/commit/f022fd7))
+
+
+
+
+
 ## [3.3.3](https://github.com/nlibjs/nlibjs/compare/v3.3.2...v3.3.3) (2019-01-23)
 
 **Note:** Version bump only for package @nlib/infra

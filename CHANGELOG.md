@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/nlibjs/nlibjs/compare/v3.3.3...v3.4.0) (2019-01-28)
+
+
+### Features
+
+* **afs:** add walkDirectory ([#23](https://github.com/nlibjs/nlibjs/issues/23)) ([850bd73](https://github.com/nlibjs/nlibjs/commit/850bd73))
+* **infra:** add leftEqual and rightEqual ([#24](https://github.com/nlibjs/nlibjs/issues/24)) ([253b758](https://github.com/nlibjs/nlibjs/commit/253b758))
+* **match:** add match ([#22](https://github.com/nlibjs/nlibjs/issues/22)) ([f022fd7](https://github.com/nlibjs/nlibjs/commit/f022fd7))
+* move some functions from node-util to node-net and node-stream ([#21](https://github.com/nlibjs/nlibjs/issues/21)) ([154b760](https://github.com/nlibjs/nlibjs/commit/154b760))
+
+
+
+
+
 ## [3.3.3](https://github.com/nlibjs/nlibjs/compare/v3.3.2...v3.3.3) (2019-01-23)
 
 **Note:** Version bump only for package nlibjs
