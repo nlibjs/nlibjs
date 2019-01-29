@@ -27,13 +27,15 @@ export const fix = async (file: string): Promise<void> => {
     const defaults: DataMap = new Map([
         ['license', 'MIT'],
         ['author', 'Kei Ito <kei.itof@gmail.com>'],
+        ['engines', {node: '>=10.0.0'}],
+    ] as DataArray);
+    const overwrites: DataMap = new Map([
         ['repository', 'https://github.com/nlibjs/nlibjs'],
         ['homepage', `https://github.com/nlibjs/nlibjs/tree/master/${category}/${directory}`],
-        ['engines', {node: '>=10.0.0'}],
     ] as DataArray);
     const result: {[key: string]: string | {}} = {};
     for (const key of keys) {
-        const value = map.get(key) || defaults.get(key);
+        const value = overwrites.get(key) || map.get(key) || defaults.get(key);
         if (typeof value !== 'undefined') {
             result[key] = value;
         }
