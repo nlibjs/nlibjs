@@ -57,7 +57,7 @@ jobs:
       - run: npx lerna publish from-package --no-git-reset --yes
 workflows:
   version: 2
-  build-test-deploy-canary:
+  build-test-deploy:
     jobs:
       - build:
           filters:
@@ -84,7 +84,6 @@ workflows:
       - deploy-canary:
           requires:
             - test
-            - lint
           filters:
             tags:
               ignore: /^v.*/
