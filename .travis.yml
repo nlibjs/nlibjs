@@ -19,7 +19,9 @@ install:
 - npm install -g nyc @commitlint/travis-cli
 - npm ci
 script:
-- npm test
+- npm run build
+- nyc lerna run test --parallel
+- npm run check-dependencies
 - git diff --exit-code
 - npm run lint
 - commitlint-travis
