@@ -15,7 +15,6 @@
         "lerna": "^3.13.1",
         "lint-staged": "^8.1.5",
         "npm-run-all": "^4.1.5",
-        "nyc": "^13.3.0",
         "rimraf": "^2.6.3",
         "ts-node": "^8.0.3",
         "typescript": "^3.3.3333"
@@ -27,7 +26,7 @@
         "check-dependencies": "ts-node scripts/checkDependencies.ts",
         "lerna:clear-cache": "lerna run clear-cache",
         "lerna:build": "lerna run build",
-        "lerna:test": "nyc lerna run test --parallel",
+        "lerna:test": "lerna run test --parallel",
         "build": "npm-run-all --serial bootstrap lerna:clear-cache lerna:build fill-json",
         "test": "npm-run-all --serial build lerna:test check-dependencies",
         "lint": "lerna run lint",
