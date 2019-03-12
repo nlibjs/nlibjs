@@ -47,7 +47,7 @@
             "packages-*/*/lib/**/*.js"
         ],
         "exclude": [
-            "packages-*/*/lib/**/*.test.js lib/*.test.js"
+            "*.test.js"
         ],
         "all": true,
         "reporter": [
