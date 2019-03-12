@@ -1,4 +1,5 @@
 import test from 'ava';
+import {toString} from '@nlib/infra';
 import {MediaType} from './MediaType';
 import * as index from './index';
 
@@ -13,12 +14,13 @@ test('fromString("")', (t) => {
 test('teXt/hTmL;cHarSEt="["]"iso-2022-jp', (t) => {
     const mediaType = MediaType.fromString('teXt/hTmL;cHarSEt="[\\\\]"iso-2022-jp');
     if (mediaType) {
-        t.is(`${mediaType.type}`, 'text');
-        t.is(`${mediaType.subtype}`, 'html');
-        t.is(`${mediaType.essence}`, 'text/html');
+        t.is(toString(mediaType.type), 'text');
+        t.is(toString(mediaType.subtype), 'html');
+        t.is(toString(mediaType.essence), 'text/html');
         t.is(mediaType.parameters.size, 1);
-        t.is(`${mediaType.parameters.get('charset')}`, '[\\]');
-        t.is(`${mediaType}`, 'text/html;charset="[\\\\]"');
+        const charset = mediaType.parameters.get('charset');
+        t.is(charset ? toString(charset) : '', '[\\]');
+        t.is(mediaType.toString(), 'text/html;charset="[\\\\]"');
     } else {
         t.truthy(mediaType);
     }

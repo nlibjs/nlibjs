@@ -1,4 +1,4 @@
-import {fromIntervalZ, inin, ZSet} from '@nlib/real-number';
+import {SetZ, hasSetZ} from '@nlib/real-number';
 import {Server, ListenOptions} from 'net';
 
 export function listen(server: Server, port?: number, hostname?: string, backlog?: number): Promise<Server>;
@@ -59,7 +59,7 @@ export const listenPort = async (
     port: number = 4000,
     hostname?: string,
     backlog?: number,
-    validPortRange: ZSet = fromIntervalZ(inin(0x0000, 0xffff)),
+    validPortRange: SetZ = [[0x0000, 0xffff]],
 ): Promise<number> => {
     if (server.listening) {
         const addressInfo = server.address();
@@ -81,7 +81,7 @@ export const listenPort = async (
             await listen(server, port);
         }
     } catch (error) {
-        if (error.code === 'EADDRINUSE' && validPortRange.has(port + 1)) {
+        if (error.code === 'EADDRINUSE' && hasSetZ(validPortRange, port + 1)) {
             return listenPort(server, port + 1, hostname, backlog, validPortRange);
         } else {
             throw error;

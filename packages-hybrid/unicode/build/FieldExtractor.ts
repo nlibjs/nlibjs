@@ -1,6 +1,5 @@
 import {Transform} from 'stream';
 import {
-    ScalarValueString,
     collectCodePointSequence,
     splitOn,
 } from '@nlib/infra';
@@ -13,7 +12,7 @@ export class FieldExtractor extends Transform {
         super({objectMode: true});
     }
 
-    public _transform(line: ScalarValueString, _: string, callback: () => void): void {
+    public _transform(line: Uint32Array, _: string, callback: () => void): void {
         const lineWithoutComment = collectCodePointSequence(line, 0, (codePoint) => codePoint !== NUMBER_SIGN);
         if (0 < lineWithoutComment.length) {
             this.push([...splitOn(lineWithoutComment, (codePoint) => codePoint === SEMICOLON)]);

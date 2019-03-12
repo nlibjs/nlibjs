@@ -23,11 +23,15 @@ export const fix = async (file: string): Promise<void> => {
         'devDependencies',
         'eslintConfig',
     ];
+    for (const [key] of map) {
+        if (!keys.includes(key)) {
+            throw new Error(`Unknown key: ${key}`);
+        }
+    }
     const [category, directory] = file.split(sep).slice(-3, -1);
     const defaults: DataMap = new Map([
         ['license', 'MIT'],
         ['author', 'Kei Ito <kei.itof@gmail.com>'],
-        ['engines', {node: '>=10.0.0'}],
     ] as DataArray);
     const overwrites: DataMap = new Map([
         ['repository', 'https://github.com/nlibjs/nlibjs'],

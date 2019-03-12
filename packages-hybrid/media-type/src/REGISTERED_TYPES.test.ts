@@ -2,19 +2,19 @@ import anyTest, {TestInterface} from 'ava';
 import {httpGet} from '@nlib/node-net';
 import {readStream} from '@nlib/node-stream';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
-import {mediatype} from './types';
 import {elementToRecord} from './elementToRecord';
 import {REGISTERED_TYPES} from './REGISTERED_TYPES';
+import {IRecord} from './types';
 
 const test = anyTest as TestInterface<{
-    records: Array<mediatype.IRecord>,
+    records: Array<IRecord>,
 }>;
 
 test.before(async (t) => {
     const res = await httpGet('https://www.iana.org/assignments/media-types/media-types.xml');
     const xmlString = await readStream(res);
     const xml = xml2js(`${xmlString}`, {compact: false}) as Element;
-    const records: Array<mediatype.IRecord> = t.context.records = [];
+    const records: Array<IRecord> = t.context.records = [];
     for (const [element] of elementWalker(xml)) {
         const record = elementToRecord(element);
         if (record) {

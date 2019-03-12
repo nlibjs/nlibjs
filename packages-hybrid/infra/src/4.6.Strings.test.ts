@@ -27,11 +27,11 @@ import {
     doesNotMatch,
     fromIterable,
     fromCodePoint,
-    toScalarValueString,
     leftEqual,
     rightEqual,
+    toScalarValueString,
+    toString,
 } from './4.6.Strings';
-import {CodePoint} from './types';
 import {isASCIIWhitespace} from './4.5.CodePoints';
 
 test('leftEqual', (t) => {
@@ -77,7 +77,7 @@ test('fromIterable', (t) => {
 test('fromCodePoint', (t) => {
     t.deepEqual(
         fromString('AbC'),
-        fromCodePoint(0x41 as CodePoint, 0x62 as CodePoint, 0x43 as CodePoint),
+        fromCodePoint(0x41, 0x62, 0x43),
     );
 });
 
@@ -272,7 +272,7 @@ test('skipRight("AAA   CCC", 5, isASCIIWhitespace)', (t) => {
 
 test('strictlySplit("XAAXbbXCCXX", "X")', (t) => {
     t.deepEqual(
-        [...strictlySplit(fromString('XAAXbbXCCXX'), ('X').codePointAt(0) as CodePoint)],
+        [...strictlySplit(fromString('XAAXbbXCCXX'), fromString('X')[0])],
         [
             fromString(''),
             fromString('AA'),
@@ -298,7 +298,7 @@ test('splitOnASCIIWhitespace(" \\t\\n\\r AA \\t\\n\\r bb \\t\\n\\r CC \\t\\n\\r 
 });
 
 test('splitOn("  AA bb  ,  CC  ,DD,  ", COMMA)', (t) => {
-    const COMMA = 0x002C as CodePoint;
+    const COMMA = 0x002C;
     const source = '  AA bb  ,  CC  ,DD,  ';
     t.log([...splitOn(fromString(source), matches(COMMA))].map((x) => `${x}`));
     t.deepEqual(
@@ -320,12 +320,16 @@ test('concatenate(" AA ", " bb ", " CC ")', (t) => {
 });
 
 test('doesNotMatch(0, 1, 2)', (t) => {
-    const condition = doesNotMatch(0 as CodePoint, 1 as CodePoint);
-    t.false(condition(0 as CodePoint));
-    t.false(condition(1 as CodePoint));
-    t.true(condition(2 as CodePoint));
+    const condition = doesNotMatch(0, 1);
+    t.false(condition(0));
+    t.false(condition(1));
+    t.true(condition(2));
 });
 
-test('toString', (t) => {
-    t.is(fromString('AbC').toString(), 'AbC');
+test('toString with Uint32Array', (t) => {
+    t.is(toString(fromString('AbC')), 'AbC');
+});
+
+test('toString with Array of numbers', (t) => {
+    t.is(toString([0x41, 0x62, 0x43]), 'AbC');
 });

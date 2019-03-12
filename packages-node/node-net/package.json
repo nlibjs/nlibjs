@@ -3,7 +3,7 @@
     "version": "3.4.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-node/node-util",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-node/node-net",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -19,10 +19,11 @@
         "cleanup": "rimraf lib",
         "tsc": "tsc",
         "build": "npm-run-all --serial cleanup tsc",
-        "test": "ava --verbose lib/*.test.js",
+        "test": "ava lib/**/*.test.js lib/*.test.js",
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
+        "@types/node": "^10.12.15",
         "@nlib/afs": "^3.4.0",
         "@nlib/real-number": "^3.3.3"
     },

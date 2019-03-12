@@ -1,0 +1,29 @@
+{
+    "name": "@nlib/named-tree",
+    "version": "3.3.3",
+    "license": "MIT",
+    "author": "Kei Ito <kei.itof@gmail.com>",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/named-tree",
+    "repository": "https://github.com/nlibjs/nlibjs",
+    "publishConfig": {
+        "access": "public"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "cleanup": "rimraf lib",
+        "tsc": "tsc",
+        "build": "npm-run-all --serial cleanup tsc",
+        "test": "ava lib/**/*.test.js lib/*.test.js",
+        "lint": "eslint --ext .ts src"
+    },
+    "dependencies": {
+        "@nlib/global": "^3.3.3",
+        "@nlib/util": "^3.3.3"
+    }
+}

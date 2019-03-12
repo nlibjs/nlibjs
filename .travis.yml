@@ -16,7 +16,6 @@ before_install:
 install:
 - npm install -g nyc @commitlint/travis-cli
 - npm ci
-- npm run bootstrap
 script:
 - npm test
 - git diff --exit-code

@@ -3,11 +3,11 @@ import {join} from 'path';
 import {Transform} from 'stream';
 import {createWriteStream} from 'fs';
 import {Map} from '@nlib/global';
-import {ScalarValueString} from '@nlib/infra';
 import {getUCDFieldsStream} from './getUCDFieldsStream';
 import {urls} from './urls';
+import {toString} from '@nlib/infra';
 
-export type AliaseMap = Map<string, ScalarValueString>;
+export type AliaseMap = Map<string, Uint32Array>;
 
 export const getNameAliases = async (): Promise<AliaseMap> => {
     const dest = join(__dirname, '../src/named.ts');
@@ -17,9 +17,9 @@ export const getNameAliases = async (): Promise<AliaseMap> => {
         stream
         .pipe(new Transform({
             objectMode: true,
-            transform([codePointWithoutPrefix, Name, type]: Array<ScalarValueString>, _, callback) {
-                if (`${type}` !== 'abbreviation') {
-                    const key = `${codePointWithoutPrefix}`;
+            transform([codePointWithoutPrefix, Name, type]: Array<Uint32Array>, _, callback) {
+                if (toString(type) !== 'abbreviation') {
+                    const key = toString(codePointWithoutPrefix);
                     if (!aliases.has(key)) {
                         aliases.set(key, Name);
                     }

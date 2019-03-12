@@ -1,5 +1,4 @@
 import {
-    ScalarValueString,
     collectCodePointSequence,
     everyCodePointIn,
     toASCIILowerCase,
@@ -10,16 +9,17 @@ import {
     SEMICOLON,
     EQUALS_SIGN,
     QUOTATION_MARK,
+    toString,
 } from '@nlib/infra';
 import {isHTTPWhitespace, collectAnHTTPQuotedString} from '@nlib/fetch';
 import {
     isHTTPToken,
     isHTTPQuotedStringToken,
 } from './codePoints';
-import {mediatype} from './types';
 import {Map} from '@nlib/global';
+import {ISource, IParameters} from './types';
 
-export const parse = (input: ScalarValueString): mediatype.ISource | null => {
+export const parse = (input: Uint32Array): ISource | null => {
     const {length: inputLength} = input;
     let position = skip(input, 0, isHTTPWhitespace);
     const type = collectCodePointSequence(
@@ -30,7 +30,7 @@ export const parse = (input: ScalarValueString): mediatype.ISource | null => {
             position = newPosition + 1;
         },
     );
-    if (type.isEmpty || !everyCodePointIn(type, isHTTPToken) || inputLength <= position) {
+    if (type.length === 0 || !everyCodePointIn(type, isHTTPToken) || inputLength <= position) {
         return null;
     }
     const subtype = stripTrailing(
@@ -44,11 +44,11 @@ export const parse = (input: ScalarValueString): mediatype.ISource | null => {
         ),
         isHTTPWhitespace,
     );
-    if (subtype.isEmpty || !everyCodePointIn(subtype, isHTTPToken)) {
+    if (subtype.length === 0 || !everyCodePointIn(subtype, isHTTPToken)) {
         return null;
     }
-    const parameters: mediatype.IParameters = new Map();
-    const mediaTypeSource: mediatype.ISource = {
+    const parameters: IParameters = new Map();
+    const mediaTypeSource: ISource = {
         type: toASCIILowerCase(type),
         subtype: toASCIILowerCase(subtype),
         parameters,
@@ -63,13 +63,13 @@ export const parse = (input: ScalarValueString): mediatype.ISource | null => {
                 position = newPosition;
             },
         ));
-        if (position < inputLength && input.get(position) !== SEMICOLON) {
+        if (position < inputLength && input[position] !== SEMICOLON) {
             position++;
             if (inputLength <= position) {
                 break;
             }
             let parameterValue = null;
-            if (input.get(position) === QUOTATION_MARK) {
+            if (input[position] === QUOTATION_MARK) {
                 parameterValue = collectAnHTTPQuotedString(
                     input,
                     position,
@@ -92,13 +92,14 @@ export const parse = (input: ScalarValueString): mediatype.ISource | null => {
                     isHTTPWhitespace,
                 );
             }
+            const name = toString(parameterName);
             if (
-                parameterName.isNotEmpty &&
+                0 < parameterName.length &&
                 everyCodePointIn(parameterName, isHTTPToken) &&
                 everyCodePointIn(parameterValue, isHTTPQuotedStringToken) &&
-                !parameters.has(`${parameterName}`)
+                !parameters.has(name)
             ) {
-                parameters.set(`${parameterName}`, parameterValue);
+                parameters.set(name, parameterValue);
             }
         }
     }

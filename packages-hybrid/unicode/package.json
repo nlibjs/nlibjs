@@ -21,7 +21,7 @@
         "build:named": "ts-node build/named.ts",
         "tsc": "tsc",
         "build": "npm-run-all --serial build:named cleanup tsc",
-        "test": "ava --verbose lib/*.test.js",
+        "test": "ava lib/**/*.test.js lib/*.test.js",
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {

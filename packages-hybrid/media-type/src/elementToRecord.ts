@@ -1,17 +1,17 @@
 import {Element, getTextContent} from '@nlib/xml-js';
-import {mediatype} from './types';
+import {IRecord, IXref} from './types';
 
 export const elementToRecord = ({
     name: elementName,
     elements: fields,
-}: Element): mediatype.IRecord | null => {
+}: Element): IRecord | null => {
     if (elementName !== 'record' || !fields) {
         return null;
     }
     let name = '';
     let type = '';
     let subtype = '';
-    let xref: mediatype.IXref | null = null;
+    let xref: IXref | null = null;
     for (const field of fields) {
         switch (field.name) {
         case 'name':

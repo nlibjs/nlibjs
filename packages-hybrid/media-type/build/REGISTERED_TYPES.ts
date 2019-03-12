@@ -2,15 +2,15 @@ import {join} from 'path';
 import {readStream} from '@nlib/node-stream';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
 import {updateFile} from '@nlib/afs';
-import {mediatype} from '../src/types';
 import {elementToRecord} from '../src/elementToRecord';
 import {getFileStream} from './getFileStream';
+import {IRecord} from '../src/types';
 
 export const build = async (): Promise<void> => {
     const res = await getFileStream('https://www.iana.org/assignments/media-types/media-types.xml');
     const xmlString = await readStream(res);
     const xml = xml2js(`${xmlString}`, {compact: false}) as Element;
-    const records: Array<mediatype.IRecord> = [];
+    const records: Array<IRecord> = [];
     const typeSet: Set<string> = new Set();
     for (const [element] of elementWalker(xml)) {
         const record = elementToRecord(element);

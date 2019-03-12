@@ -19,10 +19,24 @@
         "cleanup": "rimraf lib",
         "tsc": "tsc",
         "build": "npm-run-all --serial cleanup tsc",
-        "test": "ava --verbose lib/*.test.js",
+        "test": "ava lib/**/*.test.js lib/*.test.js",
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
         "@nlib/global": "^3.3.3"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": [
+                    "src/getLast.*",
+                    "src/getType.*",
+                    "src/is*.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/no-explicit-any": "off"
+                }
+            }
+        ]
     }
 }

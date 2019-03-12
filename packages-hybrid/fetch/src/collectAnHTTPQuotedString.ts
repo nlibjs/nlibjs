@@ -1,8 +1,6 @@
 import {Error} from '@nlib/global';
 import {
-    ScalarValueString,
     fromString,
-    slice,
     concatenate,
     collectCodePointSequence,
     doesNotMatch,
@@ -12,16 +10,16 @@ import {
 } from '@nlib/infra';
 
 export const collectAnHTTPQuotedString = (
-    input: ScalarValueString,
+    input: Uint32Array,
     position: number,
     extractValue: boolean,
     positionCallback: (position: number) => void = () => {},
-): ScalarValueString => {
+): Uint32Array => {
     const {length: inputLength} = input;
     const positionStart = position;
     let value = fromString('');
-    if (input.get(position) !== QUOTATION_MARK) {
-        throw new Error(`${slice(input, position)} doesn't start with QUOTATION_MARK (")`);
+    if (input[position] !== QUOTATION_MARK) {
+        throw new Error(`${input.slice(position)} doesn't start with QUOTATION_MARK (")`);
     }
     position++;
     while (true) {
@@ -39,7 +37,7 @@ export const collectAnHTTPQuotedString = (
         if (inputLength <= position) {
             break;
         }
-        const quoteOrBackslash = input.get(position++);
+        const quoteOrBackslash = input[position++];
         if (quoteOrBackslash === REVERSE_SOLIDUS) {
             if (inputLength <= position) {
                 value = concatenate(value, fromCodePoint(REVERSE_SOLIDUS));
@@ -57,5 +55,5 @@ export const collectAnHTTPQuotedString = (
     if (extractValue) {
         return value;
     }
-    return slice(input, positionStart, position);
+    return input.slice(positionStart, position);
 };

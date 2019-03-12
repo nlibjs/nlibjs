@@ -3,7 +3,7 @@
     "version": "3.4.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/real-number",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/match",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -19,7 +19,7 @@
         "cleanup": "rimraf lib",
         "tsc": "tsc",
         "build": "npm-run-all --serial cleanup tsc",
-        "test": "ava --verbose lib/*.test.js",
+        "test": "ava lib/**/*.test.js lib/*.test.js",
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
@@ -30,7 +30,7 @@
         "overrides": [
             {
                 "files": [
-                    "src/createMatcher.ts"
+                    "src/patternToRegExp.ts"
                 ],
                 "rules": {
                     "max-lines-per-function": "off"

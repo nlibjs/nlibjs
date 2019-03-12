@@ -1,13 +1,20 @@
-import {unionZ, eq} from '@nlib/real-number';
-import {ASCIINewline, isASCIINewline} from '@nlib/infra';
+import {unionSetZ, hasSetZ, fromValuesSetZ} from '@nlib/real-number';
+import {
+    ASCIINewline,
+    isASCIINewline,
+    CHARACTER_TABULATION,
+    SPACE,
+    LINE_FEED,
+    CARRIAGE_RETURN,
+} from '@nlib/infra';
 
 /** An HTTP tab or space is U+0009 TAB or U+0020 SPACE. */
-export const HTTPTabOrSpace = unionZ(eq(0x09), eq(0x0020));
-export const isHTTPTabOrSpace = (x: number): boolean => HTTPTabOrSpace.has(x);
+export const HTTPTabOrSpace = fromValuesSetZ(CHARACTER_TABULATION, SPACE);
+export const isHTTPTabOrSpace = (x: number): boolean => hasSetZ(HTTPTabOrSpace, x);
 
 /** HTTP whitespace is U+000A LF, U+000D CR, or an HTTP tab or space. */
-export const HTTPWhitespace = unionZ(eq(0x0A), eq(0x000D), HTTPTabOrSpace);
-export const isHTTPWhitespace = (x: number): boolean => HTTPWhitespace.has(x);
+export const HTTPWhitespace = unionSetZ(fromValuesSetZ(LINE_FEED, CARRIAGE_RETURN), HTTPTabOrSpace);
+export const isHTTPWhitespace = (x: number): boolean => hasSetZ(HTTPWhitespace, x);
 
 /** An HTTP newline byte is 0x0A (LF) or 0x0D (CR). */
 export const HTTPNewlineByte = ASCIINewline;
@@ -18,5 +25,5 @@ export const HTTPTabOrSpaceByte = HTTPTabOrSpace;
 export const isHTTPTabOrSpaceByte = isHTTPTabOrSpace;
 
 /** An HTTP whitespace byte is an HTTP newline byte or HTTP tab or space byte. */
-export const HTTPWhitespaceByte = unionZ(HTTPNewlineByte, HTTPTabOrSpaceByte);
-export const isHTTPWhitespaceByte = (x: number): boolean => HTTPWhitespaceByte.has(x);
+export const HTTPWhitespaceByte = unionSetZ(HTTPNewlineByte, HTTPTabOrSpaceByte);
+export const isHTTPWhitespaceByte = (x: number): boolean => hasSetZ(HTTPWhitespaceByte, x);

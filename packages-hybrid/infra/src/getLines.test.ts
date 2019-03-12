@@ -3,7 +3,6 @@ import {getLines, getTrimmedLines} from './getLines';
 import {fromString} from './4.6.Strings';
 
 test('getLines("\\r\\n A A \\r b b \\n\\n C C \\n\\r dd \\r \\n ee   ")', (t) => {
-    t.log([...getLines(fromString('\r\n A A \r b b \n\n C C \n\r d d \r \n E E  \n '))].map((x) => `${x}`));
     t.deepEqual(
         [...getLines(fromString('\r\n A A \r b b \n\n C C \n\r d d \r \n E E  \n '))],
         [
@@ -22,7 +21,6 @@ test('getLines("\\r\\n A A \\r b b \\n\\n C C \\n\\r dd \\r \\n ee   ")', (t) =>
 });
 
 test('getTrimmedLines("\\r\\n A A \\r b b \\n\\n C C \\n\\r dd \\r \\n ee   ")', (t) => {
-    t.log([...getTrimmedLines(fromString('\r\n A A \r b b \n\n C C \n\r d d \r \n E E  \n '))].map((x) => `${x}`));
     t.deepEqual(
         [...getTrimmedLines(fromString('\r\n A A \r b b \n\n C C \n\r d d \r \n E E  \n '))],
         [

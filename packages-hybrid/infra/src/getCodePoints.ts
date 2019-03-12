@@ -1,7 +1,6 @@
 import {isSurrogate, isLeadingSurrogate, isTrailingSurrogate} from './4.5.CodePoints';
-import {CodePoint} from './types';
 
-export const getCodePoints = function* (input: string): IterableIterator<CodePoint> {
+export const getCodePoints = function* (input: string): IterableIterator<number> {
     const {length} = input;
     for (let i = 0; i < length; i++) {
         let codeUnit = input.charCodeAt(i);
@@ -12,6 +11,6 @@ export const getCodePoints = function* (input: string): IterableIterator<CodePoi
                 i += 1;
             }
         }
-        yield codeUnit as CodePoint;
+        yield codeUnit;
     }
 };
