@@ -79,24 +79,18 @@ workflows:
     jobs:
       - build:
           filters:
-            branches:
-              only: master
             tags:
               only: /.*/
       - test:
           requires:
             - build
           filters:
-            branches:
-              only: master
             tags:
               only: /.*/
       - lint:
           requires:
             - build
           filters:
-            branches:
-              only: master
             tags:
               only: /.*/
       - deploy-canary:
@@ -104,8 +98,6 @@ workflows:
             - test
             - lint
           filters:
-            branches:
-              only: master
             tags:
               only: /.*/
       - deploy:
@@ -114,6 +106,6 @@ workflows:
             - lint
           filters:
             branches:
-              only: master
+              ignore: /.*/
             tags:
               only: /^v.*/
