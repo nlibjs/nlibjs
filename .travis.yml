@@ -26,7 +26,7 @@ after_success:
 - npm install -g codecov
 - codecov
 - |
-  if [[ $TRAVIS_OS_NAME = "linux" && $TRAVIS_NODE_VERSION = "10" && $(git symbolic-ref --short HEAD) = "master" ]]; then
+  if [[ $TRAVIS_OS_NAME = "linux" && $TRAVIS_NODE_VERSION = "10" ]]; then
     openssl aes-256-cbc -K $encrypted_8f7f9bedd2a5_key -iv $encrypted_8f7f9bedd2a5_iv -in .npmrc.enc -out ~\/.npmrc -d
     export RELEASE_NLIB=true
   fi
@@ -38,6 +38,7 @@ deploy:
     on:
       condition: "$RELEASE_NLIB = true"
       repo: nlibjs/nlibjs
+      branch: master
       tags: true
   - skip_cleanup: true
     provider: script
@@ -45,3 +46,4 @@ deploy:
     on:
       condition: "$RELEASE_NLIB = true"
       repo: nlibjs/nlibjs
+      branch: master
