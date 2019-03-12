@@ -34,8 +34,6 @@ deploy:
   - skip_cleanup: true
     provider: script
     script: npx lerna publish from-package --no-git-reset --yes
-    api_key:
-      secure: JHJ6FdAWHAc09Lha9G2vWfhQaiAe6e1nM74NO+mohYwzu7o3cAme5eq5Pt768fwRiJOqSvE296uv+kU+A1NlP/UToo/5L7QZAAcOeiac71h+/L5o1YoXX9yMkN+G/8qpTb/ZjGabEL0KqUkF2C2UvwTaA7V9xW9ZxbLZCMQt8Yqa2k0iTrUDZGEDL376iPv3kTc7T2rJse5NFKrcU3LJFUOUq35vLem/OEcRLQCg0RBaVwIiRx+uvCHXp6YsrSD8W3auv/ZP3pzonQa1PPBfclEZ2UVS6zBTVM05w3VHCpSCvjO3i2YoLdDpJf2WcrSqz7gtm+t2N5DvwExWF5r5eoOrn0qx9dflYqdXjq+uMasn4CSz8eDJsnxQbxgwiZdJJgU/cjtKWPqiciKodtYUnC4eUsqAfKwybRpuM8QeWpF2VYCgbXByjVH6vEp4nsHqtrxReRpKIRCT2VjChuQoF83yTGUbYSlWYgfyGl1u4QJs+YvfmWwxbYlFnvIEsh+e1NcumISBvK8N+mFsTPH4bmMS7skmrQCiDxGNHPU372EcyhOSmYfn41qcV7Oiaknblz9dfBM2Ud8/mnhzC4zNaPUXAD2Jd3eBaK9PX32fvEeR0FEReblLmTZn6Mi+5x2s7o32NUTBYAEn5Yv2nrSEt5Tf1HwjclSskeJOTyDmDGo=
     on:
       condition: "$TRAVIS_OS_NAME = linux"
       node: 10
@@ -45,8 +43,6 @@ deploy:
   - skip_cleanup: true
     provider: script
     script: npx lerna publish --canary --no-git-reset --yes
-    api_key:
-      secure: JHJ6FdAWHAc09Lha9G2vWfhQaiAe6e1nM74NO+mohYwzu7o3cAme5eq5Pt768fwRiJOqSvE296uv+kU+A1NlP/UToo/5L7QZAAcOeiac71h+/L5o1YoXX9yMkN+G/8qpTb/ZjGabEL0KqUkF2C2UvwTaA7V9xW9ZxbLZCMQt8Yqa2k0iTrUDZGEDL376iPv3kTc7T2rJse5NFKrcU3LJFUOUq35vLem/OEcRLQCg0RBaVwIiRx+uvCHXp6YsrSD8W3auv/ZP3pzonQa1PPBfclEZ2UVS6zBTVM05w3VHCpSCvjO3i2YoLdDpJf2WcrSqz7gtm+t2N5DvwExWF5r5eoOrn0qx9dflYqdXjq+uMasn4CSz8eDJsnxQbxgwiZdJJgU/cjtKWPqiciKodtYUnC4eUsqAfKwybRpuM8QeWpF2VYCgbXByjVH6vEp4nsHqtrxReRpKIRCT2VjChuQoF83yTGUbYSlWYgfyGl1u4QJs+YvfmWwxbYlFnvIEsh+e1NcumISBvK8N+mFsTPH4bmMS7skmrQCiDxGNHPU372EcyhOSmYfn41qcV7Oiaknblz9dfBM2Ud8/mnhzC4zNaPUXAD2Jd3eBaK9PX32fvEeR0FEReblLmTZn6Mi+5x2s7o32NUTBYAEn5Yv2nrSEt5Tf1HwjclSskeJOTyDmDGo=
     on:
       condition: "$TRAVIS_OS_NAME = linux"
       node: 10
