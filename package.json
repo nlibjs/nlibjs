@@ -27,7 +27,7 @@
         "check-dependencies": "ts-node scripts/checkDependencies.ts",
         "lerna:clear-cache": "lerna run clear-cache",
         "lerna:build": "lerna run build",
-        "lerna:test": "nyc lerna run test",
+        "lerna:test": "nyc lerna run test --parallel",
         "build": "npm-run-all --serial bootstrap lerna:clear-cache lerna:build fill-json",
         "test": "npm-run-all --serial build lerna:test check-dependencies",
         "lint": "lerna run lint",

@@ -1,18 +1,19 @@
 language: node_js
 os:
-  - linux
-  - osx
-  - windows
-matrix:
-  allow_failures:
-    - os: windows
+- linux
+- osx
+- windows
 node_js:
 - '10'
-env:
-  global:
-    secure: q/s+haJffbpIlDQCBQGt9x+bJd1OdqNJIoOnolS41r2KcwUKEYiPLHEqXFmQ21TWX0slvUvFyy4As0NR/ydr6aCWMoxKSUR1E7X0ycLuKFOVevzCmQH2XtHDKnapkoa0ddeMSdv4xEoObnuissu+zRtdAZfKuyJkz8Ysz9tPwTY6hjdH9CLfmcyGx7RkCtvaqbPPfNQrPwI/Wrl+mB9VqXwnbXt+OWwRxr78/rI2xquTazPMUj2Ao4WNU4hZlA2VPcMSLIm31WCnvcO87uNMW6/36BBW16cy02AhcVlU17HEZSwJAJQ58FlPpHbHyHmf+7PB/lfZ1cw08RvR3owSb0KVhOpvBxPa+yBS7HOGNPGdx4Zouw3/VLksVXKy80YUGA5b87hhDDl4EnfDCuLvNhCZBazgzrY8YOT0w2Ggrj/yWdd9R1HsnJQM6EludfJNHs6a0XXUyPou/loBbHD6bFHVJf7BonZfSJvHS3MZov4ULU37FZDDcGWWGariyUwaQEcIg7qBw3nxDrd396qHJgn2XfQM9b2XV3apda7SrcBQXkDWAG6zI9bDtuhjmInO8T/1zkrKh+BgMT7KG1mBHcaGsYKpPDVAJmE9dbpP0hrV2UaWsRb6capYHjIcHaL6mEOdJADpcG4jNKV3aYVbTwFr8urcnoFHCNy9tzz9aKw=
 before_install:
-- if [ $TRAVIS_OS_NAME = linux ]; then echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc; fi
+- |
+  if [[ $TRAVIS_OS_NAME == windows ]]; then
+    git config --global core.autocrlf false
+    cd ../..
+    mv $TRAVIS_REPO_SLUG _old
+    git clone _old $TRAVIS_REPO_SLUG
+    cd $TRAVIS_REPO_SLUG
+  fi
 install:
 - npm install -g nyc @commitlint/travis-cli
 - npm ci
@@ -25,22 +26,23 @@ after_success:
 - npm install -g codecov
 - codecov
 deploy:
--
-  skip_cleanup: true
-  provider: script
-  script: npx lerna publish from-package --no-git-reset --yes
-  on:
-    condition: $TRAVIS_OS_NAME = linux
-    node: 10
-    repo: nlibjs/nlibjs
-    branch: master
-    tags: true
--
-  skip_cleanup: true
-  provider: script
-  script: npx lerna publish --canary --no-git-reset --yes
-  on:
-    condition: $TRAVIS_OS_NAME = linux
-    node: 10
-    repo: nlibjs/nlibjs
-    branch: master
+  matrix:
+  - skip_cleanup: true
+    provider: script
+    script: npx lerna publish from-package --no-git-reset --yes
+    on:
+      condition: "$TRAVIS_OS_NAME = linux"
+      node: 10
+      repo: nlibjs/nlibjs
+      branch: master
+      tags: true
+  - skip_cleanup: true
+    provider: script
+    script: npx lerna publish --canary --no-git-reset --yes
+    on:
+      condition: "$TRAVIS_OS_NAME = linux"
+      node: 10
+      repo: nlibjs/nlibjs
+      branch: master
+  api_key:
+    secure: JHJ6FdAWHAc09Lha9G2vWfhQaiAe6e1nM74NO+mohYwzu7o3cAme5eq5Pt768fwRiJOqSvE296uv+kU+A1NlP/UToo/5L7QZAAcOeiac71h+/L5o1YoXX9yMkN+G/8qpTb/ZjGabEL0KqUkF2C2UvwTaA7V9xW9ZxbLZCMQt8Yqa2k0iTrUDZGEDL376iPv3kTc7T2rJse5NFKrcU3LJFUOUq35vLem/OEcRLQCg0RBaVwIiRx+uvCHXp6YsrSD8W3auv/ZP3pzonQa1PPBfclEZ2UVS6zBTVM05w3VHCpSCvjO3i2YoLdDpJf2WcrSqz7gtm+t2N5DvwExWF5r5eoOrn0qx9dflYqdXjq+uMasn4CSz8eDJsnxQbxgwiZdJJgU/cjtKWPqiciKodtYUnC4eUsqAfKwybRpuM8QeWpF2VYCgbXByjVH6vEp4nsHqtrxReRpKIRCT2VjChuQoF83yTGUbYSlWYgfyGl1u4QJs+YvfmWwxbYlFnvIEsh+e1NcumISBvK8N+mFsTPH4bmMS7skmrQCiDxGNHPU372EcyhOSmYfn41qcV7Oiaknblz9dfBM2Ud8/mnhzC4zNaPUXAD2Jd3eBaK9PX32fvEeR0FEReblLmTZn6Mi+5x2s7o32NUTBYAEn5Yv2nrSEt5Tf1HwjclSskeJOTyDmDGo=

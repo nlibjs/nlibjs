@@ -1,4 +1,4 @@
-import {join, sep} from 'path';
+import {join} from 'path';
 import {readFile, updateFile} from '../packages-node/afs';
 const glob: (pattern: string, cb: (err: Error | null, matches: Array<string>) => void) => void = require('glob');
 type DataValue = string | {[key: string]: string};
@@ -28,7 +28,7 @@ export const fix = async (file: string): Promise<void> => {
             throw new Error(`Unknown key: ${key}`);
         }
     }
-    const [category, directory] = file.split(sep).slice(-3, -1);
+    const [category, directory] = file.split(/\\|\//).slice(-3, -1);
     const defaults: DataMap = new Map([
         ['license', 'MIT'],
         ['author', 'Kei Ito <kei.itof@gmail.com>'],
