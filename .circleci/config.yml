@@ -32,7 +32,7 @@ jobs:
             - source-{{ .Branch }}-{{ .Revision }}
             - source-{{ .Branch }}-
             - source-
-      - run: npm install nyc codecov
+      - run: sudo npm install -g nyc codecov
       - run: npx npm-run-all --serial lerna:test check-dependencies
       - run: codecov
   lint:
@@ -55,7 +55,7 @@ jobs:
             - source-{{ .Branch }}-{{ .Revision }}
             - source-{{ .Branch }}-
             - source-
-      - run: npm install @commitlint/travis-cli
+      - run: sudo npm install -g @commitlint/travis-cli
       - run: commitlint-travis
   deploy:
     docker:
