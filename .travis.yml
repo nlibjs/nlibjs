@@ -25,6 +25,10 @@ script:
 after_success:
 - npm install -g codecov
 - codecov
+- |
+  if [[ $TRAVIS_OS_NAME == linux ]]; then
+    openssl aes-256-cbc -K $encrypted_8f7f9bedd2a5_key -iv $encrypted_8f7f9bedd2a5_iv -in .npmrc.enc -out ~\/.npmrc -d
+  fi
 deploy:
   matrix:
   - skip_cleanup: true
