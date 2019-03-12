@@ -16,45 +16,31 @@ jobs:
           key: dependencies-{{ checksum "package-lock.json" }}
       - run: npm run build
       - run: git diff --exit-code
-      - save_cache:
+      - persist_to_workspace:
+          root: .
           paths:
-            - node_modules
-            - packages-hybrid
-            - packages-node
-          key: source-{{ .Branch }}-{{ .Revision }}
+            - .
   test:
     docker:
       - image: circleci/node:lts
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - source-{{ .Branch }}-{{ .Revision }}
-            - source-{{ .Branch }}-
-            - source-
+      - attach_workspace:
+          at: .
       - run: npx lerna run test
       - run: npm run check-dependencies
   lint:
     docker:
       - image: circleci/node:lts
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - source-{{ .Branch }}-{{ .Revision }}
-            - source-{{ .Branch }}-
-            - source-
+      - attach_workspace:
+          at: .
       - run: npm run lint
   deploy-canary:
     docker:
       - image: circleci/node:lts
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - source-{{ .Branch }}-{{ .Revision }}
-            - source-{{ .Branch }}-
-            - source-
+      - attach_workspace:
+          at: .
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
@@ -63,23 +49,21 @@ jobs:
     docker:
       - image: circleci/node:lts
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - source-{{ .Branch }}-{{ .Revision }}
-            - source-{{ .Branch }}-
-            - source-
+      - attach_workspace:
+          at: .
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - run: npx lerna publish from-package --no-git-reset --yes
 workflows:
   version: 2
-  build-and-deploy:
+  build-test-deploy-canary:
     jobs:
       - build:
           filters:
             tags:
+              only: /.*/
+            branches:
               only: /.*/
       - test:
           requires:
@@ -87,11 +71,15 @@ workflows:
           filters:
             tags:
               only: /.*/
+            branches:
+              only: /.*/
       - lint:
           requires:
             - build
           filters:
             tags:
+              only: /.*/
+            branches:
               only: /.*/
       - deploy-canary:
           requires:
@@ -99,13 +87,15 @@ workflows:
             - lint
           filters:
             tags:
-              only: /.*/
+              ignore: /^v.*/
+            branches:
+              only: master
       - deploy:
           requires:
             - test
             - lint
           filters:
-            branches:
-              ignore: /.*/
             tags:
               only: /^v.*/
+            branches:
+              only: master
