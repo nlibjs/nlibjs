@@ -17,9 +17,8 @@
     ],
     "scripts": {
         "cleanup": "rimraf lib",
-        "tsc": "tsc",
-        "build": "npm-run-all --serial cleanup tsc",
-        "test": "ava lib/**/*.test.js lib/*.test.js",
+        "build": "tsc",
+        "test": "ava",
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
@@ -29,17 +28,5 @@
     },
     "devDependencies": {
         "@nlib/node-stream": "^3.4.0"
-    },
-    "eslintConfig": {
-        "overrides": [
-            {
-                "files": [
-                    "src/listen.ts"
-                ],
-                "rules": {
-                    "func-style": "off"
-                }
-            }
-        ]
     }
 }

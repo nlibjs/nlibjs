@@ -1,16 +1,11 @@
-export const compareArrayLike = <TItem>(
+export type IComparator<TItem> = (item1: TItem, item2: TItem) => number;
+
+export const createArrayLikeComparator = <TItem>(
+    comparator: IComparator<TItem>,
+): IComparator<ArrayLike<TItem>> => (
     list1: ArrayLike<TItem>,
     list2: ArrayLike<TItem>,
-    comparator: (item1: TItem, item2: TItem) => -1 | 0 | 1 = (item1, item2) => {
-        if (item1 < item2) {
-            return -1;
-        }
-        if (item2 < item1) {
-            return 1;
-        }
-        return 0;
-    },
-): -1 | 0 | 1 => {
+) => {
     const length1 = list1.length;
     const length2 = list2.length;
     const shortLength = length1 < length2 ? length1 : length2;
@@ -22,11 +17,5 @@ export const compareArrayLike = <TItem>(
             return itemComparisonResult;
         }
     }
-    if (length1 < length2) {
-        return -1;
-    }
-    if (length2 < length1) {
-        return 1;
-    }
-    return 0;
+    return length1 - length2;
 };

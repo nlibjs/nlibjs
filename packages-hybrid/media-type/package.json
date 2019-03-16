@@ -16,11 +16,11 @@
         "lib"
     ],
     "scripts": {
-        "cleanup": "rimraf lib",
+        "cleanup": "rimraf lib build/__cache",
         "build:REGISTERED_TYPES": "ts-node build/REGISTERED_TYPES.ts",
-        "tsc": "tsc",
-        "build": "npm-run-all --serial build:REGISTERED_TYPES cleanup tsc",
-        "test": "ava lib/**/*.test.js lib/*.test.js",
+        "build:core": "tsc",
+        "build": "run-s build:REGISTERED_TYPES build:core",
+        "test": "ava",
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {

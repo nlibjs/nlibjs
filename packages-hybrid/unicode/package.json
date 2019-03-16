@@ -16,12 +16,11 @@
         "lib"
     ],
     "scripts": {
-        "clear-cache": "rimraf build/__cache",
-        "cleanup": "rimraf lib",
+        "cleanup": "rimraf lib build/__cache",
         "build:named": "ts-node build/named.ts",
-        "tsc": "tsc",
-        "build": "npm-run-all --serial build:named cleanup tsc",
-        "test": "ava lib/**/*.test.js lib/*.test.js",
+        "build:core": "tsc",
+        "build": "run-s build:named build:core",
+        "test": "ava",
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {

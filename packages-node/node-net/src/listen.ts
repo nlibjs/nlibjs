@@ -1,58 +1,59 @@
 import {SetZ, hasSetZ} from '@nlib/real-number';
 import {Server, ListenOptions} from 'net';
 
-export function listen(server: Server, port?: number, hostname?: string, backlog?: number): Promise<Server>;
-export function listen(server: Server, port?: number, hostname?: string): Promise<Server>;
-export function listen(server: Server, port?: number, backlog?: number): Promise<Server>;
-export function listen(server: Server, port?: number): Promise<Server>;
-export function listen(server: Server, path: string, backlog?: number): Promise<Server>;
-export function listen(server: Server, path: string): Promise<Server>;
-export function listen(server: Server, options: ListenOptions): Promise<Server>;
-export function listen(server: Server, handle: {}, backlog?: number): Promise<Server>;
-export function listen(server: Server, handle: {}): Promise<Server>;
-export function listen(
+export interface IListen {
+    (server: Server, port?: number, hostname?: string, backlog?: number): Promise<Server>,
+    (server: Server, port?: number, hostname?: string): Promise<Server>,
+    (server: Server, port?: number, backlog?: number): Promise<Server>,
+    (server: Server, port?: number): Promise<Server>,
+    (server: Server, path: string, backlog?: number): Promise<Server>,
+    (server: Server, path: string): Promise<Server>,
+    (server: Server, options: ListenOptions): Promise<Server>,
+    (server: Server, handle: {}, backlog?: number): Promise<Server>,
+    (server: Server, handle: {}): Promise<Server>,
+}
+
+export const listen: IListen = (
     server: Server,
     arg1?: number | string | ListenOptions | {},
     arg2?: string | number,
     arg3?: number,
-): Promise<Server> {
-    return new Promise((resolve, reject) => {
-        if (server.listening) {
+): Promise<Server> => new Promise((resolve, reject) => {
+    if (server.listening) {
+        resolve(server);
+    } else {
+        server
+        .once('error', reject)
+        .once('listening', () => {
+            server.removeListener('error', reject);
             resolve(server);
-        } else {
-            server
-            .once('error', reject)
-            .once('listening', () => {
-                server.removeListener('error', reject);
-                resolve(server);
-            });
-            switch (typeof arg1) {
+        });
+        switch (typeof arg1) {
+        case 'number':
+            switch (typeof arg2) {
             case 'number':
-                switch (typeof arg2) {
-                case 'number':
-                    server.listen(arg1, arg2);
-                    break;
-                default:
-                    server.listen(arg1, arg2, arg3);
-                }
-                break;
-            case 'string':
-            case 'object':
-                switch (typeof arg2) {
-                case 'number':
-                case 'undefined':
-                    server.listen(arg1, arg2);
-                    break;
-                default:
-                    throw new Error(`Invalid second parameter: ${arg2}`);
-                }
+                server.listen(arg1, arg2);
                 break;
             default:
-                throw new Error(`Invalid first parameter: ${arg1}`);
+                server.listen(arg1, arg2, arg3);
             }
+            break;
+        case 'string':
+        case 'object':
+            switch (typeof arg2) {
+            case 'number':
+            case 'undefined':
+                server.listen(arg1, arg2);
+                break;
+            default:
+                throw new Error(`Invalid second parameter: ${arg2}`);
+            }
+            break;
+        default:
+            throw new Error(`Invalid first parameter: ${arg1}`);
         }
-    });
-}
+    }
+});
 
 export const listenPort = async (
     server: Server,
