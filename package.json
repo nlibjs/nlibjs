@@ -4,7 +4,7 @@
         "@commitlint/cli": "^7.5.2",
         "@commitlint/config-conventional": "^7.5.0",
         "@commitlint/config-lerna-scopes": "^7.5.1",
-        "@nlib/lint": "file:packages-hybrid/lint",
+        "@nlib/lint": "file:packages-core/lint",
         "@types/eslint": "^4.16.6",
         "@types/node": "^11.11.1",
         "@typescript-eslint/eslint-plugin": "^1.4.2",
@@ -96,7 +96,9 @@
     },
     "renovate-config": {
         "default": {
-            "extends": ["config:base"]
+            "extends": [
+                "config:base"
+            ]
         }
     }
 }

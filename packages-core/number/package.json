@@ -1,9 +1,9 @@
 {
-    "name": "@nlib/lint",
+    "name": "@nlib/number",
     "version": "3.3.3",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/lint",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/number",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -13,13 +13,15 @@
     },
     "main": "lib/index.js",
     "files": [
-        ".editorconfig",
-        ".eslintrc.json"
+        "lib"
     ],
     "scripts": {
         "cleanup": "rimraf lib",
         "build": "tsc",
         "test": "ava",
         "lint": "eslint --ext .ts src"
+    },
+    "dependencies": {
+        "@nlib/global": "^3.3.3"
     }
 }

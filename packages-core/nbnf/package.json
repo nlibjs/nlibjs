@@ -1,9 +1,9 @@
 {
-    "name": "@nlib/fetch",
+    "name": "@nlib/nbnf",
     "version": "3.4.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/fetch",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/nbnf",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -24,28 +24,23 @@
     "dependencies": {
         "@nlib/global": "^3.3.3",
         "@nlib/infra": "^3.4.0",
+        "@nlib/number": "^3.3.3",
         "@nlib/real-number": "^3.3.3",
         "@nlib/util": "^3.3.3"
     },
     "eslintConfig": {
+        "rules": {
+            "max-lines-per-function": "off",
+            "no-loop-func": "off",
+            "no-control-regex": "off"
+        },
         "overrides": [
             {
                 "files": [
-                    "src/*.ts"
-                ],
-                "env": {
-                    "node": true
-                },
-                "rules": {
-                    "no-loop-func": "off"
-                }
-            },
-            {
-                "files": [
-                    "src/collectAnHTTPQuotedString.ts"
+                    "src/parse/Digits.ts"
                 ],
                 "rules": {
-                    "max-lines-per-function": "off"
+                    "no-bitwise": "off"
                 }
             }
         ]

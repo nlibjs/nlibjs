@@ -1,9 +1,9 @@
 {
-    "name": "@nlib/util",
-    "version": "3.3.3",
+    "name": "@nlib/fetch",
+    "version": "3.4.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/util",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/fetch",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -22,19 +22,30 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.3.3"
+        "@nlib/global": "^3.3.3",
+        "@nlib/infra": "^3.4.0",
+        "@nlib/real-number": "^3.3.3",
+        "@nlib/util": "^3.3.3"
     },
     "eslintConfig": {
         "overrides": [
             {
                 "files": [
-                    "src/getLast.*",
-                    "src/getType.*",
-                    "src/is*.ts",
-                    "src/NlibError.ts"
+                    "src/*.ts"
+                ],
+                "env": {
+                    "node": true
+                },
+                "rules": {
+                    "no-loop-func": "off"
+                }
+            },
+            {
+                "files": [
+                    "src/collectAnHTTPQuotedString.ts"
                 ],
                 "rules": {
-                    "@typescript-eslint/no-explicit-any": "off"
+                    "max-lines-per-function": "off"
                 }
             }
         ]

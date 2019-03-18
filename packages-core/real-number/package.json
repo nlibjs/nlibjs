@@ -1,9 +1,9 @@
 {
-    "name": "@nlib/named-tree",
+    "name": "@nlib/real-number",
     "version": "3.3.3",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/named-tree",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/real-number",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@nlib/global": "^3.3.3",
+        "@nlib/number": "^3.3.3",
         "@nlib/util": "^3.3.3"
     }
 }

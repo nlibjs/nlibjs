@@ -1,6 +1,6 @@
 import {join} from 'path';
 import {readFile, updateFile} from '../packages-node/afs';
-import {NlibError} from '../packages-hybrid/util';
+import {NlibError} from '../packages-core/util';
 const glob: (pattern: string, cb: (err: Error | null, matches: Array<string>) => void) => void = require('glob');
 type DataValue = string | {[key: string]: string};
 type DataArray = Array<[string, DataValue]>;

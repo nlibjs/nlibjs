@@ -1,9 +1,9 @@
 {
-    "name": "@nlib/nbnf",
-    "version": "3.4.0",
+    "name": "@nlib/util",
+    "version": "3.3.3",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/nbnf",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/util",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -22,25 +22,19 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.3.3",
-        "@nlib/infra": "^3.4.0",
-        "@nlib/number": "^3.3.3",
-        "@nlib/real-number": "^3.3.3",
-        "@nlib/util": "^3.3.3"
+        "@nlib/global": "^3.3.3"
     },
     "eslintConfig": {
-        "rules": {
-            "max-lines-per-function": "off",
-            "no-loop-func": "off",
-            "no-control-regex": "off"
-        },
         "overrides": [
             {
                 "files": [
-                    "src/parse/Digits.ts"
+                    "src/getLast.*",
+                    "src/getType.*",
+                    "src/is*.ts",
+                    "src/NlibError.ts"
                 ],
                 "rules": {
-                    "no-bitwise": "off"
+                    "@typescript-eslint/no-explicit-any": "off"
                 }
             }
         ]

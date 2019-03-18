@@ -1,9 +1,9 @@
 {
-    "name": "@nlib/real-number",
+    "name": "@nlib/lint",
     "version": "3.3.3",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/real-number",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/lint",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -13,17 +13,13 @@
     },
     "main": "lib/index.js",
     "files": [
-        "lib"
+        ".editorconfig",
+        ".eslintrc.json"
     ],
     "scripts": {
         "cleanup": "rimraf lib",
         "build": "tsc",
         "test": "ava",
         "lint": "eslint --ext .ts src"
-    },
-    "dependencies": {
-        "@nlib/global": "^3.3.3",
-        "@nlib/number": "^3.3.3",
-        "@nlib/util": "^3.3.3"
     }
 }

@@ -1,6 +1,6 @@
 import {join, sep} from 'path';
 import {readFile} from '../packages-node/afs/src';
-import {NlibError} from '../packages-hybrid/util/src/NlibError';
+import {NlibError} from '../packages-core/util/src/NlibError';
 export type DataValue = string | {[key: string]: string};
 export interface IData {
     readonly name: string,
@@ -10,7 +10,7 @@ export interface IData {
     readonly [key: string]: DataValue,
 }
 export interface IPackages {
-    readonly hybrid: Map<string, IData>,
+    readonly core: Map<string, IData>,
     readonly node: Map<string, IData>,
 }
 export const glob: (pattern: string, cb: (err: Error | null, matches: Array<string>) => void) => void = require('glob');
@@ -24,7 +24,7 @@ export const globAsync = (pattern: string): Promise<Array<string>> => new Promis
     });
 });
 export const globPackages = async (): Promise<IPackages> => {
-    const hybrid = new Map<string, IData>();
+    const core = new Map<string, IData>();
     const node = new Map<string, IData>();
     await Promise.all(
         (await globAsync(join(__dirname, '../packages-*/*/package.json')))
@@ -39,8 +39,8 @@ export const globPackages = async (): Promise<IPackages> => {
                 });
             }
             switch (category) {
-            case 'packages-hybrid':
-                hybrid.set(data.name, data);
+            case 'packages-core':
+                core.set(data.name, data);
                 break;
             case 'packages-node':
                 node.set(data.name, data);
@@ -54,5 +54,5 @@ export const globPackages = async (): Promise<IPackages> => {
             }
         })
     );
-    return {hybrid, node};
+    return {core, node};
 };

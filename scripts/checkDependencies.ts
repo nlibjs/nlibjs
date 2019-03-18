@@ -1,4 +1,4 @@
-import {NlibError} from '../packages-hybrid/util/src/NlibError';
+import {NlibError} from '../packages-core/util/src/NlibError';
 import {
     globPackages,
     IData,
@@ -29,10 +29,10 @@ export const isAllowedPackage = (
 };
 
 export const check = async (): Promise<void> => {
-    const {hybrid: hybridPackages} = await globPackages();
+    const {core: corePackages} = await globPackages();
     let errorCount = 0;
-    const allowedPackages = new Map(hybridPackages);
-    for (const [name, {dependencies = {}}] of hybridPackages) {
+    const allowedPackages = new Map(corePackages);
+    for (const [name, {dependencies = {}}] of corePackages) {
         let errored = false;
         for (const dependency of Object.keys(dependencies)) {
             if (!isAllowedPackage(name, dependency, allowedPackages)) {

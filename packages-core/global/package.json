@@ -3,7 +3,7 @@
     "version": "3.3.3",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/global",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/global",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"

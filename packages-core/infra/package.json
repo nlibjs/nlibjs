@@ -1,9 +1,9 @@
 {
-    "name": "@nlib/number",
-    "version": "3.3.3",
+    "name": "@nlib/infra",
+    "version": "3.4.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
-    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-hybrid/number",
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/infra",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
         "access": "public"
@@ -22,6 +22,8 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.3.3"
+        "@nlib/global": "^3.3.3",
+        "@nlib/real-number": "^3.3.3",
+        "@nlib/util": "^3.3.3"
     }
 }
