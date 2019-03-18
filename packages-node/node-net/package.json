@@ -22,10 +22,10 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@types/node": "^10.12.15",
         "@nlib/afs": "^3.4.0",
+        "@nlib/real-number": "^3.3.3",
         "@nlib/util": "^3.3.3",
-        "@nlib/real-number": "^3.3.3"
+        "@types/node": "^11.11.3"
     },
     "devDependencies": {
         "@nlib/node-stream": "^3.4.0"

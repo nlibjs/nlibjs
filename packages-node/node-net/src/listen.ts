@@ -84,8 +84,15 @@ export const listenPort = async (
         const addressInfo = server.address();
         if (isString(addressInfo)) {
             throw new NlibError({
-                code: 'EListening',
+                code: 'node-net/listenPort/1',
                 message: `The server is listening ${addressInfo}`,
+                data: addressInfo,
+            });
+        }
+        if (!addressInfo) {
+            throw new NlibError({
+                code: 'node-net/listenPort/2',
+                message: `server.address() returns ${addressInfo}`,
                 data: addressInfo,
             });
         }
