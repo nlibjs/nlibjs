@@ -1,3 +1,4 @@
+import {NlibError} from '@nlib/util';
 import {String} from '@nlib/global';
 import {
     PositionCallback,
@@ -29,13 +30,21 @@ export const parseNumVal = (
     if (input[position] === PERCENT_SIGN) {
         position++;
     } else {
-        throw new Error('Parsing error: PERCENT_SIGN expected at left end');
+        throw new NlibError({
+            code: 'nbnf/parseNumVal/1',
+            message: 'Parsing error: PERCENT_SIGN expected at left end',
+            data: {input, from},
+        });
     }
     const radix = radixes[input[position]];
     if (radix) {
         position++;
     } else {
-        throw new Error(`Parsing error: invalid radix indicator ${String.fromCodePoint(input[position])}`);
+        throw new NlibError({
+            code: 'nbnf/parseNumVal/2',
+            message: `Parsing error: invalid radix indicator ${String.fromCodePoint(input[position])}`,
+            data: {input, from},
+        });
     }
     const number1 = parseDigits(input, position, radix, updatePosition);
     let result: INBNFSequenceElement | INBNFCodePointElement;

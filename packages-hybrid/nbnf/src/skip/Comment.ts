@@ -1,3 +1,4 @@
+import {Uint32Array} from '@nlib/global';
 import {
     SEMICOLON,
     getNextLineHead,

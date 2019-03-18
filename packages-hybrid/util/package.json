@@ -30,7 +30,8 @@
                 "files": [
                     "src/getLast.*",
                     "src/getType.*",
-                    "src/is*.ts"
+                    "src/is*.ts",
+                    "src/NlibError.ts"
                 ],
                 "rules": {
                     "@typescript-eslint/no-explicit-any": "off"

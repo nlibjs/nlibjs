@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@nlib/global": "^3.3.3",
-        "@nlib/real-number": "^3.3.3"
+        "@nlib/real-number": "^3.3.3",
+        "@nlib/util": "^3.3.3"
     }
 }

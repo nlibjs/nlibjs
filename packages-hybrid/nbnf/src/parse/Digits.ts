@@ -1,4 +1,4 @@
-import {Error} from '@nlib/global';
+import {NlibError} from '@nlib/util';
 import {
     CodePointCondition,
     PositionCallback,
@@ -36,15 +36,20 @@ export const radixes: IRadixMap = {
 
 export const parseDigits = (
     input: Uint32Array,
-    position: number,
+    from: number,
     radix: IRadixData,
     positionCallback: PositionCallback,
 ): number => {
+    let position = from;
     const digits = collectCodePointSequence(input, position, radix.condition, (newPosition) => {
         position = newPosition;
     });
     if (digits.length === 0) {
-        throw new Error('Parsing error: digits is empty');
+        throw new NlibError({
+            code: 'nbnf/parseDigits/1',
+            message: 'Parsing error: digits is empty',
+            data: {input, from},
+        });
     }
     positionCallback(position);
     return radix.filter(digits);

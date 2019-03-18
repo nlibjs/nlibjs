@@ -1,3 +1,4 @@
+import {NlibError} from '@nlib/util';
 import {
     NBNFNormalizedElementType,
     NBNFCompiledElementType,
@@ -24,10 +25,18 @@ export const compileElement = (
         if (compiledAlternation) {
             return {type: NBNFCompiledElementType.Rule, data: {name, elements: compiledAlternation}};
         } else {
-            throw new Error(`No rule: ${name}`);
+            throw new NlibError({
+                code: 'nbnf/compileElement/1',
+                message: `No rule: ${name}`,
+                data: element,
+            });
         }
     }
     default:
-        throw new Error(`Unknown type: ${element}`);
+        throw new NlibError({
+            code: 'nbnf/compileElement/2',
+            message: `Unknown type: ${element}`,
+            data: element,
+        });
     }
 };

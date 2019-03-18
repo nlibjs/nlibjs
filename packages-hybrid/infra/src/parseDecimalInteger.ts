@@ -1,7 +1,10 @@
-import {Error} from '@nlib/global';
+import {NlibError} from '@nlib/util';
 import {collectCodePointSequence} from './4.6.Strings';
 import {PositionCallback} from './types';
-import {isASCIIDigit, DIGIT_ZERO} from './4.5.CodePoints';
+import {
+    isASCIIDigit,
+    DIGIT_ZERO,
+} from './4.5.CodePoints';
 
 export const parseDecimalInteger = (
     input: Uint32Array,
@@ -13,11 +16,19 @@ export const parseDecimalInteger = (
         position = newPosition;
     });
     if (digits.length === 0) {
-        throw new Error('No digits');
+        throw new NlibError({
+            code: 'ENoDigits',
+            message: 'No digits',
+            data: input,
+        });
     }
     const firstDigit = digits[0];
     if (firstDigit === DIGIT_ZERO && digits[1] === DIGIT_ZERO) {
-        throw new Error(`The decimal starts with 00: ${digits}`);
+        throw new NlibError({
+            code: 'EZeroPrefix',
+            message: `The decimal starts with 00: ${digits}`,
+            data: input,
+        });
     }
     if (positionCallBack) {
         positionCallBack(position);

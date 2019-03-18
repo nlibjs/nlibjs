@@ -1,5 +1,6 @@
 import {join} from 'path';
-import {readFile, updateFile} from '../packages-node/afs/lib';
+import {readFile, updateFile} from '../packages-node/afs';
+import {NlibError} from '../packages-hybrid/util';
 const glob: (pattern: string, cb: (err: Error | null, matches: Array<string>) => void) => void = require('glob');
 type DataValue = string | {[key: string]: string};
 type DataArray = Array<[string, DataValue]>;
@@ -14,7 +15,11 @@ export const fix = async (file: string): Promise<void> => {
     ];
     for (const [key] of map) {
         if (!keys.includes(key)) {
-            throw new Error(`Unknown key: ${key}`);
+            throw new NlibError({
+                code: 'EINVALIDKEY',
+                message: `Unknown key: ${key}`,
+                data: key,
+            });
         }
     }
     const defaults: DataMap = new Map([

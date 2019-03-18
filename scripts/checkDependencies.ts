@@ -1,49 +1,48 @@
-import {join, sep} from 'path';
-import {readFile} from '../packages-node/afs/lib';
-const glob: (pattern: string, cb: (err: Error | null, matches: Array<string>) => void) => void = require('glob');
-type DataValue = string | {[key: string]: string};
-interface IData {
-    name: string,
-    dependencies: {
-        [packageName: string]: string,
-    },
-    [key: string]: DataValue,
-}
+import {NlibError} from '../packages-hybrid/util/src/NlibError';
+import {
+    globPackages,
+    IData,
+} from './util';
 
-export const check = (pattern: string): Promise<void> => new Promise<Array<string>>((resolve, reject) => {
-    glob(pattern, (error, files) => {
-        if (error) {
-            reject(error);
-        } else {
-            resolve(files);
-        }
-    });
-})
-.then(async (files: Array<string>) => {
-    const packages = await Promise.all(files.map(async (file) => {
-        const [category, directory] = file.split(sep).slice(-3, -1);
-        return {
-            category,
-            directory,
-            ...JSON.parse(`${await readFile(file)}`) as IData,
-        };
-    }));
-    const hybridPackages = new Set<string>();
-    for (const {category, name} of packages) {
-        if (category === 'packages-hybrid') {
-            hybridPackages.add(name);
-        }
+export const allowedExternalPackages = new Map<string, Set<string>>([
+    ['@nlib/global', new Set([
+        '@types/webassembly-js-api',
+    ])],
+    ['@nlib/xml-js', new Set([
+        'xml-js',
+    ])],
+]);
+
+export const isAllowedPackage = (
+    packageName: string,
+    dependency: string,
+    allowedPackages: Map<string, IData>,
+): boolean => {
+    if (allowedPackages.has(dependency)) {
+        return true;
     }
+    const set = allowedExternalPackages.get(packageName);
+    if (set && set.has(dependency)) {
+        return true;
+    }
+    return false;
+};
+
+export const check = async (): Promise<void> => {
+    const {hybrid: hybridPackages} = await globPackages();
     let errorCount = 0;
-    for (const {name, dependencies} of packages) {
+    const allowedPackages = new Map(hybridPackages);
+    for (const [name, {dependencies = {}}] of hybridPackages) {
         let errored = false;
-        if ((hybridPackages.has(name) || name === '@nlib/node-util') && dependencies) {
-            const forbiddenPackages = Object.keys(dependencies)
-            .filter((packageName) => packageName.startsWith('@nlib') && !hybridPackages.has(packageName));
-            if (0 < forbiddenPackages.length) {
+        for (const dependency of Object.keys(dependencies)) {
+            if (!isAllowedPackage(name, dependency, allowedPackages)) {
                 errorCount++;
                 errored = true;
-                console.error(new Error(`${name} cannot depend on ${forbiddenPackages.join(', ')}`));
+                console.error(new NlibError({
+                    code: 'EForbiddenPackage',
+                    message: `${name} cannot depend on ${dependency}`,
+                    data: dependency,
+                }));
             }
         }
         if (!errored) {
@@ -51,13 +50,16 @@ export const check = (pattern: string): Promise<void> => new Promise<Array<strin
         }
     }
     if (0 < errorCount) {
-        throw new Error(`Error count: ${errorCount}`);
+        throw new NlibError({
+            code: '',
+            message: `Error count: ${errorCount}`,
+            data: errorCount,
+        });
     }
-});
+};
 
 if (!module.parent) {
-    check(join(__dirname, '../packages-*/*/package.json'))
-    .catch((error) => {
+    check().catch((error) => {
         console.log(error);
         process.exit();
     });

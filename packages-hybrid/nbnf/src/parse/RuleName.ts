@@ -1,4 +1,5 @@
-import {Error, String} from '@nlib/global';
+import {NlibError} from '@nlib/util';
+import {String} from '@nlib/global';
 import {
     PositionCallback,
     REVERSE_SOLIDUS,
@@ -26,12 +27,20 @@ export const parseRuleName = (
     {
         const firstCodePoint = input[position];
         if (isNotRuleNameFirstCharacter(firstCodePoint)) {
-            throw new Error(`Parsing error: invalid first codePoint 0x${firstCodePoint.toString(16)} (${String.fromCodePoint(firstCodePoint)}) at ${position}\n${toString(input.slice(position))}`);
+            throw new NlibError({
+                code: 'nbnf/parseRuleName/1',
+                message: `Parsing error: invalid first codePoint 0x${firstCodePoint.toString(16)} (${String.fromCodePoint(firstCodePoint)}) at ${position}\n${toString(input.slice(position))}`,
+                data: {input, from},
+            });
         } else if (isScalarValue(firstCodePoint)) {
             position++;
             collected[length++] = firstCodePoint;
         } else {
-            throw new Error(`Parsing error: no codePoints at ${from}`);
+            throw new NlibError({
+                code: 'nbnf/parseRuleName/1',
+                message: `Parsing error: no codePoints at ${from}`,
+                data: {input, from},
+            });
         }
     }
     while (position < inputLength) {

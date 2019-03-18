@@ -1,6 +1,5 @@
 import {
     Date,
-    Error,
     console,
 } from '@nlib/global';
 import {
@@ -18,6 +17,7 @@ import {
 import {
     isNumber,
     getLast,
+    NlibError,
 } from '@nlib/util';
 import {
     ICookieParseResult,
@@ -48,7 +48,11 @@ export const extractExpiresFrom = (
     if (isASTRuleNode(expiresValueNode, 'sane-cookie-date')) {
         return new Date(nodeToString(expiresValueNode));
     }
-    console.error(new Error(`Invalid Expires: ${nodeToString(attributeNode)}`));
+    console.error(new NlibError({
+        code: 'cookie/parseCookieString/1',
+        message: `Invalid Expires: ${nodeToString(attributeNode)}`,
+        data: attributeNode,
+    }));
     return null;
 };
 
@@ -60,7 +64,11 @@ export const extractMaxAgeFrom = (
     if (isASTRuleNode(maxAgeValueNode, 'decimal-value')) {
         return parseDecLiteral(nodeToScalarValueString(maxAgeValueNode));
     }
-    console.error(new Error(`Invalid Max-Age: ${nodeToString(attributeNode)}`));
+    console.error(new NlibError({
+        code: 'cookie/parseCookieString/2',
+        message: `Invalid Max-Age: ${nodeToString(attributeNode)}`,
+        data: attributeNode,
+    }));
     return null;
 };
 
@@ -83,7 +91,11 @@ export const extractPathFrom = (
     if (isASTRuleNode(pathValueNode, 'path-value')) {
         return nodeToString(pathValueNode);
     }
-    console.error(new Error(`Invalid Path: ${nodeToString(attributeNode)}`));
+    console.error(new NlibError({
+        code: 'cookie/parseCookieString/3',
+        message: `Invalid Path: ${nodeToString(attributeNode)}`,
+        data: attributeNode,
+    }));
     return null;
 };
 
@@ -144,7 +156,11 @@ export const parseSetCookieString = (
                 break;
             case 'extension-av':
             default:
-                console.error(new Error(`Unsupported attribute: ${nodeToString(attributeNode)}`));
+                console.error(new NlibError({
+                    code: 'cookie/parseCookieString/4',
+                    message: `Unsupported attribute: ${nodeToString(attributeNode)}`,
+                    data: setCookieString,
+                }));
                 return null;
             }
         }

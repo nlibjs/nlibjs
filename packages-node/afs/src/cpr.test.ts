@@ -129,6 +129,6 @@ if (process.platform !== 'win32') {
             });
         });
         const copiedDir = join(t.context.directory, 'copied1', 'copied2');
-        await t.throwsAsync(() => cpr(copieeDir, copiedDir), {code: 'ENOTSUPPORTED'});
+        await t.throwsAsync(() => cpr(copieeDir, copiedDir), {code: 'afs/cpr/1'});
     });
 }

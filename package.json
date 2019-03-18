@@ -60,33 +60,7 @@
         "overrides": [
             {
                 "files": [
-                    "packages-hybrid/**/*.ts"
-                ],
-                "env": {
-                    "es6": true
-                }
-            },
-            {
-                "files": [
-                    "packages-client/**/*.ts"
-                ],
-                "env": {
-                    "es6": true,
-                    "browser": true
-                }
-            },
-            {
-                "files": [
-                    "packages-node/**/*.ts"
-                ],
-                "env": {
-                    "es6": true,
-                    "node": true
-                }
-            },
-            {
-                "files": [
-                    "*.test.ts"
+                    "**/*.test.ts"
                 ],
                 "env": {
                     "node": true
@@ -102,8 +76,18 @@
                 },
                 "rules": {
                     "no-console": "off",
+                    "global-require": "off",
                     "@typescript-eslint/no-require-imports": "off",
                     "@typescript-eslint/no-var-requires": "off"
+                }
+            },
+            {
+                "files": [
+                    "packages-node/**/*"
+                ],
+                "env": {
+                    "es6": true,
+                    "node": true
                 }
             }
         ]

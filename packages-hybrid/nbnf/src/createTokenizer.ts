@@ -1,4 +1,4 @@
-import {Error} from '@nlib/global';
+import {NlibError} from '@nlib/util';
 import {toScalarValueString} from '@nlib/infra';
 import {
     INBNFRuleList,
@@ -23,13 +23,21 @@ export const createTokenizerFromCompiledRuleList = (compiledRuleList: INBNFCompi
 ) => {
     const elements = compiledRuleList[name];
     if (!elements) {
-        throw new Error(`No rule found: ${name}`);
+        throw new NlibError({
+            code: 'nbnf/createTokenizer/1',
+            message: `No rule found: ${name}`,
+            data: {source, name},
+        });
     }
     for (const {node, end} of tokenizeRule({name, elements}, toScalarValueString(source), from)) {
         positionCallback(end);
         return node;
     }
-    throw new Error(`Failed to tokenize ${name}`);
+    throw new NlibError({
+        code: 'nbnf/createTokenizer/2',
+        message: `Failed to tokenize ${name}`,
+        data: {source, name},
+    });
 };
 
 export const createTokenizerFromNormalizedRuleList = (input: INBNFNormalizedRuleList): INBNFTokenizer => createTokenizerFromCompiledRuleList(compileRuleList(input));

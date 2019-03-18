@@ -1,4 +1,4 @@
-import {Error} from '@nlib/global';
+import {NlibError} from '@nlib/util';
 import {
     PositionCallback,
     getNextLineHead,
@@ -41,10 +41,18 @@ export const parseRuleList = (
                 if (alreadyDefinedRule) {
                     alreadyDefinedRule.push(...elements);
                 } else {
-                    throw new Error(`${name} is incremental rule but it's not defined at ${position}`);
+                    throw new NlibError({
+                        code: 'nbnf/parseRuleList/1',
+                        message: `${name} is incremental rule but it's not defined at ${position}`,
+                        data: {input, from},
+                    });
                 }
             } else if (rules[name]) {
-                throw new Error(`${name} is non-incremental rule but it is already defined`);
+                throw new NlibError({
+                    code: 'nbnf/parseRuleList/2',
+                    message: `${name} is non-incremental rule but it is already defined`,
+                    data: {input, from},
+                });
             } else {
                 rules[name] = elements;
             }

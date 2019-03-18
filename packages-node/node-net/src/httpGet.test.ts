@@ -139,7 +139,7 @@ test('request 404', async (t) => {
     const url = new URL(t.context.NOT_FOUND, t.context.baseURL);
     await t.throwsAsync(async () => {
         await httpGet(url);
-    });
+    }, {code: 'EResponse'});
 });
 
 test('fail to read cache', async (t) => {

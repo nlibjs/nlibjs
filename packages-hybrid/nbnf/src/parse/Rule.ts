@@ -1,3 +1,4 @@
+import {NlibError} from '@nlib/util';
 import {
     PositionCallback,
     EQUALS_SIGN,
@@ -31,7 +32,11 @@ export const parseRule = (
             position += 1;
         }
     } else {
-        throw new Error(`Parsing error at ${position}: "=" expected.`);
+        throw new NlibError({
+            code: 'nbnf/parseRule/1',
+            message: `Parsing error at ${position}: "=" expected.`,
+            data: {input, from},
+        });
     }
     position = skipCWSP(input, position);
     const elements = parseElements(

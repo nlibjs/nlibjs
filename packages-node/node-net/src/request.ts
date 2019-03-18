@@ -8,6 +8,7 @@ import {
     RequestOptions as RequestOptionsHTTPS,
 } from 'https';
 import {Readable} from 'stream';
+import {NlibError} from '@nlib/util';
 
 export const request = (
     src: string | URL,
@@ -25,7 +26,11 @@ export const request = (
             } else if (typeof data.pipe === 'function') {
                 data.pipe(req);
             } else {
-                reject(new Error(`Invalid data: ${data}`));
+                reject(new NlibError({
+                    code: 'node-net/request/1',
+                    message: `Invalid data: ${data}`,
+                    data: {src, options, data},
+                }));
             }
         } else {
             req.end();

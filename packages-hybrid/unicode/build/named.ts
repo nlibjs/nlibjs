@@ -2,7 +2,10 @@
 import {join} from 'path';
 import {Transform} from 'stream';
 import {createWriteStream} from 'fs';
-import {console} from '@nlib/global';
+import {
+    console,
+    Promise as $Promise,
+} from '@nlib/global';
 import {
     collectCodePointSequence,
     isASCIIAlphanumeric,
@@ -18,7 +21,7 @@ export const build = async (): Promise<void> => {
     const dest = join(__dirname, '../src/named.ts');
     const stream = await getUCDFieldsStream(urls.UnicodeData);
     const aliases = await getNameAliases();
-    await new Promise<void>((resolve, reject) => {
+    await new $Promise<void>((resolve, reject) => {
         stream
         .pipe(new Transform({
             objectMode: true,

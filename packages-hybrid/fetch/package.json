@@ -24,17 +24,28 @@
     "dependencies": {
         "@nlib/global": "^3.3.3",
         "@nlib/infra": "^3.4.0",
-        "@nlib/real-number": "^3.3.3"
+        "@nlib/real-number": "^3.3.3",
+        "@nlib/util": "^3.3.3"
     },
     "eslintConfig": {
         "overrides": [
             {
-                "files": "src/*.ts",
+                "files": [
+                    "src/*.ts"
+                ],
                 "env": {
                     "node": true
                 },
                 "rules": {
                     "no-loop-func": "off"
+                }
+            },
+            {
+                "files": [
+                    "src/collectAnHTTPQuotedString.ts"
+                ],
+                "rules": {
+                    "max-lines-per-function": "off"
                 }
             }
         ]

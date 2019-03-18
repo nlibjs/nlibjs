@@ -24,6 +24,7 @@
     "dependencies": {
         "@types/node": "^10.12.15",
         "@nlib/afs": "^3.4.0",
+        "@nlib/util": "^3.3.3",
         "@nlib/real-number": "^3.3.3"
     },
     "devDependencies": {

@@ -1,4 +1,11 @@
-import {Uint32Array, Uint8Array, Set, Math, String} from '@nlib/global';
+import {
+    Uint32Array,
+    Uint8Array,
+    Set,
+    Math,
+    String,
+} from '@nlib/global';
+import {NlibError} from '@nlib/util';
 import {
     PositionCallback,
     CodePointCondition,
@@ -95,7 +102,11 @@ export const isomorphicEncode = (input: Uint32Array): Uint8Array => {
     for (let index = 0; index < length; index++) {
         const codePoint = input[index];
         if (0x00FF < codePoint) {
-            throw new Error(`The codepoint at ${index} is greater then 0x00FF: ${codePoint}`);
+            throw new NlibError({
+                code: 'ERange',
+                message: `The codepoint at ${index} is greater then 0x00FF: ${codePoint}`,
+                data: input,
+            });
         }
         encoded[index] = codePoint;
     }
@@ -110,7 +121,11 @@ export const toASCIIUpperCase = (input: Uint32Array): Uint32Array => input.map(t
 
 export const encodeASCII = (input: Uint32Array): Uint8Array => {
     if (!isASCIIString(input)) {
-        throw new Error(`The input is not an ASCII string: ${input}`);
+        throw new NlibError({
+            code: 'ENonASCII',
+            message: `The input is not an ASCII string: ${input}`,
+            data: input,
+        });
     }
     return isomorphicEncode(input);
 };
@@ -118,7 +133,11 @@ export const encodeASCII = (input: Uint32Array): Uint8Array => {
 export const decodeASCII = (input: Uint8Array): Uint32Array => {
     for (const byte of input) {
         if (!isASCIIByte(byte)) {
-            throw new Error(`The input has a non-ASCII byte: ${byte}`);
+            throw new NlibError({
+                code: 'ENonASCII',
+                message: `The input has a non-ASCII byte: ${byte}`,
+                data: input,
+            });
         }
     }
     return isomorphicDecode(input);

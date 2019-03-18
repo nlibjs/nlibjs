@@ -1,5 +1,15 @@
-import {SetZ, hasSetZ} from '@nlib/real-number';
-import {Server, ListenOptions} from 'net';
+import {
+    Server,
+    ListenOptions,
+} from 'net';
+import {
+    SetZ,
+    hasSetZ,
+} from '@nlib/real-number';
+import {
+    NlibError,
+    isString,
+} from '@nlib/util';
 
 export interface IListen {
     (server: Server, port?: number, hostname?: string, backlog?: number): Promise<Server>,
@@ -46,11 +56,19 @@ export const listen: IListen = (
                 server.listen(arg1, arg2);
                 break;
             default:
-                throw new Error(`Invalid second parameter: ${arg2}`);
+                throw new NlibError({
+                    code: 'EInvalidParameter',
+                    message: `Invalid second parameter: ${arg2}`,
+                    data: arg2,
+                });
             }
             break;
         default:
-            throw new Error(`Invalid first parameter: ${arg1}`);
+            throw new NlibError({
+                code: 'EInvalidParameter',
+                message: `Invalid first parameter: ${arg1}`,
+                data: arg1,
+            });
         }
     }
 });
@@ -64,8 +82,12 @@ export const listenPort = async (
 ): Promise<number> => {
     if (server.listening) {
         const addressInfo = server.address();
-        if (typeof addressInfo === 'string') {
-            throw new Error(`The server listens a port: ${addressInfo}`);
+        if (isString(addressInfo)) {
+            throw new NlibError({
+                code: 'EListening',
+                message: `The server is listening ${addressInfo}`,
+                data: addressInfo,
+            });
         }
         return addressInfo.port;
     }

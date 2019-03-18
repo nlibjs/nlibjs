@@ -1,4 +1,5 @@
 import {join} from 'path';
+import {Set} from '@nlib/global';
 import {readStream} from '@nlib/node-stream';
 import {xml2js, Element, elementWalker} from '@nlib/xml-js';
 import {updateFile} from '@nlib/afs';

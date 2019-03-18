@@ -30,6 +30,7 @@
     },
     "eslintConfig": {
         "rules": {
+            "max-lines-per-function": "off",
             "no-loop-func": "off",
             "no-control-regex": "off"
         },

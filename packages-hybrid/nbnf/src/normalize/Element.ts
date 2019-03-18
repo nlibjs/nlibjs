@@ -1,4 +1,9 @@
-import {Error} from '@nlib/global';
+import {NlibError} from '@nlib/util';
+import {
+    fromCodePoint,
+    toASCIILowerCaseCodePoint,
+    toASCIILowerCase,
+} from '@nlib/infra';
 import {
     INBNFElement,
     NBNFElementType,
@@ -7,11 +12,6 @@ import {
     INBNFNullableNormalizedRuleList,
 } from '../types';
 import {normalizeAlternation} from './Alternation';
-import {
-    fromCodePoint,
-    toASCIILowerCaseCodePoint,
-    toASCIILowerCase,
-} from '@nlib/infra';
 
 export const normalizeElement = (
     element: INBNFElement | INBNFNormalizedElement,
@@ -56,6 +56,10 @@ export const normalizeElement = (
         return {type: NBNFNormalizedElementType.CodePoint, data: element.data};
     }
     default:
-        throw new Error(`Unknown type: ${element.type}`);
+        throw new NlibError({
+            code: 'nbnf/normalizeElement/1',
+            message: `Unknown type: ${element.type}`,
+            data: {element, expands, context},
+        });
     }
 };

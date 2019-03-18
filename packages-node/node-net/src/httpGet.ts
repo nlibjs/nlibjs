@@ -1,7 +1,19 @@
-import {join, dirname} from 'path';
-import {Readable, PassThrough} from 'stream';
+import {
+    join,
+    dirname,
+} from 'path';
+import {
+    Readable,
+    PassThrough,
+} from 'stream';
 import {Stats} from 'fs';
-import {stat, createReadStream, createWriteStream, mkdirp} from '@nlib/afs';
+import {
+    stat,
+    createReadStream,
+    createWriteStream,
+    mkdirp,
+} from '@nlib/afs';
+import {NlibError} from '@nlib/util';
 import {request} from './request';
 
 export const sanitizeEtag = (etag: string): string => etag
@@ -19,7 +31,11 @@ const readFromCache = async (cacheDirectory: string, cacheId: string): Promise<I
     if (stats.isFile()) {
         return Object.assign(createReadStream(cachePath), {fromCache: true, cachePromise: null});
     } else {
-        throw Object.assign(new Error(`There is non-file object at ${cachePath}`), {code: 'EEXISTS'});
+        throw new NlibError({
+            code: 'EEXISTS',
+            message: `There is non-file object at ${cachePath}`,
+            data: {cacheDirectory, cacheId},
+        });
     }
 };
 
@@ -54,7 +70,11 @@ export const httpGet = async (
     }
     const response = await request(url);
     if (response.statusCode !== 200) {
-        throw new Error(`response.statusCode is not 200: ${response.statusCode}`);
+        throw new NlibError({
+            code: 'EResponse',
+            message: `response.statusCode is not 200: ${response.statusCode}`,
+            data: response,
+        });
     }
     let cachePromise = null;
     if (cacheDirectory) {

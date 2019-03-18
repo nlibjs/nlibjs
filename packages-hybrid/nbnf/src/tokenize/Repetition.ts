@@ -1,3 +1,4 @@
+import {NlibError} from '@nlib/util';
 import {
     INBNFCompiledRepetition,
     NBNFCompiledElementType,
@@ -29,7 +30,11 @@ export const tokenizeRepetition = function* (
             yield* collectSequenceTokens(repeat, element, input, from);
             break;
         default:
-            throw new Error(`Invalid type: ${(element as INBNFElement).type}`);
+            throw new NlibError({
+                code: 'nbnf/TokenizeRepetition/1',
+                message: `Invalid type: ${(element as INBNFElement).type}`,
+                data: {repeat, element},
+            });
         }
     } else if (repeat[0] === 0) {
         yield {nodes: [], end: from};

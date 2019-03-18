@@ -1,3 +1,6 @@
+import {NlibError} from '@nlib/util';
+import {isSameSetZ} from '@nlib/real-number';
+import {equal} from '@nlib/infra';
 import {
     NBNFNormalizedElementType,
     INBNFNormalizedElement,
@@ -8,8 +11,6 @@ import {
     INBNFNormalizedSequenceElement,
 } from '../types';
 import {isSameNormalizedAlternation} from './Alternation';
-import {isSameSetZ} from '@nlib/real-number';
-import {equal} from '@nlib/infra';
 
 export const isSameNormalizedAlternationElementData = (
     data1: INBNFNormalizedGroupElementData,
@@ -44,6 +45,10 @@ export const isSameNormalizedElement = (
     case NBNFNormalizedElementType.Sequence:
         return isSameSequenceElement(element1, element2 as INBNFNormalizedSequenceElement);
     default:
-        throw new Error(`Unknown element type: ${element1}`);
+        throw new NlibError({
+            code: 'nbnf/isSameNormalizedElement/1',
+            message: `Unknown element type: ${element1}`,
+            data: {element1, element2},
+        });
     }
 };
