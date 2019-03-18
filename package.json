@@ -40,21 +40,6 @@
             "ts-node/register"
         ]
     },
-    "nyc": {
-        "include": [
-            "packages-*/*/lib/**/*.js"
-        ],
-        "exclude": [
-            "*.test.js"
-        ],
-        "all": true,
-        "reporter": [
-            "lcov",
-            "html",
-            "text",
-            "text-summary"
-        ]
-    },
     "eslintConfig": {
         "extends": "./node_modules/@nlib/lint/.eslintrc.json",
         "overrides": [
@@ -108,5 +93,10 @@
         "*.ts": [
             "eslint"
         ]
+    },
+    "renovate-config": {
+        "default": {
+            "extends": ["config:base"]
+        }
     }
 }

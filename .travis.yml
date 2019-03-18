@@ -16,15 +16,19 @@ before_install:
     cd $TRAVIS_REPO_SLUG
   fi
 install:
-- npm install -g nyc @commitlint/travis-cli
+- npm install -g c8
 - npm ci
 script:
 - npm run build
-- nyc lerna run test --parallel
-- npm run check-dependencies
-- git diff --exit-code
-- npm run lint
-- commitlint-travis
+- c8 npx lerna run test --parallel
+- |
+  if [[ $TRAVIS_OS_NAME == linux ]]; then
+    npm run check-dependencies
+    git diff --exit-code
+    npm install -g @commitlint/travis-cli
+    commitlint-travis
+  fi
 after_success:
+- c8 report --reporter lcov
 - npm install -g codecov
 - codecov
