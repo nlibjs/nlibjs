@@ -95,10 +95,8 @@
         ]
     },
     "renovate-config": {
-        "default": {
-            "extends": [
-                "config:base"
-            ]
-        }
+        "extends": [
+            "github>nlibjs/renovate-config"
+        ]
     }
 }
