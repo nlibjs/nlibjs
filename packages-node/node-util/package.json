@@ -20,8 +20,5 @@
         "build": "tsc",
         "test": "ava",
         "lint": "eslint --ext .ts src"
-    },
-    "dependencies": {
-        "@types/node": "^11.11.3"
     }
 }

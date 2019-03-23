@@ -11,6 +11,10 @@ export const allowedExternalPackages = new Map<string, Set<string>>([
     ['@nlib/xml-js', new Set([
         'xml-js',
     ])],
+    ['@nlib/afs', new Set([
+        'semver',
+        '@types/semver',
+    ])],
 ]);
 
 export const isAllowedPackage = (
@@ -28,39 +32,60 @@ export const isAllowedPackage = (
     return false;
 };
 
-export const check = async (): Promise<void> => {
-    const {core: corePackages} = await globPackages();
-    let errorCount = 0;
-    const allowedPackages = new Map(corePackages);
-    for (const [name, {dependencies = {}}] of corePackages) {
-        let errored = false;
-        for (const dependency of Object.keys(dependencies)) {
-            if (!isAllowedPackage(name, dependency, allowedPackages)) {
-                errorCount++;
-                errored = true;
-                console.error(new NlibError({
-                    code: 'EForbiddenPackage',
-                    message: `${name} cannot depend on ${dependency}`,
-                    data: dependency,
-                }));
-            }
-        }
-        if (!errored) {
-            console.log(`✔︎ ${name}`);
+export const checkDependencies = (
+    {
+        name,
+        dependencies = {},
+    }: IData,
+    allowedPackages: Map<string, IData>,
+): Array<NlibError<string>> => {
+    const errors: Array<NlibError<string>> = [];
+    for (const dependency of Object.keys(dependencies)) {
+        if (!isAllowedPackage(name, dependency, allowedPackages)) {
+            errors.push(new NlibError({
+                code: 'EForbiddenPackage',
+                message: `${name} cannot depend on ${dependency}`,
+                data: dependency,
+            }));
         }
     }
-    if (0 < errorCount) {
+    console.log(`${errors.length === 0 ? '✔' : '×'} ${name}`);
+    if (0 < errors.length) {
+        for (const error of errors) {
+            console.log(`  - ${error.message}`);
+        }
+    }
+    return errors;
+};
+
+export const check = async (): Promise<void> => {
+    const {
+        core: corePackages,
+        node: nodePackages,
+    } = await globPackages();
+    const errors: Array<NlibError<string>> = [];
+    const allowedPackages = new Map(corePackages);
+    for (const [, packageData] of corePackages) {
+        errors.push(...checkDependencies(packageData, allowedPackages));
+    }
+    for (const [name, packageData] of nodePackages) {
+        allowedPackages.set(name, packageData);
+    }
+    for (const [, packageData] of nodePackages) {
+        errors.push(...checkDependencies(packageData, allowedPackages));
+    }
+    if (0 < errors.length) {
         throw new NlibError({
             code: '',
-            message: `Error count: ${errorCount}`,
-            data: errorCount,
+            message: `Detected ${errors.length} error(s).`,
+            data: errors.length,
         });
     }
 };
 
 if (!module.parent) {
     check().catch((error) => {
-        console.log(error);
+        console.log(error.stack || error);
         process.exit();
     });
 }

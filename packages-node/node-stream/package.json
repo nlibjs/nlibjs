@@ -22,7 +22,6 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/infra": "^3.4.0",
-        "@types/node": "^11.11.3"
+        "@nlib/infra": "^3.4.0"
     }
 }
