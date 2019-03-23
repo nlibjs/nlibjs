@@ -28,93 +28,59 @@ jobs:
     steps:
       - attach_workspace: {at: .}
       - run: npm run lint
-  deploy-canary:
+  deployCanary:
     docker: [{image: "circleci/node:lts"}]
     steps:
       - attach_workspace: {at: .}
-      - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - run: npx lerna publish --canary --no-git-reset --yes
   deploy:
     docker: [{image: "circleci/node:lts"}]
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - run: npx lerna publish from-package --no-git-reset --yes
-  is-tagged:
-    docker: [{image: "circleci/node:lts"}]
-    steps:
-      - run: if [[ -z $CIRCLE_TAG ]]; then exit 1; fi
-  on-master-branch:
-    docker: [{image: "circleci/node:lts"}]
-    steps:
-      - run: if [[ $CIRCLE_BRANCH != "master" ]]; then exit 1; fi
-  on-develop-branch:
+  onDevelopBranch:
     docker: [{image: "circleci/node:lts"}]
     steps:
       - run: if [[ -z $CIRCLE_BRANCH || $CIRCLE_BRANCH == "master" ]]; then exit 1; fi
+  onMasterBranch:
+    docker: [{image: "circleci/node:lts"}]
+    steps:
+      - run: if [[ $CIRCLE_BRANCH != "master" ]]; then exit 1; fi
+  isTagged:
+    docker: [{image: "circleci/node:lts"}]
+    steps:
+      - run: if [[ -z $CIRCLE_TAG ]]; then exit 1; fi
 workflows:
   version: 2
   run-tests:
     jobs:
-      - on-develop-branch:
+      - onDevelopBranch:
           filters:
-            branches:
-              ignore: master
-            tags:
-              ignore: /.*/
-      - build:
-          requires:
-            - on-develop-branch
-      - test:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
+            branches: {ignore: master}
+            tags: {ignore: /.*/}
+      - build: {requires: [onDevelopBranch]}
+      - test: {requires: [build]}
+      - lint: {requires: [build]}
   canary-release:
     jobs:
-      - on-master-branch:
+      - onMasterBranch:
           filters:
-            branches:
-              only: master
-            tags:
-              ignore: /.*/
-      - build:
-          requires:
-            - on-master-branch
-      - test:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
-      - deploy-canary:
-          requires:
-            - test
-            - lint
+            branches: {only: master}
+            tags: {ignore: /.*/}
+      - build: {requires: [onMasterBranch]}
+      - test: {requires: [build]}
+      - lint: {requires: [build]}
+      - deployCanary: {requires: [test, lint]}
   release:
     jobs:
-      - is-tagged:
+      - isTagged:
           filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v.*/
-      - build:
-          requires:
-            - is-tagged
-      - test:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
-      - deploy:
-          requires:
-            - test
-            - lint
+            branches: {ignore: /.*/}
+            tags: {only: /v.*/}
+      - build: {requires: [isTagged]}
+      - test: {requires: [build]}
+      - lint: {requires: [build]}
+      - deploy: {requires: [test, lint]}
