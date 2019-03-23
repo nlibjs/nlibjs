@@ -92,7 +92,8 @@
                     "overrides": {
                         "arrow": {"before": true, "after": true}
                     }
-                }]
+                }],
+                "@typescript-eslint/unified-signatures": "error"
             }
         }
     ],

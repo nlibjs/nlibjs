@@ -13,14 +13,9 @@ import {
 
 export interface IListen {
     (server: Server, port?: number, hostname?: string, backlog?: number): Promise<Server>,
-    (server: Server, port?: number, hostname?: string): Promise<Server>,
     (server: Server, port?: number, backlog?: number): Promise<Server>,
-    (server: Server, port?: number): Promise<Server>,
-    (server: Server, path: string, backlog?: number): Promise<Server>,
-    (server: Server, path: string): Promise<Server>,
+    (server: Server, pathOrHandle: string | {}, backlog?: number): Promise<Server>,
     (server: Server, options: ListenOptions): Promise<Server>,
-    (server: Server, handle: {}, backlog?: number): Promise<Server>,
-    (server: Server, handle: {}): Promise<Server>,
 }
 
 export const listen: IListen = (
