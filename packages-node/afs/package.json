@@ -1,6 +1,6 @@
 {
     "name": "@nlib/afs",
-    "version": "3.4.0",
+    "version": "3.5.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-node/afs",
@@ -22,7 +22,7 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/util": "^3.3.3",
+        "@nlib/util": "^3.5.0",
         "@types/semver": "^5.5.0",
         "semver": "^5.6.0"
     },

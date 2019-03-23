@@ -1,6 +1,6 @@
 {
     "name": "@nlib/node-stream",
-    "version": "3.4.0",
+    "version": "3.5.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-node/node-stream",
@@ -22,6 +22,6 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/infra": "^3.4.0"
+        "@nlib/infra": "^3.5.0"
     }
 }

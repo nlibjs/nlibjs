@@ -9,14 +9,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * support node 8 ([#53](https://github.com/nlibjs/nlibjs/issues/53)) ([8d0a67e](https://github.com/nlibjs/nlibjs/commit/8d0a67e))
-
-
-
-
-
-# [3.4.0](https://github.com/nlibjs/nlibjs/compare/v3.3.3...v3.4.0) (2019-01-28)
-
-
-### Features
-
-* **match:** add match ([#22](https://github.com/nlibjs/nlibjs/issues/22)) ([f022fd7](https://github.com/nlibjs/nlibjs/commit/f022fd7))
