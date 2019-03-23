@@ -1,3 +1,4 @@
+import {URL} from 'url';
 import anyTest, {TestInterface} from 'ava';
 import {Server, createServer} from 'http';
 import {readStream} from '@nlib/node-stream';

@@ -1,3 +1,4 @@
+import {URL} from 'url';
 import anyTest, {TestInterface} from 'ava';
 import {mktempdir, readFile, mkdirp} from '@nlib/afs';
 import {join} from 'path';

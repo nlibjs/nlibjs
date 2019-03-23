@@ -1,8 +1,17 @@
 import test from 'ava';
 import * as imported from './index';
 
-Object.keys(imported).forEach((key) => {
+const allowedGlobals = new Set([
+    'URL',
+    'URLSearchParams',
+]);
+
+Object.keys(imported)
+.forEach((key) => {
     test(key, (t) => {
-        t.true(key in global, `global.${key} is undefined`);
+        t.true(
+            key in global || allowedGlobals.has(key),
+            `global.${key} is undefined`,
+        );
     });
 });

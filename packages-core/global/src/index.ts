@@ -1,12 +1,16 @@
+import {
+    URL,
+    URLSearchParams,
+} from 'url';
 export type Brand<TType, TName> = TType & {__brand: TName};
 export type Nullable<TAny> = null | TAny;
 export type Integer = Brand<number, 'Integer'>;
 const _Array = Array; export {_Array as Array};
 const _ArrayBuffer = ArrayBuffer; export {_ArrayBuffer as ArrayBuffer};
 const _Atomics = Atomics; export {_Atomics as Atomics};
-const _BigInt = BigInt; export {_BigInt as BigInt};
-const _BigInt64Array = BigInt64Array; export {_BigInt64Array as BigInt64Array};
-const _BigUint64Array = BigUint64Array; export {_BigUint64Array as BigUint64Array};
+// const _BigInt = BigInt; export {_BigInt as BigInt};
+// const _BigInt64Array = BigInt64Array; export {_BigInt64Array as BigInt64Array};
+// const _BigUint64Array = BigUint64Array; export {_BigUint64Array as BigUint64Array};
 const _Boolean = Boolean; export {_Boolean as Boolean};
 const _DataView = DataView; export {_DataView as DataView};
 const _Date = Date; export {_Date as Date};

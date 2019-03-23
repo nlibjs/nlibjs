@@ -1,3 +1,4 @@
+import {URL} from 'url';
 import {
     request as requestHTTP,
     RequestOptions as RequestOptionsHTTP,
@@ -18,7 +19,17 @@ export const request = (
     const url = new URL(`${src}`);
     const request = url.protocol === 'https:' ? requestHTTPS : requestHTTP;
     return new Promise((resolve, reject) => {
-        const req = request(url, options, resolve)
+        const req = request(
+            {
+                protocol: url.protocol,
+                auth: `${url.username || ''}${url.password ? `:${url.password}` : ''}`,
+                host: url.hostname,
+                port: url.port,
+                path: url.pathname,
+                ...options,
+            },
+            resolve,
+        )
         .once('error', reject);
         if (data) {
             if (typeof data === 'string' || Buffer.isBuffer(data)) {

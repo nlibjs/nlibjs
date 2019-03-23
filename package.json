@@ -27,7 +27,7 @@
         "lerna:build": "lerna run build",
         "lerna:test": "lerna run test --parallel",
         "build": "run-s bootstrap lerna:build fill-json",
-        "test": "run-s build lerna:test check-dependencies",
+        "test": "run-s lerna:test check-dependencies",
         "lint": "lerna run lint",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag --no-push"
     },
@@ -38,6 +38,21 @@
         ],
         "require": [
             "ts-node/register"
+        ]
+    },
+    "nyc": {
+        "include": [
+            "packages-*/*/lib/**/*.js"
+        ],
+        "exclude": [
+            "packages-*/*/lib/**/*.test.js"
+        ],
+        "all": true,
+        "reporter": [
+            "lcov",
+            "html",
+            "text",
+            "text-summary"
         ]
     },
     "eslintConfig": {
@@ -75,7 +90,24 @@
                     "node": true
                 }
             }
-        ]
+        ],
+        "rules": {
+            "no-restricted-syntax": [
+                "error",
+                {
+                    "selector": "FunctionExpression[async=true][generator=true]",
+                    "message": "Async generator is restricted."
+                },
+                {
+                    "selector": "FunctionDeclaration[async=true][generator=true]",
+                    "message": "Async generator is restricted."
+                },
+                {
+                    "selector": "ForOfStatement[await=true]",
+                    "message": "for await...of statement is restricted."
+                }
+            ]
+        }
     },
     "commitlint": {
         "extends": [

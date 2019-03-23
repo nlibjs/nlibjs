@@ -39,6 +39,7 @@ export const fix = async (file: string): Promise<void> => {
         ['author', 'Kei Ito <kei.itof@gmail.com>'],
     ] as DataArray);
     const overwrites: DataMap = new Map([
+        ['engines', {node: '>=8.15'}],
         ['repository', 'https://github.com/nlibjs/nlibjs'],
         ['homepage', `https://github.com/nlibjs/nlibjs/tree/master/${category}/${directory}`],
     ] as DataArray);

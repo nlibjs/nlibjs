@@ -6,6 +6,7 @@ os:
 - windows
 node_js:
 - '10'
+- '8'
 before_install:
 - |
   if [[ $TRAVIS_OS_NAME == windows ]]; then
@@ -16,11 +17,10 @@ before_install:
     cd $TRAVIS_REPO_SLUG
   fi
 install:
-- npm install -g c8
 - npm ci
 script:
 - npm run build
-- c8 npx lerna run test --parallel
+- NODE_V8_COVERAGE=coverage npx lerna run test --parallel
 - |
   if [[ $TRAVIS_OS_NAME == linux ]]; then
     npm run check-dependencies
@@ -28,7 +28,3 @@ script:
     npm install -g @commitlint/travis-cli
     commitlint-travis
   fi
-after_success:
-- c8 report --reporter lcov
-- npm install -g codecov
-- codecov
