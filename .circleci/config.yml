@@ -79,8 +79,24 @@ workflows:
       - isTagged:
           filters:
             branches: {ignore: /.*/}
-            tags: {only: /v.*/}
-      - build: {requires: [isTagged]}
-      - test: {requires: [build]}
-      - lint: {requires: [build]}
-      - deploy: {requires: [test, lint]}
+            tags: {only: /^v.*/}
+      - build:
+          requires: [isTagged]
+          filters:
+            branches: {ignore: /.*/}
+            tags: {only: /^v.*/}
+      - test:
+          requires: [build]
+          filters:
+            branches: {ignore: /.*/}
+            tags: {only: /^v.*/}
+      - lint:
+          requires: [build]
+          filters:
+            branches: {ignore: /.*/}
+            tags: {only: /^v.*/}
+      - deploy:
+          requires: [test, lint]
+          filters:
+            branches: {ignore: /.*/}
+            tags: {only: /^v.*/}
