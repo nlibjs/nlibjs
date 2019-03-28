@@ -19,7 +19,7 @@
         "cleanup": "rimraf lib build/__cache",
         "build:REGISTERED_TYPES": "ts-node build/REGISTERED_TYPES.ts",
         "build:core": "tsc",
-        "build": "run-s build:REGISTERED_TYPES build:core",
+        "build": "run-s build:core",
         "test": "ava",
         "lint": "eslint --ext .ts src build"
     },

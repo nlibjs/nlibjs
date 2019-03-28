@@ -8,7 +8,8 @@ import {getFileStream} from './getFileStream';
 import {IRecord} from '../src/types';
 
 export const build = async (): Promise<void> => {
-    const res = await getFileStream('https://www.iana.org/assignments/media-types/media-types.xml');
+    const url = 'https://www.iana.org/assignments/media-types/media-types.xml';
+    const res = await getFileStream(url);
     const xmlString = await readStream(res);
     const xml = xml2js(`${xmlString}`, {compact: false}) as Element;
     const records: Array<IRecord> = [];

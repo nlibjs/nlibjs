@@ -31,6 +31,21 @@
         "lint": "lerna run lint",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag --no-push"
     },
+    "lerna": {
+        "packages": [
+            "packages-*/*"
+        ],
+        "version": "3.5.0",
+        "command": {
+            "publish": {
+                "allowBranch": "master",
+                "ignoreChanges": [
+                    "*.md",
+                    "*.test.ts"
+                ]
+            }
+        }
+    },
     "ava": {
         "compileEnhancements": false,
         "extensions": [
@@ -83,7 +98,8 @@
             },
             {
                 "files": [
-                    "packages-node/**/*"
+                    "packages-node/**/*",
+                    "packages-*/**/bin/*"
                 ],
                 "env": {
                     "es6": true,
