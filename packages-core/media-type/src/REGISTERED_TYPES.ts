@@ -230,6 +230,7 @@ application.set('odm+xml', 'odm+xml');
 application.set('ODX', 'ODX');
 application.set('oebps-package+xml', 'oebps-package+xml');
 application.set('ogg', 'ogg');
+application.set('oscore', 'oscore');
 application.set('oxps', 'oxps');
 application.set('p2p-overlay+xml', 'p2p-overlay+xml');
 application.set('passport', 'passport');
