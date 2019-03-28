@@ -1515,6 +1515,7 @@ image.set('jls', 'jls');
 image.set('jp2', 'jp2');
 image.set('jpm', 'jpm');
 image.set('jpx', 'jpx');
+image.set('jxr', 'jxr');
 image.set('naplps', 'naplps');
 image.set('png', 'png');
 image.set('prs.btif', 'prs.btif');

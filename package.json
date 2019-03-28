@@ -113,7 +113,16 @@
         "extends": [
             "@commitlint/config-conventional",
             "@commitlint/config-lerna-scopes"
-        ]
+        ],
+        "rules": {
+            "scope-enum": [
+                2,
+                "always",
+                [
+                    "deps"
+                ]
+            ]
+        }
     },
     "husky": {
         "hooks": {
