@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/nlibjs/nlibjs/compare/v3.5.0...v3.6.0) (2019-04-13)
+
+
+### Bug Fixes
+
+* fix CI configurations ([d29ea6c](https://github.com/nlibjs/nlibjs/commit/d29ea6c))
+* skip fill-json ([51f6d42](https://github.com/nlibjs/nlibjs/commit/51f6d42))
+* update meta tests ([ad4154c](https://github.com/nlibjs/nlibjs/commit/ad4154c))
+
+
+### Features
+
+* **media-type:** add application/oscore ([#58](https://github.com/nlibjs/nlibjs/issues/58)) ([12421e5](https://github.com/nlibjs/nlibjs/commit/12421e5))
+
+
+
+
+
 # [3.5.0](https://github.com/nlibjs/nlibjs/compare/v3.4.0...v3.5.0) (2019-03-23)
 
 

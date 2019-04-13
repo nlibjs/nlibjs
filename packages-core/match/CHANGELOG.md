@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/nlibjs/nlibjs/compare/v3.5.0...v3.6.0) (2019-04-13)
+
+**Note:** Version bump only for package @nlib/match
+
+
+
+
+
 # [3.5.0](https://github.com/nlibjs/nlibjs/compare/v3.4.0...v3.5.0) (2019-03-23)
 
 
