@@ -22,10 +22,9 @@
     "scripts": {
         "bootstrap": "lerna bootstrap",
         "cleanup": "lerna run cleanup",
-        "fill-json": "ts-node ./scripts/fix-package.json.ts ./scripts/fix-tsconfig.json.ts",
         "lerna:build": "lerna run build",
         "lerna:test": "lerna run test --parallel",
-        "build": "run-s bootstrap lerna:build fill-json",
+        "build": "run-s bootstrap lerna:build",
         "test-meta": "ava scripts/*.test.ts",
         "test": "run-s test-meta lerna:test",
         "lint": "lerna run lint",
