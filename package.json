@@ -10,7 +10,7 @@
         "@typescript-eslint/eslint-plugin": "^1.6.0",
         "ava": "^1.4.1",
         "eslint": "^5.16.0",
-        "glob": "^7.1.3",
+        "globby": "^9.2.0",
         "husky": "^1.3.1",
         "lerna": "^3.13.2",
         "lint-staged": "^8.1.5",
@@ -23,11 +23,11 @@
         "bootstrap": "lerna bootstrap",
         "cleanup": "lerna run cleanup",
         "fill-json": "ts-node ./scripts/fix-package.json.ts ./scripts/fix-tsconfig.json.ts",
-        "check-dependencies": "ts-node scripts/checkDependencies.ts",
         "lerna:build": "lerna run build",
         "lerna:test": "lerna run test --parallel",
         "build": "run-s bootstrap lerna:build fill-json",
-        "test": "run-s lerna:test check-dependencies",
+        "test-meta": "ava scripts/*.test.ts",
+        "test": "run-s test-meta lerna:test",
         "lint": "lerna run lint",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag --no-push"
     },
@@ -72,41 +72,6 @@
     },
     "eslintConfig": {
         "extends": "./node_modules/@nlib/lint/.eslintrc.json",
-        "overrides": [
-            {
-                "files": [
-                    "**/*.test.ts"
-                ],
-                "env": {
-                    "node": true
-                }
-            },
-            {
-                "files": [
-                    "scripts/*.ts"
-                ],
-                "env": {
-                    "es6": true,
-                    "node": true
-                },
-                "rules": {
-                    "no-console": "off",
-                    "global-require": "off",
-                    "@typescript-eslint/no-require-imports": "off",
-                    "@typescript-eslint/no-var-requires": "off"
-                }
-            },
-            {
-                "files": [
-                    "packages-node/**/*",
-                    "packages-*/**/bin/*"
-                ],
-                "env": {
-                    "es6": true,
-                    "node": true
-                }
-            }
-        ],
         "rules": {
             "no-restricted-syntax": [
                 "error",
@@ -123,7 +88,41 @@
                     "message": "for await...of statement is restricted."
                 }
             ]
-        }
+        },
+        "overrides": [
+            {
+                "files": [
+                    "**/*.test.ts"
+                ],
+                "env": {
+                    "node": true
+                }
+            },
+            {
+                "files": [
+                    "scripts/**/*.ts"
+                ],
+                "env": {
+                    "es6": true,
+                    "node": true
+                },
+                "rules": {
+                    "no-console": "off",
+                    "global-require": "off",
+                    "@typescript-eslint/no-require-imports": "off"
+                }
+            },
+            {
+                "files": [
+                    "packages-node/**/*.ts",
+                    "packages-*/**/bin/*"
+                ],
+                "env": {
+                    "es6": true,
+                    "node": true
+                }
+            }
+        ]
     },
     "commitlint": {
         "extends": [
@@ -135,6 +134,24 @@
                 2,
                 "always",
                 [
+                    "cookie",
+                    "fetch",
+                    "global",
+                    "infra",
+                    "lint",
+                    "match",
+                    "media-type",
+                    "named-tree",
+                    "nbnf",
+                    "number",
+                    "real-number",
+                    "unicode",
+                    "util",
+                    "xml-js",
+                    "afs",
+                    "node-net",
+                    "node-stream",
+                    "node-util",
                     "deps"
                 ]
             ]
