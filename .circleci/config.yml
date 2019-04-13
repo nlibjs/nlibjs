@@ -33,7 +33,7 @@ jobs:
     steps:
       - attach_workspace: {at: .}
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-      - run: npx lerna publish from-package --canary --no-git-reset --yes
+      - run: npx lerna publish --canary --no-git-reset --yes
   deploy:
     docker: [{image: "circleci/node:lts"}]
     steps:
