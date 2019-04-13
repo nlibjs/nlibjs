@@ -1,6 +1,6 @@
 {
     "name": "@nlib/global",
-    "version": "3.6.0",
+    "version": "3.7.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/global",

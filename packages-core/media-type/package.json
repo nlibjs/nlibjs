@@ -1,6 +1,6 @@
 {
     "name": "@nlib/media-type",
-    "version": "3.6.0",
+    "version": "3.7.0",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/media-type",
@@ -24,16 +24,16 @@
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {
-        "@nlib/fetch": "^3.6.0",
-        "@nlib/global": "^3.6.0",
-        "@nlib/infra": "^3.6.0",
-        "@nlib/real-number": "^3.6.0"
+        "@nlib/fetch": "^3.7.0",
+        "@nlib/global": "^3.7.0",
+        "@nlib/infra": "^3.7.0",
+        "@nlib/real-number": "^3.7.0"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.6.0",
-        "@nlib/node-net": "^3.6.0",
-        "@nlib/node-stream": "^3.6.0",
-        "@nlib/xml-js": "^3.6.0"
+        "@nlib/afs": "^3.7.0",
+        "@nlib/node-net": "^3.7.0",
+        "@nlib/node-stream": "^3.7.0",
+        "@nlib/xml-js": "^3.7.0"
     },
     "eslintConfig": {
         "overrides": [
