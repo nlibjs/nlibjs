@@ -20,11 +20,4 @@ install:
 - npm ci
 script:
 - npm run build
-- NODE_V8_COVERAGE=coverage npx lerna run test --parallel
-- |
-  if [[ $TRAVIS_OS_NAME == linux ]]; then
-    npm run check-dependencies
-    git diff --exit-code
-    npm install -g @commitlint/travis-cli
-    commitlint-travis
-  fi
+- npm run lerna:test
