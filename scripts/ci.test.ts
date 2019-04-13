@@ -17,6 +17,7 @@ test('commitlint', (t) => {
             checkEnum(path.basename(fullPath));
         }
         checkEnum('deps');
+        checkEnum('repo');
     } else {
         t.true(
             Array.isArray(scopes),

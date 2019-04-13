@@ -136,7 +136,8 @@
                     "node-net",
                     "node-stream",
                     "node-util",
-                    "deps"
+                    "deps",
+                    "repo"
                 ]
             ]
         }

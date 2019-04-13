@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import globby from 'globby';
-import {lerna} from '../package.json';
+import * as lerna from '../lerna.json';
 
 export interface IPackageData {
     name: string,
