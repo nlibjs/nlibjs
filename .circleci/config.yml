@@ -19,9 +19,11 @@ jobs:
     docker: [{image: "circleci/node:lts"}]
     steps:
       - attach_workspace: {at: .}
-      - run: sudo npm install -g nyc codecov
-      - run: nyc npm run lerna:test
-      - run: codecov
+      - run: npm run lerna:test
+  metaTest:
+    docker: [{image: "circleci/node:lts"}]
+    steps:
+      - attach_workspace: {at: .}
       - run: npm run test-meta
   lint:
     docker: [{image: "circleci/node:lts"}]
@@ -63,6 +65,7 @@ workflows:
             tags: {ignore: /.*/}
       - build: {requires: [onDevelopBranch]}
       - test: {requires: [build]}
+      - metaTest: {requires: [build]}
       - lint: {requires: [build]}
   canary-release:
     jobs:
@@ -72,6 +75,7 @@ workflows:
             tags: {ignore: /.*/}
       - build: {requires: [onMasterBranch]}
       - test: {requires: [build]}
+      - metaTest: {requires: [build]}
       - lint: {requires: [build]}
       - deployCanary: {requires: [test, lint]}
   release:
@@ -86,6 +90,11 @@ workflows:
             branches: {ignore: /.*/}
             tags: {only: /^v.*/}
       - test:
+          requires: [build]
+          filters:
+            branches: {ignore: /.*/}
+            tags: {only: /^v.*/}
+      - metaTest:
           requires: [build]
           filters:
             branches: {ignore: /.*/}
