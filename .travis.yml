@@ -20,10 +20,12 @@ install:
 - npm ci
 script:
 - npm run build
-- NODE_V8_COVERAGE=coverage/tmp npm run lerna:test --parallel
-after_success:
+- NODE_V8_COVERAGE=coverage npm run lerna:test --parallel
 - |
-  if [[ -d coverage ]]; then
+  if [[ -d tmp ]]; then
+    mv coverage tmp
+    mkdir coverage
+    mv tmp coverage/tmp
     npm install -g codecov c8
     c8 report
     c8 report --reporter=text-lcov > coverage.lcov
