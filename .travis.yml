@@ -22,7 +22,7 @@ script:
 - npm run build
 - NODE_V8_COVERAGE=coverage npm run lerna:test --parallel
 - |
-  if [[ -d tmp ]]; then
+  if [[ -d coverage ]]; then
     mv coverage tmp
     mkdir coverage
     mv tmp coverage/tmp
