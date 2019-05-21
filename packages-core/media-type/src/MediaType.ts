@@ -17,11 +17,11 @@ import {IParameters, ISource} from './types';
 
 export class MediaType {
 
-    public readonly type: Uint32Array
+    public readonly type: Uint32Array;
 
-    public readonly subtype: Uint32Array
+    public readonly subtype: Uint32Array;
 
-    public readonly parameters: IParameters
+    public readonly parameters: IParameters;
 
     public constructor(source: ISource) {
         this.type = source.type;

@@ -20,4 +20,12 @@ install:
 - npm ci
 script:
 - npm run build
-- npm run lerna:test
+- |
+  if [[ $(node -v) == v10* ]]; then
+    npm install -g codecov c8
+    c8 npm run lerna:test --parallel
+    c8 report --reporter=text-lcov > coverage.lcov
+    codecov
+  else
+    npm run lerna:test --parallel
+  fi

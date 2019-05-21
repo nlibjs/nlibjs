@@ -21,10 +21,8 @@ const rmrfCore = async (
         }
         return true;
     } catch (error) {
-        switch (error.code) {
-        case 'ENOENT':
+        if (error.code === 'ENOENT') {
             return false;
-        default:
         }
         throw error;
     }

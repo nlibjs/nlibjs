@@ -8,13 +8,13 @@ import {
 
 export class LineStream extends Transform {
 
-    private decoder: NodeStringDecoder
+    private decoder: NodeStringDecoder;
 
-    private buffer: Uint32Array
+    private buffer: Uint32Array;
 
-    private lineLength: number
+    private lineLength: number;
 
-    private previousCodePoint: number
+    private previousCodePoint: number;
 
     public constructor(encoding: string = 'utf8') {
         super({objectMode: true});
