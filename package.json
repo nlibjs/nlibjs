@@ -27,7 +27,7 @@
         "build": "run-s bootstrap lerna:build",
         "test-meta": "ava scripts/*.test.ts",
         "test": "run-s test-meta lerna:test",
-        "lint": "lerna run lint",
+        "lint": "lerna run lint --parallel",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag --no-push"
     },
     "ava": {

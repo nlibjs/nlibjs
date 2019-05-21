@@ -51,11 +51,17 @@ test('should be valid configuration', (t) => {
     const availableTypeScriptRuleNames = new Set(Object.keys(availableTypeScriptRules).map((name) => `${prefix}/${name}`));
     // https://github.com/typescript-eslint/typescript-eslint/issues/101
     const rulesToBeIgnored = new Set<string>([
-        '@typescript-eslint/restrict-plus-operands',
+        '@typescript-eslint/await-thenable',
+        '@typescript-eslint/indent-new-do-not-use',
         '@typescript-eslint/no-unnecessary-type-assertion',
         '@typescript-eslint/no-unnecessary-qualifier',
         '@typescript-eslint/require-array-sort-compare',
+        '@typescript-eslint/restrict-plus-operands',
+        '@typescript-eslint/prefer-includes',
+        '@typescript-eslint/prefer-regexp-exec',
+        '@typescript-eslint/prefer-string-starts-ends-with',
         '@typescript-eslint/promise-function-async',
+        '@typescript-eslint/unbound-method',
     ]);
     for (const ruleName of availableTypeScriptRuleNames) {
         if (!rulesToBeIgnored.has(ruleName)) {

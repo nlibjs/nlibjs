@@ -9,9 +9,9 @@ export interface INlibErrorParameters<TData> {
 
 export class NlibError<TData> extends Error {
 
-    public readonly code: string | number
+    public readonly code: string | number;
 
-    public readonly data: TData
+    public readonly data: TData;
 
     public constructor(parameters: INlibErrorParameters<TData>) {
         super(parameters.message);

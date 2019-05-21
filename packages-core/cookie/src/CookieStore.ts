@@ -37,9 +37,9 @@ import {
 
 export class CookieStore {
 
-    public readonly config: ICookieStoreConfiguration
+    public readonly config: ICookieStoreConfiguration;
 
-    public readonly data: ICookieDomainStore
+    public readonly data: ICookieDomainStore;
 
     public constructor(
         {

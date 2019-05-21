@@ -28,9 +28,9 @@ export interface IFileInfo {
 
 export class DirectoryWalker extends Readable {
 
-    public path: string
+    public path: string;
 
-    public walking: boolean
+    public walking: boolean;
 
     public constructor(file: PathLike) {
         super({objectMode: true});
