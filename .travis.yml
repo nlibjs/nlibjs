@@ -5,6 +5,7 @@ os:
 - osx
 - windows
 node_js:
+- '12'
 - '10'
 - '8'
 before_install:
@@ -21,7 +22,7 @@ install:
 script:
 - npm run build
 - |
-  if [[ $(node -v) == v10* ]]; then
+  if [[ $(node -v) == v12* ]]; then
     npm install -g codecov c8
     c8 npm run lerna:test --parallel
     c8 report --reporter=text-lcov > coverage.lcov
