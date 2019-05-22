@@ -1,6 +1,6 @@
 {
     "name": "@nlib/node-stream",
-    "version": "3.7.1",
+    "version": "3.8.0",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -26,6 +26,6 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/infra": "^3.7.1"
+        "@nlib/infra": "^3.8.0"
     }
 }

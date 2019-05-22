@@ -1,6 +1,6 @@
 {
     "name": "@nlib/unicode",
-    "version": "3.7.1",
+    "version": "3.8.0",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -28,13 +28,13 @@
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {
-        "@nlib/global": "^3.7.1"
+        "@nlib/global": "^3.8.0"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.7.1",
-        "@nlib/infra": "^3.7.1",
-        "@nlib/node-net": "^3.7.1",
-        "@nlib/node-stream": "^3.7.1"
+        "@nlib/afs": "^3.8.0",
+        "@nlib/infra": "^3.8.0",
+        "@nlib/node-net": "^3.8.0",
+        "@nlib/node-stream": "^3.8.0"
     },
     "eslintConfig": {
         "overrides": [
