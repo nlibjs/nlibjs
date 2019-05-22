@@ -1,8 +1,12 @@
 {
     "name": "@nlib/global",
     "version": "3.7.1",
-    "license": "MIT",
-    "author": "Kei Ito <kei.itof@gmail.com>",
+    "license": "Apache-2.0",
+    "author": {
+        "name": "Kei Ito",
+        "email": "kei.itof@gmail.com",
+        "url": "https://github.com/kei-ito"
+    },
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/global",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
@@ -21,9 +25,7 @@
         "test": "ava",
         "lint": "eslint --ext .ts src"
     },
-    "dependencies": {
-        "@types/webassembly-js-api": "^0.0.3"
-    },
+    "dependencies": {},
     "eslintConfig": {
         "env": {
             "es6": true

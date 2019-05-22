@@ -1,8 +1,12 @@
 {
     "name": "@nlib/node-util",
     "version": "3.5.0",
-    "license": "MIT",
-    "author": "Kei Ito <kei.itof@gmail.com>",
+    "license": "Apache-2.0",
+    "author": {
+        "name": "Kei Ito",
+        "email": "kei.itof@gmail.com",
+        "url": "https://github.com/kei-ito"
+    },
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-node/node-util",
     "repository": "https://github.com/nlibjs/nlibjs",
     "publishConfig": {
