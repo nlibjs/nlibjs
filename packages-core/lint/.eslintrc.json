@@ -119,7 +119,7 @@
         "block-spacing": ["error", "never"],
         "brace-style": ["error", "1tbs"],
         "callback-return": "off",
-        "camelcase": "error",
+        "camelcase": "off",
         "capitalized-comments": "off",
         "class-methods-use-this": "error",
         "comma-dangle": ["error", "always-multiline"],

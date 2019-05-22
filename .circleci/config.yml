@@ -20,11 +20,6 @@ jobs:
     steps:
       - attach_workspace: {at: .}
       - run: npm run lerna:test
-  metaTest:
-    docker: [{image: "circleci/node:lts"}]
-    steps:
-      - attach_workspace: {at: .}
-      - run: npm run test-meta
   lint:
     docker: [{image: "circleci/node:lts"}]
     steps:
@@ -59,7 +54,6 @@ workflows:
             tags: {ignore: /.*/}
       - build: {requires: [onDevelopBranch]}
       - test: {requires: [build]}
-      - metaTest: {requires: [build]}
       - lint: {requires: [build]}
   release:
     jobs:
@@ -73,11 +67,6 @@ workflows:
             branches: {ignore: /.*/}
             tags: {only: /^v.*/}
       - test:
-          requires: [build]
-          filters:
-            branches: {ignore: /.*/}
-            tags: {only: /^v.*/}
-      - metaTest:
           requires: [build]
           filters:
             branches: {ignore: /.*/}
