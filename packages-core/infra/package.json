@@ -1,6 +1,6 @@
 {
     "name": "@nlib/infra",
-    "version": "3.7.0",
+    "version": "3.7.1",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/infra",
@@ -22,8 +22,8 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.7.0",
-        "@nlib/real-number": "^3.7.0",
-        "@nlib/util": "^3.7.0"
+        "@nlib/global": "^3.7.1",
+        "@nlib/real-number": "^3.7.1",
+        "@nlib/util": "^3.7.1"
     }
 }

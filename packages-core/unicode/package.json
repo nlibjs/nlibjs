@@ -1,6 +1,6 @@
 {
     "name": "@nlib/unicode",
-    "version": "3.7.0",
+    "version": "3.7.1",
     "license": "MIT",
     "author": "Kei Ito <kei.itof@gmail.com>",
     "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-core/unicode",
@@ -24,13 +24,13 @@
         "lint": "eslint --ext .ts src build"
     },
     "dependencies": {
-        "@nlib/global": "^3.7.0"
+        "@nlib/global": "^3.7.1"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.7.0",
-        "@nlib/infra": "^3.7.0",
-        "@nlib/node-net": "^3.7.0",
-        "@nlib/node-stream": "^3.7.0"
+        "@nlib/afs": "^3.7.1",
+        "@nlib/infra": "^3.7.1",
+        "@nlib/node-net": "^3.7.1",
+        "@nlib/node-stream": "^3.7.1"
     },
     "eslintConfig": {
         "overrides": [
