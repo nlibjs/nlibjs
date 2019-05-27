@@ -1,0 +1,19 @@
+environment:
+  matrix:
+    # - nodejs_version: '12'
+    - nodejs_version: '10'
+    # - nodejs_version: '8'
+cache:
+  - node_modules
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm ci
+  - npx lerna bootstrap --no-ci
+test_script:
+  - npm run build
+  - |
+    npm install -g codecov c8
+    c8 npm run lerna:test --parallel
+    c8 report --reporter=text-lcov > coverage.lcov
+    codecov
+build: 'off'
