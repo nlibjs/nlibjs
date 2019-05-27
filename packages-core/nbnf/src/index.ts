@@ -6,3 +6,4 @@ export * from './types';
 export * from './createTokenizer';
 export * from './knownRules';
 export * from './util';
+export * from './normalizeNBNF';
