@@ -53,6 +53,31 @@ interface ITest {
             },
         ],
     },
+    {
+        alternation: [
+            [
+                {
+                    repeat: [0, Infinity],
+                    element: {
+                        type: NBNFCompiledElementType.CodePoint,
+                        data: [[0x00, 0x43], [0x45, 0xFFFFFFFF]],
+                    },
+                },
+            ],
+        ],
+        cases: [
+            {
+                input: 'ABCDE',
+                from: 0,
+                expected: [
+                    {nodes: [...fromString('ABC')], end: 3},
+                    {nodes: [...fromString('AB')], end: 2},
+                    {nodes: [...fromString('A')], end: 1},
+                    {nodes: [...fromString('')], end: 0},
+                ],
+            },
+        ],
+    },
 ] as Array<ITest>).forEach(
     ({alternation, cases}, index1) => {
         cases.forEach(({input, from, expected}, index2) => {

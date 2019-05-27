@@ -12,6 +12,7 @@ import {
     INBNFNullableNormalizedRuleList,
 } from '../types';
 import {normalizeAlternation} from './Alternation';
+import {intersectionSetZ} from '@nlib/real-number';
 
 export const normalizeElement = (
     element: INBNFElement | INBNFNormalizedElement,
@@ -41,7 +42,7 @@ export const normalizeElement = (
         };
     case NBNFNormalizedElementType.CodePoint:
     case NBNFElementType.CodePoint: {
-        const set = element.data;
+        const set = intersectionSetZ(element.data, [[0, 0x10ffff]]);
         if (set.length === 1) {
             const [from, to] = set[0];
             if (from === to) {

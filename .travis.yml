@@ -3,20 +3,19 @@ cache: npm
 os:
   - linux
   - osx
-node_js:
-  - '12'
-  - '10'
-  - '8'
+node_js: '12'
 install:
+  - npm install -g codecov c8
   - npm ci
 script:
   - npm run build
-  - |
-    if [[ $(node -v) == v12* ]]; then
-      npm install -g codecov c8
-      c8 npm run lerna:test --parallel
-      c8 report --reporter=text-lcov > coverage.lcov
-      codecov
-    else
-      npm run lerna:test --parallel
-    fi
+  - node --version
+  - c8 npm run lerna:test --parallel
+  - c8 report --reporter=text-lcov > coverage.lcov
+  - codecov
+  - nvm install 10
+  - node --version
+  - npm run lerna:test --parallel
+  - nvm install 8
+  - node --version
+  - npm run lerna:test --parallel

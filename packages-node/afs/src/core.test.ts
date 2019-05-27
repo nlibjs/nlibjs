@@ -7,7 +7,8 @@ const fs = new Map(Object.entries(_fs));
 const core = new Map(Object.entries(_core));
 const index = new Map(Object.entries(_index));
 
-const undocumentedFields = [
+const ignoredFields = [
+    'promises',
     'FileReadStream',
     'FileWriteStream',
     '_toUnixTimestamp',
@@ -17,7 +18,7 @@ const undocumentedFields = [
     'X_OK',
 ];
 
-for (const key of undocumentedFields) {
+for (const key of ignoredFields) {
     fs.delete(key);
 }
 
