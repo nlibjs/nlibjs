@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.9.0](https://github.com/nlibjs/nlibjs/compare/v3.8.1...v3.9.0) (2019-05-27)
+
+
+### Features
+
+* **nbnf:** add a parser for CSS Animation ([#72](https://github.com/nlibjs/nlibjs/issues/72)) ([ce55c67](https://github.com/nlibjs/nlibjs/commit/ce55c67))
+
+
+
+
+
 # [3.8.0](https://github.com/nlibjs/nlibjs/compare/v3.7.1...v3.8.0) (2019-05-22)
 
 
