@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.9.1](https://github.com/nlibjs/nlibjs/compare/v3.9.0...v3.9.1) (2019-05-28)
+
+
+### Bug Fixes
+
+* **nbnf:** add css parser to index ([d5328f2](https://github.com/nlibjs/nlibjs/commit/d5328f2))
+
+
+
+
+
 # [3.9.0](https://github.com/nlibjs/nlibjs/compare/v3.8.1...v3.9.0) (2019-05-27)
 
 
