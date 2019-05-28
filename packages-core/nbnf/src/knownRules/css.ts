@@ -123,7 +123,8 @@ TimeUnit  = "s" / "ms"
 });
 
 export const CSSAnimationRules = normalizeNBNF(`
-SingleAnimation                     = 1*(Time / EasingFunction / Time / SingleAnimationIterationCount / SingleAnimationDirection / SingleAnimationFillMode / SingleAnimationPlayState / ("none" / KeyframesName))
+SingleAnimation                     = SingleAnimationProperty *(*WSP SingleAnimationProperty)
+SingleAnimationProperty             = Time / EasingFunction / Time / SingleAnimationIterationCount / SingleAnimationDirection / SingleAnimationFillMode / SingleAnimationPlayState / ("none" / KeyframesName)
 EasingFunction                      = "linear" / CubicBezierEasingFunction / StepEasingFunction
 CubicBezierEasingFunction           = "ease-in-out" / "ease-in" / "ease-out" / "ease" / CubicBezierEasingFunctionExpression
 CubicBezierEasingFunctionExpression = CubicBezierEasingFunctionPrefix

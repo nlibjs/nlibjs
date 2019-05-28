@@ -289,4 +289,32 @@ runTests(createTokenizerFromNormalizedRuleList(CSSAnimationRules), [
             }],
         },
     })),
+    {
+        input: '1s   Foo  ease-out    infinite',
+        rule: 'SingleAnimation',
+        expected: {name: 'SingleAnimation', nodes: [
+            {name: 'SingleAnimationProperty', nodes: [
+                {name: 'Time', nodes: [
+                    {name: 'TimeValue', nodes: toNodes('1')},
+                    {name: 'TimeUnit', nodes: toNodes('s')},
+                ]},
+            ]},
+            ...toNodes('   '),
+            {name: 'SingleAnimationProperty', nodes: [
+                {name: 'KeyframesName', nodes: [
+                    {name: 'CustomIdent', nodes: toNodes('Foo')},
+                ]},
+            ]},
+            ...toNodes('  '),
+            {name: 'SingleAnimationProperty', nodes: [
+                {name: 'EasingFunction', nodes: [
+                    {name: 'CubicBezierEasingFunction', nodes: toNodes('ease-out')},
+                ]},
+            ]},
+            ...toNodes('    '),
+            {name: 'SingleAnimationProperty', nodes: [
+                {name: 'SingleAnimationIterationCount', nodes: toNodes('infinite')},
+            ]},
+        ]},
+    },
 ]);
