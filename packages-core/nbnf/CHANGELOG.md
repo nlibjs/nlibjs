@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.9.3](https://github.com/nlibjs/nlibjs/compare/v3.9.2...v3.9.3) (2019-05-29)
+
+
+### Bug Fixes
+
+* **nbnf:** alternate-reverse should be put before alternate ([615a265](https://github.com/nlibjs/nlibjs/commit/615a265))
+
+
+
+
+
 ## [3.9.2](https://github.com/nlibjs/nlibjs/compare/v3.9.1...v3.9.2) (2019-05-28)
 
 
