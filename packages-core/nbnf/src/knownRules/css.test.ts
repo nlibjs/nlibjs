@@ -136,12 +136,15 @@ runTests(createTokenizerFromNormalizedRuleList(CSSAnimationRules), [
         rule: 'EasingFunction',
         expected: {name: 'EasingFunction', nodes: toNodes('linear')},
     },
-    ...[
-        'ease',
-        'ease-in',
-        'ease-out',
-        'ease-in-out',
-    ]
+    ...['normal', 'reverse', 'alternate', 'alternate-reverse'].map((direction) => ({
+        input: direction,
+        rule: 'SingleAnimationDirection',
+        expected: {
+            name: 'SingleAnimationDirection',
+            nodes: toNodes(direction),
+        },
+    })),
+    ...['ease', 'ease-in', 'ease-out', 'ease-in-out']
     .map((keyword) => ({
         input: keyword,
         rule: 'EasingFunction',
@@ -153,10 +156,7 @@ runTests(createTokenizerFromNormalizedRuleList(CSSAnimationRules), [
             }],
         },
     })),
-    ...[
-        'step-start',
-        'step-end',
-    ]
+    ...['step-start', 'step-end']
     .map((keyword) => ({
         input: keyword,
         rule: 'EasingFunction',
