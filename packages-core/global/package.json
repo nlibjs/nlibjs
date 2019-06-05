@@ -26,36 +26,30 @@
         "lint": "eslint --ext .ts src"
     },
     "eslintConfig": {
-        "env": {
-            "es6": true
-        },
-        "globals": {
-            "Atomics": true,
-            "BigInt": true,
-            "BigInt64Array": true,
-            "BigUint64Array": true,
-            "Intl": true,
-            "SharedArrayBuffer": true,
-            "URL": true,
-            "URLSearchParams": true,
-            "WebAssembly": true,
-            "clearInterval": true,
-            "clearTimeout": true,
-            "console": true,
-            "setInterval": true,
-            "setTimeout": true
-        },
-        "rules": {
-            "max-statements-per-line": "off",
-            "no-eval": "off"
-        },
         "overrides": [
             {
                 "files": [
-                    "src/index.test.ts"
+                    "src/index.ts"
                 ],
-                "env": {
-                    "node": true
+                "globals": {
+                    "Atomics": true,
+                    "BigInt": true,
+                    "BigInt64Array": true,
+                    "BigUint64Array": true,
+                    "Intl": true,
+                    "SharedArrayBuffer": true,
+                    "URL": true,
+                    "URLSearchParams": true,
+                    "WebAssembly": true,
+                    "clearInterval": true,
+                    "clearTimeout": true,
+                    "console": true,
+                    "setInterval": true,
+                    "setTimeout": true
+                },
+                "rules": {
+                    "max-statements-per-line": "off",
+                    "no-eval": "off"
                 }
             }
         ]

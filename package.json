@@ -57,6 +57,9 @@
     },
     "eslintConfig": {
         "extends": "./node_modules/@nlib/lint/.eslintrc.json",
+        "env": {
+            "es6": true
+        },
         "rules": {
             "no-restricted-syntax": [
                 "error",
@@ -88,7 +91,6 @@
                     "scripts/**/*.ts"
                 ],
                 "env": {
-                    "es6": true,
                     "node": true
                 },
                 "rules": {
@@ -103,7 +105,6 @@
                     "packages-*/**/bin/*"
                 ],
                 "env": {
-                    "es6": true,
                     "node": true
                 }
             }
@@ -130,6 +131,7 @@
                     "nbnf",
                     "number",
                     "real-number",
+                    "replacement-function",
                     "unicode",
                     "util",
                     "xml-js",
