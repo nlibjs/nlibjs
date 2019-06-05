@@ -1,6 +1,6 @@
 {
     "name": "@nlib/number",
-    "version": "3.8.0",
+    "version": "3.10.0",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -26,6 +26,6 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.8.0"
+        "@nlib/global": "^3.10.0"
     }
 }

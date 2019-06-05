@@ -1,6 +1,6 @@
 {
     "name": "@nlib/nbnf",
-    "version": "3.9.3",
+    "version": "3.10.0",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -26,11 +26,11 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/global": "^3.8.0",
-        "@nlib/infra": "^3.8.0",
-        "@nlib/number": "^3.8.0",
-        "@nlib/real-number": "^3.8.0",
-        "@nlib/util": "^3.8.0"
+        "@nlib/global": "^3.10.0",
+        "@nlib/infra": "^3.10.0",
+        "@nlib/number": "^3.10.0",
+        "@nlib/real-number": "^3.10.0",
+        "@nlib/util": "^3.10.0"
     },
     "eslintConfig": {
         "rules": {

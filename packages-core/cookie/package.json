@@ -1,6 +1,6 @@
 {
     "name": "@nlib/cookie",
-    "version": "3.9.3",
+    "version": "3.10.0",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -26,12 +26,12 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/fetch": "^3.8.0",
-        "@nlib/global": "^3.8.0",
-        "@nlib/infra": "^3.8.0",
-        "@nlib/named-tree": "^3.8.0",
-        "@nlib/nbnf": "^3.9.3",
-        "@nlib/util": "^3.8.0"
+        "@nlib/fetch": "^3.10.0",
+        "@nlib/global": "^3.10.0",
+        "@nlib/infra": "^3.10.0",
+        "@nlib/named-tree": "^3.10.0",
+        "@nlib/nbnf": "^3.10.0",
+        "@nlib/util": "^3.10.0"
     },
     "eslintConfig": {
         "overrides": [
