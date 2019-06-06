@@ -3,7 +3,7 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "@commitlint/cli": "^7.6.1",
-        "@commitlint/config-conventional": "^7.6.0",
+        "@commitlint/config-conventional": "^8.0.0",
         "@commitlint/config-lerna-scopes": "^8.0.0",
         "@nlib/lint": "file:packages-core/lint",
         "@types/eslint": "^4.16.6",
