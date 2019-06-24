@@ -52,19 +52,32 @@ test('should be valid configuration', (t) => {
     // https://github.com/typescript-eslint/typescript-eslint/issues/101
     const rulesToBeIgnored = new Set<string>([
         '@typescript-eslint/await-thenable',
-        '@typescript-eslint/indent-new-do-not-use',
-        '@typescript-eslint/no-unnecessary-type-assertion',
+        '@typescript-eslint/no-floating-promises',
+        '@typescript-eslint/no-for-in-array',
         '@typescript-eslint/no-unnecessary-qualifier',
-        '@typescript-eslint/require-array-sort-compare',
-        '@typescript-eslint/restrict-plus-operands',
+        '@typescript-eslint/no-unnecessary-type-assertion',
         '@typescript-eslint/prefer-includes',
         '@typescript-eslint/prefer-regexp-exec',
         '@typescript-eslint/prefer-string-starts-ends-with',
         '@typescript-eslint/promise-function-async',
+        '@typescript-eslint/require-array-sort-compare',
+        '@typescript-eslint/restrict-plus-operands',
         '@typescript-eslint/unbound-method',
     ]);
     for (const ruleName of availableTypeScriptRuleNames) {
-        if (!rulesToBeIgnored.has(ruleName)) {
+        if (rulesToBeIgnored.has(ruleName)) {
+            test(`should ignore "${ruleName}"`, (t) => {
+                const typescriptConfig = t.context.config.overrides
+                .find((override) => override.parser === `${prefix}/parser`);
+                if (!typescriptConfig) {
+                    t.truthy(typescriptConfig);
+                    return;
+                }
+                const {rules = {}} = typescriptConfig;
+                const config = rules[ruleName];
+                t.falsy(config, `${ruleName} should be ignored`);
+            });
+        } else {
             test(`should cover "${ruleName}"`, (t) => {
                 const typescriptConfig = t.context.config.overrides
                 .find((override) => override.parser === `${prefix}/parser`);
@@ -73,10 +86,8 @@ test('should be valid configuration', (t) => {
                     return;
                 }
                 const {rules = {}} = typescriptConfig;
-                if (!rulesToBeIgnored.has(ruleName)) {
-                    const config = rules[ruleName];
-                    t.truthy(config, `${ruleName} is not covered`);
-                }
+                const config = rules[ruleName];
+                t.truthy(config, `${ruleName} is not covered`);
             });
         }
     }
