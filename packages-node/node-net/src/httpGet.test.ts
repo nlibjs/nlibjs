@@ -1,5 +1,5 @@
 import {URL} from 'url';
-import anyTest, {TestInterface} from 'ava';
+import anyTest, {TestInterface, ExecutionContext} from 'ava';
 import {mktempdir, readFile, mkdirp} from '@nlib/afs';
 import {join} from 'path';
 import {Server, createServer} from 'http';
@@ -9,7 +9,7 @@ import {httpGet, sanitizeEtag} from './httpGet';
 import {readStream} from '@nlib/node-stream';
 import * as index from './index';
 
-const test = anyTest as TestInterface<{
+interface ITestContext {
     NORMAL_GET: string,
     CACHE_SLOW: string,
     CACHE_GET: string,
@@ -23,57 +23,70 @@ const test = anyTest as TestInterface<{
     data: string,
     cachePath1: string,
     cachePath2: string,
-}>;
+}
 
+const test = anyTest as TestInterface<ITestContext>;
 
-test.beforeEach(async (t) => {
-    const server = t.context.server = createServer((req, res) => {
-        switch (req.url) {
-        case t.context.CACHE_SLOW:
-            res.setHeader('etag', t.context.etag);
-            res.writeHead(200);
+const createTestServer = (
+    t: ExecutionContext<ITestContext>,
+): Server => createServer((req, res) => {
+    switch (req.url) {
+    case t.context.CACHE_SLOW:
+        res.setHeader('etag', t.context.etag);
+        res.writeHead(200);
+        res.write(t.context.data);
+        setTimeout(() => {
             res.write(t.context.data);
             setTimeout(() => {
                 res.write(t.context.data);
-                setTimeout(() => {
-                    res.write(t.context.data);
-                    setTimeout(() => res.end(t.context.data), 50);
-                }, 50);
+                setTimeout(() => res.end(t.context.data), 50);
             }, 50);
-            return;
-        case t.context.NORMAL_GET:
-            res.writeHead(200);
-            break;
-        case t.context.CACHE_GET:
-            res.setHeader('etag', t.context.etag);
-            res.writeHead(200);
-            break;
-        case t.context.CACHE_DATE_GET:
-            res.setHeader('Last-Modified', t.context.lastModified.toUTCString());
-            res.writeHead(200);
-            break;
-        case t.context.NOT_FOUND:
-        default:
-            res.writeHead(404);
-        }
-        if (req.method === 'GET') {
-            res.write(t.context.data);
-        }
-        res.end();
+        }, 50);
+        return;
+    case t.context.NORMAL_GET:
+        res.writeHead(200);
+        break;
+    case t.context.CACHE_GET:
+        res.setHeader('etag', t.context.etag);
+        res.writeHead(200);
+        break;
+    case t.context.CACHE_DATE_GET:
+        res.setHeader('Last-Modified', t.context.lastModified.toUTCString());
+        res.writeHead(200);
+        break;
+    case t.context.NOT_FOUND:
+    default:
+        res.writeHead(404);
+    }
+    if (req.method === 'GET') {
+        res.write(t.context.data);
+    }
+    res.end();
+});
+
+test.beforeEach(async (t) => {
+    const server = createTestServer(t);
+    const [directory, port] = await Promise.all([
+        mktempdir(),
+        listenPort(server),
+    ]);
+    const etag = 'foobar1234567890';
+    const lastModified = new Date();
+    Object.assign(t.context, {
+        server,
+        NORMAL_GET: '/normal-get',
+        CACHE_GET: '/cache-get',
+        CACHE_SLOW: '/cache-slow-get',
+        CACHE_DATE_GET: '/cache-date-get',
+        NOT_FOUND: '/404',
+        etag: 'foobar1234567890',
+        data: '<data>',
+        lastModified: new Date(),
+        directory,
+        cachePath1: join(directory, sanitizeEtag(etag)),
+        cachePath2: join(directory, sanitizeEtag(lastModified.toUTCString())),
+        baseURL: `http://localhost:${port}`,
     });
-    t.context.NORMAL_GET = '/normal-get';
-    t.context.CACHE_GET = '/cache-get';
-    t.context.CACHE_SLOW = '/cache-slow-get';
-    t.context.CACHE_DATE_GET = '/cache-date-get';
-    t.context.NOT_FOUND = '/404';
-    t.context.etag = 'foobar1234567890';
-    t.context.data = '<data>';
-    t.context.lastModified = new Date();
-    t.context.directory = await mktempdir();
-    t.context.cachePath1 = join(t.context.directory, sanitizeEtag(t.context.etag));
-    t.context.cachePath2 = join(t.context.directory, sanitizeEtag(t.context.lastModified.toUTCString()));
-    t.context.baseURL = new URL('http://localhost');
-    t.context.baseURL.port = `${await listenPort(server)}`;
 });
 
 test.afterEach(async (t) => {
