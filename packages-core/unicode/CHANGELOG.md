@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.10.1](https://github.com/nlibjs/nlibjs/compare/v3.10.0...v3.10.1) (2019-06-24)
+
+**Note:** Version bump only for package @nlib/unicode
+
+
+
+
+
 # [3.10.0](https://github.com/nlibjs/nlibjs/compare/v3.9.3...v3.10.0) (2019-06-05)
 
 **Note:** Version bump only for package @nlib/unicode
