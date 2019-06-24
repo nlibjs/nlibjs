@@ -1,21 +1,19 @@
 language: node_js
 cache: npm
-os:
-  - linux
-  - osx
+os: osx
 node_js: '12'
 install:
-  - npm install -g codecov c8
   - npm ci
 script:
   - npm run build
-  - node --version
+  - npm install -g codecov c8
   - c8 npm run lerna:test --parallel
   - c8 report --reporter=text-lcov > coverage.lcov
   - codecov
   - nvm install 10
-  - node --version
-  - npm run lerna:test --parallel
+  - npm install -g codecov c8
+  - c8 npm run lerna:test --parallel
+  - c8 report --reporter=text-lcov > coverage.lcov
+  - codecov
   - nvm install 8
-  - node --version
   - npm run lerna:test --parallel
