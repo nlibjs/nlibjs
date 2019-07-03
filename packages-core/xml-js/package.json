@@ -27,6 +27,6 @@
     },
     "dependencies": {
         "@nlib/global": "^3.10.0",
-        "xml-js": "^1.6.8"
+        "xml-js": "^1.6.11"
     }
 }

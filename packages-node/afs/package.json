@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "@nlib/util": "^3.10.0",
-        "semver": "^6.0.0"
+        "semver": "^6.2.0"
     },
     "eslintConfig": {
         "overrides": [
