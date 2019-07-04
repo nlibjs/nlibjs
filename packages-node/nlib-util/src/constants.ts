@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import {INlibJSLernaJSON, INlibJSRootPackageJSON} from './types';
-import globby from 'globby';
+import * as globby from 'globby';
 
 export const projectRootDirectory = path.join(__dirname, '../../..');
 
