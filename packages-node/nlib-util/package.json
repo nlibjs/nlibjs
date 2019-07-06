@@ -1,6 +1,6 @@
 {
     "name": "@nlib/nlib-util",
-    "version": "3.10.1",
+    "version": "3.10.2",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -26,6 +26,6 @@
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
-        "@nlib/afs": "^3.10.1"
+        "@nlib/afs": "^3.10.2"
     }
 }
