@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/nlibjs/nlibjs/compare/v3.10.2...v3.11.0) (2019-07-09)
+
+
+### Features
+
+* **cookie:** CookieStore.consume allows undefined values ([249b485](https://github.com/nlibjs/nlibjs/commit/249b485))
+
+
+
+
+
 # [3.10.0](https://github.com/nlibjs/nlibjs/compare/v3.9.3...v3.10.0) (2019-06-05)
 
 **Note:** Version bump only for package @nlib/cookie
