@@ -117,6 +117,7 @@
             "@commitlint/config-lerna-scopes"
         ],
         "rules": {
+            "subject-case": [0],
             "scope-enum": [
                 2,
                 "always",

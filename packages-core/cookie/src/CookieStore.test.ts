@@ -17,7 +17,7 @@ interface ITest {
         url: string,
         method?: string,
         cookieString?: string,
-        cookies?: Array<string>,
+        cookies?: Array<string | undefined>,
     }>,
 }
 
@@ -27,7 +27,7 @@ interface ITest {
         requests: [
             {
                 origin: 'http://example.com',
-                cookies: ['A=aaa', 'B=aaa'],
+                cookies: ['A=aaa', undefined, 'B=aaa'],
             },
             {
                 origin: 'http://example.com',
