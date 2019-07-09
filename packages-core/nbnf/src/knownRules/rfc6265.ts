@@ -19,7 +19,7 @@ import {
 } from './rfc2616';
 import {RFC1034Rules} from './rfc1034';
 
-// https://tools.ietf.org/htm./rfc6265#section-4.1.1
+// https://tools.ietf.org/html/rfc6265#section-4.1.1
 // https://tools.ietf.org/html/draft-ietf-httpbis-RFC6265bis-02#section-4.1.1
 
 export const pathValueSet = intersectionSetZ(
