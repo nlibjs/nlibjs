@@ -92,11 +92,15 @@ export class CookieStore {
 
     /** https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-02#section-5.4 */
     public consume(
-        setCookieString: string,
+        setCookieString: string | undefined,
         origin: URL,
     ): Readonly<ICookie> | number {
-        const parseResult = parseSetCookieString(setCookieString);
         let STEP = 0;
+        if (!setCookieString) {
+            return STEP;
+        }
+        STEP = 1;
+        const parseResult = parseSetCookieString(setCookieString);
         if (!parseResult) {
             return STEP;
         }
