@@ -95,6 +95,20 @@ interface ITest {
             samesite: SameSite.Lax,
         },
     },
+    {
+        input: `a=foo; DoMain=.example.com; Max-aGe=345; eXpiRes=${now.toUTCString()}; HtTpOnLy; SeCuRe; SaMeSiTe=lAX; pAtH=/foo/bar`,
+        expected: {
+            name: 'a',
+            value: 'foo',
+            domain: 'example.com',
+            path: '/foo/bar',
+            expires: now,
+            maxAge: 345,
+            http: true,
+            secure: true,
+            samesite: SameSite.Lax,
+        },
+    },
 ] as Array<ITest>).forEach(({input, expected}) => {
     test(`${input} → ${JSON.stringify(expected)}`, (t) => {
         const actual = parseSetCookieString(input);

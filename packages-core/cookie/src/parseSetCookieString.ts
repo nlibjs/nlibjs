@@ -78,7 +78,8 @@ export const extractDomainFrom = (
 ): string | null => {
     const domainValueNode = getLast(attributeNode.nodes);
     if (isASTRuleNode(domainValueNode, 'domain-value')) {
-        return nodeToString(domainValueNode);
+        const domain = nodeToString(domainValueNode);
+        return domain.startsWith('.') ? domain.slice(1) : domain;
     }
     return null;
 };
