@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.11.1](https://github.com/nlibjs/nlibjs/compare/v3.11.0...v3.11.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* remove leading dot in the Domain attribute ([b830691](https://github.com/nlibjs/nlibjs/commit/b830691))
+
+
+
+
+
 # [3.11.0](https://github.com/nlibjs/nlibjs/compare/v3.10.2...v3.11.0) (2019-07-09)
 
 
