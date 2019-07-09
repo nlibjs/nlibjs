@@ -55,7 +55,7 @@ decimal-value     = non-zero-digit *DIGIT
 non-zero-digit    = %x31-39
                       ; digits 1 through 9
 domain-av         = %i"Domain=" domain-value
- ;domain-value      = <subdomain>
+domain-value      = ["."] domain
                       ; defined in [RFC1034], Section 3.5, as
                       ; enhanced by [RFC1123], Section 2.1
 path-av           = %i"Path=" path-value
@@ -76,10 +76,10 @@ export let RFC6265Rules = normalizeNBNF(RFC6265NBNF, {
             [{repeat: [1, Infinity], element: {type: NBNFNormalizedElementType.CodePoint, data: RFC2616tokenSet}}],
         ],
         'sane-cookie-date': RFC2616Rules['HTTP-date'],
-        'domain-value': RFC1034Rules.domain,
     },
     expands: {
         ...RFC2234Rules,
+        domain: RFC1034Rules.domain,
     },
 });
 

@@ -26,6 +26,60 @@ runTests(parseRFC6265, [
         },
     },
     {
+        input: 'dOmAiN=foo.example.com',
+        rule: 'domain-av',
+        expected: {
+            name: 'domain-av',
+            nodes: [
+                ...fromString('dOmAiN='),
+                {
+                    name: 'domain-value',
+                    nodes: [
+                        {
+                            name: 'label',
+                            nodes: [...fromString('foo')],
+                        },
+                        ...fromString('.'),
+                        {
+                            name: 'label',
+                            nodes: [...fromString('example')],
+                        },
+                        ...fromString('.'),
+                        {
+                            name: 'label',
+                            nodes: [...fromString('com')],
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        input: 'dOmAiN=.example.com',
+        rule: 'domain-av',
+        expected: {
+            name: 'domain-av',
+            nodes: [
+                ...fromString('dOmAiN='),
+                {
+                    name: 'domain-value',
+                    nodes: [
+                        ...fromString('.'),
+                        {
+                            name: 'label',
+                            nodes: [...fromString('example')],
+                        },
+                        ...fromString('.'),
+                        {
+                            name: 'label',
+                            nodes: [...fromString('com')],
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
         input: 'Set-Cookie: FOO=BAR; PaTh=/foo; dOmAiN=example.com; ExPiReS=Wed, 09 Jun 2021 10:18:14 GMT; SeCuRe; HtTpOnLy; SaMeSiTe=lAX',
         rule: 'set-cookie-header',
         expected: {
