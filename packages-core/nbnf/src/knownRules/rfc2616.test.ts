@@ -79,4 +79,12 @@ runTests(parseRFC2616, [
             nodes: toNodes('Sun, 06 Nov 1994 08:49:37 GMT'),
         },
     },
+    {
+        input: 'Sun, 06-Nov-1994 08:49:37 GMT',
+        rule: 'HTTP-date',
+        expected: {
+            name: 'HTTP-date',
+            nodes: toNodes('Sun, 06-Nov-1994 08:49:37 GMT'),
+        },
+    },
 ]);
