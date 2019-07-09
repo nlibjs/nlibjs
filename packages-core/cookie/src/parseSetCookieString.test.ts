@@ -68,6 +68,20 @@ interface ITest {
         },
     },
     {
+        input: 'a=foo; DoMain=foo.example.com; Max-aGe=345; eXpiRes=Sun, 06-Nov-1994 08:49:37 GMT',
+        expected: {
+            name: 'a',
+            value: 'foo',
+            domain: 'foo.example.com',
+            path: null,
+            expires: new Date('Sun, 06-Nov-1994 08:49:37 GMT'),
+            maxAge: 345,
+            http: false,
+            secure: false,
+            samesite: SameSite.None,
+        },
+    },
+    {
         input: `a=foo; DoMain=foo.example.com; Max-aGe=345; eXpiRes=${now.toUTCString()}`,
         expected: {
             name: 'a',
