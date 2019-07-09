@@ -80,6 +80,20 @@ runTests(parseRFC6265, [
         },
     },
     {
+        input: 'eXpIrEs=Thu, 03-Jul-2042 07:35:15 GMT',
+        rule: 'expires-av',
+        expected: {
+            name: 'expires-av',
+            nodes: [
+                ...fromString('eXpIrEs='),
+                {
+                    name: 'sane-cookie-date',
+                    nodes: [...fromString('Thu, 03-Jul-2042 07:35:15 GMT')],
+                },
+            ],
+        },
+    },
+    {
         input: 'Set-Cookie: FOO=BAR; PaTh=/foo; dOmAiN=example.com; ExPiReS=Wed, 09 Jun 2021 10:18:14 GMT; SeCuRe; HtTpOnLy; SaMeSiTe=lAX',
         rule: 'set-cookie-header',
         expected: {
