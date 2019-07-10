@@ -276,6 +276,19 @@ interface ITest {
             },
         ],
     },
+    {
+        title: 'Empty path and NonEmpty path',
+        requests: [
+            {
+                origin: 'https://example.com/',
+                cookies: ['foo=aaa; DoMaIn=example.com'],
+            },
+            {
+                origin: 'https://example.com/bar',
+                cookieString: 'foo=aaa',
+            },
+        ],
+    },
 ] as Array<ITest>).forEach(({title = '', requests}, index) => {
     test(`#${index} ${title}`, (t) => {
         const store = new CookieStore();
