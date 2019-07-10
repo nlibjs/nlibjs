@@ -23,12 +23,22 @@
         "cleanup": "rimraf lib",
         "build": "tsc",
         "test": "ava --verbose",
-        "lint": "eslint --ext .ts src"
+        "lint": "eslint --ext .ts src",
+        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     },
     "dependencies": {
         "@nlib/afs": "^3.10.2"
     },
-    "ava": {
-        "files": ["lib/**/*.test.js"]
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": [
+                    "src/prepack.ts"
+                ],
+                "rules": {
+                    "no-console": "off"
+                }
+            }
+        ]
     }
 }

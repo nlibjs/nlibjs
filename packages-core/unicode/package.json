@@ -25,7 +25,8 @@
         "build:core": "tsc",
         "build": "run-s build:named build:core",
         "test": "ava",
-        "lint": "eslint --ext .ts src build"
+        "lint": "eslint --ext .ts src build",
+        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     },
     "dependencies": {
         "@nlib/global": "^3.10.0"
