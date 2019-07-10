@@ -21,7 +21,7 @@ jobs:
     steps:
       - attach_workspace: {at: .}
       - run: sudo npm install -g codecov c8
-      - run: c8 npm run lerna:test --parallel
+      - run: c8 npm test --parallel
       - run: c8 report --reporter=text-lcov > coverage.lcov
       - run: codecov
   test-10:
@@ -29,14 +29,14 @@ jobs:
     steps:
       - attach_workspace: {at: .}
       - run: sudo npm install -g codecov c8
-      - run: c8 npm run lerna:test --parallel
+      - run: c8 npm test --parallel
       - run: c8 report --reporter=text-lcov > coverage.lcov
       - run: codecov
   test-8:
     docker: [{image: "circleci/node:8"}]
     steps:
       - attach_workspace: {at: .}
-      - run: npm run lerna:test --parallel
+      - run: npm test --parallel
   lint:
     docker: [{image: "circleci/node:lts"}]
     steps:
