@@ -119,7 +119,7 @@ for (const packageDirectory of packageDirectories) {
     });
 
     test(`${relativeId}/package.json#scripts`, (t) => {
-        t.is(packageJSON.scripts.prepack, 'rimraf lib/**/*.test.js lib/**/*.test.js.map  lib/**/*.test.d.ts');
+        t.is(packageJSON.scripts.prepack, 'node -e \'require(`@nlib/nlib-util`).prepack()\'');
     });
 
     if (packageJSON.dependencies) {
