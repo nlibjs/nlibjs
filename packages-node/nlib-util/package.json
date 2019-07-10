@@ -22,10 +22,13 @@
     "scripts": {
         "cleanup": "rimraf lib",
         "build": "tsc",
-        "test": "ava",
+        "test": "ava --verbose",
         "lint": "eslint --ext .ts src"
     },
     "dependencies": {
         "@nlib/afs": "^3.10.2"
+    },
+    "ava": {
+        "files": ["lib/**/*.test.js"]
     }
 }
