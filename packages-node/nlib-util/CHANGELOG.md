@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.12.0](https://github.com/nlibjs/nlibjs/compare/v3.11.2...v3.12.0) (2019-07-11)
+
+
+### Features
+
+* **nlib-util:** add prepack ([6945b50](https://github.com/nlibjs/nlibjs/commit/6945b50))
+
+
+
+
+
 ## [3.10.2](https://github.com/nlibjs/nlibjs/compare/v3.10.1...v3.10.2) (2019-07-06)
 
 
