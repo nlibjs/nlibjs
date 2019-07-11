@@ -1,5 +1,6 @@
 import test from 'ava';
 import * as net from 'net';
+import {URL} from 'url';
 import {getBaseURL} from './getBaseURL';
 
 interface ITest {
