@@ -6,12 +6,13 @@
         "@commitlint/config-conventional": "^8.0.0",
         "@commitlint/config-lerna-scopes": "^8.0.0",
         "@nlib/lint": "file:packages-core/lint",
+        "@nlib/nlib-util": "file:packages-node/nlib-util",
         "@types/eslint": "^4.16.6",
-        "@types/node": "^12.6.1",
+        "@types/node": "^12.6.2",
         "@types/semver": "^6.0.1",
         "@typescript-eslint/eslint-plugin": "^1.11.0",
         "@typescript-eslint/parser": "^1.11.0",
-        "ava": "^2.2.0",
+        "ava": "^2.1.0",
         "eslint": "^6.0.1",
         "globby": "^10.0.1",
         "husky": "^3.0.0",
@@ -26,9 +27,8 @@
         "bootstrap": "lerna bootstrap",
         "cleanup": "lerna run cleanup",
         "lerna:build": "lerna run build",
-        "lerna:test": "lerna run test --parallel",
         "build": "run-s bootstrap lerna:build",
-        "test": "run-s lerna:test",
+        "test": "lerna run test --parallel",
         "lint": "lerna run lint --parallel",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag --no-push"
     },
@@ -39,21 +39,6 @@
         ],
         "require": [
             "ts-node/register"
-        ]
-    },
-    "nyc": {
-        "include": [
-            "packages-*/*/lib/**/*.js"
-        ],
-        "exclude": [
-            "packages-*/*/lib/**/*.test.js"
-        ],
-        "all": true,
-        "reporter": [
-            "lcov",
-            "html",
-            "text",
-            "text-summary"
         ]
     },
     "eslintConfig": {

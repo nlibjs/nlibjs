@@ -23,7 +23,8 @@
         "cleanup": "rimraf lib",
         "build": "tsc",
         "test": "ava",
-        "lint": "eslint --ext .ts src"
+        "lint": "eslint --ext .ts src",
+        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     },
     "eslintConfig": {
         "overrides": [

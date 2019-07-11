@@ -1,2 +1,2 @@
 export const domainToLabels = (domain: string): Array<string> => domain.split('.').reverse();
-export const pathToEdges = (path: string): Array<string> => path.slice(1).split('/');
+export const pathToEdges = (path: string): Array<string> => path === '/' ? [''] : path.split('/');

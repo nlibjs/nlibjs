@@ -3,7 +3,9 @@ import * as fs from 'fs';
 import {URL} from 'url';
 import test from 'ava';
 import {
-    packageDirectories, projectRootDirectory, rootPackageJSON,
+    packageDirectories,
+    projectRootDirectory,
+    rootPackageJSON,
 } from './constants';
 import {INlibJSPackageJSON} from './types';
 
@@ -117,8 +119,9 @@ for (const packageDirectory of packageDirectories) {
     });
 
     test(`${relativeId}/package.json#scripts`, (t) => {
-        t.is(typeof packageJSON.scripts, 'object');
+        t.is(packageJSON.scripts.prepack, 'node -e \'require(`@nlib/nlib-util`).prepack()\'');
     });
+
     if (packageJSON.dependencies) {
         const packageLevel = getPackageLevel(relativeId);
         test(`${relativeId}/package.json#dependencies`, (t) => {
