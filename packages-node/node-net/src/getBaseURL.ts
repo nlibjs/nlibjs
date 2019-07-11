@@ -2,10 +2,10 @@ import {URL} from 'url';
 import * as net from 'net';
 
 export const getBaseURL = (
-    addressInfo: net.AddressInfo,
+    addressInfo: string | net.AddressInfo | null,
     protocol = 'http:',
 ): URL => {
-    if (typeof addressInfo === 'object') {
+    if (addressInfo && typeof addressInfo === 'object') {
         const {port, family, address} = addressInfo;
         return new URL(`${protocol}//${family === 'IPv6' ? `[${address}]` : address}:${port}`);
     }
