@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.12.1](https://github.com/nlibjs/nlibjs/compare/v3.12.0...v3.12.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **node-net:** export closeServers ([f685419](https://github.com/nlibjs/nlibjs/commit/f685419))
+
+
+
+
+
 # [3.12.0](https://github.com/nlibjs/nlibjs/compare/v3.11.2...v3.12.0) (2019-07-11)
 
 
