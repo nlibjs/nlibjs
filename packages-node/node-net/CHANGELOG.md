@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.1](https://github.com/nlibjs/nlibjs/compare/v3.13.0...v3.13.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **node-net:** fix the type of getBaseURL ([d4bb905](https://github.com/nlibjs/nlibjs/commit/d4bb905))
+
+
+
+
+
 # [3.13.0](https://github.com/nlibjs/nlibjs/compare/v3.12.1...v3.13.0) (2019-07-11)
 
 
