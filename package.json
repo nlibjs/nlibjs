@@ -5,8 +5,6 @@
         "@commitlint/cli": "^8.0.0",
         "@commitlint/config-conventional": "^8.0.0",
         "@commitlint/config-lerna-scopes": "^8.0.0",
-        "@nlib/lint": "file:packages-core/lint",
-        "@nlib/nlib-util": "file:packages-node/nlib-util",
         "@types/eslint": "^4.16.6",
         "@types/node": "^12.6.2",
         "@types/semver": "^6.0.1",
@@ -42,7 +40,7 @@
         ]
     },
     "eslintConfig": {
-        "extends": "./node_modules/@nlib/lint/.eslintrc.json",
+        "extends": "./packages-core/lint/.eslintrc.json",
         "env": {
             "es6": true
         },
