@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.1](https://github.com/nlibjs/nlibjs/compare/v3.13.0...v3.13.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **node-net:** fix the type of getBaseURL ([d4bb905](https://github.com/nlibjs/nlibjs/commit/d4bb905))
+
+
+
+
+
+# [3.13.0](https://github.com/nlibjs/nlibjs/compare/v3.12.1...v3.13.0) (2019-07-11)
+
+
+### Features
+
+* **node-net:** add getBaseURL ([f8cc38e](https://github.com/nlibjs/nlibjs/commit/f8cc38e))
+
+
+
+
+
+## [3.12.1](https://github.com/nlibjs/nlibjs/compare/v3.12.0...v3.12.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **node-net:** export closeServers ([f685419](https://github.com/nlibjs/nlibjs/commit/f685419))
+
+
+
+
+
+# [3.12.0](https://github.com/nlibjs/nlibjs/compare/v3.11.2...v3.12.0) (2019-07-11)
+
+
+### Bug Fixes
+
+* **cookie:** getCookieStringFor doesn't return value if path is nonempty ([201ea76](https://github.com/nlibjs/nlibjs/commit/201ea76))
+
+
+### Features
+
+* **nlib-util:** add prepack ([6945b50](https://github.com/nlibjs/nlibjs/commit/6945b50))
+
+
+
+
+
 ## [3.11.2](https://github.com/nlibjs/nlibjs/compare/v3.11.1...v3.11.2) (2019-07-09)
 
 
