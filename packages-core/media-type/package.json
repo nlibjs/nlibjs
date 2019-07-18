@@ -1,6 +1,6 @@
 {
     "name": "@nlib/media-type",
-    "version": "3.13.1",
+    "version": "3.13.2",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -36,8 +36,8 @@
     },
     "devDependencies": {
         "@nlib/afs": "^3.12.1",
-        "@nlib/node-net": "^3.13.1",
-        "@nlib/node-stream": "^3.12.0",
+        "@nlib/node-net": "^3.13.2",
+        "@nlib/node-stream": "^3.13.2",
         "@nlib/xml-js": "^3.12.0"
     },
     "eslintConfig": {
