@@ -1,10 +1,10 @@
 import {Transform} from 'stream';
-import {StringDecoder, NodeStringDecoder} from 'string_decoder';
+import {StringDecoder} from 'string_decoder';
 import {getCodePoints} from '@nlib/infra';
 
 export class CodePointStream extends Transform {
 
-    private decoder: NodeStringDecoder;
+    private decoder: StringDecoder;
 
     public constructor(encoding: string = 'utf8') {
         super({objectMode: true});

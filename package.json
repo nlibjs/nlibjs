@@ -2,22 +2,20 @@
     "private": true,
     "license": "Apache-2.0",
     "devDependencies": {
-        "@commitlint/cli": "^8.0.0",
-        "@commitlint/config-conventional": "^8.0.0",
-        "@commitlint/config-lerna-scopes": "^8.0.0",
-        "@nlib/lint": "file:packages-core/lint",
-        "@nlib/nlib-util": "file:packages-node/nlib-util",
+        "@commitlint/cli": "^8.1.0",
+        "@commitlint/config-conventional": "^8.1.0",
+        "@commitlint/config-lerna-scopes": "^8.1.0",
         "@types/eslint": "^4.16.6",
-        "@types/node": "^12.6.2",
+        "@types/node": "^12.6.8",
         "@types/semver": "^6.0.1",
-        "@typescript-eslint/eslint-plugin": "^1.11.0",
-        "@typescript-eslint/parser": "^1.11.0",
+        "@typescript-eslint/eslint-plugin": "^1.12.0",
+        "@typescript-eslint/parser": "^1.12.0",
         "ava": "^2.1.0",
         "eslint": "^6.0.1",
         "globby": "^10.0.1",
         "husky": "^3.0.0",
         "lerna": "^3.15.0",
-        "lint-staged": "^9.1.0",
+        "lint-staged": "^9.2.0",
         "npm-run-all": "^4.1.5",
         "rimraf": "^2.6.3",
         "ts-node": "^8.3.0",
@@ -42,7 +40,7 @@
         ]
     },
     "eslintConfig": {
-        "extends": "./node_modules/@nlib/lint/.eslintrc.json",
+        "extends": "./packages-core/lint/.eslintrc.json",
         "env": {
             "es6": true
         },
