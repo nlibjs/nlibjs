@@ -1,6 +1,6 @@
 {
     "name": "@nlib/node-net",
-    "version": "3.10.2",
+    "version": "3.13.2",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -27,11 +27,11 @@
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     },
     "dependencies": {
-        "@nlib/afs": "^3.10.2",
-        "@nlib/real-number": "^3.10.0",
-        "@nlib/util": "^3.10.0"
+        "@nlib/afs": "^3.12.1",
+        "@nlib/real-number": "^3.12.0",
+        "@nlib/util": "^3.12.0"
     },
     "devDependencies": {
-        "@nlib/node-stream": "^3.10.1"
+        "@nlib/node-stream": "^3.13.2"
     }
 }

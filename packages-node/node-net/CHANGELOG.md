@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.2](https://github.com/nlibjs/nlibjs/compare/v3.13.1...v3.13.2) (2019-07-18)
+
+**Note:** Version bump only for package @nlib/node-net
+
+
+
+
+
+## [3.13.1](https://github.com/nlibjs/nlibjs/compare/v3.13.0...v3.13.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **node-net:** fix the type of getBaseURL ([d4bb905](https://github.com/nlibjs/nlibjs/commit/d4bb905))
+
+
+
+
+
+# [3.13.0](https://github.com/nlibjs/nlibjs/compare/v3.12.1...v3.13.0) (2019-07-11)
+
+
+### Features
+
+* **node-net:** add getBaseURL ([f8cc38e](https://github.com/nlibjs/nlibjs/commit/f8cc38e))
+
+
+
+
+
+## [3.12.1](https://github.com/nlibjs/nlibjs/compare/v3.12.0...v3.12.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **node-net:** export closeServers ([f685419](https://github.com/nlibjs/nlibjs/commit/f685419))
+
+
+
+
+
+# [3.12.0](https://github.com/nlibjs/nlibjs/compare/v3.11.2...v3.12.0) (2019-07-11)
+
+**Note:** Version bump only for package @nlib/node-net
+
+
+
+
+
 ## [3.10.2](https://github.com/nlibjs/nlibjs/compare/v3.10.1...v3.10.2) (2019-07-06)
 
 **Note:** Version bump only for package @nlib/node-net

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.2](https://github.com/nlibjs/nlibjs/compare/v3.13.1...v3.13.2) (2019-07-18)
+
+
+### Bug Fixes
+
+* **node-stream:** fix types ([6830e45](https://github.com/nlibjs/nlibjs/commit/6830e45))
+
+
+
+
+
+# [3.12.0](https://github.com/nlibjs/nlibjs/compare/v3.11.2...v3.12.0) (2019-07-11)
+
+**Note:** Version bump only for package @nlib/node-stream
+
+
+
+
+
 ## [3.10.1](https://github.com/nlibjs/nlibjs/compare/v3.10.0...v3.10.1) (2019-06-24)
 
 **Note:** Version bump only for package @nlib/node-stream

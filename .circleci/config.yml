@@ -48,6 +48,7 @@ jobs:
       - attach_workspace:
           at: .
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: npm install ./packages-node/nlib-util --no-save
       - run: npx lerna publish from-package --no-git-reset --yes
   onDevelopBranch:
     docker: [{image: "circleci/node:lts"}]

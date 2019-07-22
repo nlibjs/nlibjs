@@ -1,5 +1,5 @@
 import {Transform} from 'stream';
-import {NodeStringDecoder, StringDecoder} from 'string_decoder';
+import {StringDecoder} from 'string_decoder';
 import {
     getCodePoints,
     LINE_FEED,
@@ -8,7 +8,7 @@ import {
 
 export class LineStream extends Transform {
 
-    private decoder: NodeStringDecoder;
+    private decoder: StringDecoder;
 
     private buffer: Uint32Array;
 

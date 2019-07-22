@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.2](https://github.com/nlibjs/nlibjs/compare/v3.13.1...v3.13.2) (2019-07-18)
+
+**Note:** Version bump only for package @nlib/unicode
+
+
+
+
+
+## [3.13.1](https://github.com/nlibjs/nlibjs/compare/v3.13.0...v3.13.1) (2019-07-11)
+
+**Note:** Version bump only for package @nlib/unicode
+
+
+
+
+
+# [3.13.0](https://github.com/nlibjs/nlibjs/compare/v3.12.1...v3.13.0) (2019-07-11)
+
+**Note:** Version bump only for package @nlib/unicode
+
+
+
+
+
+## [3.12.1](https://github.com/nlibjs/nlibjs/compare/v3.12.0...v3.12.1) (2019-07-11)
+
+**Note:** Version bump only for package @nlib/unicode
+
+
+
+
+
+# [3.12.0](https://github.com/nlibjs/nlibjs/compare/v3.11.2...v3.12.0) (2019-07-11)
+
+**Note:** Version bump only for package @nlib/unicode
+
+
+
+
+
 ## [3.10.2](https://github.com/nlibjs/nlibjs/compare/v3.10.1...v3.10.2) (2019-07-06)
 
 **Note:** Version bump only for package @nlib/unicode
