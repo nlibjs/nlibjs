@@ -31,7 +31,9 @@ test('write files in parallel', async (t) => {
         const directories = Array(index % 8).fill(1).map((_, index) => `dir${index}`);
         return join(t.context.directory, ...directories, `file${index}`);
     });
-    await Promise.all(filePaths.map((filePath) => writeFilep(filePath, filePath)));
+    await Promise.all(filePaths.map(async (filePath) => {
+        await writeFilep(filePath, filePath);
+    }));
     for (const filePath of filePaths) {
         const written = await readFile(filePath, 'utf8');
         t.is(written, filePath);
@@ -41,5 +43,7 @@ test('write files in parallel', async (t) => {
 test('throw an error if there is a directory', async (t) => {
     const dirPath = join(t.context.directory, 'dir1', 'dir2', 'dir3');
     await mkdirp(dirPath);
-    await t.throwsAsync(() => writeFilep(dirPath, dirPath), {code: 'EISDIR'});
+    await t.throwsAsync(async () => {
+        await writeFilep(dirPath, dirPath);
+    }, {code: 'EISDIR'});
 });

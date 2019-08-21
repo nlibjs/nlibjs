@@ -17,7 +17,11 @@ export const tree = async (file: PathLike): Promise<ITreeNode> => {
     const stats = await lstat(file);
     if (stats.isDirectory()) {
         const branches = await Promise.all(
-            (await readdir(file)).map((name) => tree(join(`${file}`, name)))
+            (await readdir(file))
+            .map(async (name) => {
+                const result = await tree(join(`${file}`, name));
+                return result;
+            })
         );
         for (const branch of branches) {
             files[basename(branch.path)] = branch;

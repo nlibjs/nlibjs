@@ -9,7 +9,9 @@ import {updateFile} from './updateFile';
 import {mkdirp} from './mkdirp';
 import * as index from './index';
 
-const wait = (duration: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, duration));
+const wait = async (duration: number): Promise<void> => {
+    await new Promise((resolve) => setTimeout(resolve, duration));
+};
 
 const test = anyTest as TestInterface<{
     directory: string,
@@ -36,7 +38,9 @@ test('write files in parallel', async (t) => {
         const directories = Array(index % 8).fill(1).map((_, index) => `dir${index}`);
         return join(t.context.directory, ...directories, `file${index}`);
     });
-    await Promise.all(filePaths.map((filePath) => updateFile(filePath, filePath)));
+    await Promise.all(filePaths.map(async (filePath) => {
+        await updateFile(filePath, filePath);
+    }));
     for (const filePath of filePaths) {
         const written = await readFile(filePath, 'utf8');
         t.is(written, filePath);
@@ -46,7 +50,9 @@ test('write files in parallel', async (t) => {
 test('throw an error if there is a directory', async (t) => {
     const dirPath = join(t.context.directory, 'dir1', 'dir2', 'dir3');
     await mkdirp(dirPath);
-    await t.throwsAsync(() => updateFile(dirPath, dirPath), {code: 'EISDIR'});
+    await t.throwsAsync(async () => {
+        await updateFile(dirPath, dirPath);
+    }, {code: 'EISDIR'});
 });
 
 test('do nothing if the data will be unchanged', async (t) => {

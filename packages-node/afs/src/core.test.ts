@@ -8,6 +8,8 @@ const core = new Map(Object.entries(_core));
 const index = new Map(Object.entries(_index));
 
 const ignoredFields = [
+    'writev',
+    'writevSync',
     'promises',
     'FileReadStream',
     'FileWriteStream',
@@ -22,16 +24,16 @@ for (const key of ignoredFields) {
     fs.delete(key);
 }
 
-test('core should have all members in fs', (t) => {
-    for (const [key, value] of fs) {
+for (const [key, value] of fs) {
+    test(`core should have ${key}`, (t) => {
         t.true(core.has(key), `core.${key} is undefined but fs.${key} is ${typeof value}`);
         if (core.has(`${key}Sync`)) {
             t.is(typeof value, typeof core.get(key));
         } else {
             t.true(value === core.get(key));
         }
-    }
-});
+    });
+}
 
 test('index should have all members in core', (t) => {
     for (const [key, value] of core) {

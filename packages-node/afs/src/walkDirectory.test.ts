@@ -17,19 +17,22 @@ const test = anyTest as TestInterface<{
     directory: string,
 }>;
 
-const collectResults = (
+const collectResults = async (
     walker: DirectoryWalker,
-): Promise<Array<IFileInfo>> => new Promise((resolve, reject) => {
+): Promise<Array<IFileInfo>> => {
     const results: Array<IFileInfo> = [];
-    walker
-    .once('error', reject)
-    .on('data', (data) => {
-        results.push(data);
-    })
-    .once('end', () => {
-        resolve(results);
+    await new Promise((resolve, reject) => {
+        walker
+        .once('error', reject)
+        .on('data', (data) => {
+            results.push(data);
+        })
+        .once('end', () => {
+            resolve(results);
+        });
     });
-});
+    return results;
+};
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();

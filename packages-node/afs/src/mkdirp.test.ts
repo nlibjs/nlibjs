@@ -46,7 +46,9 @@ test('throw an EEXIST error', async (t) => {
     t.true((await stat(dirPath1)).isDirectory());
     const dirPath2 = join(dirPath1, 'dir4');
     await writeFile(dirPath2, dirPath2);
-    await t.throwsAsync(() => mkdirp(dirPath2), {code: 'EEXIST'});
+    await t.throwsAsync(async () => {
+        await mkdirp(dirPath2);
+    }, {code: 'EEXIST'});
 });
 
 if (process.platform !== 'win32') {
@@ -56,6 +58,8 @@ if (process.platform !== 'win32') {
         t.true((await stat(dirPath1)).isDirectory());
         await chmod(dirPath1, 1);
         const dirPath2 = join(dirPath1, 'dir4');
-        await t.throwsAsync(() => mkdirp(dirPath2), {code: 'EACCES'});
+        await t.throwsAsync(async () => {
+            await mkdirp(dirPath2);
+        }, {code: 'EACCES'});
     });
 }
