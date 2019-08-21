@@ -3,7 +3,7 @@ import {readdir, rmdir, unlink, lstat} from './core';
 import {PathLike} from 'fs';
 import {absolutify} from './absolutify';
 
-export type onFileHook = (target: string) => void;
+export type onFileHook = (target: string) => void | Promise<void>;
 
 const rmrfCore = async (
     target: string,
@@ -14,7 +14,9 @@ const rmrfCore = async (
         await onFile(target);
         if (stats.isDirectory()) {
             const files = await readdir(target);
-            await Promise.all(files.map((name) => rmrfCore(join(target, name), onFile)));
+            await Promise.all(files.map(async (name) => {
+                await rmrfCore(join(target, name), onFile);
+            }));
             await rmdir(target);
         } else {
             await unlink(target);
@@ -28,7 +30,10 @@ const rmrfCore = async (
     }
 };
 
-export const rmrf = (
+export const rmrf = async (
     target: PathLike,
     onFile: onFileHook = () => {},
-): Promise<boolean> => rmrfCore(absolutify(target), onFile);
+): Promise<boolean> => {
+    const result = await rmrfCore(absolutify(target), onFile);
+    return result;
+};

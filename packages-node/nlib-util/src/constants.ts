@@ -14,4 +14,7 @@ export const rootPackageJSON: INlibJSRootPackageJSON = JSON.parse(fs.readFileSyn
 export const packageDirectoryPatterns = lernaJSON.packages.map((pattern) => {
     return path.join(projectRootDirectory, pattern).split(path.sep).join('/');
 });
-export const packageDirectories = globby.sync(packageDirectoryPatterns, {onlyDirectories: true}).sort();
+export const packageDirectories = globby.sync(
+    packageDirectoryPatterns,
+    {onlyDirectories: true},
+).sort((a, b) => a.localeCompare(b));

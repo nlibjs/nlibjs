@@ -8,7 +8,7 @@ import {
 
 export class LineStream extends Transform {
 
-    private decoder: StringDecoder;
+    private readonly decoder: StringDecoder;
 
     private buffer: Uint32Array;
 
@@ -16,7 +16,7 @@ export class LineStream extends Transform {
 
     private previousCodePoint: number;
 
-    public constructor(encoding: string = 'utf8') {
+    public constructor(encoding = 'utf8') {
         super({objectMode: true});
         this.decoder = new StringDecoder(encoding);
         this.buffer = new Uint32Array(0x100);

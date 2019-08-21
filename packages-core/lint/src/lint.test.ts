@@ -64,24 +64,7 @@ test('should be valid configuration', (t) => {
     const availableTypeScriptRules = new Map(Object.entries(eslintPlugin.rules));
     const prefix = '@typescript-eslint';
     // https://github.com/typescript-eslint/typescript-eslint/issues/101
-    const rulesToBeIgnored = new Set<string>([
-        'await-thenable',
-        'no-floating-promises',
-        'no-for-in-array',
-        'no-misused-promises',
-        'no-unnecessary-qualifier',
-        'no-unnecessary-type-assertion',
-        'prefer-includes',
-        'prefer-regexp-exec',
-        'prefer-string-starts-ends-with',
-        'prefer-readonly',
-        'promise-function-async',
-        'require-array-sort-compare',
-        'require-await',
-        'restrict-plus-operands',
-        'strict-boolean-expressions',
-        'unbound-method',
-    ]);
+    const rulesToBeIgnored = new Set<string>([]);
     const getTypeScriptRules = (
         t: ExecutionContext<ITextContext>,
     ): NonNullable<eslint.Linter.Config['rules']> => {

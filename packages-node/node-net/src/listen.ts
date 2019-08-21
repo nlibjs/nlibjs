@@ -70,7 +70,7 @@ export const listen: IListen = (
 
 export const listenPort = async (
     server: Server,
-    port: number = 4000,
+    port = 4000,
     hostname?: string,
     backlog?: number,
     validPortRange: SetZ = [[0x0000, 0xffff]],

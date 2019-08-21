@@ -4,9 +4,9 @@ import {getCodePoints} from '@nlib/infra';
 
 export class CodePointStream extends Transform {
 
-    private decoder: StringDecoder;
+    private readonly decoder: StringDecoder;
 
-    public constructor(encoding: string = 'utf8') {
+    public constructor(encoding = 'utf8') {
         super({objectMode: true});
         this.decoder = new StringDecoder(encoding);
     }

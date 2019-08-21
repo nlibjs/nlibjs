@@ -72,7 +72,7 @@ test('find a file in the parent directory', async (t) => {
 });
 
 test('ignore directories', async (t) => {
-    mkdir(join(t.context.dir2, t.context.filename1));
+    await mkdir(join(t.context.dir2, t.context.filename1));
     const found = await findUp([t.context.filename1], t.context.dir3);
     t.is(found, t.context.file11);
 });
@@ -91,6 +91,8 @@ if (process.platform !== 'win32') {
     test('throw an EACCES error', async (t) => {
         const directory = join(t.context.directory, 'throw');
         await mkdir(directory, 1);
-        await t.throwsAsync(() => findUp(t.context.filename1, directory), {code: 'EACCES'});
+        await t.throwsAsync(async () => {
+            await findUp(t.context.filename1, directory);
+        }, {code: 'EACCES'});
     });
 }

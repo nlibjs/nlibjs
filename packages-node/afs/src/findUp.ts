@@ -26,7 +26,13 @@ const findUpCore = async (
     return null;
 };
 
-export const findUp = (
+export const findUp = async (
     filenames: string | Array<string>,
     directory = process.cwd(),
-): Promise<string | null> => findUpCore(Array.isArray(filenames) ? filenames : [filenames], absolutify(directory));
+): Promise<string | null> => {
+    const result = await findUpCore(
+        Array.isArray(filenames) ? filenames : [filenames],
+        absolutify(directory),
+    );
+    return result;
+};

@@ -33,5 +33,17 @@
     },
     "devDependencies": {
         "@nlib/node-stream": "^3.13.2"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": [
+                    "src/listen.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/promise-function-async": "off"
+                }
+            }
+        ]
     }
 }

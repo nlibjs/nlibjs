@@ -11,7 +11,11 @@ interface ICopyContext {
     dest: string,
 }
 
-const cprCore = async (node: ITreeNode, dest: string, context: ICopyContext): Promise<void> => {
+const cprCore = async (
+    node: ITreeNode,
+    dest: string,
+    context: ICopyContext,
+): Promise<void> => {
     const {stats} = node;
     if (stats.isFile()) {
         await copyFile(node.path, dest);
@@ -19,7 +23,9 @@ const cprCore = async (node: ITreeNode, dest: string, context: ICopyContext): Pr
         await mkdirp(dest);
         await Promise.all(
             Object.entries(node.files)
-            .map(([name, childNode]) => cprCore(childNode, join(dest, name), context))
+            .map(async ([name, childNode]) => {
+                await cprCore(childNode, join(dest, name), context);
+            })
         );
     } else if (stats.isSymbolicLink()) {
         const source = node.path;
@@ -41,7 +47,10 @@ const cprCore = async (node: ITreeNode, dest: string, context: ICopyContext): Pr
     }
 };
 
-export const cpr = async (src: PathLike, dest: string): ReturnType<typeof cprCore> => {
+export const cpr = async (
+    src: PathLike,
+    dest: string,
+): ReturnType<typeof cprCore> => {
     src = absolutify(src);
     dest = absolutify(dest);
     await mkdirp(dirname(dest));

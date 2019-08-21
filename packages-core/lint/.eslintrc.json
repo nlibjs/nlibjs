@@ -14,6 +14,9 @@
         {
             "files": ["*.ts"],
             "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "project": "./tsconfig.json"
+            },
             "plugins": ["@typescript-eslint"],
             "rules": {
                 "consistent-this": "off",
@@ -28,7 +31,8 @@
                 "no-useless-constructor": "off",
                 "semi": "off",
                 "@typescript-eslint/adjacent-overload-signatures": "error",
-                "@typescript-eslint/array-type": ["error", "generic"],
+                "@typescript-eslint/array-type": ["error", {"default": "generic"}],
+                "@typescript-eslint/await-thenable": "error",
                 "@typescript-eslint/ban-ts-ignore": "error",
                 "@typescript-eslint/ban-types": [
                     "error",
@@ -44,6 +48,10 @@
                 ],
                 "@typescript-eslint/camelcase": "off",
                 "@typescript-eslint/class-name-casing": "error",
+                "@typescript-eslint/consistent-type-assertions": ["error", {
+                    "assertionStyle": "as",
+                    "objectLiteralTypeAssertions": "never"
+                }],
                 "@typescript-eslint/consistent-type-definitions": "error",
                 "@typescript-eslint/explicit-function-return-type": "off",
                 "@typescript-eslint/explicit-member-accessibility": "error",
@@ -67,19 +75,20 @@
                 }],
                 "@typescript-eslint/member-naming": "error",
                 "@typescript-eslint/member-ordering": "error",
-                "@typescript-eslint/no-angle-bracket-type-assertion": "off",
                 "@typescript-eslint/no-array-constructor": "error",
                 "@typescript-eslint/no-empty-function": "error",
                 "@typescript-eslint/no-empty-interface": "off",
                 "@typescript-eslint/no-explicit-any": "error",
                 "@typescript-eslint/no-extra-parens": "off",
                 "@typescript-eslint/no-extraneous-class": "error",
+                "@typescript-eslint/no-floating-promises": "error",
+                "@typescript-eslint/no-for-in-array": "error",
                 "@typescript-eslint/no-inferrable-types": "error",
                 "@typescript-eslint/no-magic-numbers": "off",
                 "@typescript-eslint/no-misused-new": "error",
+                "@typescript-eslint/no-misused-promises": "error",
                 "@typescript-eslint/no-namespace": ["error", {"allowDefinitionFiles": true}],
                 "@typescript-eslint/no-non-null-assertion": "error",
-                "@typescript-eslint/no-object-literal-type-assertion": "error",
                 "@typescript-eslint/no-parameter-properties": "error",
                 "@typescript-eslint/no-require-imports": "error",
                 "@typescript-eslint/no-this-alias": ["error", {
@@ -87,14 +96,26 @@
                     "allowedNames": ["self"]
                 }],
                 "@typescript-eslint/no-type-alias": "off",
+                "@typescript-eslint/no-unnecessary-qualifier": "error",
+                "@typescript-eslint/no-unnecessary-type-arguments": "error",
+                "@typescript-eslint/no-unnecessary-type-assertion": "error",
                 "@typescript-eslint/no-unused-vars": "off",
                 "@typescript-eslint/no-use-before-define": ["error", {"variables": false}],
                 "@typescript-eslint/no-useless-constructor": "error",
                 "@typescript-eslint/no-var-requires": "error",
                 "@typescript-eslint/prefer-for-of": "error",
                 "@typescript-eslint/prefer-function-type": "off",
+                "@typescript-eslint/prefer-includes": "error",
                 "@typescript-eslint/prefer-namespace-keyword": "off",
+                "@typescript-eslint/prefer-regexp-exec": "error",
+                "@typescript-eslint/prefer-string-starts-ends-with": "error",
+                "@typescript-eslint/prefer-readonly": "error",
+                "@typescript-eslint/promise-function-async": "error",
+                "@typescript-eslint/require-array-sort-compare": "error",
+                "@typescript-eslint/require-await": "error",
+                "@typescript-eslint/restrict-plus-operands": "error",
                 "@typescript-eslint/semi": "error",
+                "@typescript-eslint/strict-boolean-expressions": "off",
                 "@typescript-eslint/triple-slash-reference": ["error", {
                     "path": "never",
                     "types": "never",
@@ -107,6 +128,8 @@
                         "arrow": {"before": true, "after": true}
                     }
                 }],
+                "@typescript-eslint/typedef": "off",
+                "@typescript-eslint/unbound-method": "error",
                 "@typescript-eslint/unified-signatures": "error"
             }
         }
@@ -146,6 +169,7 @@
         "func-name-matching": "off",
         "func-names": "off",
         "func-style": "error",
+        "function-call-argument-newline": ["error", "consistent"],
         "function-paren-newline": "off",
         "generator-star-spacing": ["error", {"before": false, "after": true}],
         "getter-return": "error",

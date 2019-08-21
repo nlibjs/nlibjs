@@ -41,7 +41,9 @@ test('copy a directory', async (t) => {
         copiee: join(copieeDir, `dir-${index}`, `file-${index}`),
         copied: join(copiedDir, `dir-${index}`, `file-${index}`),
     }));
-    await Promise.all(filenames.map(({copiee}) => writeFilep(copiee, copiee)));
+    await Promise.all(filenames.map(async ({copiee}) => {
+        await writeFilep(copiee, copiee);
+    }));
     await cpr(copieeDir, copiedDir);
     await Promise.all(filenames.map(async ({copiee, copied}) => {
         t.true(await isSameFile(copied, copiee));
@@ -129,6 +131,8 @@ if (process.platform !== 'win32') {
             });
         });
         const copiedDir = join(t.context.directory, 'copied1', 'copied2');
-        await t.throwsAsync(() => cpr(copieeDir, copiedDir), {code: 'afs/cpr/1'});
+        await t.throwsAsync(async () => {
+            await cpr(copieeDir, copiedDir);
+        }, {code: 'afs/cpr/1'});
     });
 }

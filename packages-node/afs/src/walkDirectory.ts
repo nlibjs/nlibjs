@@ -60,7 +60,9 @@ export class DirectoryWalker extends Readable {
         }
         await Promise.all(
             (await readdir(absolutePath))
-            .map((name) => this.walk(join(`${absolutePath}`, name), depth + 1)),
+            .map(async (name) => {
+                await this.walk(join(`${absolutePath}`, name), depth + 1);
+            }),
         );
     }
 

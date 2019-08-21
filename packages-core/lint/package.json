@@ -23,7 +23,8 @@
     "scripts": {
         "cleanup": "rimraf lib",
         "build": "tsc",
-        "test": "ava",
+        "test-ava": "ava",
+        "test": "run-s test-ava lint",
         "lint": "eslint --ext .ts src",
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     }

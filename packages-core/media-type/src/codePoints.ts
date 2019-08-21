@@ -8,10 +8,22 @@ const eq = (codePoint: number): SetZ => [[codePoint, codePoint]];
  * U+002D (-), U+002E (.), U+005E (^), U+005F (_),
  * U+0060 (`), U+007C (|), U+007E (~), or an ASCII alphanumeric. */
 export const HTTPToken = unionSetZ(
-    eq(0x0021), eq(0x0023), eq(0x0024), eq(0x0025),
-    eq(0x0026), eq(0x0027), eq(0x002A), eq(0x002B),
-    eq(0x002D), eq(0x002E), eq(0x005E), eq(0x005F),
-    eq(0x0060), eq(0x007C), eq(0x007E), ASCIIAlphanumeric,
+    eq(0x0021),
+    eq(0x0023),
+    eq(0x0024),
+    eq(0x0025),
+    eq(0x0026),
+    eq(0x0027),
+    eq(0x002A),
+    eq(0x002B),
+    eq(0x002D),
+    eq(0x002E),
+    eq(0x005E),
+    eq(0x005F),
+    eq(0x0060),
+    eq(0x007C),
+    eq(0x007E),
+    ASCIIAlphanumeric,
 );
 export const isHTTPToken = (x: number): boolean => hasSetZ(HTTPToken, x);
 

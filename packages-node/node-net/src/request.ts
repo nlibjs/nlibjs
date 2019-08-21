@@ -9,16 +9,15 @@ import {
     RequestOptions as RequestOptionsHTTPS,
 } from 'https';
 import {Readable} from 'stream';
-import {NlibError} from '@nlib/util';
 
-export const request = (
+export const request = async (
     src: string | URL,
     options: RequestOptionsHTTP | RequestOptionsHTTPS = {},
     data?: Readable | Buffer | string,
 ): Promise<IncomingMessage> => {
     const url = new URL(`${src}`);
     const request = url.protocol === 'https:' ? requestHTTPS : requestHTTP;
-    return new Promise((resolve, reject) => {
+    const req = await new Promise<IncomingMessage>((resolve, reject) => {
         const req = request(
             {
                 protocol: url.protocol,
@@ -34,17 +33,12 @@ export const request = (
         if (data) {
             if (typeof data === 'string' || Buffer.isBuffer(data)) {
                 req.end(data);
-            } else if (typeof data.pipe === 'function') {
-                data.pipe(req);
             } else {
-                reject(new NlibError({
-                    code: 'node-net/request/1',
-                    message: `Invalid data: ${data}`,
-                    data: {src, options, data},
-                }));
+                data.pipe(req);
             }
         } else {
             req.end();
         }
     });
+    return req;
 };
