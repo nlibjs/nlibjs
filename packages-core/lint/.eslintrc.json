@@ -32,6 +32,7 @@
                 "semi": "off",
                 "@typescript-eslint/adjacent-overload-signatures": "error",
                 "@typescript-eslint/array-type": ["error", {"default": "generic"}],
+                "@typescript-eslint/await-thenable": "error",
                 "@typescript-eslint/ban-ts-ignore": "error",
                 "@typescript-eslint/ban-types": [
                     "error",
@@ -80,9 +81,12 @@
                 "@typescript-eslint/no-explicit-any": "error",
                 "@typescript-eslint/no-extra-parens": "off",
                 "@typescript-eslint/no-extraneous-class": "error",
+                "@typescript-eslint/no-floating-promises": "error",
+                "@typescript-eslint/no-for-in-array": "error",
                 "@typescript-eslint/no-inferrable-types": "error",
                 "@typescript-eslint/no-magic-numbers": "off",
                 "@typescript-eslint/no-misused-new": "error",
+                "@typescript-eslint/no-misused-promises": "error",
                 "@typescript-eslint/no-namespace": ["error", {"allowDefinitionFiles": true}],
                 "@typescript-eslint/no-non-null-assertion": "error",
                 "@typescript-eslint/no-parameter-properties": "error",
@@ -92,15 +96,26 @@
                     "allowedNames": ["self"]
                 }],
                 "@typescript-eslint/no-type-alias": "off",
+                "@typescript-eslint/no-unnecessary-qualifier": "error",
                 "@typescript-eslint/no-unnecessary-type-arguments": "error",
+                "@typescript-eslint/no-unnecessary-type-assertion": "error",
                 "@typescript-eslint/no-unused-vars": "off",
                 "@typescript-eslint/no-use-before-define": ["error", {"variables": false}],
                 "@typescript-eslint/no-useless-constructor": "error",
                 "@typescript-eslint/no-var-requires": "error",
                 "@typescript-eslint/prefer-for-of": "error",
                 "@typescript-eslint/prefer-function-type": "off",
+                "@typescript-eslint/prefer-includes": "error",
                 "@typescript-eslint/prefer-namespace-keyword": "off",
+                "@typescript-eslint/prefer-regexp-exec": "error",
+                "@typescript-eslint/prefer-string-starts-ends-with": "error",
+                "@typescript-eslint/prefer-readonly": "error",
+                "@typescript-eslint/promise-function-async": "error",
+                "@typescript-eslint/require-array-sort-compare": "error",
+                "@typescript-eslint/require-await": "error",
+                "@typescript-eslint/restrict-plus-operands": "error",
                 "@typescript-eslint/semi": "error",
+                "@typescript-eslint/strict-boolean-expressions": "off",
                 "@typescript-eslint/triple-slash-reference": ["error", {
                     "path": "never",
                     "types": "never",
@@ -114,6 +129,7 @@
                     }
                 }],
                 "@typescript-eslint/typedef": "off",
+                "@typescript-eslint/unbound-method": "error",
                 "@typescript-eslint/unified-signatures": "error"
             }
         }
