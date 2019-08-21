@@ -1,6 +1,6 @@
 {
     "name": "@nlib/fetch",
-    "version": "3.12.0",
+    "version": "3.13.3",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -28,9 +28,9 @@
     },
     "dependencies": {
         "@nlib/global": "^3.12.0",
-        "@nlib/infra": "^3.12.0",
-        "@nlib/real-number": "^3.12.0",
-        "@nlib/util": "^3.12.0"
+        "@nlib/infra": "^3.13.3",
+        "@nlib/real-number": "^3.13.3",
+        "@nlib/util": "^3.13.3"
     },
     "eslintConfig": {
         "overrides": [

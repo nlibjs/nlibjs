@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.3](https://github.com/nlibjs/nlibjs/compare/v3.13.2...v3.13.3) (2019-08-21)
+
+
+### Bug Fixes
+
+* **lint:** add parserOptions.project ([cf16500](https://github.com/nlibjs/nlibjs/commit/cf16500))
+* **lint:** enable some rules which requires type information ([b096781](https://github.com/nlibjs/nlibjs/commit/b096781))
+* **lint:** update configurations ([bf377b3](https://github.com/nlibjs/nlibjs/commit/bf377b3))
+
+
+
+
+
 ## [3.13.2](https://github.com/nlibjs/nlibjs/compare/v3.13.1...v3.13.2) (2019-07-18)
 
 

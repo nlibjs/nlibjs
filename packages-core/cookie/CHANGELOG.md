@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.3](https://github.com/nlibjs/nlibjs/compare/v3.13.2...v3.13.3) (2019-08-21)
+
+**Note:** Version bump only for package @nlib/cookie
+
+
+
+
+
 # [3.12.0](https://github.com/nlibjs/nlibjs/compare/v3.11.2...v3.12.0) (2019-07-11)
 
 
