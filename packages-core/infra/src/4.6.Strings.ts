@@ -25,17 +25,17 @@ import {
 import {isASCIIByte} from './4.3.Bytes';
 import {isomorphicDecode} from './4.4.ByteSequences';
 
-export const toASCIILowerCaseCodePoint: CodePointMappingFunction = (codePoint: number): number => isASCIIUpperAlpha(codePoint) ? codePoint + 0x20 as number : codePoint;
+export const toASCIILowerCaseCodePoint: CodePointMappingFunction = (codePoint: number): number => isASCIIUpperAlpha(codePoint) ? codePoint + 0x20 : codePoint;
 
-export const toASCIIUpperCaseCodePoint: CodePointMappingFunction = (codePoint: number): number => isASCIILowerAlpha(codePoint) ? codePoint - 0x20 as number : codePoint;
+export const toASCIIUpperCaseCodePoint: CodePointMappingFunction = (codePoint: number): number => isASCIILowerAlpha(codePoint) ? codePoint - 0x20 : codePoint;
 
-export const fromString = (input: string): Uint32Array => Uint32Array.from(getCodePoints(input)) as Uint32Array;
+export const fromString = (input: string): Uint32Array => Uint32Array.from(getCodePoints(input));
 
 export const toScalarValueString = (input: string | Uint32Array): Uint32Array => typeof input === 'string' ? fromString(input) : input;
 
-export const fromIterable = (input: Iterable<number> | Iterable<number>): Uint32Array => Uint32Array.from(input) as Uint32Array;
+export const fromIterable = (input: Iterable<number> | Iterable<number>): Uint32Array => Uint32Array.from(input);
 
-export const fromCodePoint = (...input: Array<number>): Uint32Array => Uint32Array.from(input) as Uint32Array;
+export const fromCodePoint = (...input: Array<number>): Uint32Array => Uint32Array.from(input);
 
 export const toString = (input: Iterable<number>): string => String.fromCodePoint(...input);
 
