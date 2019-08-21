@@ -11,11 +11,13 @@ export const removeTestFiles = async (): Promise<void> => {
     }));
 };
 
-export const prepack = (): Promise<void> => Promise.all([
-    removeTestFiles(),
-])
-.then(() => {})
-.catch((error) => {
-    console.error(error);
-    process.exit(1);
-});
+export const prepack = async (): Promise<void> => {
+    await Promise.all([
+        removeTestFiles(),
+    ])
+    .then(() => {})
+    .catch((error) => {
+        console.error(error);
+        process.exit(1);
+    });
+};
