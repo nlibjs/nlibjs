@@ -17,7 +17,10 @@ const exportedKeys = [
 ];
 
 test('should be a superset of xml-js', (t) => {
-    t.deepEqual(exportedKeys.sort(), Object.keys(_xmljs).sort());
+    t.deepEqual(
+        exportedKeys.sort((a, b) => a.localeCompare(b)),
+        Object.keys(_xmljs).sort((a, b) => a.localeCompare(b)),
+    );
     t.is(js2xml, xmljs.js2xml);
     t.is(json2xml, xmljs.json2xml);
     t.is(xml2js, xmljs.xml2js);
