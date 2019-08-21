@@ -41,6 +41,14 @@
                 "rules": {
                     "@typescript-eslint/no-explicit-any": "off"
                 }
+            },
+            {
+                "files": [
+                    "src/getType.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/unbound-method": "off"
+                }
             }
         ]
     }
