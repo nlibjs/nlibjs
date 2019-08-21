@@ -46,6 +46,9 @@
                 },
                 "rules": {
                     "no-console": "off"
+                },
+                "parserOptions": {
+                    "project": "./build/tsconfig.json"
                 }
             }
         ]
