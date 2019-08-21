@@ -8,7 +8,7 @@ import {
 
 export class LineStream extends Transform {
 
-    private decoder: StringDecoder;
+    private readonly decoder: StringDecoder;
 
     private buffer: Uint32Array;
 
