@@ -16,7 +16,7 @@ export class LineStream extends Transform {
 
     private previousCodePoint: number;
 
-    public constructor(encoding: string = 'utf8') {
+    public constructor(encoding = 'utf8') {
         super({objectMode: true});
         this.decoder = new StringDecoder(encoding);
         this.buffer = new Uint32Array(0x100);

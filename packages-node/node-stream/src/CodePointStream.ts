@@ -6,7 +6,7 @@ export class CodePointStream extends Transform {
 
     private decoder: StringDecoder;
 
-    public constructor(encoding: string = 'utf8') {
+    public constructor(encoding = 'utf8') {
         super({objectMode: true});
         this.decoder = new StringDecoder(encoding);
     }
