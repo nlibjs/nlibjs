@@ -1,6 +1,6 @@
 {
     "name": "@nlib/unicode",
-    "version": "3.13.3",
+    "version": "3.13.4",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -32,10 +32,10 @@
         "@nlib/global": "^3.12.0"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.13.3",
-        "@nlib/infra": "^3.13.3",
-        "@nlib/node-net": "^3.13.3",
-        "@nlib/node-stream": "^3.13.3"
+        "@nlib/afs": "^3.13.4",
+        "@nlib/infra": "^3.13.4",
+        "@nlib/node-net": "^3.13.4",
+        "@nlib/node-stream": "^3.13.4"
     },
     "eslintConfig": {
         "overrides": [
