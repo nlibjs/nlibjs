@@ -71,8 +71,8 @@ export const listen: IListen = (
 export const listenPort = async (
     server: Server,
     port = 4000,
-    hostname?: string,
-    backlog?: number,
+    hostname: string | null = null,
+    backlog: number | null = null,
     validPortRange: SetZ = [[0x0000, 0xffff]],
 ): Promise<number> => {
     if (server.listening) {

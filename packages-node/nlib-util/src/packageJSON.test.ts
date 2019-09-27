@@ -122,21 +122,22 @@ for (const packageDirectory of packageDirectories) {
         t.is(packageJSON.scripts.prepack, 'node -e \'require(`@nlib/nlib-util`).prepack()\'');
     });
 
-    if (packageJSON.dependencies) {
+    const {dependencies} = packageJSON;
+    if (dependencies) {
         const packageLevel = getPackageLevel(relativeId);
         test(`${relativeId}/package.json#dependencies`, (t) => {
             t.is(typeof packageJSON.dependencies, 'object');
-            const dependencies = {...packageJSON.dependencies};
+            const deps = {...dependencies};
             switch (relativeId) {
             case 'packages-core/xml-js':
-                delete dependencies['xml-js'];
+                delete deps['xml-js'];
                 break;
             case 'packages-node/afs':
-                delete dependencies.semver;
+                delete deps.semver;
                 break;
             default:
             }
-            for (const [name] of Object.entries(dependencies)) {
+            for (const [name] of Object.entries(deps)) {
                 const basename = name.startsWith('@nlib/') ? name.slice(6) : name;
                 const directory = packageDirectories.find((directory) => directory.endsWith(basename));
                 const dependencyLevel = getPackageLevel(directory);

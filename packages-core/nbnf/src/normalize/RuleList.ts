@@ -9,13 +9,15 @@ import {normalizeAlternation} from './Alternation';
 
 export const normalizeRuleList = (
     ruleList: {
-        [name: string]: INBNFNormalizedAlternation | INBNFAlternation,
+        [name: string]: INBNFNormalizedAlternation | INBNFAlternation | undefined,
     },
     expands: INBNFNullableNormalizedRuleList = {},
 ): INBNFNormalizedRuleList => {
     const result: INBNFNormalizedRuleList = {};
-    for (const key of Object.keys(ruleList)) {
-        result[key] = normalizeAlternation(ruleList[key], expands, key);
+    for (const [key, alternation] of Object.entries(ruleList)) {
+        if (alternation) {
+            result[key] = normalizeAlternation(alternation, expands, key);
+        }
     }
     return result;
 };

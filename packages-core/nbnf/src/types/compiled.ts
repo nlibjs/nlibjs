@@ -49,5 +49,5 @@ export interface INBNFCompiledRepetition extends INBNFCompiledRepetitionBase<INB
 export interface INBNFCompiledConcatenation extends Array<INBNFCompiledRepetition> {}
 export interface INBNFCompiledAlternation extends Array<INBNFCompiledConcatenation> {}
 export interface INBNFCompiledRuleList {
-    [ruleName: string]: INBNFCompiledAlternation,
+    [ruleName: string]: INBNFCompiledAlternation | undefined,
 }

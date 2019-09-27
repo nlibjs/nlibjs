@@ -30,5 +30,22 @@
         "@nlib/global": "^3.12.0",
         "@nlib/number": "^3.12.0",
         "@nlib/util": "^3.13.3"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": [
+                    "src/IntervalR/intersection.ts",
+                    "src/IntervalR/union.ts",
+                    "src/IntervalZ/intersection.ts",
+                    "src/IntervalZ/union.ts",
+                    "src/SetR/union.ts",
+                    "src/SetZ/union.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/no-unnecessary-condition": "off"
+                }
+            }
+        ]
     }
 }

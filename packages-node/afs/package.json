@@ -37,7 +37,16 @@
                     "src/core.ts"
                 ],
                 "rules": {
-                    "prefer-destructuring": "off"
+                    "prefer-destructuring": "off",
+                    "@typescript-eslint/no-unnecessary-condition": "off"
+                }
+            },
+            {
+                "files": [
+                    "src/tree.test.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/no-unnecessary-condition": "off"
                 }
             }
         ]

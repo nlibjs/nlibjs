@@ -50,8 +50,8 @@ export interface INBNFNormalizedRule {
     elements: INBNFNormalizedAlternation,
 }
 export interface INBNFNormalizedRuleList {
-    [ruleName: string]: INBNFNormalizedAlternation,
+    [ruleName: string]: INBNFNormalizedAlternation | undefined,
 }
 export interface INBNFNullableNormalizedRuleList {
-    [ruleName: string]: INBNFNormalizedAlternation | null,
+    [ruleName: string]: INBNFNormalizedAlternation | null | undefined,
 }

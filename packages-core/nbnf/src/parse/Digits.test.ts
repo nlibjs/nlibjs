@@ -6,42 +6,55 @@ import {
     LATIN_SMALL_LETTER_X,
 } from '@nlib/infra';
 import test from 'ava';
-import {parseDigits, radixes, IRadixData} from './Digits';
+import {
+    parseDigits,
+    radixes,
+    IRadixData,
+    RadixBin,
+    RadixDec,
+    RadixHex,
+} from './Digits';
 import * as index from './index';
 
 test('index.parseDigits', (t) => {
     t.is(index.parseDigits, parseDigits);
 });
 
-const {
-    [LATIN_SMALL_LETTER_B]: bin,
-    [LATIN_SMALL_LETTER_D]: dec,
-    [LATIN_SMALL_LETTER_X]: hex,
-} = radixes;
+test(`radixes[${LATIN_SMALL_LETTER_B}]`, (t) => {
+    t.is(radixes[LATIN_SMALL_LETTER_B], RadixBin);
+});
+
+test(`radixes[${LATIN_SMALL_LETTER_D}]`, (t) => {
+    t.is(radixes[LATIN_SMALL_LETTER_D], RadixDec);
+});
+
+test(`radixes[${LATIN_SMALL_LETTER_X}]`, (t) => {
+    t.is(radixes[LATIN_SMALL_LETTER_X], RadixHex);
+});
 
 test('throw at SPACE', (t) => {
-    t.throws(() => parseDigits(fromString('  1'), 1, bin, () => {}));
+    t.throws(() => parseDigits(fromString('  1'), 1, RadixBin, () => {}));
 });
 
 const tests: Array<[string, number, IRadixData, number, number]> = [
     [
         '  10101',
         2,
-        bin,
+        RadixBin,
         0b10101,
         7,
     ],
     [
         '  13579a',
         2,
-        dec,
+        RadixDec,
         parseInt('13579', 10),
         7,
     ],
     [
         '  147ADG',
         2,
-        hex,
+        RadixHex,
         0x147AD,
         7,
     ],

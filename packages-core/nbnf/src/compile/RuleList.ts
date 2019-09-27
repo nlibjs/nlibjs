@@ -1,3 +1,4 @@
+import {NlibError} from '@nlib/util';
 import {Object} from '@nlib/global';
 import {INBNFCompiledRuleList, INBNFCompiledAlternation, INBNFNormalizedRuleList} from '../types';
 import {compileAlternation} from './Alternation';
@@ -13,10 +14,19 @@ export const compileRuleList = (
     for (const name of Object.keys(compiledRuleList)) {
         const alternation = normalizedRuleList[name];
         if (alternation) {
-            compiledRuleList[name].push(...compileAlternation(
-                alternation,
-                compiledRuleList,
-            ));
+            const list = compiledRuleList[name];
+            if (list) {
+                list.push(...compileAlternation(
+                    alternation,
+                    compiledRuleList,
+                ));
+            } else {
+                throw new NlibError({
+                    code: 'nbnf/RuleList/1',
+                    message: `No rule: ${name}`,
+                    data: compiledRuleList,
+                });
+            }
         }
     }
     return compiledRuleList;

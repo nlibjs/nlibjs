@@ -38,6 +38,14 @@
                 "rules": {
                     "@typescript-eslint/no-explicit-any": "off"
                 }
+            },
+            {
+                "files": [
+                    "src/tokenizeReplacementString.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/no-unnecessary-condition": "off"
+                }
             }
         ]
     }

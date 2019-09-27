@@ -26,7 +26,7 @@ export const collectAnHTTPQuotedString = (
         });
     }
     position++;
-    while (true) {
+    while (1) {
         value = concatenate(
             value,
             collectCodePointSequence(

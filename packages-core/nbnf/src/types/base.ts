@@ -54,5 +54,5 @@ export interface INBNFRule {
     elements: INBNFAlternation,
 }
 export interface INBNFRuleList {
-    [ruleName: string]: INBNFAlternation,
+    [ruleName: string]: INBNFAlternation | undefined,
 }

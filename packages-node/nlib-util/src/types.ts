@@ -103,8 +103,8 @@ export interface INlibJSPackageJSON {
     main: string,
     files: Array<string>,
     scripts: IScripts,
-    dependencies: IDependencies,
-    devDependencies: IDependencies,
+    dependencies?: IDependencies,
+    devDependencies?: IDependencies,
 }
 
 export interface INlibJSRootPackageJSON {

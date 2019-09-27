@@ -25,7 +25,7 @@ export const createEmptyNode = <TValue>(
 });
 
 export const createRootNode = <TValue>(
-    name = '',
+    name: string,
     value: TValue,
 ): IFilledNamedTreeNode<TValue> => Object.assign(new Map(), {
     parent: null,

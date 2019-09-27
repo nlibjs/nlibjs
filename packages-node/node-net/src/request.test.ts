@@ -47,9 +47,10 @@ test('POST https://localhost/foo (string)', async (t) => {
     const data = 'foobar';
     const url = new URL(`${t.context.baseURL}`);
     url.pathname = '/foo';
+    url.searchParams.set('foo', 'bar');
     const res = await request(url, {method: 'POST'}, data);
     t.is(res.statusCode, 200);
-    t.is(res.headers.path, '/foo');
+    t.is(res.headers.path, '/foo?foo=bar');
     t.is(res.headers.method, 'POST');
     const loaded = await readStream(res);
     t.is(`${loaded}`, data);
@@ -63,9 +64,10 @@ test('POST https://localhost/foo (stream)', async (t) => {
     });
     const url = new URL(`${t.context.baseURL}`);
     url.pathname = '/foo';
+    url.searchParams.set('foo', 'bar');
     const res = await request(url, {method: 'POST'}, input);
     t.is(res.statusCode, 200);
-    t.is(res.headers.path, '/foo');
+    t.is(res.headers.path, '/foo?foo=bar');
     t.is(res.headers.method, 'POST');
     const loaded = await readStream(res);
     t.is(`${loaded}`, data);
