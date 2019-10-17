@@ -18,6 +18,9 @@ const ignoredFields = [
     'R_OK',
     'W_OK',
     'X_OK',
+    'opendir',
+    'opendirSync',
+    'Dir',
 ];
 
 for (const key of ignoredFields) {
