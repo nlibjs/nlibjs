@@ -5,6 +5,7 @@ import {
     isNumber,
     isObject,
     isString,
+    isNonEmptyString,
 } from './is';
 import * as index from './index';
 
@@ -84,5 +85,26 @@ test('index.isNumber', (t) => {
 ] as Array<ITest>).forEach(({value, expected}) => {
     test(`isString(${JSON.stringify(value)}) → ${expected}`, (t) => {
         t.is(isString(value), expected);
+    });
+});
+
+test('index.isNonEmptyString', (t) => {
+    t.is(index.isNonEmptyString, isNonEmptyString);
+});
+
+([
+    {value: null, expected: false},
+    {value: undefined, expected: false},
+    {value: true, expected: false},
+    {value: false, expected: false},
+    {value: 0, expected: false},
+    {value: '', expected: false},
+    {value: '0', expected: true},
+    {value: {}, expected: false},
+    {value: [], expected: false},
+    {value: new Uint32Array(1), expected: false},
+] as Array<ITest>).forEach(({value, expected}) => {
+    test(`isNonEmptyString(${JSON.stringify(value)}) → ${expected}`, (t) => {
+        t.is(isNonEmptyString(value), expected);
     });
 });
