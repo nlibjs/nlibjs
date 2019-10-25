@@ -1,11 +1,39 @@
 import test from 'ava';
 import {JSON, Uint32Array} from '@nlib/global';
-import {isNumber, isObject, isString} from './is';
+import {
+    isNull,
+    isNumber,
+    isObject,
+    isString,
+} from './is';
+import * as index from './index';
 
 interface ITest {
     value: any,
     expected: boolean,
 }
+
+test('index.isNull', (t) => {
+    t.is(index.isNull, isNull);
+});
+
+([
+    {value: null, expected: true},
+    {value: undefined, expected: false},
+    {value: 0, expected: false},
+    {value: '0', expected: false},
+    {value: {}, expected: false},
+    {value: [], expected: false},
+    {value: new Uint32Array(1), expected: false},
+] as Array<ITest>).forEach(({value, expected}) => {
+    test(`isNull(${JSON.stringify(value)}) → ${expected}`, (t) => {
+        t.is(isNull(value), expected);
+    });
+});
+
+test('index.isNumber', (t) => {
+    t.is(index.isNumber, isNumber);
+});
 
 ([
     {value: null, expected: false},
