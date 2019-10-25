@@ -2,5 +2,11 @@
 export * from './NlibError';
 export * from './createArrayLikeComparator';
 export * from './getLast';
-export * from './getType';
-export * from './is';
+export * from './createTypeFilter';
+export * from './createArrayLikeComparator';
+
+export * from './isNull';
+export * from './isNumber';
+export * from './isObject';
+export * from './isString';
+export * from './isNonEmptyString';
