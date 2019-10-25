@@ -4,5 +4,5 @@ export interface ITypeFilter<TType> {
 }
 export const isNull = (x: any): x is null => x === null;
 export const isNumber = (x: any): x is number => getType(x) === 'Number';
-export const isObject = <TType = {}>(x: any): x is TType => getType(x) === 'Object';
+export const isObject = <TType = {[key: string]: any}>(x: any): x is TType => getType(x) === 'Object';
 export const isString = (x: any): x is string => getType(x) === 'String';
