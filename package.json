@@ -141,7 +141,8 @@
     },
     "lint-staged": {
         "*.ts": [
-            "eslint"
+            "eslint",
+            "tsc --noEmit"
         ]
     },
     "renovate": {
