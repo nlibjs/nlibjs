@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.5](https://github.com/nlibjs/nlibjs/compare/v3.13.4...v3.13.5) (2019-10-28)
+
+
+### Bug Fixes
+
+* **lint:** disable no-undef on .ts ([6c0997f](https://github.com/nlibjs/nlibjs/commit/6c0997f64fc0cef03a909496737ceb32563b8803))
+
+
+
+
+
 ## [3.13.4](https://github.com/nlibjs/nlibjs/compare/v3.13.3...v3.13.4) (2019-09-27)
 
 

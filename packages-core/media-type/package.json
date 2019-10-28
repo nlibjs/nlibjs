@@ -1,6 +1,6 @@
 {
     "name": "@nlib/media-type",
-    "version": "3.13.4",
+    "version": "3.13.5",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -35,9 +35,9 @@
         "@nlib/real-number": "^3.13.4"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.13.4",
-        "@nlib/node-net": "^3.13.4",
+        "@nlib/afs": "^3.13.5",
+        "@nlib/node-net": "^3.13.5",
         "@nlib/node-stream": "^3.13.4",
-        "@nlib/xml-js": "^3.13.4"
+        "@nlib/xml-js": "^3.13.5"
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "@nlib/cookie",
-    "version": "3.13.4",
+    "version": "3.13.5",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -31,7 +31,7 @@
         "@nlib/global": "^3.12.0",
         "@nlib/infra": "^3.13.4",
         "@nlib/named-tree": "^3.13.4",
-        "@nlib/nbnf": "^3.13.4",
+        "@nlib/nbnf": "^3.13.5",
         "@nlib/util": "^3.13.3"
     },
     "eslintConfig": {
