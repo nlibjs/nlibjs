@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.14.0](https://github.com/nlibjs/nlibjs/compare/v3.13.5...v3.14.0) (2019-10-28)
+
+
+### Features
+
+* **lint:** restrict enum in d.ts ([a87ef48](https://github.com/nlibjs/nlibjs/commit/a87ef48c3100c932b8cd9c7d87dec1091dd0569c))
+
+
+
+
+
 ## [3.13.5](https://github.com/nlibjs/nlibjs/compare/v3.13.4...v3.13.5) (2019-10-28)
 
 
