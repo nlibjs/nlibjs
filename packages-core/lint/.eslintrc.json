@@ -138,6 +138,18 @@
                 "@typescript-eslint/unbound-method": "error",
                 "@typescript-eslint/unified-signatures": "error"
             }
+        },
+        {
+            "files": ["*.d.ts"],
+            "rules": {
+                "no-restricted-syntax": [
+                    "error",
+                    {
+                      "selector": "TSEnumDeclaration",
+                      "message": "Don't declare enums in declaration files"
+                    }
+                ]
+            }
         }
     ],
     "rules": {
