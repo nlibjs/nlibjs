@@ -28,6 +28,7 @@
                 "no-extra-parens": "off",
                 "no-magic-numbers": "off",
                 "no-redeclare": "off",
+                "no-undef": "off",
                 "no-unused-vars": "off",
                 "no-useless-constructor": "off",
                 "quotes": "off",
