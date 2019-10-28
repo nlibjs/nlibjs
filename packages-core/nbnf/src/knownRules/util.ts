@@ -27,7 +27,7 @@ export interface ITest {
 }
 
 const stringify = (x: string): string => JSON.stringify(
-    x.replace(/[\x00-\x1F\x7F-\xA0\xAD]/g, (c) => `%x${fromString(c)[0].toString(16).padStart(2, '0')}`)
+    x.replace(/[\x00-\x1F\x7F-\xA0\xAD]/g, (c) => `%x${fromString(c)[0].toString(16).padStart(2, '0')}`),
 );
 
 export const runTests = (parser: INBNFTokenizer, tests: Array<ITest>): void => {

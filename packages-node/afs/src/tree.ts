@@ -21,7 +21,7 @@ export const tree = async (file: PathLike): Promise<ITreeNode> => {
             .map(async (name) => {
                 const result = await tree(join(`${file}`, name));
                 return result;
-            })
+            }),
         );
         for (const branch of branches) {
             files[basename(branch.path)] = branch;

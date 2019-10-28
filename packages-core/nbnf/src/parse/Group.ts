@@ -17,6 +17,6 @@ export const parseGroup = (
         RIGHT_PARENTHESIS,
         input,
         from,
-        positionCallback
+        positionCallback,
     ),
 });

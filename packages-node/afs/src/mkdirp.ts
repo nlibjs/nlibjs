@@ -7,7 +7,7 @@ const recursiveIsSupported = gt(process.version, 'v10.12.0');
 export const mkdirp = async (
     directory: PathLike,
     mode = 0o777,
-    useNativeRecursiveOptionIfAvailable = true
+    useNativeRecursiveOptionIfAvailable = true,
 ): Promise<boolean> => {
     try {
         const useRecursive = recursiveIsSupported && useNativeRecursiveOptionIfAvailable;

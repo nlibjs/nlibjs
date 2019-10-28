@@ -25,7 +25,7 @@ const cprCore = async (
             Object.entries(node.files)
             .map(async ([name, childNode]) => {
                 await cprCore(childNode, join(dest, name), context);
-            })
+            }),
         );
     } else if (stats.isSymbolicLink()) {
         const source = node.path;
