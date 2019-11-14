@@ -1,5 +1,6 @@
 {
     "private": true,
+    "name": "@nlib/nlib",
     "license": "Apache-2.0",
     "devDependencies": {
         "@commitlint/cli": "^8.2.0",
