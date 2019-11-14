@@ -8,7 +8,6 @@ cache:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm ci
-  - npx lerna bootstrap --no-ci
 test_script:
   - npm run build
   - |
@@ -16,4 +15,4 @@ test_script:
     c8 npm test --parallel
     c8 report --reporter=text-lcov > coverage.lcov
     codecov
-build: 'off'
+build: off

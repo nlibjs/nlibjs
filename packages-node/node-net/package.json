@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "@nlib/afs": "^3.13.5",
+        "@nlib/cookie": "^3.13.5",
         "@nlib/real-number": "^3.13.4",
         "@nlib/util": "^3.13.3"
     },
