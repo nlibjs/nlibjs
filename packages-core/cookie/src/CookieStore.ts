@@ -1,11 +1,5 @@
-import {
-    Object,
-    Date,
-    Set,
-} from '@nlib/global';
-import {
-    isNumber,
-} from '@nlib/util';
+import {Object, Date, Set} from '@nlib/global';
+import {isNumber} from '@nlib/util';
 import {
     createEmptyRootNode,
     getOrSetDefaultValue,
@@ -90,9 +84,33 @@ export class CookieStore {
         )[cookie.name] = cookie;
     }
 
+    public consumeResponse(
+        {headers}: {headers: Headers},
+        origin: URL,
+    ): Array<{input: string, result: Readonly<ICookie> | number}> {
+        const results: Array<{input: string, result: Readonly<ICookie> | number}> = [];
+        for (const [key, input] of headers.entries()) {
+            if (key.toLowerCase() === 'set-cookie') {
+                results.push({input, result: this.consume(input, origin)});
+            }
+        }
+        return results;
+    }
+
+    public consumeIncomingMessage(
+        {headers}: {headers: {'set-cookie'?: Array<string>}},
+        origin: URL,
+    ): Array<{input: string, result: Readonly<ICookie> | number}> {
+        const results: Array<{input: string, result: Readonly<ICookie> | number}> = [];
+        for (const input of headers['set-cookie'] || []) {
+            results.push({input, result: this.consume(input, origin)});
+        }
+        return results;
+    }
+
     /** https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-02#section-5.4 */
     public consume(
-        setCookieString: string | undefined,
+        setCookieString: string | undefined | null,
         origin: URL,
     ): Readonly<ICookie> | number {
         let STEP = 0;
