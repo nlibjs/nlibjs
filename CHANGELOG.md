@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.15.0](https://github.com/nlibjs/nlibjs/compare/v3.14.0...v3.15.0) (2019-11-14)
+
+
+### Bug Fixes
+
+* add typescript-eslint/no-unused-expressions ([5af45a6](https://github.com/nlibjs/nlibjs/commit/5af45a6834e75ee5d4f9d5e2955948609f47a63e))
+
+
+### Features
+
+* **cookie:** add consumeResponse and consumeIncomingMessage ([b6dfc72](https://github.com/nlibjs/nlibjs/commit/b6dfc72e5f9ab26841f597bd442ca6bdeb830330))
+* **node-net:** add resolveRedirection ([5cb05d8](https://github.com/nlibjs/nlibjs/commit/5cb05d8f8f984ae25f5881d8a37488c34bb0506c))
+
+
+
+
+
 # [3.14.0](https://github.com/nlibjs/nlibjs/compare/v3.13.5...v3.14.0) (2019-10-28)
 
 

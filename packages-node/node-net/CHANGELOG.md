@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.15.0](https://github.com/nlibjs/nlibjs/compare/v3.14.0...v3.15.0) (2019-11-14)
+
+
+### Features
+
+* **node-net:** add resolveRedirection ([5cb05d8](https://github.com/nlibjs/nlibjs/commit/5cb05d8f8f984ae25f5881d8a37488c34bb0506c))
+
+
+
+
+
 ## [3.13.5](https://github.com/nlibjs/nlibjs/compare/v3.13.4...v3.13.5) (2019-10-28)
 
 **Note:** Version bump only for package @nlib/node-net

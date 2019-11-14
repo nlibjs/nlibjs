@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.15.0](https://github.com/nlibjs/nlibjs/compare/v3.14.0...v3.15.0) (2019-11-14)
+
+
+### Bug Fixes
+
+* add typescript-eslint/no-unused-expressions ([5af45a6](https://github.com/nlibjs/nlibjs/commit/5af45a6834e75ee5d4f9d5e2955948609f47a63e))
+
+
+
+
+
 # [3.14.0](https://github.com/nlibjs/nlibjs/compare/v3.13.5...v3.14.0) (2019-10-28)
 
 
