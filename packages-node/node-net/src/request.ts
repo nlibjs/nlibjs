@@ -16,25 +16,23 @@ export const request = async (
     data: Readable | Buffer | string | null = null,
 ): Promise<IncomingMessage> => {
     const url = new URL(`${src}`);
-    const request = url.protocol === 'https:' ? requestHTTPS : requestHTTP;
-    const req = await new Promise<IncomingMessage>((resolve, reject) => {
-        const req = request(
-            {
-                protocol: url.protocol,
-                auth: `${url.username || ''}${url.password ? `:${url.password}` : ''}`,
-                host: url.hostname,
-                port: url.port,
-                path: `${url.pathname}${url.search}`,
-                ...options,
-            },
-            resolve,
-        )
-        .once('error', reject);
+    const createRequest = url.protocol === 'https:' ? requestHTTPS : requestHTTP;
+    const response = await new Promise<IncomingMessage>((resolve, reject) => {
+        const request = createRequest({
+            protocol: url.protocol,
+            auth: `${url.username || ''}${url.password ? `:${url.password}` : ''}`,
+            host: url.hostname,
+            port: url.port,
+            path: `${url.pathname}${url.search}`,
+            ...options,
+        });
+        request.once('error', reject);
+        request.once('response', resolve);
         if (!data || typeof data === 'string' || Buffer.isBuffer(data)) {
-            req.end(data);
+            request.end(data);
         } else {
-            data.pipe(req);
+            data.pipe(request);
         }
     });
-    return req;
+    return response;
 };
