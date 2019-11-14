@@ -1,7 +1,6 @@
 import {URL} from 'url';
 import {
     request as requestHTTP,
-    RequestOptions as RequestOptionsHTTP,
     IncomingMessage,
 } from 'http';
 import {
@@ -9,23 +8,33 @@ import {
     RequestOptions as RequestOptionsHTTPS,
 } from 'https';
 import {Readable} from 'stream';
+import {
+    resolveRedirection,
+    IResolveRedirectionOptions,
+} from './resolveRedirection';
+
+export interface IHTTPRequestOptions extends RequestOptionsHTTPS {
+    resolveRedirection?: IResolveRedirectionOptions | boolean | null,
+}
 
 export const request = async (
     src: string | URL,
-    options: RequestOptionsHTTP | RequestOptionsHTTPS = {},
+    options: IHTTPRequestOptions = {},
     data: Readable | Buffer | string | null = null,
 ): Promise<IncomingMessage> => {
     const url = new URL(`${src}`);
     const createRequest = url.protocol === 'https:' ? requestHTTPS : requestHTTP;
     const response = await new Promise<IncomingMessage>((resolve, reject) => {
-        const request = createRequest({
+        const requestOptions = {
             protocol: url.protocol,
             auth: `${url.username || ''}${url.password ? `:${url.password}` : ''}`,
             host: url.hostname,
             port: url.port,
             path: `${url.pathname}${url.search}`,
             ...options,
-        });
+        };
+        delete requestOptions.resolveRedirection;
+        const request = createRequest(requestOptions);
         request.once('error', reject);
         request.once('response', resolve);
         if (!data || typeof data === 'string' || Buffer.isBuffer(data)) {
@@ -34,5 +43,12 @@ export const request = async (
             data.pipe(request);
         }
     });
+    if (options.resolveRedirection) {
+        return resolveRedirection(
+            url,
+            response,
+            options.resolveRedirection === true ? {} : options.resolveRedirection,
+        );
+    }
     return response;
 };
