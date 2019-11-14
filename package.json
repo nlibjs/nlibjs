@@ -22,10 +22,9 @@
         "typescript": "^3.7.2"
     },
     "scripts": {
-        "bootstrap": "lerna bootstrap",
+        "prepare": "lerna bootstrap",
         "cleanup": "lerna run cleanup",
-        "lerna:build": "lerna run build",
-        "build": "run-s bootstrap lerna:build",
+        "build": "lerna run build",
         "test": "lerna run test --parallel",
         "lint": "lerna run lint --parallel",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag --no-push"
