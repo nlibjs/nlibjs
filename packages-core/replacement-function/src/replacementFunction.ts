@@ -4,11 +4,8 @@ import {ReplacementType} from './types';
 export type ReplacementFunction = (substring: string, ...args: Array<any>) => string;
 
 export const replacementFunction = (
-    replacement: ReplacementFunction | string,
+    replacement: string,
 ): ReplacementFunction => {
-    if (typeof replacement === 'function') {
-        return replacement;
-    }
     const tokens = [...tokenizeReplacementString(replacement)];
     return (...args) => {
         const sourceString: string = args.pop();
