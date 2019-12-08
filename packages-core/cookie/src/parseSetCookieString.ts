@@ -27,7 +27,7 @@ import {
 export const extractCookieNodesFrom = (
     setCookieString: string,
 ): {name: INBNFASTRuleNode, value: INBNFASTRuleNode, attributes: Array<INBNFASTNode>} | null => {
-    const token = parseRFC6265(setCookieString, 'set-cookie-string', 0, () => {});
+    const token = parseRFC6265(setCookieString, 'set-cookie-string');
     if (isASTRuleNode(token, 'set-cookie-string')) {
         const {nodes: [pairNode, ...attributes]} = token;
         if (isASTRuleNode(pairNode, 'cookie-pair')) {

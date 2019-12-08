@@ -13,7 +13,7 @@ export const collectAnHTTPQuotedString = (
     input: Uint32Array,
     position: number,
     extractValue: boolean,
-    positionCallback: (position: number) => void = () => {},
+    positionCallback?: (position: number) => void,
 ): Uint32Array => {
     const {length: inputLength} = input;
     const positionStart = position;
@@ -59,7 +59,9 @@ export const collectAnHTTPQuotedString = (
             });
         }
     }
-    positionCallback(position);
+    if (positionCallback) {
+        positionCallback(position);
+    }
     if (extractValue) {
         return value;
     }

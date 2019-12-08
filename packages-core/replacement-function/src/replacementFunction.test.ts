@@ -31,20 +31,10 @@ interface ITest {
             },
         ],
     },
-    {
-        input: (match, letter) => `${match}-${letter}`,
-        tests: [
-            {
-                regexp: /([XY])/g,
-                source: 'abXcdYef',
-                expected: 'abX-XcdY-Yef',
-            },
-        ],
-    },
 ] as Array<ITest>).forEach(({input, tests}) => {
     const fn = replacementFunction(input);
     tests.forEach(({regexp, source, expected}) => {
-        test(`${JSON.stringify(source)} ${regexp} → ${input} → ${expected}`, (t) => {
+        test(`${JSON.stringify(source)} ${regexp.toString()} → ${input} → ${expected}`, (t) => {
             const actual = source.replace(regexp, fn);
             t.is(actual, expected);
             if (typeof input === 'string') {

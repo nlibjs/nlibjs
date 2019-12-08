@@ -15,13 +15,12 @@ export interface INBNFASTRuleNode {
     name: string,
     nodes: INBNFASTNodeList,
 }
-
 export interface INBNFTokenizer {
     (
         source: string | Uint32Array,
         ruleName: string,
-        from: number,
-        positionCallback: PositionCallback,
+        from?: number,
+        positionCallback?: PositionCallback,
     ): INBNFASTNode,
 }
 export interface INBNFCompilerOptions {
