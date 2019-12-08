@@ -26,8 +26,8 @@
         "prepare": "lerna bootstrap",
         "cleanup": "lerna run cleanup",
         "build": "lerna run build",
-        "test": "lerna run test --parallel",
-        "lint": "lerna run lint --parallel",
+        "test": "lerna run test",
+        "lint": "lerna run lint",
         "bump": "lerna version --conventional-commits --sign-git-commit --sign-git-tag --no-push"
     },
     "ava": {
