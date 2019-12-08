@@ -127,6 +127,7 @@
                     "node-net",
                     "node-stream",
                     "node-util",
+                    "remove-sourcemap",
                     "deps",
                     "repo"
                 ]

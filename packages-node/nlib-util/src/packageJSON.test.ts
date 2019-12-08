@@ -43,6 +43,7 @@ for (const packageDirectory of packageDirectories) {
             'repository',
             'publishConfig',
             'engines',
+            'bin',
             'main',
             'files',
             'scripts',
