@@ -49,7 +49,7 @@ const writeToCache = async (stream: Readable, cacheDirectory: string, cacheId: s
         .once('finish', resolve)
         .once('error', reject);
     });
-    return stat(cachePath);
+    return await stat(cachePath);
 };
 
 export const httpGet = async (

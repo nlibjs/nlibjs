@@ -44,7 +44,7 @@ export const request = async (
         }
     });
     if (options.resolveRedirection) {
-        return resolveRedirection(
+        return await resolveRedirection(
             url,
             response,
             options.resolveRedirection === true ? {} : options.resolveRedirection,

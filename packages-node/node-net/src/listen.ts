@@ -107,7 +107,7 @@ export const listenPort = async (
         }
     } catch (error) {
         if (error.code === 'EADDRINUSE' && hasSetZ(validPortRange, port + 1)) {
-            return listenPort(server, port + 1, hostname, backlog, validPortRange);
+            return await listenPort(server, port + 1, hostname, backlog, validPortRange);
         } else {
             throw error;
         }

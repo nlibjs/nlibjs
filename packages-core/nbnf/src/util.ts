@@ -15,6 +15,9 @@ import {
     INBNFASTRuleNode,
 } from './types';
 
+export const defaultPositionCallback = () => {
+    // Noop
+};
 export const nodeToCodePoints = function* (
     node: INBNFASTNode,
     mappingFunction?: CodePointMappingFunction,

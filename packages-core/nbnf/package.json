@@ -42,6 +42,14 @@
         "overrides": [
             {
                 "files": [
+                    "*.test.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/no-empty-function": "off"
+                }
+            },
+            {
+                "files": [
                     "src/parse/Digits.ts"
                 ],
                 "rules": {

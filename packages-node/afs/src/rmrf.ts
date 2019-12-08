@@ -30,9 +30,13 @@ const rmrfCore = async (
     }
 };
 
+const noop = () => {
+    // Noop
+};
+
 export const rmrf = async (
     target: PathLike,
-    onFile: onFileHook = () => {},
+    onFile: onFileHook = noop,
 ): Promise<boolean> => {
     const result = await rmrfCore(absolutify(target), onFile);
     return result;

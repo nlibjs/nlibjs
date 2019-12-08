@@ -15,7 +15,6 @@ export const prepack = async (): Promise<void> => {
     await Promise.all([
         removeTestFiles(),
     ])
-    .then(() => {})
     .catch((error) => {
         console.error(error);
         process.exit(1);

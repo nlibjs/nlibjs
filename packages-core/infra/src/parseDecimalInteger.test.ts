@@ -30,6 +30,6 @@ const errorTests: Array<[string, number]> = [
 
 for (const [source, from] of errorTests) {
     test(`parseDecimalInteger("${source}", ${from}) should throw an error`, (t) => {
-        t.throws(() => parseDecimalInteger(fromString(source), from, () => {}));
+        t.throws(() => parseDecimalInteger(fromString(source), from));
     });
 }

@@ -14,12 +14,15 @@ import {
     normalizeNBNFFromScalarValueString,
     normalizeNBNFFromRuleList,
 } from './normalizeNBNF';
+import {defaultPositionCallback} from './util';
 
-export const createTokenizerFromCompiledRuleList = (compiledRuleList: INBNFCompiledRuleList): INBNFTokenizer => (
+export const createTokenizerFromCompiledRuleList = (
+    compiledRuleList: INBNFCompiledRuleList,
+): INBNFTokenizer => (
     source,
     name,
     from = 0,
-    positionCallback = () => {},
+    positionCallback = defaultPositionCallback,
 ) => {
     const elements = compiledRuleList[name];
     if (!elements) {
@@ -40,7 +43,9 @@ export const createTokenizerFromCompiledRuleList = (compiledRuleList: INBNFCompi
     });
 };
 
-export const createTokenizerFromNormalizedRuleList = (input: INBNFNormalizedRuleList): INBNFTokenizer => createTokenizerFromCompiledRuleList(compileRuleList(input));
+export const createTokenizerFromNormalizedRuleList = (
+    input: INBNFNormalizedRuleList,
+): INBNFTokenizer => createTokenizerFromCompiledRuleList(compileRuleList(input));
 
 export const createTokenizerFromRuleList = (
     input: INBNFRuleList,

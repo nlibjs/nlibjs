@@ -6,6 +6,7 @@ import {
 } from './types';
 import {parseRuleList} from './parse';
 import {normalizeRuleList} from './normalize';
+import {defaultPositionCallback} from './util';
 
 export const normalizeNBNFFromRuleList = (
     input: INBNFRuleList | INBNFNormalizedRuleList,
@@ -22,7 +23,7 @@ export const normalizeNBNFFromScalarValueString = (
     parseRuleList(
         input,
         options.from || 0,
-        options.positionCallback || (() => {}),
+        options.positionCallback || defaultPositionCallback,
     ),
     options,
 );

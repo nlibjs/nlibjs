@@ -17,7 +17,7 @@ import {
     INBNFASTNode,
     INBNFTokenizer,
 } from '../types';
-import {nodeToDebugString} from '../util';
+import {nodeToDebugString, defaultPositionCallback} from '../util';
 
 export interface ITest {
     input: string | Iterable<number>,
@@ -35,9 +35,9 @@ export const runTests = (parser: INBNFTokenizer, tests: Array<ITest>): void => {
         const inputString = isString(input) ? fromString(input) : fromCodePoint(...input);
         test(`${stringify(toString(inputString))} ${rule} ${from} → ${expected ? stringify(nodeToDebugString(expected)) : 'throw an error'}`, (t) => {
             if (expected) {
-                t.deepEqual(parser(inputString, rule, from, () => {}), expected);
+                t.deepEqual(parser(inputString, rule, from, defaultPositionCallback), expected);
             } else {
-                t.throws(() => parser(inputString, rule, from, () => {}));
+                t.throws(() => parser(inputString, rule, from, defaultPositionCallback));
             }
         });
     }

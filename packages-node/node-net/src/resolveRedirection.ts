@@ -47,7 +47,7 @@ const _resolveRedirection = async (
         cookie.consumeIncomingMessage(response, origin);
         headers.cookie = cookie.getCookieStringFor(method, url, origin);
     }
-    return _resolveRedirection(
+    return await _resolveRedirection(
         url,
         await request(url, {method, headers, resolveRedirection: null}),
         history.concat(origin),

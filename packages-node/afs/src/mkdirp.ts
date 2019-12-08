@@ -16,7 +16,7 @@ export const mkdirp = async (
     } catch (error) {
         if (error.code === 'ENOENT') {
             await mkdirp(dirname(`${directory}`), mode, useNativeRecursiveOptionIfAvailable);
-            return mkdirp(directory, mode, useNativeRecursiveOptionIfAvailable);
+            return await mkdirp(directory, mode, useNativeRecursiveOptionIfAvailable);
         }
         if (error.code === 'EEXIST') {
             const stats = await stat(directory);

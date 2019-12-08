@@ -21,7 +21,7 @@ const findUpCore = async (
     }
     const parentDirectory = dirname(directory);
     if (parentDirectory !== directory) {
-        return findUpCore(targets, dirname(directory));
+        return await findUpCore(targets, dirname(directory));
     }
     return null;
 };
@@ -29,10 +29,7 @@ const findUpCore = async (
 export const findUp = async (
     filenames: string | Array<string>,
     directory = process.cwd(),
-): Promise<string | null> => {
-    const result = await findUpCore(
-        Array.isArray(filenames) ? filenames : [filenames],
-        absolutify(directory),
-    );
-    return result;
-};
+): Promise<string | null> => await findUpCore(
+    Array.isArray(filenames) ? filenames : [filenames],
+    absolutify(directory),
+);
