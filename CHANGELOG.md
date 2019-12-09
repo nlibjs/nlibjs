@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.15.3](https://github.com/nlibjs/nlibjs/compare/v3.15.2...v3.15.3) (2019-12-09)
+
+
+### Bug Fixes
+
+* **remove-sourcemap:** shebang ([f6c267d](https://github.com/nlibjs/nlibjs/commit/f6c267d2eeca4857b56a0be8edd22931ce8af8b2))
+
+
+
+
+
 ## [3.15.2](https://github.com/nlibjs/nlibjs/compare/v3.15.1...v3.15.2) (2019-12-09)
 
 **Note:** Version bump only for package @nlib/nlib
