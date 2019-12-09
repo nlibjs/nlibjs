@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.15.5](https://github.com/nlibjs/nlibjs/compare/v3.15.4...v3.15.5) (2019-12-09)
+
+
+### Bug Fixes
+
+* **remove-sourcemap:** print process ([9a96f47](https://github.com/nlibjs/nlibjs/commit/9a96f470dba3f8793a4dd44a3a53c0353c6ecd96))
+
+
+
+
+
 ## [3.15.4](https://github.com/nlibjs/nlibjs/compare/v3.15.3...v3.15.4) (2019-12-09)
 
 
