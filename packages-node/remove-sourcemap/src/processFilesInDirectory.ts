@@ -8,19 +8,20 @@ export const processFilesInDirectory = async (
     processorList: IProcessorList,
 ) => {
     const results: {[key: string]: string | null} = {};
-    const tasks: Array<Promise<void>> = [];
     await new Promise((resolve, reject) => {
         afs.createDirectoryWalker(directory).pipe(new stream.Writable({
             objectMode: true,
             write({path: filePath, stats}, _encoding, callback) {
                 if (stats.isFile()) {
-                    const promise = processFile(filePath, processorList)
+                    processFile(filePath, processorList)
                     .then((result) => {
                         results[filePath] = result;
-                    });
-                    tasks.push(promise);
+                        callback();
+                    })
+                    .catch(callback);
+                } else {
+                    callback();
                 }
-                callback();
             },
             final(callback) {
                 callback();
@@ -29,6 +30,5 @@ export const processFilesInDirectory = async (
         }))
         .once('error', reject);
     });
-    await Promise.all(tasks);
     return results;
 };

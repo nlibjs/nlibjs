@@ -6,7 +6,7 @@ export const removeSourceMapLines = (
     return lines.filter((line, index) => {
         if ((/^\s*\/[/*]\s*#\s+sourceMappingURL\s*=/).test(line)) {
             const lineNumber = `${index + 1}`.padStart(lineNumberWidth);
-            console.log(`${lineNumber}: ${line}`);
+            console.log(`  ${lineNumber}| ${line}`);
             return false;
         }
         return true;
