@@ -6,14 +6,16 @@ install:
   - npm ci
 script:
   - npm run build
-  - npm install -g codecov c8 nyc
+  - npm install -g codecov c8
   - c8 npm test
   - c8 report --reporter=text-lcov > coverage.lcov
   - codecov --disable=gcov
   - nvm install 10
+  - npm install -g codecov c8
   - c8 npm test
   - c8 report --reporter=text-lcov > coverage.lcov
   - codecov --disable=gcov
+  - npm install -g codecov nyc
   - nvm install 8
   - nyc npm test
   - codecov --disable=gcov
