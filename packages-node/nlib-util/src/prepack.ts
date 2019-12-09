@@ -13,12 +13,11 @@ export const removeTestFiles = async (): Promise<void> => {
 };
 
 export const prepack = async (): Promise<void> => {
-    await Promise.all([
-        removeTestFiles(),
-        removeSourceMap(path.join(process.cwd(), 'lib')),
-    ])
-    .catch((error) => {
+    try {
+        await removeTestFiles();
+        await removeSourceMap(path.join(process.cwd(), 'lib'));
+    } catch (error) {
         console.error(error);
         process.exit(1);
-    });
+    }
 };
