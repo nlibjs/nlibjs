@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import * as path from 'path';
 import {promises as afs} from 'fs';
 import {removeSourceMap} from './removeSourceMap';
