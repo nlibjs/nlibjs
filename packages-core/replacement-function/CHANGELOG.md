@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.15.1](https://github.com/nlibjs/nlibjs/compare/v3.15.0...v3.15.1) (2019-12-09)
+
+
+### Bug Fixes
+
+* **replacement-function:** update input type ([385db4a](https://github.com/nlibjs/nlibjs/commit/385db4aa64d175c0109f976034fff8bdae8eead9))
+
+
+
+
+
 ## [3.13.4](https://github.com/nlibjs/nlibjs/compare/v3.13.3...v3.13.4) (2019-09-27)
 
 

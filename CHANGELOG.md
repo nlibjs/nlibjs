@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.15.1](https://github.com/nlibjs/nlibjs/compare/v3.15.0...v3.15.1) (2019-12-09)
+
+
+### Bug Fixes
+
+* **lint:** update eslint rules ([bdc66aa](https://github.com/nlibjs/nlibjs/commit/bdc66aa90ff40fbc0685cd1885d61934a30923c5))
+* **replacement-function:** update input type ([385db4a](https://github.com/nlibjs/nlibjs/commit/385db4aa64d175c0109f976034fff8bdae8eead9))
+
+
+### Features
+
+* **lint:** update eslint rules ([37d0b64](https://github.com/nlibjs/nlibjs/commit/37d0b644cf0ca427e139e1a5b82390a51aedc5d4))
+* **remove-sourcemap:** removeSourceMap ([#96](https://github.com/nlibjs/nlibjs/issues/96)) ([dc517a4](https://github.com/nlibjs/nlibjs/commit/dc517a44fe590628a9b296d15a16c270be886d88))
+
+
+
+
+
 # [3.15.0](https://github.com/nlibjs/nlibjs/compare/v3.14.0...v3.15.0) (2019-11-14)
 
 

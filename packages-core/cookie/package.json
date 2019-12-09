@@ -1,6 +1,6 @@
 {
     "name": "@nlib/cookie",
-    "version": "3.15.0",
+    "version": "3.15.1",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -27,11 +27,11 @@
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     },
     "dependencies": {
-        "@nlib/fetch": "^3.13.4",
+        "@nlib/fetch": "^3.15.1",
         "@nlib/global": "^3.12.0",
         "@nlib/infra": "^3.13.4",
         "@nlib/named-tree": "^3.13.4",
-        "@nlib/nbnf": "^3.13.5",
+        "@nlib/nbnf": "^3.15.1",
         "@nlib/util": "^3.13.3"
     },
     "eslintConfig": {
