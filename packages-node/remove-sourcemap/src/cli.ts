@@ -19,7 +19,7 @@ const execute = async (
 };
 
 if (!module.parent) {
-    execute(process.argv.slice(2, -1).reverse()[0])
+    execute(process.argv.slice(2).reverse()[0])
     .catch((error) => {
         console.error(error);
         process.exit(1);
