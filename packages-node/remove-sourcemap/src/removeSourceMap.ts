@@ -1,3 +1,4 @@
+import * as path from 'path';
 import {promises as afs} from 'fs';
 import {removeSourceMapLines} from './removeSourceMapLines';
 import {IPatternList} from './types';
@@ -16,14 +17,20 @@ export const removeSourceMap = async (
     {
         name: 'remove sourcemap lines',
         pattern: filter,
-        process: async (filePath) => await afs.writeFile(
-            filePath,
-            removeSourceMapLines(await afs.readFile(filePath, 'utf8')),
-        ),
+        process: async (filePath) => {
+            console.log(`Filter: ${path.relative(directory, filePath)}`);
+            await afs.writeFile(
+                filePath,
+                removeSourceMapLines(await afs.readFile(filePath, 'utf8')),
+            );
+        },
     },
     {
         name: 'delete sourcemap files',
         pattern: remove,
-        process: async (filePath) => await afs.unlink(filePath),
+        process: async (filePath) => {
+            console.log(`Delete: ${path.relative(directory, filePath)}`);
+            await afs.unlink(filePath);
+        },
     },
 ]);

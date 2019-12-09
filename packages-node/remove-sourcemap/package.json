@@ -42,7 +42,9 @@
             },
             {
                 "files": [
-                    "src/cli.ts"
+                    "src/cli.ts",
+                    "src/removeSourceMap.ts",
+                    "src/removeSourceMapLines.ts"
                 ],
                 "rules": {
                     "no-console": "off"
