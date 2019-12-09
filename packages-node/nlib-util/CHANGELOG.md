@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.15.4](https://github.com/nlibjs/nlibjs/compare/v3.15.3...v3.15.4) (2019-12-09)
+
+**Note:** Version bump only for package @nlib/nlib-util
+
+
+
+
+
 ## [3.15.3](https://github.com/nlibjs/nlibjs/compare/v3.15.2...v3.15.3) (2019-12-09)
 
 **Note:** Version bump only for package @nlib/nlib-util
