@@ -1,16 +1,10 @@
 import {join, relative, dirname} from 'path';
 import anyTest, {TestInterface} from 'ava';
-import {
-    mkdir,
-    symlink,
-    lstat,
-    readlink,
-} from './core';
+import {mkdir, symlink, lstat, readlink} from './core';
 import {mktempdir} from './mktempdir';
 import {writeFilep} from './writeFilep';
 import {cpr} from './cpr';
 import {isSameFile} from './isSameFile';
-import * as index from './index';
 import {exec} from 'child_process';
 
 const test = anyTest as TestInterface<{
@@ -19,10 +13,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test('index.cpr', (t) => {
-    t.is(index.cpr, cpr);
 });
 
 test('copy a file in a directory', async (t) => {

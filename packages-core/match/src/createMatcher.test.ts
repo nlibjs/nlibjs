@@ -1,10 +1,5 @@
 import test from 'ava';
 import {createMatcher} from './createMatcher';
-import * as index from './index';
-
-test('index.createMatcher', (t) => {
-    t.is(index.createMatcher, createMatcher);
-});
 
 type TestCase = [string | RegExp, string, boolean?];
 

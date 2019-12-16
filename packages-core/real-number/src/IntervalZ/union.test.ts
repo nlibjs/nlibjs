@@ -2,11 +2,6 @@ import test from 'ava';
 import {unionIntervalZ} from './union';
 import {IntervalZ} from './types';
 import {stringifyIntervalZ} from './stringify';
-import * as index from './index';
-
-test('index.unionIntervalZ', (t) => {
-    t.is(index.unionIntervalZ, unionIntervalZ);
-});
 
 const tests: Array<[Array<IntervalZ>, IntervalZ | null]> = [
     [

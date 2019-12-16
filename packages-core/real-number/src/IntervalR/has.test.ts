@@ -3,11 +3,6 @@ import {Infinity} from '@nlib/global';
 import {hasIntervalR} from './has';
 import {IntervalR} from './types';
 import {stringifyIntervalR} from './stringify';
-import * as index from '../index';
-
-test('index.hasIntervalR', (t) => {
-    t.is(index.hasIntervalR, hasIntervalR);
-});
 
 const tests: Array<[IntervalR, Array<[number, boolean]>]> = [
     [

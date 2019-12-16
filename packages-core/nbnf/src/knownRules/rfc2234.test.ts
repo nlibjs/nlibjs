@@ -1,7 +1,8 @@
-import {runTests, toNodes} from './util';
+import test from 'ava';
+import {toNodes, runTests} from './util';
 import {parseRFC2234} from './rfc2234';
 
-runTests(parseRFC2234, [
+runTests(test, parseRFC2234, [
     {
         input: 'A',
         rule: 'ALPHA',

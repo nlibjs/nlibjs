@@ -1,15 +1,6 @@
 import test from 'ava';
 import {JSON} from '@nlib/global';
-import {
-    NlibError,
-    INlibErrorParameters,
-    isNlibError,
-} from './NlibError';
-import * as index from './index';
-
-test('index.NlibError', (t) => {
-    t.is(index.NlibError, NlibError);
-});
+import {NlibError, INlibErrorParameters, isNlibError} from './NlibError';
 
 ([
     {

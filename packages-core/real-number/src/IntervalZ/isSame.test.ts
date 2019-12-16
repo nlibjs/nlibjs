@@ -2,11 +2,6 @@ import test from 'ava';
 import {isSameIntervalZ} from './isSame';
 import {IntervalZ} from './types';
 import {stringifyIntervalZ} from './stringify';
-import * as index from './index';
-
-test('index.isSameIntervalZ', (t) => {
-    t.is(index.isSameIntervalZ, isSameIntervalZ);
-});
 
 const tests: Array<[IntervalZ, IntervalZ, boolean]> = [
     [

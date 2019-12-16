@@ -1,17 +1,9 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {tokenizeAlternation} from './Alternation';
-import {
-    NBNFCompiledElementType,
-    INBNFCompiledAlternation,
-    INBNFTokenizerResult,
-} from '../types';
-import * as index from './index';
 import {tokenizerResultToDebugString} from '../util';
-
-test('index.tokenizeAlternation', (t) => {
-    t.is(index.tokenizeAlternation, tokenizeAlternation);
-});
+import {INBNFCompiledAlternation, NBNFCompiledElementType} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
 
 interface ITest {
     alternation: INBNFCompiledAlternation,

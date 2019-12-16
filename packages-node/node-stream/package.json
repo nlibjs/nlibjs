@@ -21,7 +21,9 @@
     ],
     "scripts": {
         "cleanup": "rimraf lib",
-        "build": "tsc",
+        "build:index": "indexen-ts src --dest src/index.ts",
+        "build:tsc": "tsc",
+        "build": "run-s build:index build:tsc",
         "test": "ava",
         "lint": "eslint --ext .ts src",
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"

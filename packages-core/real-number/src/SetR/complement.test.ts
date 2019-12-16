@@ -3,12 +3,7 @@ import {Infinity} from '@nlib/global';
 import {complementSetR} from './complement';
 import {SetR} from './types';
 import {stringifySetR} from './stringify';
-import * as index from './index';
 import {exex, inin, inex} from '../IntervalR';
-
-test('index.complementSetR', (t) => {
-    t.is(index.complementSetR, complementSetR);
-});
 
 const tests: Array<[SetR, SetR]> = [
     [

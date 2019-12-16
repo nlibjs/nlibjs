@@ -1,12 +1,7 @@
 import test from 'ava';
-import * as index from './index';
 import {traceAncestorValues} from './traceAncestorValues';
 import {createEmptyRootNode} from './createNode';
 import {setValue} from './setValue';
-
-test('index.traceAncestorValues', (t) => {
-    t.is(index.traceAncestorValues, traceAncestorValues);
-});
 
 test('traceAncestorValues', (t) => {
     const tree = createEmptyRootNode<string>();

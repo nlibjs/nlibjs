@@ -1,11 +1,6 @@
 import test from 'ava';
 import {JSON, Uint32Array} from '@nlib/global';
 import {getType} from './getType';
-import * as index from './index';
-
-test('index.getType', (t) => {
-    t.is(index.getType, getType);
-});
 
 interface ITest {
     value: any,

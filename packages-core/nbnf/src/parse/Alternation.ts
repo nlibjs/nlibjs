@@ -1,7 +1,7 @@
 import {SOLIDUS, PositionCallback} from '@nlib/infra';
 import {skipCWSP} from '../skip/CWSP';
-import {INBNFAlternation} from '../types';
 import {parseConcatenation} from './Concatenation';
+import {INBNFAlternation} from '../types/base';
 
 export const parseAlternation = (
     input: Uint32Array,

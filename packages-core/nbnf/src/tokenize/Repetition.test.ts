@@ -5,17 +5,9 @@ import {
     LATIN_CAPITAL_LETTER_A,
 } from '@nlib/infra';
 import {tokenizeRepetition} from './Repetition';
-import {
-    NBNFCompiledElementType,
-    INBNFCompiledRepetition,
-    INBNFTokenizerResult,
-} from '../types';
-import * as index from './index';
 import {tokenizerResultToDebugString} from '../util';
-
-test('index.tokenizeRepetition', (t) => {
-    t.is(index.tokenizeRepetition, tokenizeRepetition);
-});
+import {INBNFCompiledRepetition, NBNFCompiledElementType} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
 
 interface ITest {
     repetition: INBNFCompiledRepetition,

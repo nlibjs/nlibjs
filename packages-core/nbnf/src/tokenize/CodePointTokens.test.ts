@@ -2,17 +2,9 @@ import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {IntervalZ} from '@nlib/real-number';
 import {collectCodePointTokens} from './CodePointTokens';
-import {
-    NBNFCompiledElementType,
-    INBNFCompiledCodePointElement,
-    INBNFTokenizerResult,
-} from '../types';
-import * as index from './index';
 import {tokenizerResultToDebugString} from '../util';
-
-test('index.collectCodePointTokens', (t) => {
-    t.is(index.collectCodePointTokens, collectCodePointTokens);
-});
+import {INBNFCompiledCodePointElement, NBNFCompiledElementType} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
 
 interface ITest {
     repeat: IntervalZ,

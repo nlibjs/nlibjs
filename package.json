@@ -6,6 +6,7 @@
         "@commitlint/cli": "^8.2.0",
         "@commitlint/config-conventional": "^8.2.0",
         "@commitlint/config-lerna-scopes": "^8.2.0",
+        "@nlib/indexen": "file:packages-node/indexen",
         "@types/eslint": "^6.1.3",
         "@types/node": "^12.12.17",
         "@types/semver": "^6.2.0",
@@ -40,6 +41,7 @@
         ]
     },
     "eslintConfig": {
+        "root": true,
         "extends": "./packages-core/lint/.eslintrc.json",
         "env": {
             "es6": true
@@ -64,32 +66,23 @@
         "overrides": [
             {
                 "files": [
-                    "**/*.test.ts"
+                    "*.test.ts"
                 ],
                 "env": {
                     "node": true
-                }
-            },
-            {
-                "files": [
-                    "scripts/**/*.ts"
-                ],
-                "env": {
-                    "node": true
-                },
-                "rules": {
-                    "no-console": "off",
-                    "global-require": "off",
-                    "@typescript-eslint/no-require-imports": "off"
                 }
             },
             {
                 "files": [
                     "packages-node/**/*.ts",
-                    "packages-*/**/bin/*"
+                    "packages-*/*/build/**",
+                    "packages-*/*/bin/**"
                 ],
                 "env": {
                     "node": true
+                },
+                "rules": {
+                    "no-console": "off"
                 }
             }
         ]
@@ -123,6 +116,7 @@
                     "util",
                     "xml-js",
                     "afs",
+                    "indexen",
                     "nlib-util",
                     "node-net",
                     "node-stream",

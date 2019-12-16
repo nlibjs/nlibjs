@@ -2,15 +2,6 @@ import test from 'ava';
 import {sortIntervalZ, sortIntervalZ2} from './sort';
 import {IntervalZ} from './types';
 import {stringifyIntervalZ} from './stringify';
-import * as index from '../index';
-
-test('index.sortIntervalZ', (t) => {
-    t.is(index.sortIntervalZ, sortIntervalZ);
-});
-
-test('index.sortIntervalZ2', (t) => {
-    t.is(index.sortIntervalZ2, sortIntervalZ2);
-});
 
 const tests: Array<[Array<IntervalZ>, Array<IntervalZ>]> = [
     [

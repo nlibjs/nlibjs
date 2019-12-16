@@ -1,14 +1,11 @@
 import {NlibError} from '@nlib/util';
-import {
-    INBNFCompiledRepetition,
-    NBNFCompiledElementType,
-    INBNFElement,
-    INBNFTokenizerResult,
-} from '../types';
 import {collectGroupTokens} from './GroupTokens';
 import {collectRuleTokens} from './RuleTokens';
 import {collectCodePointTokens} from './CodePointTokens';
 import {collectSequenceTokens} from './SequenceTokens';
+import {INBNFCompiledRepetition, NBNFCompiledElementType} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
+import {INBNFElement} from '../types/base';
 
 export const tokenizeRepetition = function* (
     {repeat, element}: INBNFCompiledRepetition,

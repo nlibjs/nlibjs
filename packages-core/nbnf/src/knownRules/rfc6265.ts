@@ -8,8 +8,6 @@ import {
 } from '@nlib/real-number';
 import {createTokenizerFromNormalizedRuleList} from '../createTokenizer';
 import {normalizeNBNF} from '../normalizeNBNF';
-import {NBNFNormalizedElementType} from '../types';
-import {normalizeRuleList} from '../normalize';
 import {RFC2234Rules} from './rfc2234';
 import {
     RFC2616tokenSet,
@@ -18,6 +16,8 @@ import {
     RFC2616CTLSet,
 } from './rfc2616';
 import {RFC1034Rules} from './rfc1034';
+import {NBNFNormalizedElementType} from '../types/normalized';
+import {normalizeRuleList} from '../normalize/RuleList';
 
 // https://tools.ietf.org/html/rfc6265#section-4.1.1
 // https://tools.ietf.org/html/draft-ietf-httpbis-RFC6265bis-02#section-4.1.1

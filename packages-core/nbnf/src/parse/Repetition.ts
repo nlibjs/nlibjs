@@ -6,13 +6,13 @@ import {
     PERCENT_SIGN,
     LATIN_SMALL_LETTER_I,
 } from '@nlib/infra';
-import {INBNFRepetition, INBNFElement} from '../types';
 import {parseRepeat} from './Repeat';
 import {parseGroup} from './Group';
 import {parseOption} from './Option';
 import {parseSequence} from './Sequence';
 import {parseNumVal} from './NumVal';
 import {parseRuleName} from './RuleName';
+import {INBNFRepetition, INBNFElement} from '../types/base';
 
 export const parseRepetition = (
     input: Uint32Array,

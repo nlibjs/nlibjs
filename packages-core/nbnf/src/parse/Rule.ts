@@ -7,8 +7,8 @@ import {
 } from '@nlib/infra';
 import {parseRuleName} from './RuleName';
 import {skipCWSP} from '../skip/CWSP';
-import {INBNFRule} from '../types';
 import {parseElements} from './Elements';
+import {INBNFRule} from '../types/base';
 
 export const parseRule = (
     input: Uint32Array,

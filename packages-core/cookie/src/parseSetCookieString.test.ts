@@ -1,19 +1,9 @@
 import test from 'ava';
-import {
-    JSON,
-    Date,
-    Math,
-} from '@nlib/global';
+import {JSON, Date, Math} from '@nlib/global';
 import {parseSetCookieString} from './parseSetCookieString';
-import * as index from './index';
 import {SameSite} from './types';
 
 const now = new Date();
-
-test('index.parseSetCookieString', (t) => {
-    t.is(index.parseSetCookieString, parseSetCookieString);
-});
-
 
 interface ITest {
     input: string,

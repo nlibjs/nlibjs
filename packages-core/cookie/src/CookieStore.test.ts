@@ -4,11 +4,6 @@ import {
     JSON,
 } from '@nlib/global';
 import {CookieStore} from './CookieStore';
-import * as index from './index';
-
-test('index.CookieStore', (t) => {
-    t.is(index.CookieStore, CookieStore);
-});
 
 interface ITest {
     title?: string,

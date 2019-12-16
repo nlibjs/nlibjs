@@ -1,0 +1,49 @@
+{
+    "name": "@nlib/indexen",
+    "version": "3.15.6",
+    "license": "Apache-2.0",
+    "author": {
+        "name": "Kei Ito",
+        "email": "kei.itof@gmail.com",
+        "url": "https://github.com/kei-ito"
+    },
+    "homepage": "https://github.com/nlibjs/nlibjs/tree/master/packages-node/indexen",
+    "repository": "https://github.com/nlibjs/nlibjs",
+    "publishConfig": {
+        "access": "public"
+    },
+    "engines": {
+        "node": ">=8.15"
+    },
+    "main": "lib/index.js",
+    "files": [
+        "lib",
+        "src"
+    ],
+    "bin": {
+        "indexen": "bin/cli.js",
+        "indexen-ts": "bin/cli.ts"
+    },
+    "scripts": {
+        "cleanup": "rimraf lib",
+        "build:index": "indexen-ts src --dest src/index.ts",
+        "build:tsc": "tsc",
+        "build": "run-s build:index build:tsc",
+        "test": "ava",
+        "lint": "eslint --ext .ts src",
+        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
+    },
+    "eslintConfig": {
+        "extends": "../../package.json",
+        "overrides": [
+            {
+                "files": [
+                    "bin/*"
+                ],
+                "rules": {
+                    "no-console": "off"
+                }
+            }
+        ]
+    }
+}

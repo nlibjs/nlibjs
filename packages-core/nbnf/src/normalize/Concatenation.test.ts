@@ -2,11 +2,6 @@ import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {normalizeConcatenation} from './Concatenation';
 import {parseConcatenation} from '../parse/Concatenation';
-import * as index from './index';
-
-test('index.normalizeConcatenation', (t) => {
-    t.is(index.normalizeConcatenation, normalizeConcatenation);
-});
 
 const tests: Array<[string, string]> = [
     [

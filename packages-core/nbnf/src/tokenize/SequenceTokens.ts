@@ -1,9 +1,7 @@
 import {IntervalZ} from '@nlib/real-number';
 import {toASCIILowerCaseCodePoint} from '@nlib/infra';
-import {
-    INBNFCompiledSequenceElement,
-    INBNFTokenizerResult,
-} from '../types';
+import {INBNFCompiledSequenceElement} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
 
 export const getCaseInsensitiveRepeatCount = (
     max: number,

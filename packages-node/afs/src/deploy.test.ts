@@ -1,12 +1,8 @@
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
-import {
-    readFile,
-    stat,
-} from './core';
+import {readFile, stat} from './core';
 import {mktempdir} from './mktempdir';
 import {deploy} from './deploy';
-import * as index from './index';
 
 const test = anyTest as TestInterface<{
     directory: string,
@@ -14,10 +10,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test('index.deploy', (t) => {
-    t.is(index.deploy, deploy);
 });
 
 test('deploy files', async (t) => {

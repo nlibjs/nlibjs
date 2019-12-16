@@ -1,8 +1,9 @@
+import test from 'ava';
 import {createTokenizerFromNormalizedRuleList} from '../createTokenizer';
-import {runTests, toNodes} from './util';
+import {toNodes, runTests} from './util';
 import {CSSAtomicRules, CSSBaseRules, CSSAnimationRules} from './css';
 
-runTests(createTokenizerFromNormalizedRuleList(CSSAtomicRules), [
+runTests(test, createTokenizerFromNormalizedRuleList(CSSAtomicRules), [
     {
         input: '/*ABC*/',
         rule: 'Comment',
@@ -107,7 +108,7 @@ runTests(createTokenizerFromNormalizedRuleList(CSSAtomicRules), [
     },
 ]);
 
-runTests(createTokenizerFromNormalizedRuleList(CSSBaseRules), [
+runTests(test, createTokenizerFromNormalizedRuleList(CSSBaseRules), [
     {
         input: '1s',
         rule: 'Time',
@@ -130,7 +131,7 @@ runTests(createTokenizerFromNormalizedRuleList(CSSBaseRules), [
     },
 ]);
 
-runTests(createTokenizerFromNormalizedRuleList(CSSAnimationRules), [
+runTests(test, createTokenizerFromNormalizedRuleList(CSSAnimationRules), [
     {
         input: 'linear',
         rule: 'EasingFunction',

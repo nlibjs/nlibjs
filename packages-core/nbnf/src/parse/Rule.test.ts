@@ -1,12 +1,7 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseRule} from './Rule';
-import {NBNFElementType, INBNFRule} from '../types';
-import * as index from './index';
-
-test('index.parseRule', (t) => {
-    t.is(index.parseRule, parseRule);
-});
+import {INBNFRule, NBNFElementType} from '../types/base';
 
 test('throw at SPACE', (t) => {
     t.throws(() => parseRule(fromString(' foo = bar baz \n\n'), 0, () => {}));

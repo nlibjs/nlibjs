@@ -2,15 +2,7 @@ import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {normalizeRepetition} from './Repetition';
 import {parseRepetition} from '../parse/Repetition';
-import {
-    INBNFNormalizedRuleList,
-    NBNFNormalizedElementType,
-} from '../types';
-import * as index from './index';
-
-test('index.normalizeRepetition', (t) => {
-    t.is(index.normalizeRepetition, normalizeRepetition);
-});
+import {INBNFNormalizedRuleList, NBNFNormalizedElementType} from '../types/normalized';
 
 const tests: Array<[string, string, INBNFNormalizedRuleList?]> = [
     [

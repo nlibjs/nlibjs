@@ -1,11 +1,6 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {skipComment} from './Comment';
-import * as index from './index';
-
-test('index.skipComment', (t) => {
-    t.is(index.skipComment, skipComment);
-});
 
 test('skipComment no match', (t) => {
     t.is(skipComment(fromString('foo;bar\nbaz'), 2), 2);

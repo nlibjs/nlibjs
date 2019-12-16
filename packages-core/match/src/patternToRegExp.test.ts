@@ -1,10 +1,5 @@
 import test from 'ava';
 import {patternToRegExp} from './patternToRegExp';
-import * as index from './index';
-
-test('index.patternToRegExp', (t) => {
-    t.is(index.patternToRegExp, patternToRegExp);
-});
 
 type TestCase = [string | RegExp, RegExp];
 

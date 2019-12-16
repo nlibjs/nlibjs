@@ -1,13 +1,8 @@
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
-import {
-    mkdir,
-    writeFile,
-    symlink,
-} from './core';
+import {mkdir, writeFile, symlink} from './core';
 import {mktempdir} from './mktempdir';
 import {tree} from './tree';
-import * as index from './index';
 import {exec} from 'child_process';
 
 const test = anyTest as TestInterface<{
@@ -16,10 +11,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test('index.tree', (t) => {
-    t.is(index.tree, tree);
 });
 
 test('return a tree', async (t) => {

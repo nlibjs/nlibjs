@@ -1,12 +1,7 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseRepetition} from './Repetition';
-import {NBNFElementType, INBNFRepetition} from '../types';
-import * as index from './index';
-
-test('index.parseRepetition', (t) => {
-    t.is(index.parseRepetition, parseRepetition);
-});
+import {INBNFRepetition, NBNFElementType} from '../types/base';
 
 test('throw at SPACE', (t) => {
     t.throws(() => parseRepetition(fromString('  foo  '), 1, () => {}));

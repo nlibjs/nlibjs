@@ -1,14 +1,9 @@
-import {
-    NBNFNormalizedElementType,
-    INBNFConcatenation,
-    INBNFNormalizedConcatenation,
-    INBNFNormalizedRepetition,
-    INBNFNullableNormalizedRuleList,
-} from '../types';
 import {normalizeRepetition} from './Repetition';
 import {isSameNormalizedAlternation} from '../isSameNormalized/Alternation';
 import {isSameNormalizedElement} from '../isSameNormalized/Element';
 import {concatenate} from '@nlib/infra';
+import {INBNFNormalizedRepetition, NBNFNormalizedElementType, INBNFNormalizedConcatenation, INBNFNullableNormalizedRuleList} from '../types/normalized';
+import {INBNFConcatenation} from '../types/base';
 
 export const getMergedSequence = (
     {repeat: [min1, max1], element: element1}: INBNFNormalizedRepetition,

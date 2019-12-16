@@ -22,8 +22,9 @@
     "scripts": {
         "cleanup": "rimraf lib build/__cache",
         "build:REGISTERED_TYPES": "ts-node build/REGISTERED_TYPES.ts",
-        "build:core": "tsc",
-        "build": "run-s build:core",
+        "build:index": "indexen-ts src --dest src/index.ts",
+        "build:tsc": "tsc",
+        "build": "run-s build:index build:tsc",
         "test": "ava",
         "lint": "eslint --ext .ts src build",
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
@@ -39,5 +40,17 @@
         "@nlib/node-net": "^3.15.1",
         "@nlib/node-stream": "^3.13.4",
         "@nlib/xml-js": "^3.13.5"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": [
+                    "build/**"
+                ],
+                "parserOptions": {
+                    "project": "build/tsconfig.json"
+                }
+            }
+        ]
     }
 }

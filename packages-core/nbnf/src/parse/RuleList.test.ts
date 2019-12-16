@@ -1,12 +1,7 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseRuleList} from './RuleList';
-import * as index from './index';
-import {INBNFRuleList, NBNFElementType} from '../types';
-
-test('index.parseRuleList', (t) => {
-    t.is(index.parseRuleList, parseRuleList);
-});
+import {INBNFRuleList, NBNFElementType} from '../types/base';
 
 interface ITest {
     lines: Array<string>,

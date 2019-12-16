@@ -1,8 +1,5 @@
 import {Uint32Array} from '@nlib/global';
-import {
-    SEMICOLON,
-    getNextLineHead,
-} from '@nlib/infra';
+import {SEMICOLON, getNextLineHead} from '@nlib/infra';
 
 export const COMMENTSTARTER = Uint32Array.of(SEMICOLON);
 

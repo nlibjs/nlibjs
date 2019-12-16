@@ -1,11 +1,6 @@
 import {String} from '@nlib/global';
 import test from 'ava';
 import {getCodePoints} from './getCodePoints';
-import * as index from './index';
-
-test('index.getCodePoints', (t) => {
-    t.is(index.getCodePoints, getCodePoints);
-});
 
 test('getCodePoints("AbC")', (t) => {
     t.deepEqual([...getCodePoints('AbC')], [0x41, 0x62, 0x43]);

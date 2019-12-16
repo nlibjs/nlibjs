@@ -4,16 +4,7 @@ import {
     fromIterable,
 } from '@nlib/infra';
 import {parseNumVal} from './NumVal';
-import {
-    NBNFElementType,
-    INBNFCodePointElement,
-    INBNFSequenceElement,
-} from '../types';
-import * as index from './index';
-
-test('index.parseNumVal', (t) => {
-    t.is(index.parseNumVal, parseNumVal);
-});
+import {INBNFSequenceElement, INBNFCodePointElement, NBNFElementType} from '../types/base';
 
 test('throw at SPACE', (t) => {
     t.throws(() => parseNumVal(fromString('  '), 1, () => {}));

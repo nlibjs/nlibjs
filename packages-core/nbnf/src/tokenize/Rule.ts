@@ -1,8 +1,6 @@
-import {
-    INBNFCompiledRuleElementData,
-    INBNFASTRuleNode,
-} from '../types';
 import {tokenizeAlternation} from './Alternation';
+import {INBNFCompiledRuleElementData} from '../types/compiled';
+import {INBNFASTRuleNode} from '../types/misc';
 
 export const tokenizeRule = function* (
     {name, elements}: INBNFCompiledRuleElementData,

@@ -5,7 +5,6 @@ import anyTest, {TestInterface} from 'ava';
 // import {elementToRecord} from './elementToRecord';
 import {REGISTERED_TYPES} from './REGISTERED_TYPES';
 import {IRecord} from './types';
-import * as index from './index';
 
 const test = anyTest as TestInterface<{
     records: Array<IRecord>,
@@ -36,6 +35,6 @@ const test = anyTest as TestInterface<{
 //     }
 // });
 
-test('index.REGISTERED_TYPES', (t) => {
-    t.is(index.REGISTERED_TYPES, REGISTERED_TYPES);
+test('REGISTERED_TYPES', (t) => {
+    t.truthy(REGISTERED_TYPES);
 });

@@ -1,8 +1,5 @@
 import {SetZ} from '@nlib/real-number';
-import {
-    INBNFNormalizedCodePointRepetition,
-    NBNFNormalizedElementType,
-} from '../types';
+import {INBNFNormalizedCodePointRepetition, NBNFNormalizedElementType} from '../types/normalized';
 
 export const createCodePointRepetition = (
     min: number,

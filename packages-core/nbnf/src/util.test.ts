@@ -4,31 +4,12 @@ import {
     toASCIILowerCaseCodePoint,
     toString,
 } from '@nlib/infra';
-import * as index from './index';
 import {
-    nodeToDebugString,
-    nodeToScalarValueString,
     nodeListToDebugString,
     nodeListToScalarValueString,
     nodeListToString,
 } from './util';
-import {INBNFASTNodeList} from './types';
-
-test('index.nodeToDebugString', (t) => {
-    t.is(index.nodeToDebugString, nodeToDebugString);
-});
-
-test('index.nodeToScalarValueString', (t) => {
-    t.is(index.nodeToScalarValueString, nodeToScalarValueString);
-});
-
-test('index.nodeListToDebugString', (t) => {
-    t.is(index.nodeListToDebugString, nodeListToDebugString);
-});
-
-test('index.nodeListToScalarValueString', (t) => {
-    t.is(index.nodeListToScalarValueString, nodeListToScalarValueString);
-});
+import {INBNFASTNodeList} from './types/misc';
 
 interface ITest {
     input: INBNFASTNodeList,

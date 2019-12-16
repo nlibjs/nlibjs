@@ -2,12 +2,7 @@ import test from 'ava';
 import {Infinity} from '@nlib/global';
 import {hasIntervalZ} from './has';
 import {IntervalZ} from './types';
-import * as index from '../index';
 import {stringifyIntervalZ} from './stringify';
-
-test('index.hasIntervalZ', (t) => {
-    t.is(index.hasIntervalZ, hasIntervalZ);
-});
 
 const tests: Array<[IntervalZ, Array<[number, boolean]>]> = [
     [

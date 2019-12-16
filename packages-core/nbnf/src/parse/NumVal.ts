@@ -8,15 +8,8 @@ import {
     HYPHEN_MINUS,
     fromCodePoint,
 } from '@nlib/infra';
-import {
-    radixes,
-    parseDigits,
-} from './Digits';
-import {
-    NBNFElementType,
-    INBNFSequenceElement,
-    INBNFCodePointElement,
-} from '../types';
+import {radixes, parseDigits} from './Digits';
+import {INBNFSequenceElement, INBNFCodePointElement, NBNFElementType} from '../types/base';
 
 export const parseNumVal = (
     input: Uint32Array,

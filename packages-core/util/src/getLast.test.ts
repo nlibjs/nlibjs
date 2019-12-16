@@ -1,11 +1,6 @@
 import test from 'ava';
 import {JSON} from '@nlib/global';
 import {getLast} from './getLast';
-import * as index from './index';
-
-test('index.getLast', (t) => {
-    t.is(index.getLast, getLast);
-});
 
 interface ITest {
     value: ArrayLike<any>,

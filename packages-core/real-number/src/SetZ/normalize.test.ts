@@ -2,11 +2,6 @@ import test from 'ava';
 import {normalizeSetZ} from './normalize';
 import {SetZ} from './types';
 import {stringifySetZ} from './stringify';
-import * as index from './index';
-
-test('index.normalizeSetZ', (t) => {
-    t.is(index.normalizeSetZ, normalizeSetZ);
-});
 
 const tests: Array<[SetZ, SetZ]> = [
     [

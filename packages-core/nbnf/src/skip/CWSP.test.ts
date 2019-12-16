@@ -2,11 +2,6 @@ import test from 'ava';
 import {JSON} from '@nlib/global';
 import {fromString} from '@nlib/infra';
 import {skipCWSP} from './CWSP';
-import * as index from './index';
-
-test('index.skipCWSP', (t) => {
-    t.is(index.skipCWSP, skipCWSP);
-});
 
 interface ITest {
     input: string,

@@ -6,12 +6,10 @@ import {
     toScalarValueString,
     skip,
 } from '@nlib/infra';
-import {
-    INBNFRuleList,
-} from '../types';
 import {parseRule} from './Rule';
-import {skipCNL} from '../skip';
 import {isWSP} from '../codePoints';
+import {INBNFRuleList} from '../types/base';
+import {skipCNL} from '../skip/CNL';
 
 export const parseRuleList = (
     source: Uint32Array | string,

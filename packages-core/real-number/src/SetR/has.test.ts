@@ -2,11 +2,6 @@ import test from 'ava';
 import {hasSetR} from './has';
 import {SetR} from './types';
 import {stringifySetR} from './stringify';
-import * as index from './index';
-
-test('index.hasSetR', (t) => {
-    t.is(index.hasSetR, hasSetR);
-});
 
 const tests: Array<[SetR, Array<[number, boolean]>]> = [
     [

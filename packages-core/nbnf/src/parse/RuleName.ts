@@ -10,10 +10,7 @@ import {
     isNotRuleNameCharacter,
     isNotRuleNameFirstCharacter,
 } from '../codePoints';
-import {
-    NBNFElementType,
-    INBNFRuleNameElement,
-} from '../types';
+import {INBNFRuleNameElement, NBNFElementType} from '../types/base';
 
 export const parseRuleName = (
     input: Uint32Array,

@@ -1,7 +1,8 @@
+import test from 'ava';
 import {parseRFC2616} from './rfc2616';
-import {runTests, toNodes} from './util';
+import {toNodes, runTests} from './util';
 
-runTests(parseRFC2616, [
+runTests(test, parseRFC2616, [
     {input: 'ÿ', rule: 'OCTET', expected: {name: 'OCTET', nodes: toNodes('ÿ')}},
     {input: 'Ā', rule: 'OCTET'},
     {input: 'a', rule: 'CHAR', expected: {name: 'CHAR', nodes: toNodes('a')}},

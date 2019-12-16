@@ -2,11 +2,6 @@ import test from 'ava';
 import {isSameSetZ} from './isSame';
 import {SetZ} from './types';
 import {stringifySetZ} from './stringify';
-import * as index from './index';
-
-test('index.isSameSetZ', (t) => {
-    t.is(index.isSameSetZ, isSameSetZ);
-});
 
 const tests: Array<[SetZ, SetZ, boolean]> = [
     [

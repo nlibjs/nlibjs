@@ -1,14 +1,6 @@
 import test from 'ava';
-import * as index from './index';
 import {setValue} from './setValue';
-import {
-    createNode,
-    createEmptyRootNode,
-} from './createNode';
-
-test('index.setValue', (t) => {
-    t.is(index.setValue, setValue);
-});
+import {createNode, createEmptyRootNode} from './createNode';
 
 test('setValue depth:0', (t) => {
     const tree = createEmptyRootNode();

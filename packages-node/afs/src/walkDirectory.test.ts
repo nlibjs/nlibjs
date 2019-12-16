@@ -1,17 +1,8 @@
 import {join} from 'path';
 import anyTest, {TestInterface} from 'ava';
-import {
-    mkdir,
-    writeFile,
-    symlink,
-} from './core';
+import {mkdir, writeFile, symlink} from './core';
 import {mktempdir} from './mktempdir';
-import {
-    createDirectoryWalker,
-    IFileInfo,
-    DirectoryWalker,
-} from './walkDirectory';
-import * as index from './index';
+import {createDirectoryWalker, IFileInfo, DirectoryWalker} from './walkDirectory';
 
 const test = anyTest as TestInterface<{
     directory: string,
@@ -36,10 +27,6 @@ const collectResults = async (
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test('index.tree', (t) => {
-    t.is(index.createDirectoryWalker, createDirectoryWalker);
 });
 
 test('return files', async (t) => {

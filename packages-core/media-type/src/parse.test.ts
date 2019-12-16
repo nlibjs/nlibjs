@@ -1,11 +1,6 @@
 import test from 'ava';
 import {fromString, toString} from '@nlib/infra';
 import {parse} from './parse';
-import * as index from './index';
-
-test('index does not export parse', (t) => {
-    t.false('parse' in index);
-});
 
 test('return null if type is empty', (t) => {
     const mediaTypeSource = parse(fromString(''));

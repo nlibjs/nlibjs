@@ -2,11 +2,6 @@ import test from 'ava';
 import {unionSetZ} from './union';
 import {SetZ} from './types';
 import {stringifySetZ} from './stringify';
-import * as index from './index';
-
-test('index.unionSetZ', (t) => {
-    t.is(index.unionSetZ, unionSetZ);
-});
 
 const tests: Array<[Array<SetZ>, SetZ]> = [
     [

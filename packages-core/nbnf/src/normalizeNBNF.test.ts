@@ -1,9 +1,9 @@
 import test from 'ava';
-import {INBNFCompilerOptions} from './types';
 import {normalizeNBNF} from './normalizeNBNF';
-import {parseRuleList} from './parse';
 import {normalizeRuleList} from './normalize/RuleList';
-import {RFC2234Rules} from './knownRules';
+import {INBNFCompilerOptions} from './types/misc';
+import {RFC2234Rules} from './knownRules/rfc2234';
+import {parseRuleList} from './parse/RuleList';
 
 const tests: Array<[Array<string>, INBNFCompilerOptions, Array<string>]> = [
     [

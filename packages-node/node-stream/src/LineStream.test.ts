@@ -3,11 +3,6 @@ import {PassThrough} from 'stream';
 import {fromString} from '@nlib/infra';
 import {readObjectStream} from './readStream';
 import {LineStream} from './LineStream';
-import * as index from './index';
-
-test('index.LineStream', (t) => {
-    t.is(index.LineStream, LineStream);
-});
 
 test('LineStream', async (t) => {
     const source = new PassThrough();

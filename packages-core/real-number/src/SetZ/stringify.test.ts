@@ -1,8 +1,13 @@
 import test from 'ava';
 import {stringifySetZ} from './stringify';
-import * as index from './index';
 
-test('index.stringifySetZ', (t) => {
-    t.is(index.stringifySetZ, stringifySetZ);
+test('stringifySetZ', (t) => {
+    t.is(
+        stringifySetZ([
+            [1, 2],
+            [3, 4],
+        ]),
+        '{[1, 2] [3, 4]}',
+    );
 });
 

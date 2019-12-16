@@ -1,14 +1,6 @@
-import {
-    NBNFElementType,
-    NBNFNormalizedElementType,
-    INBNFRepetition,
-    INBNFNormalizedRepetition,
-    INBNFNormalizedAlternation,
-    INBNFNullableNormalizedRuleList,
-} from '../types';
-import {
-    normalizeElement,
-} from './Element';
+import {normalizeElement} from './Element';
+import {INBNFNormalizedRepetition, INBNFNormalizedAlternation, INBNFNullableNormalizedRuleList, NBNFNormalizedElementType} from '../types/normalized';
+import {INBNFRepetition, NBNFElementType} from '../types/base';
 
 export const filterRepetition = (
     repetition: INBNFNormalizedRepetition | INBNFRepetition,

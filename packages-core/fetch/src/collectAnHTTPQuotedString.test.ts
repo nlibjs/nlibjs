@@ -1,11 +1,6 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {collectAnHTTPQuotedString} from './collectAnHTTPQuotedString';
-import * as index from './index';
-
-test('index.collectAnHTTPQuotedString', (t) => {
-    t.is(index.collectAnHTTPQuotedString, collectAnHTTPQuotedString);
-});
 
 test('collectAnHTTPQuotedString("text/html;charset="shift_jis"iso-2022-jp", 18)', (t) => {
     const source = fromString('text/html;charset="shift_jis"iso-2022-jp');

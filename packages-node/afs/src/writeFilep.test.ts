@@ -4,7 +4,6 @@ import {readFile} from './core';
 import {mktempdir} from './mktempdir';
 import {writeFilep} from './writeFilep';
 import {mkdirp} from './mkdirp';
-import * as index from './index';
 
 const test = anyTest as TestInterface<{
     directory: string,
@@ -12,10 +11,6 @@ const test = anyTest as TestInterface<{
 
 test.beforeEach(async (t) => {
     t.context.directory = await mktempdir();
-});
-
-test('index.writeFilep', (t) => {
-    t.is(index.writeFilep, writeFilep);
 });
 
 test('write data to a file in a nested directory', async (t) => {

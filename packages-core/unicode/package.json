@@ -22,8 +22,9 @@
     "scripts": {
         "cleanup": "rimraf lib build/__cache",
         "build:named": "ts-node build/named.ts",
-        "build:core": "tsc",
-        "build": "run-s build:named build:core",
+        "build:index": "indexen-ts src --dest src/index.ts",
+        "build:tsc": "tsc",
+        "build": "run-s build:named build:index build:tsc",
         "test": "ava",
         "lint": "eslint --ext .ts src build",
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
@@ -40,15 +41,11 @@
     "eslintConfig": {
         "overrides": [
             {
-                "files": "build/*.ts",
-                "env": {
-                    "node": true
-                },
-                "rules": {
-                    "no-console": "off"
-                },
+                "files": [
+                    "build/**"
+                ],
                 "parserOptions": {
-                    "project": "./build/tsconfig.json"
+                    "project": "build/tsconfig.json"
                 }
             }
         ]

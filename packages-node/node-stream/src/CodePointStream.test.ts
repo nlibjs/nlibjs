@@ -2,11 +2,6 @@ import test from 'ava';
 import {PassThrough} from 'stream';
 import {readObjectStream} from './readStream';
 import {CodePointStream} from './CodePointStream';
-import * as index from './index';
-
-test('index.CodePointStream', (t) => {
-    t.is(index.CodePointStream, CodePointStream);
-});
 
 test('AbC😇AbC', async (t) => {
     const source = new PassThrough();

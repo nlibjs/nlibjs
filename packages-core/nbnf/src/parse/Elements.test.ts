@@ -1,12 +1,7 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseElements} from './Elements';
-import {NBNFElementType, INBNFAlternation} from '../types';
-import * as index from './index';
-
-test('index.parseElements', (t) => {
-    t.is(index.parseElements, parseElements);
-});
+import {NBNFElementType, INBNFAlternation} from '../types/base';
 
 const tests: Array<[string, number, INBNFAlternation, number]> = [
     [

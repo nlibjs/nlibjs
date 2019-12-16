@@ -7,14 +7,6 @@ import {
     isomorphicDecode,
 } from './4.4.ByteSequences';
 import {fromString} from './4.6.Strings';
-import * as index from './index';
-
-test('index', (t) => {
-    t.is(index.toLowerCaseBytes, toLowerCaseBytes);
-    t.is(index.toUpperCaseBytes, toUpperCaseBytes);
-    t.is(index.caseInsensitiveMatchBytes, caseInsensitiveMatchBytes);
-    t.is(index.isomorphicDecode, isomorphicDecode);
-});
 
 test('toLowerCaseBytes', (t) => {
     t.deepEqual(

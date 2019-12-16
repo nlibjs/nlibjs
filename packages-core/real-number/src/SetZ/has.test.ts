@@ -2,11 +2,6 @@ import test from 'ava';
 import {hasSetZ} from './has';
 import {SetZ} from './types';
 import {stringifySetZ} from './stringify';
-import * as index from './index';
-
-test('index.hasSetZ', (t) => {
-    t.is(index.hasSetZ, hasSetZ);
-});
 
 const tests: Array<[SetZ, Array<[number, boolean]>]> = [
     [

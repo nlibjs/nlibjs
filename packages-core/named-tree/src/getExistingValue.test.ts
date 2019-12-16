@@ -1,12 +1,7 @@
 import test from 'ava';
-import * as index from './index';
 import {getExistingValue} from './getExistingValue';
 import {setValue} from './setValue';
 import {createEmptyRootNode} from './createNode';
-
-test('index.getExistingValue', (t) => {
-    t.is(index.getExistingValue, getExistingValue);
-});
 
 test('getExistingValue depth:0', (t) => {
     const tree = createEmptyRootNode();

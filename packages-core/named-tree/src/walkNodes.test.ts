@@ -1,12 +1,7 @@
 import test from 'ava';
-import * as index from './index';
 import {walkNodes} from './walkNodes';
 import {createEmptyRootNode} from './createNode';
 import {setValue} from './setValue';
-
-test('index.walkNodes', (t) => {
-    t.is(index.walkNodes, walkNodes);
-});
 
 test('walkNodes', (t) => {
     const tree = createEmptyRootNode<string>();

@@ -1,16 +1,16 @@
 import {NlibError} from '@nlib/util';
 import {isSameSetZ} from '@nlib/real-number';
 import {equal} from '@nlib/infra';
+import {isSameNormalizedAlternation} from './Alternation';
 import {
-    NBNFNormalizedElementType,
-    INBNFNormalizedElement,
     INBNFNormalizedGroupElementData,
+    INBNFNormalizedSequenceElement,
+    INBNFNormalizedElement,
+    NBNFNormalizedElementType,
     INBNFNormalizedCodePointElement,
     INBNFNormalizedGroupElement,
     INBNFNormalizedRuleNameElement,
-    INBNFNormalizedSequenceElement,
-} from '../types';
-import {isSameNormalizedAlternation} from './Alternation';
+} from '../types/normalized';
 
 export const isSameNormalizedAlternationElementData = (
     data1: INBNFNormalizedGroupElementData,

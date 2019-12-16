@@ -1,8 +1,8 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {isSameNormalizedRuleList} from './RuleList';
-import {parseRuleList} from '../parse';
-import {normalizeRuleList} from '../normalize';
+import {normalizeRuleList} from '../normalize/RuleList';
+import {parseRuleList} from '../parse/RuleList';
 
 const tests: Array<[Array<string>, Array<string>, boolean]> = [
     [

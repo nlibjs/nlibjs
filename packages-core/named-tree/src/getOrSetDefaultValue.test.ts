@@ -1,13 +1,8 @@
 import test from 'ava';
-import * as index from './index';
 import {getOrSetDefaultValue} from './getOrSetDefaultValue';
 import {INamedTreeNode} from './types';
 import {getExistingValue} from './getExistingValue';
 import {createEmptyRootNode} from './createNode';
-
-test('index.getOrSetDefaultValue', (t) => {
-    t.is(index.getOrSetDefaultValue, getOrSetDefaultValue);
-});
 
 test('getOrSetDefaultValue depth:0', (t) => {
     const tree: INamedTreeNode<string> = createEmptyRootNode();

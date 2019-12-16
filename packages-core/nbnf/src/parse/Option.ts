@@ -3,8 +3,8 @@ import {
     RIGHT_SQUARE_BRACKET,
     PositionCallback,
 } from '@nlib/infra';
-import {NBNFElementType, INBNFOptionElement} from '../types';
 import {parseAlternationWrapper} from './AlternationWrapper';
+import {INBNFOptionElement, NBNFElementType} from '../types/base';
 
 export const parseOption = (
     input: Uint32Array,

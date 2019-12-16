@@ -1,12 +1,7 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseConcatenation} from './Concatenation';
-import {NBNFElementType, INBNFConcatenation} from '../types';
-import * as index from './index';
-
-test('index.parseConcatenation', (t) => {
-    t.is(index.parseConcatenation, parseConcatenation);
-});
+import {INBNFConcatenation, NBNFElementType} from '../types/base';
 
 const tests: Array<[string, number, INBNFConcatenation, number]> = [
     [

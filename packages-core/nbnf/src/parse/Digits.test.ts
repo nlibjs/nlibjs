@@ -14,11 +14,6 @@ import {
     RadixDec,
     RadixHex,
 } from './Digits';
-import * as index from './index';
-
-test('index.parseDigits', (t) => {
-    t.is(index.parseDigits, parseDigits);
-});
 
 test(`radixes[${LATIN_SMALL_LETTER_B}]`, (t) => {
     t.is(radixes[LATIN_SMALL_LETTER_B], RadixBin);

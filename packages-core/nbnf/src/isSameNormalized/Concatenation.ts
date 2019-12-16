@@ -1,5 +1,5 @@
-import {INBNFNormalizedConcatenation} from '../types';
 import {isSameNormalizedRepetition} from './Repetition';
+import {INBNFNormalizedConcatenation} from '../types/normalized';
 
 export const isSameNormalizedConcatenation = (
     concatenation1: INBNFNormalizedConcatenation,

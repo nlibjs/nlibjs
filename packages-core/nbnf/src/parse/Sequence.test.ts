@@ -2,12 +2,7 @@ import test from 'ava';
 import {JSON} from '@nlib/global';
 import {fromString} from '@nlib/infra';
 import {parseSequence} from './Sequence';
-import * as index from './index';
-import {NBNFElementType, INBNFSequenceElement} from '../types';
-
-test('index.parseSequence', (t) => {
-    t.is(index.parseSequence, parseSequence);
-});
+import {INBNFSequenceElement, NBNFElementType} from '../types/base';
 
 test('throws at SPACE', (t) => {
     t.throws(() => parseSequence(fromString('  "" '), 1, () => {}, false));

@@ -1,12 +1,10 @@
 import {fromString} from '@nlib/infra';
-import {
-    INBNFRuleList,
-    INBNFCompilerOptions,
-    INBNFNormalizedRuleList,
-} from './types';
-import {parseRuleList} from './parse';
-import {normalizeRuleList} from './normalize';
 import {defaultPositionCallback} from './util';
+import {INBNFRuleList} from './types/base';
+import {INBNFNormalizedRuleList} from './types/normalized';
+import {INBNFCompilerOptions} from './types/misc';
+import {normalizeRuleList} from './normalize/RuleList';
+import {parseRuleList} from './parse/RuleList';
 
 export const normalizeNBNFFromRuleList = (
     input: INBNFRuleList | INBNFNormalizedRuleList,

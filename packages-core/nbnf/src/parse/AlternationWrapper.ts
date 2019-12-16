@@ -3,7 +3,7 @@ import {String} from '@nlib/global';
 import {PositionCallback} from '@nlib/infra';
 import {skipCWSP} from '../skip/CWSP';
 import {parseAlternation} from './Alternation';
-import {INBNFAlternation} from '../types';
+import {INBNFAlternation} from '../types/base';
 
 export const parseAlternationWrapper = (
     left: number,

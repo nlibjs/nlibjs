@@ -1,8 +1,9 @@
+import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseRFC6265} from './rfc6265';
 import {runTests} from './util';
 
-runTests(parseRFC6265, [
+runTests(test, parseRFC6265, [
     {
         input: '/',
         rule: 'path-value',

@@ -3,11 +3,6 @@ import {intersectionSetR} from './intersection';
 import {inin, inex, exin, exex} from '../IntervalR';
 import {SetR} from './types';
 import {stringifySetR} from './stringify';
-import * as index from './index';
-
-test('index.intersectionSetR', (t) => {
-    t.is(index.intersectionSetR, intersectionSetR);
-});
 
 const tests: Array<[Array<SetR>, SetR]> = [
     [

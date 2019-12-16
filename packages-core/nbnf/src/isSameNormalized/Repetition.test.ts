@@ -1,8 +1,8 @@
 import test from 'ava';
 import {isSameNormalizedRepetition} from './Repetition';
-import {parseRepetition} from '../parse';
 import {fromString} from '@nlib/infra';
-import {normalizeRepetition} from '../normalize';
+import {normalizeRepetition} from '../normalize/Repetition';
+import {parseRepetition} from '../parse/Repetition';
 
 const tests: Array<[string, string, boolean]> = [
     ['foo', 'foo', true],

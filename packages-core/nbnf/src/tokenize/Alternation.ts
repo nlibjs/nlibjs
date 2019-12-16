@@ -1,8 +1,6 @@
-import {
-    INBNFCompiledAlternation,
-    INBNFTokenizerResult,
-} from '../types';
 import {tokenizeConcatenation} from './Concatenation';
+import {INBNFCompiledAlternation} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
 
 export const tokenizeAlternation = function* (
     alternation: INBNFCompiledAlternation,

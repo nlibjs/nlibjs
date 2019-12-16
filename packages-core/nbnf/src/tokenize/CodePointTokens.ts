@@ -1,7 +1,6 @@
 import {hasSetZ, IntervalZ} from '@nlib/real-number';
-import {
-    INBNFCompiledCodePointElement, INBNFTokenizerResult,
-} from '../types';
+import {INBNFCompiledCodePointElement} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
 
 export const collectCodePointTokens = function* (
     [min, max]: IntervalZ,

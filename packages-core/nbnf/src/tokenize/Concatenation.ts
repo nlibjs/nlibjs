@@ -1,8 +1,6 @@
-import {
-    INBNFCompiledConcatenation,
-    INBNFTokenizerResult,
-} from '../types';
 import {tokenizeRepetition} from './Repetition';
+import {INBNFCompiledConcatenation} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
 
 export const tokenizeConcatenation = function* (
     concatenation: INBNFCompiledConcatenation,

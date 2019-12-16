@@ -1,6 +1,6 @@
 import {isSameIntervalZ} from '@nlib/real-number';
-import {INBNFNormalizedRepetition} from '../types';
 import {isSameNormalizedElement} from './Element';
+import {INBNFNormalizedRepetition} from '../types/normalized';
 
 export const isSameNormalizedRepetition = (
     repetition1: INBNFNormalizedRepetition,

@@ -1,11 +1,6 @@
 import test from 'ava';
 import {xml2js, Element} from 'xml-js';
 import {getTextContent} from './getTextContent';
-import * as index from './index';
-
-test('index.getTextContent', (t) => {
-    t.true('getTextContent' in index);
-});
 
 test('getTextContent', (t) => {
     const xml = xml2js(`

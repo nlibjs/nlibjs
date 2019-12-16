@@ -1,7 +1,6 @@
 import anyTest, {TestInterface} from 'ava';
 import {createServer, Server} from 'net';
 import {listenPort, listen} from './listen';
-import * as index from './index';
 import {closeServers} from './closeServers';
 
 const test = anyTest as TestInterface<{
@@ -20,10 +19,6 @@ test.beforeEach((t) => {
 
 test.afterEach(async (t) => {
     await closeServers(...t.context.servers);
-});
-
-test('index.listen', (t) => {
-    t.is(index.listen, listen);
 });
 
 test('listen 5000', async (t) => {

@@ -1,7 +1,7 @@
 import {PositionCallback} from '@nlib/infra';
 import {skipCWSP} from '../skip/CWSP';
-import {INBNFAlternation} from '../types';
 import {parseAlternation} from './Alternation';
+import {INBNFAlternation} from '../types/base';
 
 export const parseElements = (
     input: Uint32Array,

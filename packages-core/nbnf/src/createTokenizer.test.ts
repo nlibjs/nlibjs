@@ -1,11 +1,9 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {createTokenizerFromString} from './createTokenizer';
-import {
-    INBNFASTNode,
-    INBNFNormalizedRuleList,
-} from './types';
 import {nodeToDebugString} from './util';
+import {INBNFASTNode} from './types/misc';
+import {INBNFNormalizedRuleList} from './types/normalized';
 
 type NBNFLines = Array<string>;
 interface INBNFTest {

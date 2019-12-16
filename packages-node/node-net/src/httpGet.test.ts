@@ -7,7 +7,6 @@ import {listenPort} from './listen';
 import {closeServers} from './closeServers';
 import {httpGet, sanitizeEtag} from './httpGet';
 import {readStream} from '@nlib/node-stream';
-import * as index from './index';
 
 interface ITestContext {
     NORMAL_GET: string,
@@ -91,10 +90,6 @@ test.beforeEach(async (t) => {
 
 test.afterEach(async (t) => {
     await closeServers(t.context.server);
-});
-
-test('index.httpGet', (t) => {
-    t.is(index.httpGet, httpGet);
 });
 
 test('request https://example.com/', async (t) => {

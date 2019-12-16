@@ -1,8 +1,8 @@
 import test from 'ava';
-import {isSameNormalizedAlternation} from './Alternation';
-import {parseAlternation} from '../parse';
 import {fromString} from '@nlib/infra';
-import {normalizeAlternation} from '../normalize';
+import {isSameNormalizedAlternation} from './Alternation';
+import {normalizeAlternation} from '../normalize/Alternation';
+import {parseAlternation} from '../parse/Alternation';
 
 const tests: Array<[string, string, boolean]> = [
     ['foo / bar', 'foo / bar', true],

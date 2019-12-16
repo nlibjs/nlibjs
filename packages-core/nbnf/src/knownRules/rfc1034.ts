@@ -1,7 +1,7 @@
 // https://tools.ietf.org/html/rfc1034#section-3.5
 import {createTokenizerFromNormalizedRuleList} from '../createTokenizer';
 import {normalizeNBNF} from '../normalizeNBNF';
-import {normalizeRuleList} from '../normalize';
+import {normalizeRuleList} from '../normalize/RuleList';
 
 export let RFC1034Rules = normalizeNBNF(`
 domain      = label *("." label)

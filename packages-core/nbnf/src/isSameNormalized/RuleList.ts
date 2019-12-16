@@ -1,6 +1,6 @@
 import {Object} from '@nlib/global';
-import {INBNFNormalizedRuleList} from '../types';
 import {isSameNormalizedAlternation} from './Alternation';
+import {INBNFNormalizedRuleList} from '../types/normalized';
 
 export const isSameNormalizedRuleList = (
     ruleList1: INBNFNormalizedRuleList,

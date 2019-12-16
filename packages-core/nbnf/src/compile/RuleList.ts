@@ -1,7 +1,8 @@
 import {NlibError} from '@nlib/util';
 import {Object} from '@nlib/global';
-import {INBNFCompiledRuleList, INBNFCompiledAlternation, INBNFNormalizedRuleList} from '../types';
 import {compileAlternation} from './Alternation';
+import {INBNFNormalizedRuleList} from '../types/normalized';
+import {INBNFCompiledRuleList, INBNFCompiledAlternation} from '../types/compiled';
 
 export const compileRuleList = (
     normalizedRuleList: INBNFNormalizedRuleList,

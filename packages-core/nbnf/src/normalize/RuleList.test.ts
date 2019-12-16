@@ -1,11 +1,6 @@
 import test from 'ava';
 import {normalizeRuleList} from './RuleList';
 import {parseRuleList} from '../parse/RuleList';
-import * as index from './index';
-
-test('index.normalizeRuleList', (t) => {
-    t.is(index.normalizeRuleList, normalizeRuleList);
-});
 
 const tests = [
     [

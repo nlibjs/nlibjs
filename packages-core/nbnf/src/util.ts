@@ -1,19 +1,7 @@
-import {
-    String,
-    Uint32Array,
-} from '@nlib/global';
-import {
-    isNumber,
-} from '@nlib/util';
-import {
-    CodePointMappingFunction,
-} from '@nlib/infra';
-import {
-    INBNFASTNodeList,
-    INBNFASTNode,
-    INBNFTokenizerResult,
-    INBNFASTRuleNode,
-} from './types';
+import {String, Uint32Array} from '@nlib/global';
+import {isNumber} from '@nlib/util';
+import {CodePointMappingFunction} from '@nlib/infra';
+import {INBNFASTNode, INBNFASTNodeList, INBNFTokenizerResult, INBNFASTRuleNode} from './types/misc';
 
 export const defaultPositionCallback = () => {
     // Noop

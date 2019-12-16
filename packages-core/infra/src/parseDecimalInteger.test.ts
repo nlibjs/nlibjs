@@ -1,11 +1,6 @@
 import test from 'ava';
 import {parseDecimalInteger} from './parseDecimalInteger';
 import {fromString} from './4.6.Strings';
-import * as index from './index';
-
-test('index.parseDecimalInteger', (t) => {
-    t.is(index.parseDecimalInteger, parseDecimalInteger);
-});
 
 const tests: Array<[string, number, number, number]> = [
     ['  0  ', 2, 0, 3],

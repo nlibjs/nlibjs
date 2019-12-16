@@ -4,15 +4,10 @@ import {
     toASCIILowerCaseCodePoint,
     toASCIILowerCase,
 } from '@nlib/infra';
-import {
-    INBNFElement,
-    NBNFElementType,
-    INBNFNormalizedElement,
-    NBNFNormalizedElementType,
-    INBNFNullableNormalizedRuleList,
-} from '../types';
 import {normalizeAlternation} from './Alternation';
 import {intersectionSetZ} from '@nlib/real-number';
+import {INBNFElement, NBNFElementType} from '../types/base';
+import {INBNFNormalizedElement, INBNFNullableNormalizedRuleList, NBNFNormalizedElementType} from '../types/normalized';
 
 export const normalizeElement = (
     element: INBNFElement | INBNFNormalizedElement,

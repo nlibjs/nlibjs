@@ -1,11 +1,7 @@
 import {Object} from '@nlib/global';
-import {
-    INBNFNormalizedRuleList,
-    INBNFNormalizedAlternation,
-    INBNFAlternation,
-    INBNFNullableNormalizedRuleList,
-} from '../types';
 import {normalizeAlternation} from './Alternation';
+import {INBNFNormalizedAlternation, INBNFNullableNormalizedRuleList, INBNFNormalizedRuleList} from '../types/normalized';
+import {INBNFAlternation} from '../types/base';
 
 export const normalizeRuleList = (
     ruleList: {

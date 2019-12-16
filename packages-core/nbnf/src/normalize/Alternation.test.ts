@@ -2,12 +2,7 @@ import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {normalizeAlternation} from './Alternation';
 import {parseAlternation} from '../parse/Alternation';
-import * as index from './index';
-import {INBNFNormalizedAlternation, NBNFNormalizedElementType} from '../types';
-
-test('index.normalizeAlternation', (t) => {
-    t.is(index.normalizeAlternation, normalizeAlternation);
-});
+import {INBNFNormalizedAlternation, NBNFNormalizedElementType} from '../types/normalized';
 
 const lightTests: Array<[string, string]> = [
     ['"foo"/"foo"', '1*1"foo"'],

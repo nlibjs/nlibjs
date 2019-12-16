@@ -1,8 +1,9 @@
+import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseRFC3339} from './rfc3339';
 import {runTests} from './util';
 
-runTests(parseRFC3339, [
+runTests(test, parseRFC3339, [
     {
         input: '1937-01-02T12:34:56.789+01:23',
         rule: 'date-time',

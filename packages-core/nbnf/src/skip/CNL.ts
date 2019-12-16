@@ -1,7 +1,4 @@
-import {
-    getNextLineHead,
-    isASCIINewline,
-} from '@nlib/infra';
+import {getNextLineHead, isASCIINewline} from '@nlib/infra';
 import {skipComment} from './Comment';
 
 /** skip comment or newline */

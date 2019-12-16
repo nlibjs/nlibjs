@@ -1,11 +1,6 @@
 import test from 'ava';
 import {xml2js, Element} from 'xml-js';
 import {elementWalker} from './elementWalker';
-import * as index from './index';
-
-test('index.elementWalker', (t) => {
-    t.true('elementWalker' in index);
-});
 
 test('elementWalker', (t) => {
     const xml = xml2js(`

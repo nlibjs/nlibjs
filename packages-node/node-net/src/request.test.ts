@@ -4,7 +4,6 @@ import {Server, createServer} from 'http';
 import {readStream} from '@nlib/node-stream';
 import {mktempdir} from '@nlib/afs';
 import {request} from './request';
-import * as index from './index';
 import {listenPort} from './listen';
 import {closeServers} from './closeServers';
 import {PassThrough} from 'stream';
@@ -51,10 +50,6 @@ test.beforeEach(async (t) => {
 
 test.afterEach(async (t) => {
     await closeServers(t.context.server);
-});
-
-test('index.request', (t) => {
-    t.is(index.request, request);
 });
 
 test('GET https://example.com/', async (t) => {

@@ -1,11 +1,6 @@
 import test from 'ava';
 import {toString} from '@nlib/infra';
 import {MediaType} from './MediaType';
-import * as index from './index';
-
-test('index.MediaType', (t) => {
-    t.is(index.MediaType, MediaType);
-});
 
 test('fromString("")', (t) => {
     t.is(MediaType.fromString(''), null);

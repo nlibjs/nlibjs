@@ -1,8 +1,9 @@
+import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseRFC1034} from './rfc1034';
-import {runTests, toNodes} from './util';
+import {toNodes, runTests} from './util';
 
-runTests(parseRFC1034, [
+runTests(test, parseRFC1034, [
     {
         input: 'abcxyzABCXYZ',
         rule: 'lgh-str',

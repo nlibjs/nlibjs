@@ -3,8 +3,8 @@ import {
     LEFT_PARENTHESIS,
     RIGHT_PARENTHESIS,
 } from '@nlib/infra';
-import {NBNFElementType, INBNFGroupElement} from '../types';
 import {parseAlternationWrapper} from './AlternationWrapper';
+import {NBNFElementType, INBNFGroupElement} from '../types/base';
 
 export const parseGroup = (
     input: Uint32Array,

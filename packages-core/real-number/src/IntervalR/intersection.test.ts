@@ -2,11 +2,6 @@ import test from 'ava';
 import {intersectionIntervalR} from './intersection';
 import {IntervalR} from './types';
 import {stringifyIntervalR} from './stringify';
-import * as index from './index';
-
-test('index.intersectionIntervalR', (t) => {
-    t.is(index.intersectionIntervalR, intersectionIntervalR);
-});
 
 const tests: Array<[Array<IntervalR>, IntervalR | null]> = [
     [

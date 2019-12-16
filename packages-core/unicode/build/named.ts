@@ -1,11 +1,8 @@
 // http://unicode.org/reports/tr44/
-import {join} from 'path';
-import {Transform} from 'stream';
-import {createWriteStream} from 'fs';
-import {
-    console,
-    Promise as $Promise,
-} from '@nlib/global';
+import * as path from 'path';
+import * as stream from 'stream';
+import * as fs from 'fs';
+import {console, Promise} from '@nlib/global';
 import {
     collectCodePointSequence,
     isASCIIAlphanumeric,
@@ -14,16 +11,16 @@ import {
     toString,
 } from '@nlib/infra';
 import {getUCDFieldsStream} from './getUCDFieldsStream';
-import {urls} from './urls';
 import {getNameAliases} from './getNameAliases';
+import {urls} from './urls';
 
 export const build = async (): Promise<void> => {
-    const dest = join(__dirname, '../src/named.ts');
-    const stream = await getUCDFieldsStream(urls.UnicodeData);
+    const dest = path.join(__dirname, '../src/named.ts');
+    const ucdFieldsStream = await getUCDFieldsStream(urls.UnicodeData);
     const aliases = await getNameAliases();
-    await new $Promise<void>((resolve, reject) => {
-        stream
-        .pipe(new Transform({
+    await new Promise<void>((resolve, reject) => {
+        ucdFieldsStream
+        .pipe(new stream.Transform({
             objectMode: true,
             transform([codePointWithoutPrefix, Name]: Array<Uint32Array>, _, callback) {
                 let name: Uint32Array | undefined = collectCodePointSequence(
@@ -41,7 +38,7 @@ export const build = async (): Promise<void> => {
                 callback();
             },
         }))
-        .pipe(createWriteStream(dest))
+        .pipe(fs.createWriteStream(dest))
         .once('error', reject)
         .once('finish', resolve);
     });

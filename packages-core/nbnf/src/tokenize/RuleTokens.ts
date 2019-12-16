@@ -1,10 +1,7 @@
 import {IntervalZ} from '@nlib/real-number';
-import {
-    INBNFASTNodeList,
-    INBNFCompiledRuleElement,
-    INBNFTokenizerResult,
-} from '../types';
 import {tokenizeRule} from './Rule';
+import {INBNFCompiledRuleElement} from '../types/compiled';
+import {INBNFASTNodeList, INBNFTokenizerResult} from '../types/misc';
 
 export const collectRuleTokens = function* (
     [min, max]: IntervalZ,

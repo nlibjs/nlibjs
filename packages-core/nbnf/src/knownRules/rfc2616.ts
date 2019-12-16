@@ -31,8 +31,8 @@ import {
 import {normalizeNBNF} from '../normalizeNBNF';
 import {RFC2234Rules} from './rfc2234';
 import {createTokenizerFromNormalizedRuleList} from '../createTokenizer';
-import {normalizeRuleList} from '../normalize';
-import {NBNFNormalizedElementType} from '../types';
+import {NBNFNormalizedElementType} from '../types/normalized';
+import {normalizeRuleList} from '../normalize/RuleList';
 
 // https://tools.ietf.org/htm./rfc2616#section-2.2
 

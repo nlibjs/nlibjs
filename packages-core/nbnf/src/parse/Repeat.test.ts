@@ -2,11 +2,6 @@ import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {IntervalZ} from '@nlib/real-number';
 import {parseRepeat} from './Repeat';
-import * as index from './index';
-
-test('index.parseRepeat', (t) => {
-    t.is(index.parseRepeat, parseRepeat);
-});
 
 const tests: Array<[string, number, IntervalZ, number]> = [
     [

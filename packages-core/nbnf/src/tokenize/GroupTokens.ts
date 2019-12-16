@@ -1,10 +1,7 @@
 import {IntervalZ} from '@nlib/real-number';
-import {
-    INBNFASTNodeList,
-    INBNFCompiledGroupElement,
-    INBNFTokenizerResult,
-} from '../types';
 import {tokenizeAlternation} from './Alternation';
+import {INBNFCompiledGroupElement} from '../types/compiled';
+import {INBNFASTNodeList, INBNFTokenizerResult} from '../types/misc';
 
 export const collectGroupTokens = function* (
     [min, max]: IntervalZ,

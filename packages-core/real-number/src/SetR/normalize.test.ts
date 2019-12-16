@@ -1,13 +1,8 @@
 import test from 'ava';
-import * as index from './index';
 import {normalizeSetR} from './normalize';
 import {inin, inex, exin, exex} from '../IntervalR';
 import {SetR} from './types';
 import {stringifySetR} from './stringify';
-
-test('index.normalizeSetR', (t) => {
-    t.is(index.normalizeSetR, normalizeSetR);
-});
 
 const tests: Array<[SetR, SetR]> = [
     [

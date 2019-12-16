@@ -1,11 +1,6 @@
 import test from 'ava';
 import {readStream, readObjectStream} from './readStream';
 import {PassThrough} from 'stream';
-import * as index from './index';
-
-test('index.readStream', (t) => {
-    t.is(index.readStream, readStream);
-});
 
 test('read a stream', async (t) => {
     const readableStream = new PassThrough();

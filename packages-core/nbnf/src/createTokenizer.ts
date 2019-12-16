@@ -1,20 +1,17 @@
 import {NlibError} from '@nlib/util';
 import {toScalarValueString} from '@nlib/infra';
 import {
-    INBNFRuleList,
-    INBNFTokenizer,
-    INBNFCompiledRuleList,
-    INBNFTokenizerOptions,
-    INBNFNormalizedRuleList,
-} from './types';
-import {compileRuleList} from './compile';
-import {tokenizeRule} from './tokenize';
-import {
     normalizeNBNF,
     normalizeNBNFFromScalarValueString,
     normalizeNBNFFromRuleList,
 } from './normalizeNBNF';
 import {defaultPositionCallback} from './util';
+import {INBNFCompiledRuleList} from './types/compiled';
+import {INBNFTokenizer, INBNFTokenizerOptions} from './types/misc';
+import {tokenizeRule} from './tokenize/Rule';
+import {INBNFNormalizedRuleList} from './types/normalized';
+import {compileRuleList} from './compile/RuleList';
+import {INBNFRuleList} from './types/base';
 
 export const createTokenizerFromCompiledRuleList = (
     compiledRuleList: INBNFCompiledRuleList,

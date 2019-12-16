@@ -13,8 +13,8 @@ import {
     unionSetZ,
 } from '@nlib/real-number';
 import {normalizeNBNF} from '../normalizeNBNF';
-import {NBNFNormalizedElementType} from '../types';
-import {normalizeRuleList} from '../normalize';
+import {NBNFNormalizedElementType} from '../types/normalized';
+import {normalizeRuleList} from '../normalize/RuleList';
 
 const AnythingSet: SetZ = [[0, 0x10FFFF]];
 const AnythingButAsteriskSet = intersectionSetZ(AnythingSet, complementSetZ(fromValuesSetZ(ASTERISK)));

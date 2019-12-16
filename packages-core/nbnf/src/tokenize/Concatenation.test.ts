@@ -1,19 +1,9 @@
 import test from 'ava';
-import {
-    fromString,
-} from '@nlib/infra';
+import {fromString} from '@nlib/infra';
 import {tokenizeConcatenation} from './Concatenation';
-import {
-    NBNFCompiledElementType,
-    INBNFCompiledConcatenation,
-    INBNFTokenizerResult,
-} from '../types';
-import * as index from './index';
 import {tokenizerResultToDebugString} from '../util';
-
-test('index.tokenizeConcatenation', (t) => {
-    t.is(index.tokenizeConcatenation, tokenizeConcatenation);
-});
+import {INBNFCompiledConcatenation, NBNFCompiledElementType} from '../types/compiled';
+import {INBNFTokenizerResult} from '../types/misc';
 
 interface ITest {
     concatenation: INBNFCompiledConcatenation,

@@ -1,12 +1,7 @@
 import {NlibError} from '@nlib/util';
-import {
-    NBNFNormalizedElementType,
-    NBNFCompiledElementType,
-    INBNFNormalizedElement,
-    INBNFCompiledElement,
-    INBNFCompiledRuleList,
-} from '../types';
 import {compileAlternation} from './Alternation';
+import {INBNFNormalizedElement, NBNFNormalizedElementType} from '../types/normalized';
+import {INBNFCompiledRuleList, INBNFCompiledElement, NBNFCompiledElementType} from '../types/compiled';
 
 export const compileElement = (
     element: INBNFNormalizedElement,

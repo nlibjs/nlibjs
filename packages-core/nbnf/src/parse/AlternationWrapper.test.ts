@@ -1,12 +1,7 @@
 import test from 'ava';
 import {fromString, HYPHEN_MINUS, PERCENT_SIGN} from '@nlib/infra';
 import {parseAlternationWrapper} from './AlternationWrapper';
-import {NBNFElementType, INBNFAlternation} from '../types';
-import * as index from './index';
-
-test('index.parseAlternationWrapper', (t) => {
-    t.is(index.parseAlternationWrapper, parseAlternationWrapper);
-});
+import {INBNFAlternation, NBNFElementType} from '../types/base';
 
 test('throw by missing left end', (t) => {
     t.throws(() => parseAlternationWrapper(

@@ -5,10 +5,7 @@ import {
     REVERSE_SOLIDUS,
     toString,
 } from '@nlib/infra';
-import {
-    NBNFElementType,
-    INBNFSequenceElement,
-} from '../types';
+import {INBNFSequenceElement, NBNFElementType} from '../types/base';
 
 export const parseSequence = (
     input: Uint32Array,

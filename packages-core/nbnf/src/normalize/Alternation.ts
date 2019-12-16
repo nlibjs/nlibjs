@@ -1,23 +1,10 @@
-import {
-    unionSetZ,
-    SetZ,
-    fromValuesSetZ,
-} from '@nlib/real-number';
-import {
-    INBNFAlternation,
-    INBNFNormalizedAlternation,
-    INBNFNormalizedConcatenation,
-    NBNFNormalizedElementType,
-    INBNFNullableNormalizedRuleList,
-    INBNFNormalizedElement,
-} from '../types';
+import {unionSetZ, SetZ, fromValuesSetZ} from '@nlib/real-number';
 import {normalizeConcatenation} from './Concatenation';
 import {isSameNormalizedConcatenation} from '../isSameNormalized/Concatenation';
 import {isSameNormalizedElement} from '../isSameNormalized/Element';
-import {
-    toASCIILowerCaseCodePoint,
-    toASCIIUpperCaseCodePoint,
-} from '@nlib/infra';
+import {toASCIILowerCaseCodePoint, toASCIIUpperCaseCodePoint} from '@nlib/infra';
+import {INBNFNormalizedElement, NBNFNormalizedElementType, INBNFNormalizedAlternation, INBNFNormalizedConcatenation, INBNFNullableNormalizedRuleList} from '../types/normalized';
+import {INBNFAlternation} from '../types/base';
 
 export const getSetFromElement = (element: INBNFNormalizedElement): null | SetZ => {
     switch (element.type) {

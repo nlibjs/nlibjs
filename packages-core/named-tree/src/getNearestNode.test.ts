@@ -1,13 +1,8 @@
 import test from 'ava';
-import * as index from './index';
 import {getNearestNode} from './getNearestNode';
 import {createEmptyRootNode} from './createNode';
 import {setValue} from './setValue';
 import {getExistingNode} from './getExistingNode';
-
-test('index.getNearestNode', (t) => {
-    t.is(index.getNearestNode, getNearestNode);
-});
 
 test('getNearestNode', (t) => {
     const tree = createEmptyRootNode<string>();

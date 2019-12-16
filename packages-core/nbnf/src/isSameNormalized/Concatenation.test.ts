@@ -1,8 +1,8 @@
 import test from 'ava';
-import {isSameNormalizedConcatenation} from './Concatenation';
-import {parseConcatenation} from '../parse';
 import {fromString} from '@nlib/infra';
-import {normalizeConcatenation} from '../normalize';
+import {isSameNormalizedConcatenation} from './Concatenation';
+import {normalizeConcatenation} from '../normalize/Concatenation';
+import {parseConcatenation} from '../parse/Concatenation';
 
 const tests: Array<[string, string, boolean]> = [
     ['foo bar', 'foo bar', true],

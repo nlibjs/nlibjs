@@ -1,7 +1,7 @@
 import {PositionCallback} from '@nlib/infra';
 import {skipCWSP} from '../skip/CWSP';
-import {INBNFConcatenation} from '../types';
 import {parseRepetition} from './Repetition';
+import {INBNFConcatenation} from '../types/base';
 
 export const parseConcatenation = (
     input: Uint32Array,
