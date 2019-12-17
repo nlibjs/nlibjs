@@ -1,7 +1,7 @@
 import {join} from 'path';
-import {readdir, rmdir, unlink, lstat} from './core';
 import {PathLike} from 'fs';
-import {absolutify} from './absolutify';
+import {absolutify} from '@nlib/node-util';
+import {readdir, rmdir, unlink, lstat} from './core';
 
 export type onFileHook = (target: string) => void | Promise<void>;
 
