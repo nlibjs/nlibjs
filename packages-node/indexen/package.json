@@ -34,7 +34,6 @@
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     },
     "eslintConfig": {
-        "extends": "../../package.json",
         "overrides": [
             {
                 "files": [
