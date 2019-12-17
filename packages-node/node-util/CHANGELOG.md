@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.16.0](https://github.com/nlibjs/nlibjs/compare/v3.15.6...v3.16.0) (2019-12-17)
+
+
+### Features
+
+* **indexen:** add indexen ([#101](https://github.com/nlibjs/nlibjs/issues/101)) ([808e79d](https://github.com/nlibjs/nlibjs/commit/808e79dda5b04290983f8b136418148660fad32d))
+* **node-util:** add absolutify ([83d9ab0](https://github.com/nlibjs/nlibjs/commit/83d9ab0e9b29681b891364f74081d68b14e1701a))
+* **node-util:** remove getHash ([7b812e8](https://github.com/nlibjs/nlibjs/commit/7b812e87a32f24320c98df3c07596f96aa6a0ff1))
+
+
+
+
+
 # [3.12.0](https://github.com/nlibjs/nlibjs/compare/v3.11.2...v3.12.0) (2019-07-11)
 
 **Note:** Version bump only for package @nlib/node-util

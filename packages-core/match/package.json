@@ -1,6 +1,6 @@
 {
     "name": "@nlib/match",
-    "version": "3.13.4",
+    "version": "3.16.0",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -30,8 +30,8 @@
     },
     "dependencies": {
         "@nlib/global": "^3.12.0",
-        "@nlib/infra": "^3.13.4",
-        "@nlib/util": "^3.13.3"
+        "@nlib/infra": "^3.16.0",
+        "@nlib/util": "^3.16.0"
     },
     "eslintConfig": {
         "overrides": [
