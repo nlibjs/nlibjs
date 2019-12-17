@@ -1,10 +1,10 @@
 import {join, dirname, isAbsolute, relative} from 'path';
 import {PathLike} from 'fs';
 import {NlibError} from '@nlib/util';
+import {absolutify} from '@nlib/node-util';
 import {copyFile, symlink, readlink} from './core';
 import {tree, ITreeNode} from './tree';
 import {mkdirp} from './mkdirp';
-import {absolutify} from './absolutify';
 
 interface ICopyContext {
     src: string,

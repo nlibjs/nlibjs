@@ -1,8 +1,8 @@
 import {PathLike, Stats} from 'fs';
 import {join} from 'path';
-import {lstat, readdir} from './core';
-import {absolutify} from './absolutify';
 import {Readable} from 'stream';
+import {absolutify} from '@nlib/node-util';
+import {lstat, readdir} from './core';
 
 export interface IFileInfo {
     path: string,
