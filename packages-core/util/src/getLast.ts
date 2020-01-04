@@ -1,5 +1,6 @@
 import {Number} from '@nlib/global';
-import {NlibError} from './NlibError';
+import {CustomError} from './CustomError';
+
 export const getLast = <TItem>(
     arrayLike: ArrayLike<TItem>,
     indexFromLast = -1,
@@ -7,7 +8,7 @@ export const getLast = <TItem>(
     if (indexFromLast < 0 && Number.isInteger(indexFromLast)) {
         const index = arrayLike.length + indexFromLast;
         if (index < 0) {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'EShort',
                 message: `Cannot get the item at ${index}`,
                 data: arrayLike,
@@ -15,7 +16,7 @@ export const getLast = <TItem>(
         }
         return arrayLike[index];
     }
-    throw new NlibError({
+    throw new CustomError({
         code: 'EInvalidIndex',
         message: `The second argument should be a negative integer: ${indexFromLast}`,
         data: indexFromLast,

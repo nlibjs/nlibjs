@@ -39,7 +39,7 @@
                     "src/getType.*",
                     "src/createTypeFilter.*",
                     "src/is*.ts",
-                    "src/NlibError.ts",
+                    "src/CustomError.ts",
                     "src/*.test.ts"
                 ],
                 "rules": {
