@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {String} from '@nlib/global';
 import {
     PositionCallback,
@@ -23,7 +23,7 @@ export const parseNumVal = (
     if (input[position] === PERCENT_SIGN) {
         position++;
     } else {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseNumVal/1',
             message: 'Parsing error: PERCENT_SIGN expected at left end',
             data: {input, from},
@@ -33,7 +33,7 @@ export const parseNumVal = (
     if (radix) {
         position++;
     } else {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseNumVal/2',
             message: `Parsing error: invalid radix indicator ${String.fromCodePoint(input[position])}`,
             data: {input, from},

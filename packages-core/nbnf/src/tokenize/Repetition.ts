@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {collectGroupTokens} from './GroupTokens';
 import {collectRuleTokens} from './RuleTokens';
 import {collectCodePointTokens} from './CodePointTokens';
@@ -27,7 +27,7 @@ export const tokenizeRepetition = function* (
             yield* collectSequenceTokens(repeat, element, input, from);
             break;
         default:
-            throw new NlibError({
+            throw new CustomError({
                 code: 'nbnf/TokenizeRepetition/1',
                 message: `Invalid type: ${(element as INBNFElement).type}`,
                 data: {repeat, element},

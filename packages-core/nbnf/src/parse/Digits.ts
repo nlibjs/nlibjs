@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {
     CodePointCondition,
     PositionCallback,
@@ -49,7 +49,7 @@ export const parseDigits = (
         position = newPosition;
     });
     if (digits.length === 0) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseDigits/1',
             message: 'Parsing error: digits is empty',
             data: {input, from},

@@ -1,6 +1,6 @@
 import {join, dirname, isAbsolute, relative} from 'path';
 import {PathLike} from 'fs';
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {absolutify} from '@nlib/node-util';
 import {copyFile, symlink, readlink} from './core';
 import {tree, ITreeNode} from './tree';
@@ -39,7 +39,7 @@ const cprCore = async (
             await symlink(isRelative ? relative(dirname(dest), absoluteTarget) : target, dest);
         }
     } else {
-        throw new NlibError({
+        throw new CustomError({
             code: 'afs/cpr/1',
             message: `Unsupported file: ${node.path}`,
             data: {node, dest, context},

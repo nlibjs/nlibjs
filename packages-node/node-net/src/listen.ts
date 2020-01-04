@@ -7,7 +7,7 @@ import {
     hasSetZ,
 } from '@nlib/real-number';
 import {
-    NlibError,
+    CustomError,
     isString,
 } from '@nlib/util';
 
@@ -51,7 +51,7 @@ export const listen: IListen = (
                 server.listen(arg1, arg2);
                 break;
             default:
-                throw new NlibError({
+                throw new CustomError({
                     code: 'EInvalidParameter',
                     message: `Invalid second parameter: ${arg2}`,
                     data: arg2,
@@ -59,7 +59,7 @@ export const listen: IListen = (
             }
             break;
         default:
-            throw new NlibError({
+            throw new CustomError({
                 code: 'EInvalidParameter',
                 message: `Invalid first parameter: ${arg1}`,
                 data: arg1,
@@ -78,14 +78,14 @@ export const listenPort = async (
     if (server.listening) {
         const addressInfo = server.address();
         if (isString(addressInfo)) {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'node-net/listenPort/1',
                 message: `The server is listening ${addressInfo}`,
                 data: addressInfo,
             });
         }
         if (!addressInfo) {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'node-net/listenPort/2',
                 message: `server.address() returns ${addressInfo}`,
                 data: addressInfo,

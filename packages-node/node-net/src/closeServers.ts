@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {Server} from 'net';
 
 export const closeServers = async (...servers: Array<Server>): Promise<void> => {
@@ -6,7 +6,7 @@ export const closeServers = async (...servers: Array<Server>): Promise<void> => 
         await new Promise((resolve, reject) => {
             if (server.listening) {
                 const timer = setTimeout(() => {
-                    reject(new NlibError({
+                    reject(new CustomError({
                         code: 'node-net/closeServers/1',
                         message: `The server#${index} failed to close`,
                         data: {servers},

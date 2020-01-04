@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {compileAlternation} from './Alternation';
 import {INBNFNormalizedElement, NBNFNormalizedElementType} from '../types/normalized';
 import {INBNFCompiledRuleList, INBNFCompiledElement, NBNFCompiledElementType} from '../types/compiled';
@@ -20,7 +20,7 @@ export const compileElement = (
         if (compiledAlternation) {
             return {type: NBNFCompiledElementType.Rule, data: {name, elements: compiledAlternation}};
         } else {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'nbnf/compileElement/1',
                 message: `No rule: ${name}`,
                 data: element,
@@ -28,7 +28,7 @@ export const compileElement = (
         }
     }
     default:
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/compileElement/2',
             message: `Unknown type: ${element}`,
             data: element,

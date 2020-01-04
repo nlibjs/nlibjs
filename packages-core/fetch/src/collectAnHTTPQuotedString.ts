@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {
     fromString,
     concatenate,
@@ -19,7 +19,7 @@ export const collectAnHTTPQuotedString = (
     const positionStart = position;
     let value = fromString('');
     if (input[position] !== QUOTATION_MARK) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'EInvalidCharacter',
             message: `${input.slice(position)} doesn't start with QUOTATION_MARK (")`,
             data: input,
@@ -52,7 +52,7 @@ export const collectAnHTTPQuotedString = (
         } else if (quoteOrBackslash === QUOTATION_MARK) {
             break;
         } else {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'EInvalidCharacter',
                 message: `Invalid end: ${input}`,
                 data: input,

@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {toScalarValueString} from '@nlib/infra';
 import {
     normalizeNBNF,
@@ -23,7 +23,7 @@ export const createTokenizerFromCompiledRuleList = (
 ) => {
     const elements = compiledRuleList[name];
     if (!elements) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/createTokenizer/1',
             message: `No rule found: ${name}`,
             data: {source, name},
@@ -33,7 +33,7 @@ export const createTokenizerFromCompiledRuleList = (
         positionCallback(end);
         return node;
     }
-    throw new NlibError({
+    throw new CustomError({
         code: 'nbnf/createTokenizer/2',
         message: `Failed to tokenize ${name}`,
         data: {source, name},

@@ -17,7 +17,7 @@ import {
     toString,
 } from '@nlib/infra';
 import {RegExp} from '@nlib/global';
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {Pattern, IRegexpLike} from './types';
 
 export const patternToRegExp = (pattern: Pattern): IRegexpLike => {
@@ -33,7 +33,7 @@ export const patternToRegExp = (pattern: Pattern): IRegexpLike => {
     while (position < length) {
         const codePoint = source[position];
         if (isASCIINewline(codePoint)) {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'EInvalidCharacter',
                 message: 'Newline characters are not allowed in patterns',
                 data: pattern,
@@ -52,7 +52,7 @@ export const patternToRegExp = (pattern: Pattern): IRegexpLike => {
             regexpSource.push(buffer.slice(0, bufferSize));
             if (source[position + 1] === ASTERISK) {
                 if (source[position + 2] !== SOLIDUS) {
-                    throw new NlibError({
+                    throw new CustomError({
                         code: 'EInvalidGlobStart',
                         message: `Invalid glob star: ${source.slice(position - 1, position + 1)}`,
                         data: pattern,
