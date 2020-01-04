@@ -17,7 +17,7 @@ import {
 import {
     isNumber,
     getLast,
-    NlibError,
+    CustomError,
 } from '@nlib/util';
 import {
     ICookieParseResult,
@@ -48,7 +48,7 @@ export const extractExpiresFrom = (
     if (isASTRuleNode(expiresValueNode, 'sane-cookie-date')) {
         return new Date(nodeToString(expiresValueNode));
     }
-    console.error(new NlibError({
+    console.error(new CustomError({
         code: 'cookie/parseCookieString/1',
         message: `Invalid Expires: ${nodeToString(attributeNode)}`,
         data: attributeNode,
@@ -64,7 +64,7 @@ export const extractMaxAgeFrom = (
     if (isASTRuleNode(maxAgeValueNode, 'decimal-value')) {
         return parseDecLiteral(nodeToScalarValueString(maxAgeValueNode));
     }
-    console.error(new NlibError({
+    console.error(new CustomError({
         code: 'cookie/parseCookieString/2',
         message: `Invalid Max-Age: ${nodeToString(attributeNode)}`,
         data: attributeNode,
@@ -92,7 +92,7 @@ export const extractPathFrom = (
     if (isASTRuleNode(pathValueNode, 'path-value')) {
         return nodeToString(pathValueNode);
     }
-    console.error(new NlibError({
+    console.error(new CustomError({
         code: 'cookie/parseCookieString/3',
         message: `Invalid Path: ${nodeToString(attributeNode)}`,
         data: attributeNode,
@@ -157,7 +157,7 @@ export const parseSetCookieString = (
                 break;
             case 'extension-av':
             default:
-                console.error(new NlibError({
+                console.error(new CustomError({
                     code: 'cookie/parseCookieString/4',
                     message: `Unsupported attribute: ${nodeToString(attributeNode)}`,
                     data: setCookieString,

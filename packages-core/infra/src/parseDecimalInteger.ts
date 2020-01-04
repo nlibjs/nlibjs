@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {collectCodePointSequence} from './4.6.Strings';
 import {PositionCallback} from './types';
 import {
@@ -16,7 +16,7 @@ export const parseDecimalInteger = (
         position = newPosition;
     });
     if (digits.length === 0) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'ENoDigits',
             message: 'No digits',
             data: input,
@@ -24,7 +24,7 @@ export const parseDecimalInteger = (
     }
     const firstDigit = digits[0];
     if (firstDigit === DIGIT_ZERO && digits[1] === DIGIT_ZERO) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'EZeroPrefix',
             message: `The decimal starts with 00: ${digits}`,
             data: input,

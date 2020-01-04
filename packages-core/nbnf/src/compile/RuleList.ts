@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {Object} from '@nlib/global';
 import {compileAlternation} from './Alternation';
 import {INBNFNormalizedRuleList} from '../types/normalized';
@@ -22,7 +22,7 @@ export const compileRuleList = (
                     compiledRuleList,
                 ));
             } else {
-                throw new NlibError({
+                throw new CustomError({
                     code: 'nbnf/RuleList/1',
                     message: `No rule: ${name}`,
                     data: compiledRuleList,

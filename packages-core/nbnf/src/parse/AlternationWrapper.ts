@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {String} from '@nlib/global';
 import {PositionCallback} from '@nlib/infra';
 import {skipCWSP} from '../skip/CWSP';
@@ -16,7 +16,7 @@ export const parseAlternationWrapper = (
     if (input[position] === left) {
         position++;
     } else {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseAlternationWrapper/1',
             message: `Parsing error: "${String.fromCodePoint(left)}" expected`,
             data: {input, from, left, right},
@@ -32,7 +32,7 @@ export const parseAlternationWrapper = (
     );
     position = skipCWSP(input, position);
     if (input.length <= position) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseAlternationWrapper/2',
             message: `Parsing error: "${String.fromCodePoint(right)}" expected but input end`,
             data: {input, from, left, right},
@@ -43,7 +43,7 @@ export const parseAlternationWrapper = (
         if (codePoint === right) {
             position++;
         } else {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'nbnf/parseAlternationWrapper/3',
                 message: `Parsing error: "${String.fromCodePoint(right)}" expected but get ${String.fromCodePoint(codePoint)}`,
                 data: {input, from, left, right},

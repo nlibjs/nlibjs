@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {
     PositionCallback,
     QUOTATION_MARK,
@@ -17,7 +17,7 @@ export const parseSequence = (
     if (input[position] === QUOTATION_MARK) {
         position++;
     } else {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseSequence/1',
             message: 'Parsing error: QUOTATION_MARK expected at the left end',
             data: {input, from},
@@ -41,14 +41,14 @@ export const parseSequence = (
         }
     }
     if (length === 0) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseSequence/2',
             message: 'Parsing error: codePoints is empty',
             data: {input, from},
         });
     }
     if (!terminated) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseSequence/3',
             message: `Parsing error: QUOTATION_MARK expected at the right end.\n${toString(input.slice(from))}`,
             data: {input, from},

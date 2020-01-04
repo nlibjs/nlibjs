@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {
     PositionCallback,
     EQUALS_SIGN,
@@ -32,7 +32,7 @@ export const parseRule = (
             position += 1;
         }
     } else {
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/parseRule/1',
             message: `Parsing error at ${position}: "=" expected.`,
             data: {input, from},

@@ -182,7 +182,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * **cookie:** add a module to handle Cookies ([#29](https://github.com/nlibjs/nlibjs/issues/29)) ([2e89930](https://github.com/nlibjs/nlibjs/commit/2e89930)), closes [#25](https://github.com/nlibjs/nlibjs/issues/25) [#30](https://github.com/nlibjs/nlibjs/issues/30) [#31](https://github.com/nlibjs/nlibjs/issues/31) [#32](https://github.com/nlibjs/nlibjs/issues/32) [#33](https://github.com/nlibjs/nlibjs/issues/33) [#34](https://github.com/nlibjs/nlibjs/issues/34) [#35](https://github.com/nlibjs/nlibjs/issues/35)
-* add NlibError ([#26](https://github.com/nlibjs/nlibjs/issues/26)) ([#43](https://github.com/nlibjs/nlibjs/issues/43)) ([d6df885](https://github.com/nlibjs/nlibjs/commit/d6df885))
+* add CustomError ([#26](https://github.com/nlibjs/nlibjs/issues/26)) ([#43](https://github.com/nlibjs/nlibjs/issues/43)) ([d6df885](https://github.com/nlibjs/nlibjs/commit/d6df885))
 * support node 8 ([#53](https://github.com/nlibjs/nlibjs/issues/53)) ([8d0a67e](https://github.com/nlibjs/nlibjs/commit/8d0a67e))
 
 

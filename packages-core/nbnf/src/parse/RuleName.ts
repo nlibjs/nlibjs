@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {String} from '@nlib/global';
 import {
     PositionCallback,
@@ -24,7 +24,7 @@ export const parseRuleName = (
     {
         const firstCodePoint = input[position];
         if (isNotRuleNameFirstCharacter(firstCodePoint)) {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'nbnf/parseRuleName/1',
                 message: `Parsing error: invalid first codePoint 0x${firstCodePoint.toString(16)} (${String.fromCodePoint(firstCodePoint)}) at ${position}\n${toString(input.slice(position))}`,
                 data: {input, from},
@@ -33,7 +33,7 @@ export const parseRuleName = (
             position++;
             collected[length++] = firstCodePoint;
         } else {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'nbnf/parseRuleName/1',
                 message: `Parsing error: no codePoints at ${from}`,
                 data: {input, from},

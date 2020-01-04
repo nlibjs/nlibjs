@@ -5,7 +5,7 @@ import {
     Math,
     String,
 } from '@nlib/global';
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {
     PositionCallback,
     CodePointCondition,
@@ -102,7 +102,7 @@ export const isomorphicEncode = (input: Uint32Array): Uint8Array => {
     for (let index = 0; index < length; index++) {
         const codePoint = input[index];
         if (0x00FF < codePoint) {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'ERange',
                 message: `The codepoint at ${index} is greater then 0x00FF: ${codePoint}`,
                 data: input,
@@ -121,7 +121,7 @@ export const toASCIIUpperCase = (input: Uint32Array): Uint32Array => input.map(t
 
 export const encodeASCII = (input: Uint32Array): Uint8Array => {
     if (!isASCIIString(input)) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'ENonASCII',
             message: `The input is not an ASCII string: ${input}`,
             data: input,
@@ -133,7 +133,7 @@ export const encodeASCII = (input: Uint32Array): Uint8Array => {
 export const decodeASCII = (input: Uint8Array): Uint32Array => {
     for (const byte of input) {
         if (!isASCIIByte(byte)) {
-            throw new NlibError({
+            throw new CustomError({
                 code: 'ENonASCII',
                 message: `The input has a non-ASCII byte: ${byte}`,
                 data: input,

@@ -1,4 +1,4 @@
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {
     fromCodePoint,
     toASCIILowerCaseCodePoint,
@@ -52,7 +52,7 @@ export const normalizeElement = (
         return {type: NBNFNormalizedElementType.CodePoint, data: element.data};
     }
     default:
-        throw new NlibError({
+        throw new CustomError({
             code: 'nbnf/normalizeElement/1',
             message: `Unknown type: ${element.type}`,
             data: {element, expands, context},

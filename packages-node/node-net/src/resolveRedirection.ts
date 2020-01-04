@@ -1,7 +1,7 @@
 import {URL} from 'url';
 import {IncomingMessage, OutgoingHttpHeaders} from 'http';
 import {CookieStore} from '@nlib/cookie';
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {request} from './request';
 
 export interface IResolveRedirectionOptions {
@@ -31,7 +31,7 @@ const _resolveRedirection = async (
         return response;
     }
     if (!(history.length <= maxRedirections)) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'TooManyRedirections',
             message: `TooManyRedirections:\n${history.join('\n→ ')}`,
             data: history,

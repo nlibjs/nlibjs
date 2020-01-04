@@ -14,7 +14,7 @@ import {
     createWriteStream,
     mkdirp,
 } from '@nlib/afs';
-import {NlibError} from '@nlib/util';
+import {CustomError} from '@nlib/util';
 import {request} from './request';
 
 export const sanitizeEtag = (etag: string): string => etag
@@ -32,7 +32,7 @@ const readFromCache = async (cacheDirectory: string, cacheId: string): Promise<I
     if (stats.isFile()) {
         return Object.assign(createReadStream(cachePath), {fromCache: true, cachePromise: null});
     } else {
-        throw new NlibError({
+        throw new CustomError({
             code: 'EEXISTS',
             message: `There is non-file object at ${cachePath}`,
             data: {cacheDirectory, cacheId},
@@ -71,7 +71,7 @@ export const httpGet = async (
     }
     const response = await request(url);
     if (response.statusCode !== 200) {
-        throw new NlibError({
+        throw new CustomError({
             code: 'EResponse',
             message: `response.statusCode is not 200: ${response.statusCode}`,
             data: response,
