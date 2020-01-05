@@ -1,6 +1,6 @@
 import {PathLike, Stats} from 'fs';
 import {join} from 'path';
-import {Readable} from 'stream';
+import * as stream from 'stream';
 import {absolutify} from '@nlib/node-util';
 import {lstat, readdir} from './core';
 
@@ -26,7 +26,7 @@ export interface IFileInfo {
 //     }
 // };
 
-export class DirectoryWalker extends Readable {
+export class DirectoryWalker extends stream.Readable {
 
     public path: string;
 

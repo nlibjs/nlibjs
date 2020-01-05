@@ -1,10 +1,10 @@
 import test from 'ava';
-import {PassThrough} from 'stream';
+import * as stream from 'stream';
 import {readObjectStream} from './readStream';
 import {CodePointStream} from './CodePointStream';
 
 test('AbC😇AbC', async (t) => {
-    const source = new PassThrough();
+    const source = new stream.PassThrough();
     source.write('AbC');
     setImmediate(() => {
         source.write('😇');

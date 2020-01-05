@@ -1,8 +1,8 @@
-import {Transform} from 'stream';
+import * as stream from 'stream';
 import {StringDecoder} from 'string_decoder';
 import {getCodePoints} from '@nlib/infra';
 
-export class CodePointStream extends Transform {
+export class CodePointStream extends stream.Transform {
 
     private readonly decoder: StringDecoder;
 
