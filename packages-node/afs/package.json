@@ -1,6 +1,6 @@
 {
     "name": "@nlib/afs",
-    "version": "3.16.0",
+    "version": "3.17.0",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -30,7 +30,7 @@
     },
     "dependencies": {
         "@nlib/node-util": "^3.16.0",
-        "@nlib/util": "^3.16.0",
+        "@nlib/util": "^3.17.0",
         "semver": "^7.0.0"
     },
     "eslintConfig": {

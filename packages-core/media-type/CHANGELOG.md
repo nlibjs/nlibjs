@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.17.0](https://github.com/nlibjs/nlibjs/compare/v3.16.0...v3.17.0) (2020-01-05)
+
+**Note:** Version bump only for package @nlib/media-type
+
+
+
+
+
 # [3.16.0](https://github.com/nlibjs/nlibjs/compare/v3.15.6...v3.16.0) (2019-12-17)
 
 

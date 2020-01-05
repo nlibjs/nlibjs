@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.17.0](https://github.com/nlibjs/nlibjs/compare/v3.16.0...v3.17.0) (2020-01-05)
+
+
+### Bug Fixes
+
+* **lint:** update configurations ([e39392f](https://github.com/nlibjs/nlibjs/commit/e39392fef1ebafdcb5b68a7fddaf4020f4f55b57))
+
+
+
+
+
 ## [3.15.1](https://github.com/nlibjs/nlibjs/compare/v3.15.0...v3.15.1) (2019-12-09)
 
 

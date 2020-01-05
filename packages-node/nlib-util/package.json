@@ -1,6 +1,6 @@
 {
     "name": "@nlib/nlib-util",
-    "version": "3.16.0",
+    "version": "3.17.0",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -29,8 +29,8 @@
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     },
     "dependencies": {
-        "@nlib/afs": "^3.16.0",
-        "@nlib/remove-sourcemap": "^3.16.0"
+        "@nlib/afs": "^3.17.0",
+        "@nlib/remove-sourcemap": "^3.17.0"
     },
     "eslintConfig": {
         "overrides": [

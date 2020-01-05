@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.17.0](https://github.com/nlibjs/nlibjs/compare/v3.16.0...v3.17.0) (2020-01-05)
+
+
+### Features
+
+* **util:** add humanReadable ([a6b41da](https://github.com/nlibjs/nlibjs/commit/a6b41da07eb6775b162dc0ddf83b6b718bbe656e))
+* **util:** add isNonEmptyString ([bc4ee17](https://github.com/nlibjs/nlibjs/commit/bc4ee17b305053a07cf3829621fddcfc9500e139))
+* **util:** add isNull ([06189e3](https://github.com/nlibjs/nlibjs/commit/06189e3c76934ed06cbc8bc79fbf3b2931468a6b))
+* **util:** remove createTypeFilter ([52076e8](https://github.com/nlibjs/nlibjs/commit/52076e8c7a6a2b700b0d89e3d20a0097e76f6d3f))
+
+
+
+
+
 # [3.16.0](https://github.com/nlibjs/nlibjs/compare/v3.15.6...v3.16.0) (2019-12-17)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.17.0](https://github.com/nlibjs/nlibjs/compare/v3.16.0...v3.17.0) (2020-01-05)
+
+
+### Features
+
+* **node-stream:** add chainStream ([45feb97](https://github.com/nlibjs/nlibjs/commit/45feb97c98ff67960605c988c6c30e27540293e5))
+
+
+
+
+
 # [3.16.0](https://github.com/nlibjs/nlibjs/compare/v3.15.6...v3.16.0) (2019-12-17)
 
 
