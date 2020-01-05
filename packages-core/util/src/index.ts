@@ -4,6 +4,7 @@ export * from './createArrayLikeComparator';
 export * from './createTypeFilter';
 export * from './getLast';
 export * from './getType';
+export * from './humanReadable';
 export * from './isNonEmptyString';
 export * from './isNull';
 export * from './isNumber';
