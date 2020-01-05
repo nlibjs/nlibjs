@@ -48,7 +48,8 @@
             },
             {
                 "files": [
-                    "src/getType.ts"
+                    "src/getType.ts",
+                    "src/humanReadable.ts"
                 ],
                 "rules": {
                     "@typescript-eslint/unbound-method": "off"
