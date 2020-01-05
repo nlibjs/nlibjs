@@ -23,8 +23,8 @@ interface ITest {
     {input: [1050000], expected: '1.1M'},
     {input: [999940000], expected: '999.9M'},
     {input: [999951000], expected: '1.0G'},
-    {input: [2048, {base: 1000, digits: 2}], expected: '2.05K'},
-    {input: [2048, {base: 2 ** 10, digits: 2}], expected: '2.00K'},
+    {input: [2048, {base: 1000, digits: 2, delimiter: ' '}], expected: '2.05 K'},
+    {input: [2048, {base: 2 ** 10, digits: 2, delimiter: ' '}], expected: '2.00 K'},
 ] as Array<ITest>).forEach(({input, expected}, index) => {
     test(`#${index} humanReadable(${JSON.stringify(input).slice(1, -1)}) → ${expected}`, (t) => {
         t.is(humanReadable(...input), expected);
