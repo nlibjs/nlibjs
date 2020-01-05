@@ -6,7 +6,7 @@ import {mktempdir} from '@nlib/afs';
 import {request} from './request';
 import {listenPort} from './listen';
 import {closeServers} from './closeServers';
-import {PassThrough} from 'stream';
+import * as stream from 'stream';
 
 const test = anyTest as TestInterface<{
     directory: string,
@@ -72,7 +72,7 @@ test('POST http://localhost/foo (string)', async (t) => {
 
 test('POST http://localhost/foo (stream)', async (t) => {
     const data = 'foobar';
-    const input = new PassThrough();
+    const input = new stream.PassThrough();
     setImmediate(() => {
         input.end(data);
     });

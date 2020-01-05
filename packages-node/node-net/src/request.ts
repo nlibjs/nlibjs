@@ -1,17 +1,8 @@
 import {URL} from 'url';
-import {
-    request as requestHTTP,
-    IncomingMessage,
-} from 'http';
-import {
-    request as requestHTTPS,
-    RequestOptions as RequestOptionsHTTPS,
-} from 'https';
-import {Readable} from 'stream';
-import {
-    resolveRedirection,
-    IResolveRedirectionOptions,
-} from './resolveRedirection';
+import {request as requestHTTP, IncomingMessage} from 'http';
+import {request as requestHTTPS, RequestOptions as RequestOptionsHTTPS} from 'https';
+import * as stream from 'stream';
+import {resolveRedirection, IResolveRedirectionOptions} from './resolveRedirection';
 
 export interface IHTTPRequestOptions extends RequestOptionsHTTPS {
     resolveRedirection?: IResolveRedirectionOptions | boolean | null,
@@ -20,7 +11,7 @@ export interface IHTTPRequestOptions extends RequestOptionsHTTPS {
 export const request = async (
     src: string | URL,
     options: IHTTPRequestOptions = {},
-    data: Readable | Buffer | string | null = null,
+    data: stream.Readable | Buffer | string | null = null,
 ): Promise<IncomingMessage> => {
     const url = new URL(`${src}`);
     const createRequest = url.protocol === 'https:' ? requestHTTPS : requestHTTP;

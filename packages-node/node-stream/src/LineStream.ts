@@ -1,4 +1,4 @@
-import {Transform} from 'stream';
+import * as stream from 'stream';
 import {StringDecoder} from 'string_decoder';
 import {
     getCodePoints,
@@ -6,7 +6,7 @@ import {
     CARRIAGE_RETURN,
 } from '@nlib/infra';
 
-export class LineStream extends Transform {
+export class LineStream extends stream.Transform {
 
     private readonly decoder: StringDecoder;
 

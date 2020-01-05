@@ -1,14 +1,14 @@
-import {Writable, Stream} from 'stream';
+import * as stream from 'stream';
 
 export const readStream = async (
-    readableStream: Stream,
+    readableStream: stream.Stream,
 ): Promise<Buffer> => {
     const buffer = await new Promise<Buffer>((resolve, reject) => {
         const chunks: Array<Buffer> = [];
         let length = 0;
         readableStream
         .once('error', reject)
-        .pipe(new Writable({
+        .pipe(new stream.Writable({
             write(chunk, _, callback) {
                 chunks.push(chunk);
                 length += chunk.length;
@@ -24,13 +24,13 @@ export const readStream = async (
 };
 
 export const readObjectStream = async <TType>(
-    readableStream: Stream,
+    readableStream: stream.Stream,
 ): Promise<Array<TType>> => {
     const data = await new Promise<Array<TType>>((resolve, reject) => {
         const result: Array<TType> = [];
         readableStream
         .once('error', reject)
-        .pipe(new Writable({
+        .pipe(new stream.Writable({
             objectMode: true,
             write(data: TType, _: string, callback: () => void) {
                 result.push(data);

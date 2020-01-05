@@ -1,32 +1,26 @@
 import {URL} from 'url';
-import {
-    join,
-    dirname,
-} from 'path';
-import {
-    Readable,
-    PassThrough,
-} from 'stream';
+import {join, dirname} from 'path';
+import * as stream from 'stream';
 import {Stats} from 'fs';
-import {
-    stat,
-    createReadStream,
-    createWriteStream,
-    mkdirp,
-} from '@nlib/afs';
+import {stat, createReadStream, createWriteStream, mkdirp} from '@nlib/afs';
 import {CustomError} from '@nlib/util';
 import {request} from './request';
 
-export const sanitizeEtag = (etag: string): string => etag
+export const sanitizeEtag = (
+    etag: string,
+): string => etag
 .replace(/\s/g, '_')
 .replace(/\W/g, (c) => `_${(c.codePointAt(0) || 0).toString(16)}_`);
 
-export interface IResponseStream extends Readable {
+export interface IResponseStream extends stream.Readable {
     fromCache: boolean,
     cachePromise: Promise<Stats> | null,
 }
 
-const readFromCache = async (cacheDirectory: string, cacheId: string): Promise<IResponseStream> => {
+const readFromCache = async (
+    cacheDirectory: string,
+    cacheId: string,
+): Promise<IResponseStream> => {
     const cachePath = join(cacheDirectory, sanitizeEtag(cacheId));
     const stats = await stat(cachePath);
     if (stats.isFile()) {
@@ -40,7 +34,11 @@ const readFromCache = async (cacheDirectory: string, cacheId: string): Promise<I
     }
 };
 
-const writeToCache = async (stream: Readable, cacheDirectory: string, cacheId: string): Promise<Stats> => {
+const writeToCache = async (
+    stream: stream.Readable,
+    cacheDirectory: string,
+    cacheId: string,
+): Promise<Stats> => {
     const cachePath = join(cacheDirectory, sanitizeEtag(cacheId));
     await mkdirp(dirname(cachePath));
     const writer = createWriteStream(cachePath);
@@ -82,8 +80,8 @@ export const httpGet = async (
         const {headers} = response;
         const id = headers.etag || headers['last-modified'];
         if (typeof id === 'string') {
-            cachePromise = writeToCache(response.pipe(new PassThrough()), cacheDirectory, id);
+            cachePromise = writeToCache(response.pipe(new stream.PassThrough()), cacheDirectory, id);
         }
     }
-    return Object.assign(response.pipe(new PassThrough()), {fromCache: false, cachePromise});
+    return Object.assign(response.pipe(new stream.PassThrough()), {fromCache: false, cachePromise});
 };

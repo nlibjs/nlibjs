@@ -1,9 +1,9 @@
 import test from 'ava';
+import * as stream from 'stream';
 import {readStream, readObjectStream} from './readStream';
-import {PassThrough} from 'stream';
 
 test('read a stream', async (t) => {
-    const readableStream = new PassThrough();
+    const readableStream = new stream.PassThrough();
     const data = 'foo';
     readableStream.write(data);
     setTimeout(() => {
@@ -15,7 +15,7 @@ test('read a stream', async (t) => {
 });
 
 test('read an object stream', async (t) => {
-    const readableStream = new PassThrough({objectMode: true});
+    const readableStream = new stream.PassThrough({objectMode: true});
     readableStream.write(100);
     setTimeout(() => {
         readableStream.write(200);

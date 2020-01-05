@@ -1,11 +1,11 @@
 import test from 'ava';
-import {PassThrough} from 'stream';
+import * as stream from 'stream';
 import {fromString} from '@nlib/infra';
 import {readObjectStream} from './readStream';
 import {LineStream} from './LineStream';
 
 test('LineStream', async (t) => {
-    const source = new PassThrough();
+    const source = new stream.PassThrough();
     source.write('AbC');
     source.write('\n\r');
     setImmediate(() => {
