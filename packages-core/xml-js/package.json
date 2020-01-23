@@ -1,6 +1,6 @@
 {
     "name": "@nlib/xml-js",
-    "version": "3.16.0",
+    "version": "3.17.1",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -29,7 +29,7 @@
         "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
     },
     "dependencies": {
-        "@nlib/global": "^3.12.0",
+        "@nlib/global": "^3.17.1",
         "xml-js": "^1.6.11"
     }
 }

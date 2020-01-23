@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.17.1](https://github.com/nlibjs/nlibjs/compare/v3.17.0...v3.17.1) (2020-01-23)
+
+
+### Bug Fixes
+
+* **lint:** update eslint rules ([c965cbd](https://github.com/nlibjs/nlibjs/commit/c965cbd645d0acc936b2aea8015db9b86a11d643))
+* **nbnf:** remove ava from package ([7a2cc18](https://github.com/nlibjs/nlibjs/commit/7a2cc18bd31028883856bf7dd91948ed520947d2))
+
+
+
+
+
 # [3.17.0](https://github.com/nlibjs/nlibjs/compare/v3.16.0...v3.17.0) (2020-01-05)
 
 
