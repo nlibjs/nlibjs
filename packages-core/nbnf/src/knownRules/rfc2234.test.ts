@@ -1,5 +1,5 @@
 import test from 'ava';
-import {toNodes, runTests} from './util';
+import {toNodes, runTests} from './util.test';
 import {parseRFC2234} from './rfc2234';
 
 runTests(test, parseRFC2234, [

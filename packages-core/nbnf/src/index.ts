@@ -17,7 +17,6 @@ export * from './knownRules/rfc2234';
 export * from './knownRules/rfc2616';
 export * from './knownRules/rfc3339';
 export * from './knownRules/rfc6265';
-export * from './knownRules/util';
 export * from './normalize/Alternation';
 export * from './normalize/Concatenation';
 export * from './normalize/Element';

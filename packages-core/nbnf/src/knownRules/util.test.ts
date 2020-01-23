@@ -1,4 +1,4 @@
-import {TestInterface} from 'ava';
+import test, {TestInterface} from 'ava';
 import {Array, JSON} from '@nlib/global';
 import {fromString, concatenate, fromCodePoint, toString} from '@nlib/infra';
 import {isNumber, isString} from '@nlib/util';
@@ -40,3 +40,7 @@ export const runTests = (
         });
     }
 };
+
+test('dummy', (t) => {
+    t.pass();
+});
