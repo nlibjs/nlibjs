@@ -1,6 +1,6 @@
 import test from 'ava';
 import {parseRFC2616} from './rfc2616';
-import {toNodes, runTests} from './util';
+import {toNodes, runTests} from './util.test';
 
 runTests(test, parseRFC2616, [
     {input: 'ÿ', rule: 'OCTET', expected: {name: 'OCTET', nodes: toNodes('ÿ')}},

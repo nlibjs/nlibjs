@@ -1,6 +1,6 @@
 import test from 'ava';
 import {createTokenizerFromNormalizedRuleList} from '../createTokenizer';
-import {toNodes, runTests} from './util';
+import {toNodes, runTests} from './util.test';
 import {CSSAtomicRules, CSSBaseRules, CSSAnimationRules} from './css';
 
 runTests(test, createTokenizerFromNormalizedRuleList(CSSAtomicRules), [

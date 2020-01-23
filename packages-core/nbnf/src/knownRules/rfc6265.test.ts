@@ -1,7 +1,7 @@
 import test from 'ava';
 import {fromString} from '@nlib/infra';
 import {parseRFC6265} from './rfc6265';
-import {runTests} from './util';
+import {runTests} from './util.test';
 
 runTests(test, parseRFC6265, [
     {
