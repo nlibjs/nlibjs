@@ -90,6 +90,10 @@ export interface IDependencies {
     [name: string]: string | undefined,
 }
 
+export interface ILintStagedConfig {
+    [pattern: string]: Array<string>,
+}
+
 export interface INlibJSPackageJSON {
     name: string,
     version: string,
@@ -105,6 +109,7 @@ export interface INlibJSPackageJSON {
     scripts: IScripts,
     dependencies?: IDependencies,
     devDependencies?: IDependencies,
+    'lint-staged': ILintStagedConfig,
 }
 
 export interface INlibJSRootPackageJSON {
@@ -116,7 +121,10 @@ export interface INlibJSRootPackageJSON {
         extends: Array<string>,
         overrides: Array<ESLint.Linter.Config & {files: Array<string>}>,
     },
-    ava: {},
+    ava: {
+        extensions: Array<string>,
+        require: Array<string>,
+    },
     commitlint: {
         extends: Array<string>,
         rules: {
@@ -127,8 +135,14 @@ export interface INlibJSRootPackageJSON {
             ],
         },
     },
-    husky: {},
-    'renovate-config': {},
+    husky: {
+        hooks: {
+            [hook: string]: string,
+        },
+    },
+    renovate: {
+        extends: Array<string>,
+    },
 }
 
 export interface IPackageTestParameters {

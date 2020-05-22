@@ -27,7 +27,8 @@
         "build": "run-s build:index build:tsc",
         "test": "ava",
         "lint": "eslint --ext .ts src build",
-        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
+        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'",
+        "precommit": "lint-staged"
     },
     "dependencies": {
         "@nlib/fetch": "^3.17.1",
@@ -51,6 +52,11 @@
                     "project": "build/tsconfig.json"
                 }
             }
+        ]
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint"
         ]
     }
 }
