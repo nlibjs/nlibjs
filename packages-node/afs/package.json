@@ -52,6 +52,14 @@
                 "rules": {
                     "@typescript-eslint/no-unnecessary-condition": "off"
                 }
+            },
+            {
+                "files": [
+                    "src/isError.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/no-explicit-any": "off"
+                }
             }
         ]
     },
