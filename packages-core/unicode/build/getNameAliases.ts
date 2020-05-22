@@ -7,12 +7,10 @@ import {createWriteStream} from 'fs';
 import {getUCDFieldsStream} from './getUCDFieldsStream';
 import {urls} from './urls';
 
-export type AliaseMap = Map<string, Uint32Array>;
-
-export const getNameAliases = async (): Promise<AliaseMap> => {
+export const getNameAliases = async (): Promise<Map<string, Uint32Array>> => {
     const dest = path.join(__dirname, '../src/named.ts');
     const ucsFieldsStream = await getUCDFieldsStream(urls.NameAliases);
-    const aliases: AliaseMap = new Map();
+    const aliases = new Map<string, Uint32Array>();
     await new Promise<void>((resolve, reject) => {
         ucsFieldsStream
         .pipe(new stream.Transform({
