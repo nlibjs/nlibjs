@@ -257,7 +257,7 @@ export class CookieStore {
         const isHTTP = !isNonHTTP(requestURL.protocol);
         const isSameSiteRequest = getSiteForCookies(requestURL) === canonicalizedHostName;
         const isSafeMethod = SafeMethods.has(method.toLowerCase());
-        const isTopLevelContext = true;
+        // const isTopLevelContext = true;
         const pickedNames: Set<string> = new Set();
         for (const cookie of this.anchestorsFrom(requestURL.hostname, requestURL.pathname)) {
             if (
@@ -279,8 +279,8 @@ export class CookieStore {
                     isSameSiteRequest ||
                     (
                         cookie.sameSiteFlag === SameSite.Lax &&
-                        isSafeMethod &&
-                        isTopLevelContext
+                        isSafeMethod
+                        // && isTopLevelContext
                     )
                 )
             ) {
