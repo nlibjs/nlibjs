@@ -1,3 +1,4 @@
+import {Stats} from 'fs';
 import * as stream from 'stream';
 import * as afs from '@nlib/afs';
 import {IProcessorList} from './types';
@@ -11,7 +12,11 @@ export const processFilesInDirectory = async (
     await new Promise((resolve, reject) => {
         afs.createDirectoryWalker(directory).pipe(new stream.Writable({
             objectMode: true,
-            write({path: filePath, stats}, _encoding, callback) {
+            write(
+                {path: filePath, stats}: {path: string, stats: Stats},
+                _encoding,
+                callback,
+            ) {
                 if (stats.isFile()) {
                     processFile(filePath, processorList)
                     .then((result) => {
