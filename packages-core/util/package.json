@@ -49,6 +49,14 @@
             },
             {
                 "files": [
+                    "src/CustomError.ts"
+                ],
+                "rules": {
+                    "@typescript-eslint/no-unsafe-assignment": "off"
+                }
+            },
+            {
+                "files": [
                     "src/getType.ts",
                     "src/humanReadable.ts"
                 ],

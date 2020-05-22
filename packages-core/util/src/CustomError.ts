@@ -1,5 +1,4 @@
 import {Error} from '@nlib/global';
-import {isObject} from 'util';
 
 export interface ICustomErrorParameters {
     code: string | number,
@@ -20,7 +19,3 @@ export class CustomError extends Error {
     }
 
 }
-
-export const isCustomError = (
-    x: any,
-): x is CustomError => isObject(x) && x.constructor.name === 'CustomError';
