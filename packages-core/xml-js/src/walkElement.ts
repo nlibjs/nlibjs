@@ -1,7 +1,7 @@
 import {Boolean} from '@nlib/global';
 import {Element} from 'xml-js';
 
-type WalkCallback = (...ancestors: Array<Element>) => void | boolean;
+type WalkCallback = (...ancestors: Array<Element>) => undefined | boolean;
 
 const walkElementCore = (
     element: Element,
