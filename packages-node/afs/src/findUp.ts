@@ -15,7 +15,7 @@ const findUpCore = async (
                 return file;
             }
         } catch (error) {
-            if (isENOENT(error)) {
+            if (!isENOENT(error)) {
                 throw error;
             }
         }
