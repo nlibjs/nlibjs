@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.17.2](https://github.com/nlibjs/nlibjs/compare/v3.17.1...v3.17.2) (2020-05-25)
+
+
+### Bug Fixes
+
+* **afs:** fix the error handler ([6954b67](https://github.com/nlibjs/nlibjs/commit/6954b67f60090389709b16d6c93236350193ece0))
+* **lint:** cover no-loss-of-precision ([88c1cd4](https://github.com/nlibjs/nlibjs/commit/88c1cd42c5576fcb274d6af022318be977a89b8a))
+* **lint:** upgrade eslint and plugins ([bad07eb](https://github.com/nlibjs/nlibjs/commit/bad07eb4c32d5ecfd8116dfa935efc32e93bfbc7))
+
+
+
+
+
 ## [3.17.1](https://github.com/nlibjs/nlibjs/compare/v3.17.0...v3.17.1) (2020-01-23)
 
 

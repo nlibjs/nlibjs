@@ -1,6 +1,6 @@
 {
     "name": "@nlib/cookie",
-    "version": "3.17.1",
+    "version": "3.17.2",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -30,12 +30,12 @@
         "precommit": "lint-staged"
     },
     "dependencies": {
-        "@nlib/fetch": "^3.17.1",
-        "@nlib/global": "^3.17.1",
-        "@nlib/infra": "^3.17.1",
-        "@nlib/named-tree": "^3.17.1",
-        "@nlib/nbnf": "^3.17.1",
-        "@nlib/util": "^3.17.1"
+        "@nlib/fetch": "^3.17.2",
+        "@nlib/global": "^3.17.2",
+        "@nlib/infra": "^3.17.2",
+        "@nlib/named-tree": "^3.17.2",
+        "@nlib/nbnf": "^3.17.2",
+        "@nlib/util": "^3.17.2"
     },
     "eslintConfig": {
         "overrides": [

@@ -3,7 +3,7 @@
         "packages-core/*",
         "packages-node/*"
     ],
-    "version": "3.17.1",
+    "version": "3.17.2",
     "command": {
         "publish": {
             "allowBranch": "master",

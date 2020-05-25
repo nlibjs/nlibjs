@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.17.2](https://github.com/nlibjs/nlibjs/compare/v3.17.1...v3.17.2) (2020-05-25)
+
+
+### Bug Fixes
+
+* **afs:** fix the error handler ([6954b67](https://github.com/nlibjs/nlibjs/commit/6954b67f60090389709b16d6c93236350193ece0))
+
+
+
+
+
 ## [3.17.1](https://github.com/nlibjs/nlibjs/compare/v3.17.0...v3.17.1) (2020-01-23)
 
 **Note:** Version bump only for package @nlib/afs

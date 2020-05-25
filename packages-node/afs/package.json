@@ -1,6 +1,6 @@
 {
     "name": "@nlib/afs",
-    "version": "3.17.1",
+    "version": "3.17.2",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -30,8 +30,8 @@
         "precommit": "lint-staged"
     },
     "dependencies": {
-        "@nlib/node-util": "^3.17.1",
-        "@nlib/util": "^3.17.1",
+        "@nlib/node-util": "^3.17.2",
+        "@nlib/util": "^3.17.2",
         "semver": "^7.0.0"
     },
     "eslintConfig": {

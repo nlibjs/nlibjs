@@ -1,6 +1,6 @@
 {
     "name": "@nlib/real-number",
-    "version": "3.17.1",
+    "version": "3.17.2",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -30,9 +30,9 @@
         "precommit": "lint-staged"
     },
     "dependencies": {
-        "@nlib/global": "^3.17.1",
-        "@nlib/number": "^3.17.1",
-        "@nlib/util": "^3.17.1"
+        "@nlib/global": "^3.17.2",
+        "@nlib/number": "^3.17.2",
+        "@nlib/util": "^3.17.2"
     },
     "eslintConfig": {
         "overrides": [

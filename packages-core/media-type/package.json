@@ -1,6 +1,6 @@
 {
     "name": "@nlib/media-type",
-    "version": "3.17.1",
+    "version": "3.17.2",
     "license": "Apache-2.0",
     "author": {
         "name": "Kei Ito",
@@ -31,16 +31,16 @@
         "precommit": "lint-staged"
     },
     "dependencies": {
-        "@nlib/fetch": "^3.17.1",
-        "@nlib/global": "^3.17.1",
-        "@nlib/infra": "^3.17.1",
-        "@nlib/real-number": "^3.17.1"
+        "@nlib/fetch": "^3.17.2",
+        "@nlib/global": "^3.17.2",
+        "@nlib/infra": "^3.17.2",
+        "@nlib/real-number": "^3.17.2"
     },
     "devDependencies": {
-        "@nlib/afs": "^3.17.1",
-        "@nlib/node-net": "^3.17.1",
-        "@nlib/node-stream": "^3.17.1",
-        "@nlib/xml-js": "^3.17.1"
+        "@nlib/afs": "^3.17.2",
+        "@nlib/node-net": "^3.17.2",
+        "@nlib/node-stream": "^3.17.2",
+        "@nlib/xml-js": "^3.17.2"
     },
     "eslintConfig": {
         "overrides": [

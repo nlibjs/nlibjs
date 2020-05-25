@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.17.2](https://github.com/nlibjs/nlibjs/compare/v3.17.1...v3.17.2) (2020-05-25)
+
+**Note:** Version bump only for package @nlib/named-tree
+
+
+
+
+
 ## [3.17.1](https://github.com/nlibjs/nlibjs/compare/v3.17.0...v3.17.1) (2020-01-23)
 
 **Note:** Version bump only for package @nlib/named-tree
