@@ -339,6 +339,7 @@
         "no-lone-blocks": "error",
         "no-lonely-if": "error",
         "no-loop-func": "error",
+        "no-loss-of-precision": "error",
         "no-magic-numbers": "off",
         "no-misleading-character-class": "error",
         "no-mixed-operators": [
