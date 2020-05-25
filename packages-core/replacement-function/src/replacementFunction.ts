@@ -8,13 +8,13 @@ export const replacementFunction = (
 ): ReplacementFunction => {
     const tokens = [...tokenizeReplacementString(replacement)];
     return (...args) => {
-        const sourceString: string = args.pop();
-        const offset: number = args.pop();
+        const sourceString = args.pop() as string;
+        const offset = args.pop() as number;
         return tokens.map((token) => {
             if (typeof token === 'string') {
                 return token;
             } else if (0 < token) {
-                return token < args.length ? args[token] : `$${token}`;
+                return token < args.length ? args[token] as string : `$${token}`;
             } else if (token === ReplacementType.Matched) {
                 return args[0];
             } else if (token === ReplacementType.Preceding) {

@@ -3,6 +3,7 @@ export * from './core';
 export * from './cpr';
 export * from './deploy';
 export * from './findUp';
+export * from './isError';
 export * from './isSameFile';
 export * from './listFiles';
 export * from './mkdirp';

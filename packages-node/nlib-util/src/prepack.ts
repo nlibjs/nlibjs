@@ -1,11 +1,11 @@
 import * as path from 'path';
-import * as globby from 'globby';
+import * as fg from 'fast-glob';
 import * as afs from '@nlib/afs';
 import {removeSourceMap} from '@nlib/remove-sourcemap';
 
 export const removeTestFiles = async (): Promise<void> => {
     const pattern = path.join(process.cwd(), 'lib/**/*.test{.js,.js.map,.d.ts}');
-    const files = await globby(pattern);
+    const files = await fg(pattern);
     await Promise.all(files.map(async (file) => {
         await afs.unlink(file);
         console.log(`Deleted: ${file}`);

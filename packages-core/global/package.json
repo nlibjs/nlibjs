@@ -24,7 +24,8 @@
         "build": "tsc",
         "test": "ava",
         "lint": "eslint --ext .ts src",
-        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
+        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'",
+        "precommit": "lint-staged"
     },
     "eslintConfig": {
         "overrides": [
@@ -53,6 +54,11 @@
                     "no-eval": "off"
                 }
             }
+        ]
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint"
         ]
     }
 }

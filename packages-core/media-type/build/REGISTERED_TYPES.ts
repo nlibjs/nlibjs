@@ -24,10 +24,10 @@ export const build = async (): Promise<void> => {
     const types = [...typeSet];
     const lines = [
         'import {Map} from \'@nlib/global\';',
-        'export const REGISTERED_TYPES: Map<string, Map<string, string>> = new Map();',
+        'export const REGISTERED_TYPES = new Map<string, Map<string, string>>();',
     ];
     for (const type of types) {
-        lines.push(`const ${type} = new Map();`);
+        lines.push(`const ${type} = new Map<string, string>();`);
         lines.push(`REGISTERED_TYPES.set('${type}', ${type});`);
         for (const record of records) {
             if (record.type === type) {

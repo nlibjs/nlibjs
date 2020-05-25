@@ -30,10 +30,11 @@ test('should have some packages', (t) => {
 for (const packageDirectory of packageDirectories) {
 
     const relativeId = path.relative(projectRootDirectory, packageDirectory).split(path.sep).join('/');
+    const titlePrefix = ['.', relativeId, 'package.json'].join(path.sep);
     const packageJSONPath = path.join(packageDirectory, 'package.json');
-    const packageJSON: INlibJSPackageJSON = JSON.parse(fs.readFileSync(packageJSONPath, 'utf8'));
+    const packageJSON = JSON.parse(fs.readFileSync(packageJSONPath, 'utf8')) as INlibJSPackageJSON;
 
-    test(`${relativeId}/package.json keys`, (t) => {
+    test(`${titlePrefix} keys`, (t) => {
         const allowedKeys = new Set([
             'name',
             'version',
@@ -50,6 +51,7 @@ for (const packageDirectory of packageDirectories) {
             'dependencies',
             'devDependencies',
             'eslintConfig',
+            'lint-staged',
         ]);
         const invalidKeys = Object.keys(packageJSON).filter((key) => !allowedKeys.has(key));
         t.is(
@@ -59,27 +61,27 @@ for (const packageDirectory of packageDirectories) {
         );
     });
 
-    test(`${relativeId}/package.json#name`, (t) => {
+    test(`${titlePrefix} name`, (t) => {
         t.is(packageJSON.name, `@nlib/${path.basename(relativeId)}`);
     });
 
-    test(`${relativeId}/package.json#license`, (t) => {
+    test(`${titlePrefix} license`, (t) => {
         t.is(packageJSON.license, rootPackageJSON.license);
     });
 
-    test(`${relativeId}/package.json#author`, (t) => {
+    test(`${titlePrefix} author`, (t) => {
         t.is(typeof packageJSON.author, 'object');
     });
 
-    test(`${relativeId}/package.json#author.name`, (t) => {
+    test(`${titlePrefix} author.name`, (t) => {
         t.is(typeof packageJSON.author.name, 'string');
     });
 
-    test(`${relativeId}/package.json#author.email`, (t) => {
+    test(`${titlePrefix} author.email`, (t) => {
         t.true((/[^\s@]+@[^\s@]+$/).test(packageJSON.author.email));
     });
 
-    test(`${relativeId}/package.json#author.url`, (t) => {
+    test(`${titlePrefix} author.url`, (t) => {
         if (packageJSON.author.url) {
             t.is(
                 `${new URL(packageJSON.author.url)}`,
@@ -90,43 +92,48 @@ for (const packageDirectory of packageDirectories) {
         }
     });
 
-    test(`${relativeId}/package.json#homepage`, (t) => {
+    test(`${titlePrefix} homepage`, (t) => {
         t.is(
             packageJSON.homepage,
             `https://github.com/nlibjs/nlibjs/tree/master/${relativeId}`,
         );
     });
 
-    test(`${relativeId}/package.json#repository`, (t) => {
+    test(`${titlePrefix} repository`, (t) => {
         t.is(
             packageJSON.repository,
             'https://github.com/nlibjs/nlibjs',
         );
     });
 
-    test(`${relativeId}/package.json#publishConfig`, (t) => {
+    test(`${titlePrefix} publishConfig`, (t) => {
         t.deepEqual(
             packageJSON.publishConfig,
             {access: 'public'},
         );
     });
 
-    test(`${relativeId}/package.json#main`, (t) => {
+    test(`${titlePrefix} main`, (t) => {
         t.is(packageJSON.main, 'lib/index.js');
     });
 
-    test(`${relativeId}/package.json#files`, (t) => {
+    test(`${titlePrefix} files`, (t) => {
         t.true(packageJSON.files.every((item) => typeof item === 'string'));
     });
 
-    test(`${relativeId}/package.json#scripts`, (t) => {
+    test(`${titlePrefix} scripts`, (t) => {
+        t.is(packageJSON.scripts.precommit, 'lint-staged');
         t.is(packageJSON.scripts.prepack, 'node -e \'require(`@nlib/nlib-util`).prepack()\'');
+    });
+
+    test(`${titlePrefix} lint-staged`, (t) => {
+        t.is(typeof packageJSON['lint-staged'], 'object');
     });
 
     const {dependencies} = packageJSON;
     if (dependencies) {
         const packageLevel = getPackageLevel(relativeId);
-        test(`${relativeId}/package.json#dependencies`, (t) => {
+        test(`${titlePrefix} dependencies`, (t) => {
             t.is(typeof packageJSON.dependencies, 'object');
             const deps = {...dependencies};
             switch (relativeId) {

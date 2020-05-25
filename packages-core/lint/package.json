@@ -26,6 +26,12 @@
         "test-ava": "ava",
         "test": "run-s test-ava lint",
         "lint": "eslint --ext .ts src",
-        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'"
+        "prepack": "node -e 'require(`@nlib/nlib-util`).prepack()'",
+        "precommit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint"
+        ]
     }
 }

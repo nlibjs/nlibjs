@@ -1,6 +1,7 @@
 {
     "packages": [
-        "packages-*/*"
+        "packages-core/*",
+        "packages-node/*"
     ],
     "version": "3.17.1",
     "command": {

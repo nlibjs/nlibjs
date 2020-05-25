@@ -1,6 +1,7 @@
 import {
     Server,
     ListenOptions,
+    Socket,
 } from 'net';
 import {
     SetZ,
@@ -11,16 +12,18 @@ import {
     isString,
 } from '@nlib/util';
 
+export type Handle = Server | Socket | {fd: number};
+
 export interface IListen {
     (server: Server, port?: number, hostname?: string, backlog?: number): Promise<Server>,
     (server: Server, port?: number, backlog?: number): Promise<Server>,
-    (server: Server, pathOrHandle: string | {}, backlog?: number): Promise<Server>,
+    (server: Server, pathOrHandle: string | Handle, backlog?: number): Promise<Server>,
     (server: Server, options: ListenOptions): Promise<Server>,
 }
 
 export const listen: IListen = (
     server: Server,
-    arg1?: number | string | ListenOptions | {},
+    arg1?: number | string | ListenOptions | Handle,
     arg2?: string | number,
     arg3?: number,
 ): Promise<Server> => new Promise((resolve, reject) => {
@@ -106,7 +109,7 @@ export const listenPort = async (
             await listen(server, port);
         }
     } catch (error) {
-        if (error.code === 'EADDRINUSE' && hasSetZ(validPortRange, port + 1)) {
+        if ((error as {code: string}).code === 'EADDRINUSE' && hasSetZ(validPortRange, port + 1)) {
             return await listenPort(server, port + 1, hostname, backlog, validPortRange);
         } else {
             throw error;

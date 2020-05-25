@@ -61,7 +61,7 @@ export const httpGet = async (
             try {
                 return (await readFromCache(cacheDirectory, id));
             } catch (error) {
-                if (error.code !== 'ENOENT') {
+                if ((error as {code?: string}).code !== 'ENOENT') {
                     throw error;
                 }
             }

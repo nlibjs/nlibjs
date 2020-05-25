@@ -100,7 +100,7 @@ test('GET http://localhost/redirect?step=4 without cookie', async (t) => {
         await request(url, {resolveRedirection: {debug: true}});
         t.fail();
     } catch (error) {
-        t.is(error.code, 'TooManyRedirections');
+        t.is((error as {code: string}).code, 'TooManyRedirections');
     }
 });
 

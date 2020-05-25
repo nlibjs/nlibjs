@@ -2,6 +2,7 @@ import {PathLike} from 'fs';
 import {dirname} from 'path';
 import {mkdir, stat} from './core';
 import {gt} from 'semver';
+import {isENOENT, isEEXIST} from './isError';
 const recursiveIsSupported = gt(process.version, 'v10.12.0');
 
 export const mkdirp = async (
@@ -14,11 +15,11 @@ export const mkdirp = async (
         await mkdir(directory, useRecursive ? {recursive: true, mode} : mode);
         return true;
     } catch (error) {
-        if (error.code === 'ENOENT') {
+        if (isENOENT(error)) {
             await mkdirp(dirname(`${directory}`), mode, useNativeRecursiveOptionIfAvailable);
             return await mkdirp(directory, mode, useNativeRecursiveOptionIfAvailable);
         }
-        if (error.code === 'EEXIST') {
+        if (isEEXIST(error)) {
             const stats = await stat(directory);
             if (stats.isDirectory()) {
                 return false;

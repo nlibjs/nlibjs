@@ -9,7 +9,7 @@ export const readStream = async (
         readableStream
         .once('error', reject)
         .pipe(new stream.Writable({
-            write(chunk, _, callback) {
+            write(chunk: Buffer, _, callback) {
                 chunks.push(chunk);
                 length += chunk.length;
                 callback();

@@ -2,6 +2,7 @@ import {join} from 'path';
 import {PathLike} from 'fs';
 import {absolutify} from '@nlib/node-util';
 import {readdir, rmdir, unlink, lstat} from './core';
+import {isENOENT} from './isError';
 
 export type onFileHook = (target: string) => void | Promise<void>;
 
@@ -23,7 +24,7 @@ const rmrfCore = async (
         }
         return true;
     } catch (error) {
-        if (error.code === 'ENOENT') {
+        if (isENOENT(error)) {
             return false;
         }
         throw error;

@@ -1,6 +1,7 @@
 import {join, dirname} from 'path';
 import {absolutify} from '@nlib/node-util';
 import {stat} from './core';
+import {isENOENT} from './isError';
 
 const findUpCore = async (
     targets: Array<string>,
@@ -14,7 +15,7 @@ const findUpCore = async (
                 return file;
             }
         } catch (error) {
-            if (error.code !== 'ENOENT') {
+            if (!isENOENT(error)) {
                 throw error;
             }
         }
