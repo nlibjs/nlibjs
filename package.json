@@ -4,7 +4,7 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "@commitlint/cli": "^8.3.5",
-        "@commitlint/config-conventional": "^8.3.4",
+        "@commitlint/config-conventional": "^11.0.0",
         "@commitlint/config-lerna-scopes": "^8.3.4",
         "@nlib/indexen": "file:packages-node/indexen",
         "@types/eslint": "^6.8.1",
