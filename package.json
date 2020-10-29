@@ -3,7 +3,7 @@
     "name": "@nlib/nlib",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@commitlint/cli": "^8.3.5",
+        "@commitlint/cli": "^11.0.0",
         "@commitlint/config-conventional": "^8.3.4",
         "@commitlint/config-lerna-scopes": "^8.3.4",
         "@nlib/indexen": "file:packages-node/indexen",
