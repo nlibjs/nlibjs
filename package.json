@@ -5,7 +5,7 @@
     "devDependencies": {
         "@commitlint/cli": "^8.3.5",
         "@commitlint/config-conventional": "^8.3.4",
-        "@commitlint/config-lerna-scopes": "^8.3.4",
+        "@commitlint/config-lerna-scopes": "^11.0.0",
         "@nlib/indexen": "file:packages-node/indexen",
         "@types/eslint": "^6.8.1",
         "@types/node": "^14.0.5",
